@@ -1,0 +1,7 @@
+@if(displayButton){
+    @if(!isBtn){
+        <a (click)="onBtnClick()" [ngClass]="classesList" style="cursor: pointer;"><i [ngClass]="faIconList" ngbTooltip="{{toolTip}}" ></i>{{buttonName}}</a>
+    } @else {
+        <button [ngClass]="classesList" tabindex="tabIndex" [disabled]="gotoSheetButton" (click)="onBtnClick()"> <img *ngIf="imageUrl" [src]="imageUrl" alt="icon" /><i *ngIf="!imageUrl" [ngClass]="faIconList" ></i> {{buttonName}}</button>
+    }
+}

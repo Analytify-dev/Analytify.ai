@@ -1,0 +1,17 @@
+<!-- <apx-chart 
+[series]="item.chartOptions.series!" 
+[chart]="item.chartOptions.chart!" 
+[xaxis]="item.chartOptions.xaxis!"
+(chartInit)="onChartInit($event, item)">
+</apx-chart> -->
+
+<div id="chart">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [title]="chartOptions.title"
+      [xaxis]="chartOptions.xaxis"
+      [yaxis]="chartOptions.yaxis"
+      [legend]="chartOptions.legend">
+    </apx-chart>
+  </div>
