@@ -1,0 +1,682 @@
+<div class="main-container container-fluid">
+    <div class="main-demo main-demo-1 overflow-hidden reveal landing-top-header active" id="home" #home style="  border-radius: 0px 0px 15px 15px;">
+        <div class="container px-sm-0">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-6 pb-5 text-center my-auto animation-zidex pos-relative landing-main-heading">
+                <h1 class="text-  tx-fixed-white mt-0">A quick and easy way to build your Business with <span class="tx-fixed-white fw-bold">"Analytify"</span></h1>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- ROW-1 OPEN-->
+    <div class="col-lg-12 p-0 mt-3">
+        <div class="landing-connect-search mb-3 ">
+            <app-insights-button [buttonName]="' New Chart'" [classesList]="'btn btn-primary me-3'" [previledgeId]="17" [isBtn]="true"
+            (btnClickEvent)="sheetsRoute()" [isIcon]="true" [faIconList]="'fa fa-plus'"></app-insights-button>
+            <app-insights-button [buttonName]="' New Dashboard'" [classesList]="'btn btn-primary me-3'" [previledgeId]="34" [isBtn]="true"
+            (btnClickEvent)="loadNewDashboard()" [isIcon]="true" [faIconList]="'fa fa-plus'"></app-insights-button>
+            <app-insights-button [buttonName]="'Connect To Database'" [classesList]="'btn btn-primary me-3'" [isIcon]="false" [previledgeId]="1" [isBtn]="true"
+            (btnClickEvent)="newConnections()"></app-insights-button>
+            <div class="view-card">
+                <div class="input-group">
+                    <input type="text" class="form-control border-end-0" [(ngModel)]="wholeSearch" (keyup)="totalSearch()" placeholder="Search ...">
+                    <button type="button"  aria-label="button" class="btn input-group-text btn-primary tx-fixed-white border-start-0 ">
+                        <i class="fe fe-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-xl-9">
+           
+            <div *ngIf="viewDashboardList" class="card" style="padding: 15px;">
+                <div class="row">
+                    <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
+                        <h6 class="fw-bold mb-1">Saved Dashboards</h6>
+                        <div class="view-card">
+                            <!-- <a class="btn btn-blue-light mb-2 me-3" ><i class="fa fa-plus"></i> Dashboard</a> -->
+                            @if(!showAllDasboards && savedDashboardList.length !== 0){
+                            <a class="">
+                                <span class="add-txt text-info card-title me-2 " (click)="showAllDasboards=!showAllDasboards">Show
+                                    Less <i class="fa fa-angle-double-right"> </i></span>
+                            </a>
+                            } @if(showAllDasboards && savedDashboardList.length !== 0){
+                            <a class="" *ngIf="savedDashboardList.length > 4">
+                                <span class="add-txt text-info card-title me-2" (click)="showAllDasboards=!showAllDasboards">View
+                                    More <i class="fa fa-angle-double-right"> </i></span>
+                            </a>
+                            }
+                        </div>
+                    </div>
+                    <div *ngIf="savedDashboardList.length === 0">
+                        No dashboards to display!
+                    </div>
+                    <ng-container *ngFor="let dashboardList of savedDashboardList;let i = index">
+                        <div *ngIf="i < 11" class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                            <div *ngIf="showAllDasboards && i < 4" class="card img-shadow mb-0">
+                                <img (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                    src="{{dashboardList.dashboard_image}}" class="card-img-top-dashboard img-cursor" alt="img">
+                                <div class="card-body p-2 d-flex align-items-center justify-content-between">
+                                    <div class="dashboard-card-title">
+                                        <h5 class="card-title   mb-1" ngbTooltip="{{dashboardList.dashboard_name}}"
+                                            (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                            style="cursor: pointer;color: #2392c1;">
+                                            {{dashboardList.dashboard_name | slice:0:11}}</h5>
+                                        <p class="card-text">Modified on {{dashboardList.Modified}} </p>
+                                    </div>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="36"
+                                                    [isBtn]="false" [buttonName]="' View Dashboard'"
+                                                    (btnClickEvent)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+            
+                                                <a class="dropdown-item" tabindex="0"
+                                                    (click)="viewPropertiesTab(dashboardList.dashboard_name,dashboardList.dashboard_id)">
+                                                    <i class="fa fa-sliders me-2 d-inline-flex"></i> Properties</a>
+            
+                                                <app-insights-button [classesList]="'dropdown-item  btn btn-secondary-light'"
+                                                    [previledgeId]="35" [isBtn]="false" [buttonName]="' Delete'"
+                                                    (btnClickEvent)="deleteDashboard(dashboardList.dashboard_id)"
+                                                    [faIconList]="'fe fe-trash'" [isIcon]="true"></app-insights-button>
+            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                            <div *ngIf="!showAllDasboards && i < 11" class="card  img-shadow">
+                                <img (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                    src="{{dashboardList.dashboard_image}}" class="card-img-top-dashboard img-cursor" alt="img">
+                                <div class="card-body p-2 d-flex align-items-center justify-content-between">
+                                    <div class="dashboard-card-title">
+                                        <h5 class="card-title   mb-1" ngbTooltip="{{dashboardList.dashboard_name}}"
+                                            (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                            style="cursor: pointer;color: #2392c1;">
+                                            {{dashboardList.dashboard_name | slice:0:11}}</h5>
+                                        <p class="card-text">Modified on {{dashboardList.Modified}} </p>
+                                    </div>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="36"
+                                                    [isBtn]="false" [buttonName]="' View Dashboard'"
+                                                    (btnClickEvent)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+                                                <a class="dropdown-item" tabindex="0"
+                                                    (click)="viewPropertiesTab(dashboardList.dashboard_name,dashboardList.dashboard_id)">
+                                                    <i class="fa fa-sliders me-2 d-inline-flex"></i> Properties</a>
+                                                <app-insights-button [classesList]="'dropdown-item  btn btn-secondary-light'"
+                                                    [previledgeId]="35" [isBtn]="false" [buttonName]="' Delete'"
+                                                    (btnClickEvent)="deleteDashboard(dashboardList.dashboard_id)"
+                                                    [faIconList]="'fe fe-trash'" [isIcon]="true"></app-insights-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div *ngIf="!showAllDasboards && savedDashboardList.length > 10" class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
+                        <div class="p-5 d-flex align-items-center justify-content-start">
+                            <div class="dashboard-card-title">
+                                <h5 (click)="viewAllDashboards()" class="card-title   mb-1"
+                                    style="cursor: pointer;color: #2392c1;border-bottom: 1px solid;"> View All <i
+                                        class="fa fa-angle-double-right"></i> </h5>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="viewSheets" class="card" style="padding: 15px;">
+                <div class="row">
+                    <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
+                        <h6 class="fw-bold mb-1">Saved Charts</h6>
+                        <div class="view-card">
+                            <!-- <div *ngFor="let data of userSheetsList">
+                                        <p>{{data.sheet_type}}</p>
+                                    </div> -->
+                            <!-- <a class="btn btn-blue-light mb-2 me-3" ><i class="fa fa-plus"></i> Recently Viewed</a> -->
+                            @if(!showAllSheets && userSheetsList.length !==0){
+                            <a class="">
+                                <span class="add-txt text-info card-title me-2" (click)="showAllSheets=!showAllSheets">Show Less <i
+                                        class="fa fa-angle-double-right"> </i></span>
+                            </a>
+                            } @if(showAllSheets && userSheetsList.length !==0){
+                            <a class="" *ngIf="userSheetsList.length > 4">
+                                <span class="add-txt text-info card-title me-2" (click)="showAllSheets=!showAllSheets">View More <i
+                                        class="fa fa-angle-double-right"> </i></span>
+                            </a>
+                            }
+                        </div>
+                    </div>
+                    <div *ngIf="userSheetsList.length === 0">
+                        No charts to display!
+                    </div>
+                    <ng-container *ngFor="let sheetlist of userSheetsList;let i = index">
+                        <div *ngIf="i < 11" class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                            <div *ngIf="showAllSheets && i < 4" class="card  img-shadow mb-0">
+                                <!-- <img src="./assets/images/Landingpage-images/recently-view/recent-1.jpg" class="card-img-top " alt="img"> -->
+                                <div class="card-body p-2 d-flex align-items-center justify-content-between">
+                                    <span class="avatar avatar-sm avatar-radius w-6 h-6 border">
+                                        <!-- <img  alt="product" class="avatar-radius" src="./assets/images/icons/postSQL-icon.jpg"> -->
+                                        <img *ngIf="sheetlist.chart_id === 1"
+                                            src="./assets/images/Tiled view sheet icons/table-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 6"
+                                            src="./assets/images/Tiled view sheet icons/bar-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 17"
+                                            src="./assets/images/Tiled view sheet icons/area-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 13"
+                                            src="./assets/images/Tiled view sheet icons/line-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 24"
+                                            src="./assets/images/Tiled view sheet icons/pie-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 7"
+                                            src="./assets/images/Tiled view sheet icons/sideBar-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 5"
+                                            src="./assets/images/Tiled view sheet icons/Stacked-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 4"
+                                            src="./assets/images/Tiled view sheet icons/BarLine-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 2"
+                                            src="./assets/images/Tiled view sheet icons/Hstacked-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 3"
+                                            src="./assets/images/Tiled view sheet icons/HGrouped-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 8"
+                                            src="./assets/images/Tiled view sheet icons/multi-lines-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 10"
+                                            src="./assets/images/Tiled view sheet icons/donut-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 12" src="./assets/images/Tiled view sheet icons/spider-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 25" src="./assets/images/Tiled view sheet icons/kpi-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 26" src="./assets/images/Tiled view sheet icons/heatmap-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 27" src="./assets/images/Tiled view sheet icons/funnel-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 28" src="./assets/images/Tiled view sheet icons/guage-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 29" src="./assets/images/Tiled view sheet icons/worldmap-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 11" src="./assets/images/Tiled view sheet icons/calendar-bg.png" alt=""
+                                            class="avatar-radius">
+                                    </span>
+                                    <div class="dashboard-card-title">
+                                        <h5 class="card-title   mb-1" ngbTooltip="{{sheetlist.sheet_name}}"
+                                            (click)="viewSheet(sheetlist.server_id,sheetlist.file_id,sheetlist.queryset_id,sheetlist.sheet_id)"
+                                            style="cursor: pointer;color: #2392c1;"> {{sheetlist.sheet_name | slice:0:11}}</h5>
+                                        <p class="card-text">Modified on {{sheetlist.Modified}} </p>
+                                    </div>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="20"
+                                                    [isBtn]="false" [buttonName]="' View Sheet'"
+                                                    (btnClickEvent)="viewSheet(sheetlist.server_id,sheetlist.file_id,sheetlist.queryset_id,sheetlist.sheet_id)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+                                                <app-insights-button [classesList]="'dropdown-item  btn btn-secondary-light'"
+                                                    [previledgeId]="19" [isBtn]="false" [buttonName]="' Delete'"
+                                                    (btnClickEvent)="deleteSheet(sheetlist.server_id,sheetlist.file_id,sheetlist.queryset_id,sheetlist.sheet_id)"
+                                                    [faIconList]="'fe fe-trash'" [isIcon]="true"></app-insights-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                            <div *ngIf="!showAllSheets && i < 11" class="card  img-shadow">
+                                <!-- <img src="./assets/images/Landingpage-images/recently-view/recent-1.jpg" class="card-img-top " alt="img"> -->
+                                <div class="card-body p-2 d-flex align-items-center justify-content-between">
+                                    <span class="avatar avatar-sm avatar-radius w-6 h-6 border">
+                                        <!-- <img  alt="product" class="avatar-radius" src="./assets/images/icons/postSQL-icon.jpg"> -->
+                                        <img *ngIf="sheetlist.chart_id === 1"
+                                            src="./assets/images/Tiled view sheet icons/table-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 6"
+                                            src="./assets/images/Tiled view sheet icons/bar-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 17"
+                                            src="./assets/images/Tiled view sheet icons/area-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 13"
+                                            src="./assets/images/Tiled view sheet icons/line-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 24"
+                                            src="./assets/images/Tiled view sheet icons/pie-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 7"
+                                            src="./assets/images/Tiled view sheet icons/sideBar-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 5"
+                                            src="./assets/images/Tiled view sheet icons/Stacked-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 4"
+                                            src="./assets/images/Tiled view sheet icons/BarLine-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 2"
+                                            src="./assets/images/Tiled view sheet icons/Hstacked-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 3"
+                                            src="./assets/images/Tiled view sheet icons/HGrouped-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 8"
+                                            src="./assets/images/Tiled view sheet icons/multi-lines-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 10"
+                                            src="./assets/images/Tiled view sheet icons/donut-tiled-icon.jpg" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 12" src="./assets/images/Tiled view sheet icons/spider-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 25" src="./assets/images/Tiled view sheet icons/kpi-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 26" src="./assets/images/Tiled view sheet icons/heatmap-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 27" src="./assets/images/Tiled view sheet icons/funnel-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 28" src="./assets/images/Tiled view sheet icons/guage-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 29" src="./assets/images/Tiled view sheet icons/spider-bg.png" alt=""
+                                            class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 11" src="./assets/images/Tiled view sheet icons/calendar-bg.png" alt=""
+                                            class="avatar-radius">
+                                    </span>
+                                    <div class="dashboard-card-title">
+                                        <h5 class="card-title   mb-1" ngbTooltip="{{sheetlist.sheet_name}}"
+                                            (click)="viewSheet(sheetlist.server_id,sheetlist.file_id,sheetlist.queryset_id,sheetlist.sheet_id)"
+                                            style="cursor: pointer;color: #2392c1;"> {{sheetlist.sheet_name | slice:0:16}}</h5>
+                                        <p class="card-text">Modified on {{sheetlist.Modified}} </p>
+                                    </div>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="20"
+                                                    [isBtn]="false" [buttonName]="' View Sheet'"
+                                                    (btnClickEvent)="viewSheet(sheetlist.server_id,sheetlist.file_id,sheetlist.queryset_id,sheetlist.sheet_id)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+                                                <app-insights-button [classesList]="'dropdown-item  btn btn-secondary-light'"
+                                                    [previledgeId]="19" [isBtn]="false" [buttonName]="' Delete'"
+                                                    (btnClickEvent)="deleteSheet(sheetlist.server_id,sheetlist.file_id,sheetlist.queryset_id,sheetlist.sheet_id)"
+                                                    [faIconList]="'fe fe-trash'" [isIcon]="true"></app-insights-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </ng-container>
+            
+                    <div *ngIf="!showAllSheets && userSheetsList.length > 10" class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
+                        <div class="p-5 d-flex align-items-center justify-content-start">
+                            <div class="dashboard-card-title">
+                                <h5 (click)="viewAllSheets()" class="card-title   mb-1"
+                                    style="cursor: pointer;color: #2392c1;border-bottom: 1px solid;"> View All <i
+                                        class="fa fa-angle-double-right"></i> </h5>
+                                <p class="card-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="viewCustomSql" class="card" style="padding: 15px;">
+                <div class="row ">
+                    <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
+                        <h6 class="fw-bold mb-1">Saved Queries</h6>
+                        <div class="view-card">
+                            @if(!showAllSavedQueries && savedQueryList.length !==0){
+                            <a class="">
+                                <span class="add-txt text-info card-title me-2"
+                                    (click)="showAllSavedQueries=!showAllSavedQueries">Show Less <i
+                                        class="fa fa-angle-double-right"> </i></span>
+                            </a>
+                            } @if(showAllSavedQueries && savedQueryList.length !==0){
+                            <a class="" *ngIf="savedQueryList.length > 4">
+                                <span class="add-txt text-info card-title me-2"
+                                    (click)="showAllSavedQueries=!showAllSavedQueries">View More <i
+                                        class="fa fa-angle-double-right"> </i></span>
+                            </a>
+                            }
+                        </div>
+                    </div>
+                    <div *ngIf="savedQueryList.length === 0">
+                        No queries to display!
+                    </div>
+            
+                    <ng-container *ngFor="let savedQuery of savedQueryList;let i = index">
+                        <div *ngIf="i < 11" class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                            <div *ngIf="showAllSavedQueries && i < 4" class="card img-shadow mb-0">
+                                <div class="card-body p-2 d-flex align-items-center justify-content-between">
+                                    <div class="dashboard-card-title">
+                                        <h5 class="card-title   mb-1"
+                                            (click)="gotoSavedQuery(savedQuery.server_id,savedQuery.queryset_id,savedQuery.file_id,savedQuery.is_custom_sql,savedQuery?.datasource_filterdata[0]?.datasource_querysetid)"
+                                            ngbTooltip="{{savedQuery.queryset_name}}" style="cursor: pointer;color: #2392c1;">
+                                            {{savedQuery.queryset_name | slice:0:20}}</h5>
+                                        <p class="card-text">Modified on {{savedQuery.modified}} </p>
+                                    </div>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="54"
+                                                    [isBtn]="false" [buttonName]="' Edit'"
+                                                    (btnClickEvent)="gotoSavedQuery(savedQuery.server_id,savedQuery.queryset_id,savedQuery.file_id,savedQuery.is_custom_sql,savedQuery?.datasource_filterdata[0]?.datasource_querysetid)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+                                                <app-insights-button [classesList]="'dropdown-item  btn btn-secondary-light'"
+                                                    [previledgeId]="53" [isBtn]="false" [buttonName]="' Delete'"
+                                                    (btnClickEvent)="deleteSavedQuery(savedQuery.queryset_id)"
+                                                    [faIconList]="'fe fe-trash'" [isIcon]="true"></app-insights-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="!showAllSavedQueries && i < 11" class="card  img-shadow">
+                                <!-- <img src="./assets/images/Landingpage-images/recently-view/recent-1.jpg" class="card-img-top " alt="img"> -->
+                                <div class="card-body p-2 d-flex align-items-center justify-content-between">
+                                    <div class="dashboard-card-title">
+                                        <h5 class="card-title   mb-1"
+                                            (click)="gotoSavedQuery(savedQuery.server_id,savedQuery.queryset_id,savedQuery.file_id,savedQuery.is_custom_sql,savedQuery?.datasource_filterdata[0]?.datasource_querysetid)"
+                                            ngbTooltip="{{savedQuery.queryset_name}}" style="cursor: pointer;color: #2392c1;">
+                                            {{savedQuery.queryset_name | slice:0:20}}</h5>
+                                        <p class="card-text">Modified on {{savedQuery.modified}} </p>
+                                    </div>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="54"
+                                                    [isBtn]="false" [buttonName]="' Edit'"
+                                                    (btnClickEvent)="gotoSavedQuery(savedQuery.server_id,savedQuery.queryset_id,savedQuery.file_id,savedQuery.is_custom_sql,savedQuery?.datasource_filterdata[0]?.datasource_querysetid)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+                                                <app-insights-button [classesList]="'dropdown-item  btn btn-secondary-light'"
+                                                    [previledgeId]="53" [isBtn]="false" [buttonName]="' Delete'"
+                                                    (btnClickEvent)="deleteSavedQuery(savedQuery.queryset_id)"
+                                                    [faIconList]="'fe fe-trash'" [isIcon]="true"></app-insights-button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </ng-container>
+            
+                    <div *ngIf="!showAllSavedQueries && savedQueryList.length > 10" class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
+                        <div class="p-5 d-flex align-items-center justify-content-start">
+                            <div class="dashboard-card-title">
+                                <h5 (click)="viewAllSavedQueries()" class="card-title   mb-1"
+                                    style="cursor: pointer;color: #2392c1;border-bottom: 1px solid;"> View All <i
+                                        class="fa fa-angle-double-right"></i> </h5>
+                                <p class="card-text "></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="padding: 15px;">
+                <div class="row mb-0">
+                    <div class="d-flex align-items-center justify-content-between border-bottom mb-2">
+                        <h6 class="fw-bold mb-1 fs-18"> Quick Start</h6>
+                        <div class="view-card">
+                            <!-- <a class="">
+                                            <span class="add-txt text-info me-2 card-title" >View More <i class="fa fa-angle-double-right"> </i></span>
+                                        </a> -->
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-6 col-md-6">
+                        <div class=" ">
+                            <div class=" p-2 d-flex align-items-center justify-content-between">
+                                <div class="dashboard-card-title">
+                                    <p class="card-text">Sample dashboard </p>
+                                    <p class="card-text">Explore what Analytify can do </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-container *ngFor="let dashboardList of demoDashboardList;let i = index">
+                        <div 
+                            class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
+                            <div class=" card img-shadow mb-0 ">
+                                <div class="card overflow-hidden mb-0 " style="cursor: pointer;">
+                                    <img (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)" src="{{dashboardList.dashboard_image}}" alt="img" class="card-img-top">
+                                </div>
+                                <div class="card-body p-2 d-flex justify-content-between">
+                                    <h5 (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)" class="card-title mb-0" style="cursor: pointer; color: #2392c1;">{{dashboardList.dashboard_name}}</h5>
+                                    <div class="dashboard-option">
+                                        <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button"  ngbDropdownToggle
+                                            aria-haspopup="true" aria-expanded="false" class="">
+                                                <i class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                            </a>
+                                            <div class="dropdown-menu" ngbDropdownMenu>
+                                                <app-insights-button [classesList]="'dropdown-item'" [previledgeId]="36"
+                                                    [isBtn]="false" [buttonName]="' View Dashboard'"
+                                                    (btnClickEvent)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
+                                                    [faIconList]="'fe fe-upload'" [isIcon]="true"></app-insights-button>
+                                                <a class="dropdown-item" tabindex="0"
+                                                    (click)="viewSampleDashbaordPropertiesTab(dashboardList.dashboard_name,dashboardList.dashboard_id)">
+                                                    <i class="fa fa-sliders me-2 d-inline-flex"></i> Properties</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3">
+            <div *ngIf="viewDatabbses" class="card">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="card-title">Recent Connections</div>
+                    <a class="">
+                        <span class="add-txt text-info me-2" (click)="goToConnections()">View All <i class="fa fa-angle-double-right"> </i></span>
+                    </a>
+                </div>
+                <div class="card-body mb-0 p-0 " style="padding-right: 10px !important;">
+                    <div class="table-responsive">
+                        <table class="table border text-nowrap text-md-nowrap mb-0">
+                            <tbody>
+                                @for(database of connectionList;track database){
+                                <tr>
+                                    <td>
+                                        <a class="card-title" style="color: #2392c1;"
+                                            (click)="getTablesFromConnectedDb(database.database_id,database.file_id)"
+                                            ngbTooltip="{{database.display_name}}"> {{database.display_name | slice:0:15}}</a>
+                                    </td>
+                                    <td *ngIf="database.server_type === 'POSTGRESQL'">
+                                        <img alt="product" src="./assets/images/icons/postSQL-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'ORACLE'">
+                                        <img alt="product" src="./assets/images/icons/oracle-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'MYSQL'">
+                                        <img alt="product" src="./assets/images/icons/MySql-icon1.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'MONGODB'">
+                                        <img alt="product" src="./assets/images/icons/mongodb-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'MICROSOFTSQLSERVER'">
+                                        <img alt="product" src="./assets/images/icons/microsoft-sql-server-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'SQLITE'">
+                                        <img alt="product" src="./assets/images/icons/sqlite-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'SNOWFLAKE'">
+                                        <img alt="product" src="./assets/images/icons/snowflake-icon.png"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'EXCEL'">
+                                        <img alt="product" src="./assets/images/icons/csv-icon.jpg" class="w-5 h-5 border me-2">{{database.server_type |
+                                        lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'CSV'">
+                                        <img alt="product" src="./assets/images/icons/excel-icon.jpg" class="w-5 h-5 border me-2">{{database.server_type
+                                        | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'QUICKBOOKS'">
+                                        <img alt="product" src="./assets/images/icons/salesforce-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'SALESFORCE'">
+                                        <img alt="product" src="./assets/images/icons/quickbooks-icon.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <!-- <td>{{database.server_type}}</td> -->
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ROW-1 CLOSED-->
+</div>
+
+
+<ng-template #propertiesModal let-modal>
+    <div class="modal-header">
+        <h6 class="modal-title">Dashboard properties</h6>
+        <button type="button"class="btn-close"aria-label="Close"(click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+    
+      <div class="modal-body" style="height: 500px; overflow: scroll;">
+          <div class="">
+              <label for="input-label" class="form-label">Title</label>
+              <p class="fw-semibold mb-2 mt-3 border p-1">{{dashboardPropertyTitle}}</p>
+
+          </div>
+          <div class="">
+            
+            <p class="fw-semibold mb-2 mt-3">Share/publish</p>
+            <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button" (change)="sharePublish($event)" [closeOnSelect]="true" placeholder="Share or Publish">
+             <ng-option  value="public" selected>Public</ng-option>
+             <ng-option  value="private" selected>Private</ng-option>
+            </ng-select>
+       </div>
+          <div *ngIf="shareAsPrivate" class="">
+            
+               <p class="fw-semibold mb-2 mt-3">Roles</p>
+               <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button" (change)="onRolesChange($event)" [closeOnSelect]="false" [(ngModel)]="selectedRoleIds"  [multiple]="true" placeholder="Select Roles">
+                <ng-option *ngFor="let role of roleDetails" value="{{role.id}}" selected>{{role.role}}</ng-option>
+                   
+               </ng-select>
+          </div>
+          <div *ngIf="shareAsPrivate" class="">
+            
+            <p class="fw-semibold mb-2 mt-3">Users</p>
+            <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button1"(click)="getUsersforRole()" (change)="getSelectedUsers($event)" [(ngModel)]="selectedUserIds"  [closeOnSelect]="false"  [multiple]="true" placeholder="Select Users">
+                <ng-option *ngFor="let user of usersOnSelectedRole" value="{{user.user_id}}">{{user.username}}</ng-option>
+              
+            </ng-select>
+       </div>
+       <div *ngIf="publishedDashboard" class="">
+            
+        <p class="fw-semibold mb-2 mt-3">Url</p>
+        <button class="btn text-left" style="border: 1px solid #edebeb;width: 100%;">{{publicUrl}}
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" viewBox="0 0 488.3 488.3" width="16px" height="16px" xml:space="preserve" (click)="copyUrl()">
+            <g>
+              <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/>
+              <path d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z"/>
+            </g>
+          </svg></button>
+   </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" [disabled]="!selectedRoleIds?.length || !selectedUserIds?.length" *ngIf="!createUrl" (click)="saveDashboardProperties()" class="btn ripple btn-primary">Apply</button>
+        <button type="button" *ngIf="createUrl" (click)="publishDashboard()" class="btn ripple btn-primary">Publish</button>
+
+        <button
+          type="button"
+          class="btn ripple btn-secondary"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+      </div>
+</ng-template>
+
+<ng-template #sampleDashboardPropertiesModal let-modal>
+    <div class="modal-header">
+        <h6 class="modal-title">Dashboard properties</h6>
+        <button type="button"class="btn-close"aria-label="Close"(click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+    
+      <div class="modal-body" style="overflow: scroll;">
+          <div class="">
+              <label for="input-label" class="form-label">Title</label>
+              <p class="fw-semibold mb-2 mt-3 border p-1">{{dashboardPropertyTitle}}</p>
+
+          </div>
+       <div *ngIf="publishedDashboard" class="">
+            
+        <p class="fw-semibold mb-2 mt-3">Url</p>
+        <button class="btn text-left" style="border: 1px solid #edebeb;width: 100%;">{{publicUrl}}
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" viewBox="0 0 488.3 488.3" width="16px" height="16px" xml:space="preserve" (click)="copyUrl()">
+            <g>
+              <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/>
+              <path d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z"/>
+            </g>
+          </svg></button>
+   </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="sharePublish('public');publishDashboard()" class="btn ripple btn-primary">Publish Dashboard</button>
+
+        <button
+          type="button"
+          class="btn ripple btn-secondary"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+      </div>
+</ng-template>

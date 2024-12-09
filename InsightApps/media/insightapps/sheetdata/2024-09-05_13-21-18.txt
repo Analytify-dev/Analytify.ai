@@ -1,0 +1,401 @@
+{
+    "columns": [
+        {
+            "column": "business_travel",
+            "data_type": "varchar"
+        }
+    ],
+    "columns_data": [
+        [
+            "business_travel",
+            "varchar",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "id",
+            "data_type": "int",
+            "type": "count"
+        }
+    ],
+    "rows_data": [
+        [
+            "id",
+            "aggregate",
+            "count"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [
+            "Human Resources",
+            "Life Sciences",
+            "Marketing",
+            "Medical",
+            "Other",
+            "Technical Degree"
+        ],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [
+            {
+                "name": "count(id)",
+                "data": [
+                    150,
+                    277,
+                    1043
+                ],
+                "group": "apexcharts-axis-0"
+            }
+        ],
+        "sidebysideBarXaxis": [
+            {
+                "name": "business_travel",
+                "values": [
+                    "Non-Travel",
+                    "Travel_Frequently",
+                    "Travel_Rarely"
+                ]
+            }
+        ],
+        "sidebysideBarOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "data": [
+                        150,
+                        277,
+                        1043
+                    ],
+                    "group": "apexcharts-axis-0",
+                    "zIndex": 0
+                }
+            ],
+            "colors": "#81d4fa",
+            "chart": {
+                "type": "bar",
+                "height": 320
+            },
+            "plotOptions": {
+                "bar": {
+                    "horizontal": false,
+                    "columnWidth": "55%"
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "colors": [
+                        "#f43f63"
+                    ]
+                }
+            },
+            "stroke": {
+                "show": true,
+                "width": 2,
+                "colors": [
+                    "transparent"
+                ]
+            },
+            "xaxis": {
+                "categories": [
+                    "Non-Travel",
+                    "Travel_Frequently",
+                    "Travel_Rarely"
+                ],
+                "labels": {
+                    "show": true,
+                    "style": {
+                        "colors": "#00a5a2",
+                        "fontSize": "11px",
+                        "fontWeight": 600,
+                        "cssClass": "apexcharts-xaxis-label"
+                    }
+                },
+                "convertedCatToNumeric": false
+            },
+            "yaxis": [
+                {
+                    "show": true,
+                    "showAlways": false,
+                    "showForNullSeries": true,
+                    "opposite": false,
+                    "reversed": false,
+                    "logarithmic": false,
+                    "logBase": 10,
+                    "forceNiceScale": false,
+                    "floating": false,
+                    "labels": {
+                        "show": true,
+                        "minWidth": 0,
+                        "maxWidth": 160,
+                        "offsetX": 0,
+                        "offsetY": 0,
+                        "rotate": 0,
+                        "padding": 20,
+                        "style": {
+                            "colors": "#00a5a2",
+                            "fontSize": "11px",
+                            "fontWeight": 600,
+                            "cssClass": "apexcharts-xaxis-label"
+                        }
+                    },
+                    "axisBorder": {
+                        "show": false,
+                        "color": "#e0e0e0",
+                        "width": 1,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    },
+                    "axisTicks": {
+                        "show": false,
+                        "color": "#e0e0e0",
+                        "width": 6,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    },
+                    "title": {
+                        "text": "",
+                        "rotate": -90,
+                        "offsetY": 0,
+                        "offsetX": 0,
+                        "style": {
+                            "fontSize": "11px",
+                            "fontWeight": 900,
+                            "cssClass": ""
+                        }
+                    },
+                    "tooltip": {
+                        "enabled": false,
+                        "offsetX": 0
+                    },
+                    "crosshairs": {
+                        "show": true,
+                        "position": "front",
+                        "stroke": {
+                            "color": "#b6b6b6",
+                            "width": 1,
+                            "dashArray": 0
+                        }
+                    }
+                }
+            ],
+            "fill": {
+                "opacity": 1
+            },
+            "tooltip": {
+                "y": {}
+            },
+            "grid": {
+                "borderColor": "rgba(119, 119, 142, 0.05)",
+                "show": true,
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            }
+        },
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "kpiData": [
+            {
+                "col": "count(id)",
+                "result_data": [
+                    150,
+                    277,
+                    1043
+                ]
+            }
+        ],
+        "kpiFontSize": 9,
+        "kpicolor": "#42a5f5"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            {
+                "name": "count(id)",
+                "data": [
+                    150,
+                    277,
+                    1043
+                ],
+                "group": "apexcharts-axis-0",
+                "zIndex": 0
+            }
+        ],
+        "colors": "#81d4fa",
+        "chart": {
+            "type": "bar",
+            "height": 320
+        },
+        "plotOptions": {
+            "bar": {
+                "horizontal": false,
+                "columnWidth": "55%"
+            }
+        },
+        "dataLabels": {
+            "enabled": true,
+            "offsetY": -20,
+            "style": {
+                "fontSize": "12px",
+                "colors": [
+                    "#f43f63"
+                ]
+            }
+        },
+        "stroke": {
+            "show": true,
+            "width": 2,
+            "colors": [
+                "transparent"
+            ]
+        },
+        "xaxis": {
+            "categories": [
+                "Non-Travel",
+                "Travel_Frequently",
+                "Travel_Rarely"
+            ],
+            "labels": {
+                "show": true,
+                "style": {
+                    "colors": "#00a5a2",
+                    "fontSize": "11px",
+                    "fontWeight": 600,
+                    "cssClass": "apexcharts-xaxis-label"
+                }
+            },
+            "convertedCatToNumeric": false
+        },
+        "yaxis": [
+            {
+                "show": true,
+                "showAlways": false,
+                "showForNullSeries": true,
+                "opposite": false,
+                "reversed": false,
+                "logarithmic": false,
+                "logBase": 10,
+                "forceNiceScale": false,
+                "floating": false,
+                "labels": {
+                    "show": true,
+                    "minWidth": 0,
+                    "maxWidth": 160,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "rotate": 0,
+                    "padding": 20,
+                    "style": {
+                        "colors": "#00a5a2",
+                        "fontSize": "11px",
+                        "fontWeight": 600,
+                        "cssClass": "apexcharts-xaxis-label"
+                    }
+                },
+                "axisBorder": {
+                    "show": false,
+                    "color": "#e0e0e0",
+                    "width": 1,
+                    "offsetX": 0,
+                    "offsetY": 0
+                },
+                "axisTicks": {
+                    "show": false,
+                    "color": "#e0e0e0",
+                    "width": 6,
+                    "offsetX": 0,
+                    "offsetY": 0
+                },
+                "title": {
+                    "text": "",
+                    "rotate": -90,
+                    "offsetY": 0,
+                    "offsetX": 0,
+                    "style": {
+                        "fontSize": "11px",
+                        "fontWeight": 900,
+                        "cssClass": ""
+                    }
+                },
+                "tooltip": {
+                    "enabled": false,
+                    "offsetX": 0
+                },
+                "crosshairs": {
+                    "show": true,
+                    "position": "front",
+                    "stroke": {
+                        "color": "#b6b6b6",
+                        "width": 1,
+                        "dashArray": 0
+                    }
+                }
+            }
+        ],
+        "fill": {
+            "opacity": 1
+        },
+        "tooltip": {
+            "y": {}
+        },
+        "grid": {
+            "borderColor": "rgba(119, 119, 142, 0.05)",
+            "show": true,
+            "xaxis": {
+                "lines": {
+                    "show": false
+                }
+            },
+            "yaxis": {
+                "lines": {
+                    "show": false
+                }
+            }
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

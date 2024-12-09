@@ -1,0 +1,273 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "country",
+            "data_type": "string"
+        }
+    ],
+    "columns_data": [
+        [
+            "country",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "sales",
+            "data_type": "int",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "sales",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [
+        {
+            "column": "country",
+            "result_data": [
+                "Spain",
+                "Switzerland",
+                "Italy",
+                "Belgium",
+                "Sweden",
+                "Norway",
+                "France",
+                "USA",
+                "Austria",
+                "UK",
+                "Australia",
+                "Ireland",
+                "Germany",
+                "Japan",
+                "Denmark",
+                "Singapore",
+                "Canada",
+                "Philippines",
+                "Finland"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(sales)",
+            "result_data": [
+                1215530,
+                117700,
+                374624,
+                108397,
+                202777,
+                307425,
+                1110770,
+                3627511,
+                202036,
+                478814,
+                630535,
+                57749,
+                220441,
+                188144,
+                245608,
+                288451,
+                224044,
+                94006,
+                329538
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 19,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiNumber": 7,
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "savedChartOptions": {
+        "tooltip": {
+            "trigger": "item",
+            "showDelay": 0,
+            "transitionDuration": 0.2
+        },
+        "visualMap": {
+            "min": 57749,
+            "max": 3627511,
+            "text": [
+                "High",
+                "Low"
+            ],
+            "realtime": false,
+            "calculable": true,
+            "inRange": {
+                "color": [
+                    "lightskyblue",
+                    "yellow",
+                    "orangered"
+                ]
+            }
+        },
+        "series": [
+            {
+                "type": "map",
+                "map": "world",
+                "roam": false,
+                "data": [
+                    {
+                        "name": "Spain",
+                        "value": 1215530,
+                        "sum(sales)": 1215530
+                    },
+                    {
+                        "name": "Switzerland",
+                        "value": 117700,
+                        "sum(sales)": 117700
+                    },
+                    {
+                        "name": "Italy",
+                        "value": 374624,
+                        "sum(sales)": 374624
+                    },
+                    {
+                        "name": "Belgium",
+                        "value": 108397,
+                        "sum(sales)": 108397
+                    },
+                    {
+                        "name": "Sweden",
+                        "value": 202777,
+                        "sum(sales)": 202777
+                    },
+                    {
+                        "name": "Norway",
+                        "value": 307425,
+                        "sum(sales)": 307425
+                    },
+                    {
+                        "name": "France",
+                        "value": 1110770,
+                        "sum(sales)": 1110770
+                    },
+                    {
+                        "name": "USA",
+                        "value": 3627511,
+                        "sum(sales)": 3627511
+                    },
+                    {
+                        "name": "Austria",
+                        "value": 202036,
+                        "sum(sales)": 202036
+                    },
+                    {
+                        "name": "UK",
+                        "value": 478814,
+                        "sum(sales)": 478814
+                    },
+                    {
+                        "name": "Australia",
+                        "value": 630535,
+                        "sum(sales)": 630535
+                    },
+                    {
+                        "name": "Ireland",
+                        "value": 57749,
+                        "sum(sales)": 57749
+                    },
+                    {
+                        "name": "Germany",
+                        "value": 220441,
+                        "sum(sales)": 220441
+                    },
+                    {
+                        "name": "Japan",
+                        "value": 188144,
+                        "sum(sales)": 188144
+                    },
+                    {
+                        "name": "Denmark",
+                        "value": 245608,
+                        "sum(sales)": 245608
+                    },
+                    {
+                        "name": "Singapore",
+                        "value": 288451,
+                        "sum(sales)": 288451
+                    },
+                    {
+                        "name": "Canada",
+                        "value": 224044,
+                        "sum(sales)": 224044
+                    },
+                    {
+                        "name": "Philippines",
+                        "value": 94006,
+                        "sum(sales)": 94006
+                    },
+                    {
+                        "name": "Finland",
+                        "value": 329538,
+                        "sum(sales)": 329538
+                    }
+                ]
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "center",
+        "backgroundColor": "#ffffff",
+        "color": "#00a5a2"
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

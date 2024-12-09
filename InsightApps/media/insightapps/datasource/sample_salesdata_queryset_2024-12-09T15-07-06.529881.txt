@@ -1,0 +1,105 @@
+[
+    {
+        "schema": "main",
+        "table": "sales",
+        "columns": [
+            {
+                "column": "order_number",
+                "datatype": "integer"
+            },
+            {
+                "column": "quantity_ordered",
+                "datatype": "integer"
+            },
+            {
+                "column": "price_each",
+                "datatype": "real"
+            },
+            {
+                "column": "order_line_number",
+                "datatype": "integer"
+            },
+            {
+                "column": "sales",
+                "datatype": "integer"
+            },
+            {
+                "column": "order_date",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "status",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "month_id",
+                "datatype": "integer"
+            },
+            {
+                "column": "year_id",
+                "datatype": "integer"
+            },
+            {
+                "column": "product_line",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "msrp",
+                "datatype": "integer"
+            },
+            {
+                "column": "product_code",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "customer_name",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "phone_number",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "address_1",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "address_2",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "city",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "state",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "postal_code",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "country",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "territory",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "lastname",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "firstname",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "deal_size",
+                "datatype": "varchar(50)"
+            }
+        ],
+        "alias": "sales"
+    }
+]

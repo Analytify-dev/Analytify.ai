@@ -1,0 +1,180 @@
+{
+    "columns": [
+        {
+            "column": "education_field",
+            "data_type": "varchar"
+        }
+    ],
+    "columns_data": [
+        [
+            "education_field",
+            "varchar",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "id",
+            "data_type": "int",
+            "type": "count"
+        }
+    ],
+    "rows_data": [
+        [
+            "id",
+            "aggregate",
+            "count"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [
+            27,
+            606,
+            159,
+            464,
+            82,
+            132
+        ],
+        "pieXaxis": [
+            "Human Resources",
+            "Life Sciences",
+            "Marketing",
+            "Medical",
+            "Other",
+            "Technical Degree"
+        ],
+        "pieOptions": {
+            "series": [
+                27,
+                606,
+                159,
+                464,
+                82,
+                132
+            ],
+            "chart": {
+                "height": 300,
+                "type": "pie"
+            },
+            "colors": [
+                "#00a5a2",
+                "#31d1ce",
+                "#f5b849",
+                "#49b6f5",
+                "#e6533c",
+                "#00a5a2"
+            ],
+            "labels": [
+                "Human Resources",
+                "Life Sciences",
+                "Marketing",
+                "Medical",
+                "Other",
+                "Technical Degree"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "dropShadow": {
+                    "enabled": false
+                }
+            }
+        },
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "kpiData": [
+            {
+                "col": "count(id)",
+                "result_data": [
+                    27,
+                    606,
+                    159,
+                    464,
+                    82,
+                    132
+                ]
+            }
+        ],
+        "kpiFontSize": 9,
+        "kpicolor": "#42a5f5"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            27,
+            606,
+            159,
+            464,
+            82,
+            132
+        ],
+        "chart": {
+            "height": 300,
+            "type": "pie"
+        },
+        "colors": [
+            "#00a5a2",
+            "#31d1ce",
+            "#f5b849",
+            "#49b6f5",
+            "#e6533c",
+            "#00a5a2"
+        ],
+        "labels": [
+            "Human Resources",
+            "Life Sciences",
+            "Marketing",
+            "Medical",
+            "Other",
+            "Technical Degree"
+        ],
+        "legend": {
+            "show": true,
+            "position": "bottom"
+        },
+        "dataLabels": {
+            "dropShadow": {
+                "enabled": false
+            }
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

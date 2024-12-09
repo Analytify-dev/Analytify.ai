@@ -1,0 +1,228 @@
+<app-page-header title="Dashboard List" title1="Home" activeitem="dashboard"></app-page-header>
+
+
+<div class="main-container container-fluid">
+    <div class="row" class="card" style="padding-top: 15px;">
+    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+      <div class="d-flex justify-content-between px-5">
+        <div class="connect-txt">
+          <h4 class="card-title mt-2">Dashboards</h4>
+        </div>
+        <div class="new-data-btn d-flex text-align-center">
+          <button *ngIf="gridView" type="button" class="btn btn-icon btn-outline-primary me-1"><i class="fa fa-th-large"></i></button>
+          <button *ngIf="gridView" type="button"  (click)="gridView=false" class="btn btn-icon btn-primary-light me-3" ><i class="fa fa-th-list"></i></button>
+
+          <button *ngIf="!gridView" type="button" (click)="gridView=true" class="btn btn-icon btn-primary-light me-1"><i class="fa fa-th-large"></i></button>
+          <button *ngIf="!gridView" type="button" class="btn btn-icon btn-outline-primary me-3" ><i class="fa fa-th-list"></i></button>
+
+          <div class="input-group">
+            <input type="text" class="form-control border-end-0 " placeholder="Search" [(ngModel)]="dashboardName" (keyup.enter)="searchDashboarList()" aria-describedby="button-addon2" >
+            <button class="btn btn-primary border me-2" (click)="searchDashboarList()" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
+            <button type="button" class="btn btn-primary" (click)="dashboardRoute()" style="border-radius: 4px 4px 4px 4px;"><i class="fa fa-plus"></i> New Dashboard</button>
+
+          </div>
+        </div>
+    </div>
+    <div *ngIf="viewDashboardList && savedDashboardList.length === 0">
+      No Dashboards, to display!
+    </div>
+    <div *ngIf="!viewDashboardList">
+     You don't have permission to view 
+    </div>
+        <div *ngIf="viewDashboardList" class="card-body">
+            @if(!gridView){
+            <div class="table-responsive" style="height: 26rem;">
+                <table class="table border text-nowrap text-md-nowrap mb-0">
+                    <thead class="table-primary" style="position: sticky;top: -1px;background-color: #2392c1;">
+                        <tr>
+                            <th>Title</th>
+                            <th>Created</th>
+                            <th>Last Modified</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dashboard of savedDashboardList | paginate : {
+                            itemsPerPage: itemsPerPage,
+                            currentPage: page,
+                            totalItems: totalItems
+                          }">
+                            <td>
+                              <div class="d-flex">
+                                <div (click)="viewDashboard(dashboard.server_id,dashboard.queryset_id,dashboard.dashboard_id)" class="imgdf">
+                                  <img src="{{dashboard.dashboard_image}}" alt="" class="w-7 h-7 border rounded-3  me-4 img-cursor">
+                                </div>
+                                <div class="content">
+                                  <a style="color: #05aff8;cursor: pointer;" [ngbTooltip]="dashboard.dashboard_name.length > 13 ? dashboard.dashboard_name : null"
+
+                                    (click)="viewDashboard(dashboard.server_id,dashboard.queryset_id,dashboard.dashboard_id)">
+                                    {{dashboard.dashboard_name.length > 13 ? (dashboard.dashboard_name | slice:0:15)+'...' : dashboard.dashboard_name }}</a>
+                                  <p class="mb-0">Created by : {{dashboard.created_by}}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td>{{dashboard.created}}</td>
+                            <td>{{dashboard.Modified}}</td>
+                            <td>
+                                <div class="hstack gap-2 fs-1">
+                            
+                                  <app-insights-button [classesList]="'btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-2'"
+                                  [previledgeId]="37" [isBtn]="false"
+                                  (btnClickEvent)="viewDashboard(dashboard.server_id,dashboard.queryset_id,dashboard.dashboard_id)" [toolTip]="'Edit'"
+                                  [faIconList]="'ri-edit-line'" [isIcon]="true"></app-insights-button>
+                                <app-insights-button [classesList]="'btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light me-2'"
+                                  [previledgeId]="35" [isBtn]="false" [toolTip]="'Delete'"
+                                  (btnClickEvent)="deleteDashboard(dashboard.dashboard_id)"
+                                  [faIconList]="'ri-delete-bin-7-line'" [isIcon]="true"></app-insights-button>
+                                  <app-insights-button [classesList]="'btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light'"
+                                  [previledgeId]="35" [isBtn]="false" [toolTip]="'Properties'"
+                                  (btnClickEvent)="viewPropertiesTab(dashboard.dashboard_name,dashboard.dashboard_id)"
+                                  [faIconList]="'fa fa-sliders'" [isIcon]="true"></app-insights-button>
+                            
+                                </div>
+                            </td>
+                        </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+        }
+        @if(gridView){
+
+            <div class="row">
+                <div *ngFor="let dashboard of savedDashboardList | paginate : {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: page,
+                    totalItems: totalItems
+                  }" class="col-md-12 col-xl-3">
+                  <div class="card  ">
+                    <div class="user-image card-box-shadow">                        
+                          <img src="{{dashboard.dashboard_image}}" (click)="viewDashboard(dashboard.server_id,dashboard.queryset_id,dashboard.dashboard_id)" alt="" class="card-img-top img-cursor" style="height: 140px;">
+                    </div>
+                    <div class="card-body p-1 mt-1 text-center">
+                        <a  class="fs-18 fw-bold d-block"  [ngbTooltip]="dashboard.dashboard_name.length > 13 ? dashboard.dashboard_name : null" (click)="viewDashboard(dashboard.server_id,dashboard.queryset_id,dashboard.dashboard_id)"> {{dashboard.dashboard_name.length > 13 ? (dashboard.dashboard_name | slice:0:15)+'...' : dashboard.dashboard_name }}</a>
+                    </div>
+                    <div class=" p-1 text-center">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <span class="fw-semibold fs-14">Created on: </span>
+                        </div>
+                        <div class="col-md-6">
+                            <span class="fs-15">{{dashboard.created}}</span>
+                        </div>
+                      </div>     
+                      <div class="row ">
+                        <div class="col-md-6">
+                          <span class="fw-semibold fs-14">Modified on: </span>
+                        </div>
+                        <div class="col-md-6">
+                          <span class="fs-15">{{dashboard.Modified}}</span>
+                        </div>
+                      </div>                               
+                      </div>
+                        <div class=" text-center p-2">
+                          <app-insights-button [classesList]="'btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light me-2'"
+                            [previledgeId]="37" [isBtn]="false"
+                            (btnClickEvent)="viewDashboard(dashboard.server_id,dashboard.queryset_id,dashboard.dashboard_id)" [toolTip]="'Edit'"
+                            [faIconList]="'ri-edit-line'" [isIcon]="true"></app-insights-button>
+                          <app-insights-button [classesList]="'btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light me-2'"
+                            [previledgeId]="35" [isBtn]="false" [toolTip]="'Delete'"
+                            (btnClickEvent)="deleteDashboard(dashboard.dashboard_id)"
+                            [faIconList]="'ri-delete-bin-7-line'" [isIcon]="true"></app-insights-button>
+                            <app-insights-button [classesList]="'btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light'"
+                            [previledgeId]="35" [isBtn]="false" [toolTip]="'Properties'"
+                            (btnClickEvent)="viewPropertiesTab(dashboard.dashboard_name,dashboard.dashboard_id)"
+                            [faIconList]="'fa fa-sliders'" [isIcon]="true"></app-insights-button>
+                        </div>
+                  </div>
+                    </div>
+          </div>
+        }
+
+
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangeUserDashboardsList((page = $event))"></pagination-controls>
+            <div  style="float: right;font-size: 15px; margin-top: -41px;">
+                <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getuserDashboardsListput()" class="form-control">
+                      <option  value="10"> 10</option>
+                      <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
+                      <option [disabled]="!(totalItems > 20)" value="30"> 30</option>
+                   
+                </select>
+             </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+  <ng-template #propertiesModal let-modal>
+    <div class="modal-header">
+        <h6 class="modal-title">Dashboard properties</h6>
+        <button type="button"class="btn-close"aria-label="Close"(click)="modal.dismiss('Cross click')">
+        </button>
+      </div>
+    
+      <div class="modal-body" style="height: 500px; overflow: scroll;">
+          <div class="">
+              <label for="input-label" class="form-label">Title</label>
+              <p class="fw-semibold mb-2 mt-3 border p-1">{{dashboardPropertyTitle}}</p>
+
+          </div>
+          <div class="">
+            
+            <p class="fw-semibold mb-2 mt-3">Share/publish</p>
+            <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button" (change)="sharePublish($event)" [closeOnSelect]="true" placeholder="Share or Publish">
+             <ng-option  value="public" selected>Public</ng-option>
+             <ng-option  value="private" selected>Private</ng-option>
+            </ng-select>
+       </div>
+          <div *ngIf="shareAsPrivate" class="">
+            
+               <p class="fw-semibold mb-2 mt-3">Roles</p>
+               <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button" (change)="onRolesChange($event)"  [closeOnSelect]="false" [(ngModel)]="selectedRoleIds" [multiple]="true" placeholder="Select Roles">
+                   <ng-option *ngFor="let role of roleDetails" value="{{role.id}}" selected>{{role.role}}</ng-option>
+                   
+               </ng-select>
+          </div>
+          <div *ngIf="shareAsPrivate" class="">
+            
+            <p class="fw-semibold mb-2 mt-3">Users</p>
+            <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button1"(click)="getUsersforRole()" (change)="getSelectedUsers($event)" [(ngModel)]="selectedUserIds"  [closeOnSelect]="false"  [multiple]="true" placeholder="Select Users">
+                <ng-option *ngFor="let user of usersOnSelectedRole" value="{{user.user_id}}">{{user.username}}</ng-option>
+              
+            </ng-select>
+       </div>
+       <div *ngIf="publishedDashboard" class="">
+            
+        <p class="fw-semibold mb-2 mt-3">Url</p>
+        <button class="btn text-left" style="border: 1px solid #edebeb;width: 100%;">{{publicUrl}}
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" viewBox="0 0 488.3 488.3" width="16px" height="16px" xml:space="preserve" (click)="copyUrl()">
+            <g>
+              <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/>
+              <path d="M401.05,0h-227c-21.3,0-38.6,17.3-38.6,38.6c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5c0-6.4,5.2-11.6,11.6-11.6h227    c6.4,0,11.6,5.2,11.6,11.6v325.7c0,6.4-5.2,11.6-11.6,11.6c-7.5,0-13.5,6-13.5,13.5s6,13.5,13.5,13.5c21.3,0,38.6-17.3,38.6-38.6    V38.6C439.65,17.3,422.35,0,401.05,0z"/>
+            </g>
+          </svg></button>
+   </div>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" (click)="saveDashboardProperties()" class="btn ripple btn-primary">Apply</button>
+        <button
+          type="button"
+          class="btn ripple btn-secondary"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+      </div> -->
+      <div class="modal-footer">
+        <button type="button" [disabled]="!selectedRoleIds?.length || !selectedUserIds?.length" *ngIf="!createUrl" (click)="saveDashboardProperties()" class="btn ripple btn-primary">Apply</button>
+        <button type="button" *ngIf="createUrl" (click)="publishDashboard()" class="btn ripple btn-primary">Publish</button>
+
+        <button
+          type="button"
+          class="btn ripple btn-secondary"
+          (click)="modal.close('Save click')"
+        >
+          Close
+        </button>
+      </div>
+</ng-template>

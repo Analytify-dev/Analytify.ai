@@ -1,0 +1,216 @@
+{
+    "columns": [
+        {
+            "column": "department",
+            "data_type": "varchar"
+        }
+    ],
+    "columns_data": [
+        [
+            "department",
+            "varchar",
+            ""
+        ],
+        [
+            "department",
+            "varchar",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "department",
+            "type": "count"
+        }
+    ],
+    "rows_data": [
+        [
+            "department",
+            "aggregate",
+            "count"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [
+            2,
+            1,
+            2,
+            14,
+            16,
+            8,
+            27,
+            4,
+            1,
+            18,
+            4,
+            1,
+            13,
+            4
+        ],
+        "donutXaxis": [
+            "Accounting",
+            "Customer Support",
+            "Design",
+            "Engineering",
+            "Finance",
+            "Human Resources",
+            "IT",
+            "Legal",
+            "Manufacturing",
+            "Marketing",
+            "Operations",
+            "Quality Assurance",
+            "Sales",
+            "Supply Chain"
+        ],
+        "donutOptions": {
+            "series": [
+                2,
+                1,
+                2,
+                14,
+                16,
+                8,
+                27,
+                4,
+                1,
+                18,
+                4,
+                1,
+                13,
+                4
+            ],
+            "chart": {
+                "type": "donut"
+            },
+            "labels": [
+                "Accounting",
+                "Customer Support",
+                "Design",
+                "Engineering",
+                "Finance",
+                "Human Resources",
+                "IT",
+                "Legal",
+                "Manufacturing",
+                "Marketing",
+                "Operations",
+                "Quality Assurance",
+                "Sales",
+                "Supply Chain"
+            ],
+            "responsive": [
+                {
+                    "breakpoint": 480,
+                    "options": {
+                        "chart": {
+                            "width": 100
+                        },
+                        "legend": {
+                            "position": "bottom"
+                        }
+                    }
+                }
+            ],
+            "legend": {
+                "show": false
+            }
+        },
+        "kpiData": [],
+        "kpiFontSize": 10.5,
+        "kpicolor": "#1565c0"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            2,
+            1,
+            2,
+            14,
+            16,
+            8,
+            27,
+            4,
+            1,
+            18,
+            4,
+            1,
+            13,
+            4
+        ],
+        "chart": {
+            "type": "donut"
+        },
+        "labels": [
+            "Accounting",
+            "Customer Support",
+            "Design",
+            "Engineering",
+            "Finance",
+            "Human Resources",
+            "IT",
+            "Legal",
+            "Manufacturing",
+            "Marketing",
+            "Operations",
+            "Quality Assurance",
+            "Sales",
+            "Supply Chain"
+        ],
+        "responsive": [
+            {
+                "breakpoint": 480,
+                "options": {
+                    "chart": {
+                        "width": 100
+                    },
+                    "legend": {
+                        "position": "bottom"
+                    }
+                }
+            }
+        ],
+        "legend": {
+            "show": false
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

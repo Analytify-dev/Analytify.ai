@@ -1,0 +1,665 @@
+{
+    "columns": [
+        {
+            "column": "job_role",
+            "data_type": "varchar"
+        }
+    ],
+    "columns_data": [
+        [
+            "job_role",
+            "varchar",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "id",
+            "data_type": "int",
+            "type": "count_distinct"
+        },
+        {
+            "column": "age",
+            "data_type": "int",
+            "type": "avg"
+        }
+    ],
+    "rows_data": [
+        [
+            "id",
+            "aggregate",
+            "count_distinct"
+        ],
+        [
+            "age",
+            "aggregate",
+            "avg"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [
+            {
+                "name": "CNTD(id)",
+                "data": [
+                    131,
+                    52,
+                    259,
+                    102,
+                    145,
+                    80,
+                    292,
+                    326,
+                    83
+                ],
+                "group": "apexcharts-axis-0"
+            },
+            {
+                "name": "avg(age)",
+                "data": [
+                    39.81,
+                    35.5,
+                    34.1,
+                    46.76,
+                    38.3,
+                    44,
+                    34.24,
+                    36.89,
+                    30.36
+                ],
+                "group": "apexcharts-axis-0"
+            }
+        ],
+        "barLineXaxis": [
+            {
+                "name": "job_role",
+                "values": [
+                    "Healthcare Representative",
+                    "Human Resources",
+                    "Laboratory Technician",
+                    "Manager",
+                    "Manufacturing Director",
+                    "Research Director",
+                    "Research Scientist",
+                    "Sales Executive",
+                    "Sales Representative"
+                ]
+            }
+        ],
+        "barLineOptions": {
+            "series": [
+                {
+                    "name": "CNTD(id)",
+                    "type": "column",
+                    "data": [
+                        131,
+                        52,
+                        259,
+                        102,
+                        145,
+                        80,
+                        292,
+                        326,
+                        83
+                    ],
+                    "group": "apexcharts-axis-0",
+                    "zIndex": 0
+                },
+                {
+                    "name": "avg(age)",
+                    "type": "line",
+                    "data": [
+                        39.81,
+                        35.5,
+                        34.1,
+                        46.76,
+                        38.3,
+                        44,
+                        34.24,
+                        36.89,
+                        30.36
+                    ],
+                    "group": "apexcharts-axis-1",
+                    "zIndex": 1
+                }
+            ],
+            "colors": [
+                "#00a5a2",
+                "#31d1ce"
+            ],
+            "chart": {
+                "height": 350,
+                "type": "line",
+                "background": "#fafafa"
+            },
+            "grid": {
+                "show": true,
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "stroke": {
+                "width": [
+                    0,
+                    4
+                ]
+            },
+            "title": {
+                "text": "",
+                "style": {
+                    "fontSize": "13px",
+                    "fontWeight": "bold",
+                    "color": "#8c9097"
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "colors": [
+                        "#cddc39"
+                    ]
+                }
+            },
+            "labels": [],
+            "xaxis": {
+                "type": "numeric",
+                "labels": {
+                    "show": true,
+                    "style": {
+                        "colors": [],
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "convertedCatToNumeric": false,
+                "categories": [],
+                "tickAmount": "dataPoints"
+            },
+            "yaxis": [
+                {
+                    "show": true,
+                    "showAlways": false,
+                    "showForNullSeries": true,
+                    "opposite": false,
+                    "reversed": false,
+                    "logarithmic": false,
+                    "logBase": 10,
+                    "forceNiceScale": false,
+                    "floating": false,
+                    "labels": {
+                        "show": true,
+                        "minWidth": 0,
+                        "maxWidth": 160,
+                        "offsetX": 0,
+                        "offsetY": 0,
+                        "rotate": 0,
+                        "padding": 20,
+                        "style": {
+                            "colors": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                            "fontSize": "12px",
+                            "fontWeight": 12,
+                            "fontFamily": "Helvetica, Arial, sans-serif",
+                            "cssClass": ""
+                        }
+                    },
+                    "axisBorder": {
+                        "show": false,
+                        "color": "#e0e0e0",
+                        "width": 1,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    },
+                    "axisTicks": {
+                        "show": false,
+                        "color": "#e0e0e0",
+                        "width": 6,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    },
+                    "title": {
+                        "text": "",
+                        "rotate": -90,
+                        "offsetY": 0,
+                        "offsetX": 0,
+                        "style": {
+                            "color": "#8c9097",
+                            "fontSize": "13px",
+                            "fontWeight": "bold",
+                            "cssClass": ""
+                        }
+                    },
+                    "tooltip": {
+                        "enabled": false,
+                        "offsetX": 0
+                    },
+                    "crosshairs": {
+                        "show": true,
+                        "position": "front",
+                        "stroke": {
+                            "color": "#b6b6b6",
+                            "width": 1,
+                            "dashArray": 0
+                        }
+                    }
+                },
+                {
+                    "show": true,
+                    "showAlways": false,
+                    "showForNullSeries": true,
+                    "opposite": true,
+                    "reversed": false,
+                    "logarithmic": false,
+                    "logBase": 10,
+                    "forceNiceScale": false,
+                    "floating": false,
+                    "labels": {
+                        "show": true,
+                        "minWidth": 0,
+                        "maxWidth": 160,
+                        "offsetX": 0,
+                        "offsetY": 0,
+                        "rotate": 0,
+                        "padding": 20,
+                        "style": {
+                            "colors": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                            "fontSize": "12px",
+                            "fontWeight": 12,
+                            "fontFamily": "Helvetica, Arial, sans-serif",
+                            "cssClass": ""
+                        }
+                    },
+                    "axisBorder": {
+                        "show": false,
+                        "color": "#e0e0e0",
+                        "width": 1,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    },
+                    "axisTicks": {
+                        "show": false,
+                        "color": "#e0e0e0",
+                        "width": 6,
+                        "offsetX": 0,
+                        "offsetY": 0
+                    },
+                    "title": {
+                        "text": "",
+                        "rotate": -90,
+                        "offsetY": 0,
+                        "offsetX": 0,
+                        "style": {
+                            "color": "#8c9097",
+                            "fontSize": "13px",
+                            "fontWeight": "bold",
+                            "cssClass": ""
+                        }
+                    },
+                    "tooltip": {
+                        "enabled": false,
+                        "offsetX": 0
+                    },
+                    "crosshairs": {
+                        "show": true,
+                        "position": "front",
+                        "stroke": {
+                            "color": "#b6b6b6",
+                            "width": 1,
+                            "dashArray": 0
+                        }
+                    }
+                }
+            ]
+        },
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "kpiData": [
+            {
+                "col": "CNTD(id)",
+                "result_data": [
+                    131,
+                    52,
+                    259,
+                    102,
+                    145,
+                    80,
+                    292,
+                    326,
+                    83
+                ]
+            },
+            {
+                "col": "avg(age)",
+                "result_data": [
+                    39.81,
+                    35.5,
+                    34.1,
+                    46.76,
+                    38.3,
+                    44,
+                    34.24,
+                    36.89,
+                    30.36
+                ]
+            }
+        ],
+        "kpiFontSize": 9,
+        "kpicolor": "#42a5f5"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            {
+                "name": "CNTD(id)",
+                "type": "column",
+                "data": [
+                    131,
+                    52,
+                    259,
+                    102,
+                    145,
+                    80,
+                    292,
+                    326,
+                    83
+                ],
+                "group": "apexcharts-axis-0",
+                "zIndex": 0
+            },
+            {
+                "name": "avg(age)",
+                "type": "line",
+                "data": [
+                    39.81,
+                    35.5,
+                    34.1,
+                    46.76,
+                    38.3,
+                    44,
+                    34.24,
+                    36.89,
+                    30.36
+                ],
+                "group": "apexcharts-axis-1",
+                "zIndex": 1
+            }
+        ],
+        "colors": [
+            "#00a5a2",
+            "#31d1ce"
+        ],
+        "chart": {
+            "height": 350,
+            "type": "line",
+            "background": "#fafafa"
+        },
+        "grid": {
+            "show": true,
+            "xaxis": {
+                "lines": {
+                    "show": false
+                }
+            },
+            "yaxis": {
+                "lines": {
+                    "show": false
+                }
+            }
+        },
+        "stroke": {
+            "width": [
+                0,
+                4
+            ]
+        },
+        "title": {
+            "text": "",
+            "style": {
+                "fontSize": "13px",
+                "fontWeight": "bold",
+                "color": "#8c9097"
+            }
+        },
+        "dataLabels": {
+            "enabled": true,
+            "offsetY": -20,
+            "style": {
+                "fontSize": "12px",
+                "colors": [
+                    "#cddc39"
+                ]
+            }
+        },
+        "labels": [],
+        "xaxis": {
+            "type": "numeric",
+            "labels": {
+                "show": true,
+                "style": {
+                    "colors": [],
+                    "fontSize": "12px",
+                    "fontFamily": "Helvetica, Arial, sans-serif",
+                    "fontWeight": 12
+                }
+            },
+            "convertedCatToNumeric": false,
+            "categories": [],
+            "tickAmount": "dataPoints"
+        },
+        "yaxis": [
+            {
+                "show": true,
+                "showAlways": false,
+                "showForNullSeries": true,
+                "opposite": false,
+                "reversed": false,
+                "logarithmic": false,
+                "logBase": 10,
+                "forceNiceScale": false,
+                "floating": false,
+                "labels": {
+                    "show": true,
+                    "minWidth": 0,
+                    "maxWidth": 160,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "rotate": 0,
+                    "padding": 20,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": "12px",
+                        "fontWeight": 12,
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "cssClass": ""
+                    }
+                },
+                "axisBorder": {
+                    "show": false,
+                    "color": "#e0e0e0",
+                    "width": 1,
+                    "offsetX": 0,
+                    "offsetY": 0
+                },
+                "axisTicks": {
+                    "show": false,
+                    "color": "#e0e0e0",
+                    "width": 6,
+                    "offsetX": 0,
+                    "offsetY": 0
+                },
+                "title": {
+                    "text": "",
+                    "rotate": -90,
+                    "offsetY": 0,
+                    "offsetX": 0,
+                    "style": {
+                        "color": "#8c9097",
+                        "fontSize": "13px",
+                        "fontWeight": "bold",
+                        "cssClass": ""
+                    }
+                },
+                "tooltip": {
+                    "enabled": false,
+                    "offsetX": 0
+                },
+                "crosshairs": {
+                    "show": true,
+                    "position": "front",
+                    "stroke": {
+                        "color": "#b6b6b6",
+                        "width": 1,
+                        "dashArray": 0
+                    }
+                }
+            },
+            {
+                "show": true,
+                "showAlways": false,
+                "showForNullSeries": true,
+                "opposite": true,
+                "reversed": false,
+                "logarithmic": false,
+                "logBase": 10,
+                "forceNiceScale": false,
+                "floating": false,
+                "labels": {
+                    "show": true,
+                    "minWidth": 0,
+                    "maxWidth": 160,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "rotate": 0,
+                    "padding": 20,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": "12px",
+                        "fontWeight": 12,
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "cssClass": ""
+                    }
+                },
+                "axisBorder": {
+                    "show": false,
+                    "color": "#e0e0e0",
+                    "width": 1,
+                    "offsetX": 0,
+                    "offsetY": 0
+                },
+                "axisTicks": {
+                    "show": false,
+                    "color": "#e0e0e0",
+                    "width": 6,
+                    "offsetX": 0,
+                    "offsetY": 0
+                },
+                "title": {
+                    "text": "",
+                    "rotate": -90,
+                    "offsetY": 0,
+                    "offsetX": 0,
+                    "style": {
+                        "color": "#8c9097",
+                        "fontSize": "13px",
+                        "fontWeight": "bold",
+                        "cssClass": ""
+                    }
+                },
+                "tooltip": {
+                    "enabled": false,
+                    "offsetX": 0
+                },
+                "crosshairs": {
+                    "show": true,
+                    "position": "front",
+                    "stroke": {
+                        "color": "#b6b6b6",
+                        "width": 1,
+                        "dashArray": 0
+                    }
+                }
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": false,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

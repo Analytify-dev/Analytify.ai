@@ -1,0 +1,157 @@
+{
+    "columns": [
+        {
+            "column": "department",
+            "data_type": "string"
+        }
+    ],
+    "columns_data": [
+        [
+            "department",
+            "string",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "id",
+            "data_type": "int",
+            "type": "count"
+        }
+    ],
+    "rows_data": [
+        [
+            "id",
+            "aggregate",
+            "count"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [
+            63,
+            961,
+            446
+        ],
+        "donutXaxis": [
+            "Human Resources",
+            "Research & Development",
+            "Sales"
+        ],
+        "donutOptions": {
+            "series": [
+                63,
+                961,
+                446
+            ],
+            "chart": {
+                "type": "donut",
+                "background": "#ffffff"
+            },
+            "labels": [
+                "Human Resources",
+                "Research & Development",
+                "Sales"
+            ],
+            "responsive": [
+                {
+                    "breakpoint": 480,
+                    "options": {
+                        "chart": {
+                            "width": 100
+                        },
+                        "legend": {
+                            "position": "bottom"
+                        }
+                    }
+                }
+            ],
+            "legend": {
+                "show": false
+            }
+        },
+        "kpiData": [
+            {
+                "col": "count(id)",
+                "result_data": [
+                    63,
+                    961,
+                    446
+                ]
+            }
+        ],
+        "kpiFontSize": 9,
+        "kpicolor": "#42a5f5"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            63,
+            961,
+            446
+        ],
+        "chart": {
+            "type": "donut",
+            "background": "#ffffff"
+        },
+        "labels": [
+            "Human Resources",
+            "Research & Development",
+            "Sales"
+        ],
+        "responsive": [
+            {
+                "breakpoint": 480,
+                "options": {
+                    "chart": {
+                        "width": 100
+                    },
+                    "legend": {
+                        "position": "bottom"
+                    }
+                }
+            }
+        ],
+        "legend": {
+            "show": false
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

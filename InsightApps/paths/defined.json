@@ -1,0 +1,760 @@
+[
+  {
+    "privileges": [
+      { "id": 1, "privilege": "can add database" },
+      { "id": 2, "privilege": "can edit database" },
+      { "id": 3, "privilege": "can delete database" },
+      { "id": 4, "privilege": "can view database" },
+      { "id": 5, "privilege": "can search database" },
+      { "id": 6, "privilege": "can preview data from datasource" },
+      { "id": 7, "privilege": "can add tables to semantic layer" },
+      { "id": 8, "privilege": "can view tables from semantic layer" },
+      { "id": 9, "privilege": "can delete tables from semantic layer" },
+      { "id": 10, "privilege": "can add datasource filters" },
+      { "id": 11, "privilege": "can edit datasource filters" },
+      { "id": 12, "privilege": "can delete datasource filters" },
+      { "id": 13, "privilege": "can view datasource filters" },
+      { "id": 15, "privilege": "can search tables from connected database" },
+      { "id": 17, "privilege": "can add sheet" },
+      { "id": 18, "privilege": "can edit sheet" },
+      { "id": 19, "privilege": "can delete sheet" },
+      { "id": 20, "privilege": "can view sheet" },
+      { "id": 21, "privilege": "can add sheet filters" },
+      { "id": 22, "privilege": "can edit sheet filters" },
+      { "id": 23, "privilege": "can delete sheet filters" },
+      { "id": 24, "privilege": "can view sheet filters" },
+      { "id": 25, "privilege": "can download sheet" },
+      { "id": 26, "privilege": "can add database connections from sheet" },
+      { "id": 27, "privilege": "can edit database connections from sheet" },
+      { "id": 28, "privilege": "can add sheet title" },
+      { "id": 29, "privilege": "can edit sheet title" },
+      { "id": 30, "privilege": "can format sheet title" },
+      {
+        "id": 31,
+        "privilege": "can rename dimensions in column shelf from sheet"
+      },
+      { "id": 32, "privilege": "can rename measures in row shelf from sheet" },
+      { "id": 34, "privilege": "can add dashboard" },
+      { "id": 35, "privilege": "can delete dashboard" },
+      { "id": 36, "privilege": "can view dashboard" },
+      { "id": 37, "privilege": "can edit dashboard" },
+      { "id": 38, "privilege": "can add dashboard filter" },
+      { "id": 39, "privilege": "can edit dashboard filter" },
+      { "id": 40, "privilege": "can delete dashboard filter" },
+      { "id": 41, "privilege": "can view dashboard filter" },
+      { "id": 42, "privilege": "can download dashboard" },
+      { "id": 43, "privilege": "can share dashboard" },
+      { "id": 44, "privilege": "can export dashboard" },
+      { "id": 45, "privilege": "can favourite dashboard using favicon" },
+      { "id": 46, "privilege": "can add dashboard title" },
+      { "id": 47, "privilege": "can edit dashboard title" },
+      { "id": 48, "privilege": "can goto sheet from dashboard" },
+      { "id": 49, "privilege": "can remove sheet from dashboard" },
+      { "id": 50, "privilege": "can resize dashboard layout" },
+      { "id": 51, "privilege": "can add customsql query" },
+      { "id": 52, "privilege": "can edit customsql query" },
+      { "id": 53, "privilege": "can delete customsql query" },
+      { "id": 54, "privilege": "can view customsql query" },
+      { "id": 56, "privilege": "can add roles" },
+      { "id": 57, "privilege": "can delete roles" },
+      { "id": 58, "privilege": "can edit roles" },
+      { "id": 59, "privilege": "can view roles" },
+      { "id": 61, "privilege": "can edit user" },
+      { "id": 62, "privilege": "can add user" },
+      { "id": 63, "privilege": "can delete user" },
+      { "id": 64, "privilege": "can view userlist" },
+      { "id": 65, "privilege": "can add csv files" },
+      { "id": 66, "privilege": "can delete csv files" },
+      { "id": 67, "privilege": "can add excel files" },
+      { "id": 68, "privilege": "can delete excel files" },
+      { "id": 69, "privilege": "can view excel files" },
+      { "id": 70, "privilege": "can view csv files" },
+      { "id": 71, "privilege": "can view previlages" },
+      { "id": 72, "privilege": "can view/copy View Query" }
+    ]
+  },
+
+  {
+    "roles": [
+      {
+        "role_id": 1,
+        "role": "Admin",
+        "created_by": "",
+        "created_at": "2024-08-28T15:38:10Z",
+        "updated_at": "2024-08-28T15:38:10Z",
+        "role_desc": "",
+        "privilege_ids": [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 17, 18, 19, 20, 21, 22,
+          23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40,
+          41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 56, 57, 58,
+          61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 59, 71, 72
+        ]
+      }
+    ]
+  },
+
+  {
+    "file_types": [
+      {
+        "id": 1,
+        "file_type": "EXCEL"
+      },
+      {
+        "id": 2,
+        "file_type": "CSV"
+      },
+      {
+        "id": 3,
+        "file_type": "PDF"
+      },
+      {
+        "id": 4,
+        "file_type": "XML"
+      },
+      {
+        "id": 5,
+        "file_type": "TEXT"
+      },
+      {
+        "id": 6,
+        "file_type": "QUICKBOOKS"
+      }
+    ]
+  },
+
+  {
+    "server_types": [
+      {
+        "id": 1,
+        "server_type": "POSTGRESQL"
+      },
+      {
+        "id": 2,
+        "server_type": "ORACLE"
+      },
+      {
+        "id": 3,
+        "server_type": "MYSQL"
+      },
+      {
+        "id": 4,
+        "server_type": "SQLITE"
+      },
+      {
+        "id": 5,
+        "server_type": "IBMDB2"
+      },
+      {
+        "id": 6,
+        "server_type": "MICROSOFTSQLSERVER"
+      },
+      {
+        "id": 7,
+        "server_type": "MICROSOFTACCESS"
+      },
+      {
+        "id": 8,
+        "server_type": "SYBASE"
+      },
+      {
+        "id": 9,
+        "server_type": "MONGODB"
+      },
+      {
+        "id": 10,
+        "server_type": "SNOWFLAKE"
+      },
+      {
+        "id": 11,
+        "server_type": "CASSANDRA"
+      },
+      {
+        "id": 12,
+        "server_type": "SAP HANA"
+      },
+      {
+        "id": 13,
+        "server_type": "SAP BW"
+      }
+    ]
+  },
+
+  {
+    "grid_types": [
+      {
+        "id": 1,
+        "grid_type": "SCROLL"
+      },
+      {
+        "id": 2,
+        "grid_type": "FIXED"
+      }
+    ]
+  },
+
+  {
+    "charts": [
+      {
+        "id": 1,
+        "chart_type": "Table",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 2,
+        "chart_type": "HORIZONTAL STACKED BAR",
+        "min_measures": "1",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 3,
+        "chart_type": "HORIZONTAL SIDE BY SIDE",
+        "min_measures": "1",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 4,
+        "chart_type": "DUAL COMBINATION",
+        "min_measures": "0",
+        "max_measures": "2",
+        "min_dimensions": "0",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "1",
+        "max_geo": " "
+      },
+      {
+        "id": 5,
+        "chart_type": "STACKED BAR",
+        "min_measures": "0",
+        "max_measures": "1",
+        "min_dimensions": "0",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "1",
+        "max_geo": " "
+      },
+      {
+        "id": 6,
+        "chart_type": "bar",
+        "min_measures": "1",
+        "max_measures": " ",
+        "min_dimensions": "0",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 7,
+        "chart_type": "SIDE BY SIDE",
+        "min_measures": "1",
+        "max_measures": " ",
+        "min_dimensions": "1",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 8,
+        "chart_type": "DUAL LINE",
+        "min_measures": "1",
+        "max_measures": " ",
+        "min_dimensions": "1",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 9,
+        "chart_type": "",
+        "min_measures": "1",
+        "max_measures": "1",
+        "min_dimensions": "1",
+        "max_dimensions": " ",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 10,
+        "chart_type": "DONUT",
+        "min_measures": "1",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 11,
+        "chart_type": "CALENDAR",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 12,
+        "chart_type": "RADAR",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 13,
+        "chart_type": "line",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 14,
+        "chart_type": "",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 15,
+        "chart_type": "",
+        "min_measures": "2",
+        "max_measures": "2",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 16,
+        "chart_type": "",
+        "min_measures": "2",
+        "max_measures": "2",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 17,
+        "chart_type": "AREA_CHARTS",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 18,
+        "chart_type": "",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 19,
+        "chart_type": "",
+        "min_measures": "2",
+        "max_measures": "4",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 20,
+        "chart_type": "",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 21,
+        "chart_type": "",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 22,
+        "chart_type": "",
+        "min_measures": "0",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "1",
+        "max_dates": "1",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 23,
+        "chart_type": "",
+        "min_measures": "2",
+        "max_measures": "2",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 24,
+        "chart_type": "pie",
+        "min_measures": "1",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": "",
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 25,
+        "chart_type": "KPI",
+        "min_measures": "1",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": null,
+        "min_dates": "0",
+        "max_dates": null,
+        "min_geo": "0",
+        "max_geo": ""
+      },
+      {
+        "id": 26,
+        "chart_type": "HEAT MAP",
+        "min_measures": "1",
+        "max_measures": "2",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 27,
+        "chart_type": "FUNNEL",
+        "min_measures": "1",
+        "max_measures": "1",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 28,
+        "chart_type": "GAUGE",
+        "min_measures": "1",
+        "max_measures": "1",
+        "min_dimensions": "0",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      },
+      {
+        "id": 29,
+        "chart_type": "WORLD MAP",
+        "min_measures": "1",
+        "max_measures": "",
+        "min_dimensions": "1",
+        "max_dimensions": "",
+        "min_dates": "0",
+        "max_dates": " ",
+        "min_geo": "0",
+        "max_geo": " "
+      }
+    ]
+  },
+
+  {
+    "modules": [
+      {
+        "id" : 1,
+        "module_name" : "Data source",
+        "angular_path" : "datasource",
+        "css_classes" : "bg-1",
+        "image_urls" : ".\/assets\/images\/Tiled view sheet icons\/data.jpg"
+      },
+      {
+        "id" : 2,
+        "module_name" : "custom SQL query",
+        "angular_path" : "customSqlQuery",
+        "css_classes" : "bg-2",
+        "image_urls" : ".\/assets\/images\/Tiled view sheet icons\/Custom-sql.jpg"
+      },
+      {
+        "id" : 3,
+        "module_name" : "sheets",
+        "angular_path" : "sheets",
+        "css_classes" : "bg-3",
+        "image_urls" : ".\/assets\/images\/Tiled view sheet icons\/Sheets.jpg"
+      },
+      {
+        "id" : 4,
+        "module_name" : "Geeni AIQ",
+        "angular_path" : "geeniaiq",
+        "css_classes" : "bg-4",
+        "image_urls" : ".\/assets\/images\/Tiled view sheet icons\/Geeni-AIQ.jpg"
+      },
+      {
+        "id" : 5,
+        "module_name" : "Dashboard",
+        "angular_path" : "dashboard",
+        "css_classes" : "bg-5",
+        "image_urls" : ".\/assets\/images\/Tiled view sheet icons\/Card-Dashboard.jpg"
+      },
+      {
+        "id" : 6,
+        "module_name" : "Dashboard Privileges",
+        "angular_path" : "dashboardprivileges",
+        "css_classes" : "bg-6",
+        "image_urls" : ".\/assets\/images\/Tiled view sheet icons\/List-Users.jpg"
+      }
+    ]
+  },
+
+  {
+    "user_guide": [
+      {
+        "id" : 1,
+        "title" : "Connecting to a new datasource",
+        "description" : "The Data Sources section helps you connect and manage data sources\nlike databases and files",
+        "link" : "https:\/\/xamplify.io\/l\/TVeaTB7C",
+        "alias" : "Connecting_to_a_new_datasource",
+        "created_at" : "2024-10-16T06:03:06.355Z",
+        "updated_at" : "2024-10-16T06:03:06.355Z",
+        "module_id" : 1
+      },
+      {
+        "id" : 2,
+        "title" : "Moving tables to semantic layer",
+        "description" : "Dragging required tables to the semantic layer to build the queryset",
+        "link" : "https:\/\/xamplify.io\/l\/igaK4cK3",
+        "alias" : "Moving_Tables_to_semantic_layer",
+        "created_at" : "2024-10-16T06:06:29.142Z",
+        "updated_at" : "2024-10-16T06:06:29.142Z",
+        "module_id" : 1
+      },
+      {
+        "id" : 3,
+        "title" : "Applying filters to data sources",
+        "description" : "We can use filters on the query set to show the \nrefined data on the data source page.",
+        "link" : "https:\/\/xamplify.io\/l\/9yGY1B3S",
+        "alias" : "Applying_Filters_to_data_sources",
+        "created_at" : "2024-10-16T06:08:56.062Z",
+        "updated_at" : "2024-10-16T06:08:56.062Z",
+        "module_id" : 1
+      },
+      {
+        "id" : 4,
+        "title" : "Writing custom SQL queries",
+        "description" : "Writing custom SQL queries allows users to interact with databases\nin a flexible and powerful way, retrieving, modifying, or manipulating data\nas needed.",
+        "link" : "https:\/\/xamplify.io\/l\/0RQFpWid",
+        "alias" : "Writing_custom_SQL_queries",
+        "created_at" : "2024-10-16T06:10:51.571Z",
+        "updated_at" : "2024-10-16T06:10:51.571Z",
+        "module_id" : 2
+      },
+      {
+        "id" : 5,
+        "title" : "Creating charts in Analytify",
+        "description" : "Creating charts is an essential part of turning raw data into\nmeaningful insights.",
+        "link" : "https:\/\/xamplify.io\/l\/7LUESQ51",
+        "alias" : "Creating_charts_in_Analytify",
+        "created_at" : "2024-10-16T06:12:15.371Z",
+        "updated_at" : "2024-10-16T06:12:15.371Z",
+        "module_id" : 3
+      },
+      {
+        "id" : 6,
+        "title" : "Adding filters to a sheet",
+        "description" : "Adding filters to a sheet is a powerful way to focus on specific data,\nimprove data exploration, and streamline analysis.",
+        "link" : "https:\/\/xamplify.io\/l\/QPOvtCtP",
+        "alias" : "Adding_Filters_to_a_sheet",
+        "created_at" : "2024-10-16T06:13:48.615Z",
+        "updated_at" : "2024-10-16T06:13:48.615Z",
+        "module_id" : 3
+      },
+      {
+        "id" : 7,
+        "title" : "Applying Necessary Customizations",
+        "description" : "Sheet customizations allow you to tailor how data is displayed,\norganized, and interacted with in a spreadsheet",
+        "link" : "https:\/\/xamplify.io\/l\/FaU1a2K8",
+        "alias" : "Applying_Necessary_Customizations",
+        "created_at" : "2024-10-16T06:15:37.359Z",
+        "updated_at" : "2024-10-16T06:15:37.359Z",
+        "module_id" : 3
+      },
+      {
+        "id" : 8,
+        "title" : "Using Geeni AIQ with Analytify",
+        "description" : "The Analytify Geeni AIQ feature leverages GPT technology to provide \nintelligent chart suggestions based on your querysets metadata",
+        "link" : "https:\/\/xamplify.io\/l\/9KCK3ASm",
+        "alias" : "Using_Geeni_Aiq_with_Insight_Apps",
+        "created_at" : "2024-10-16T06:17:41.335Z",
+        "updated_at" : "2024-10-16T06:17:41.335Z",
+        "module_id" : 4
+      },
+      {
+        "id" : 9,
+        "title" : "Moving charts onto the dashboard",
+        "description" : "After creating several charts in Analytify, you can quickly\nadd them to a dashboard for a unified view of your data.",
+        "link" : "https:\/\/xamplify.io\/l\/1UptKYfR",
+        "alias" : "Moving_Charts_onto_the_dashboard",
+        "created_at" : "2024-10-16T06:19:02.404Z",
+        "updated_at" : "2024-10-16T06:19:02.404Z",
+        "module_id" : 5
+      },
+      {
+        "id" : 10,
+        "title" : "Applying customizations to your dashboard",
+        "description" : "Before adding your charts to the dashboard, you can adjust the layout\nand look.",
+        "link" : "https:\/\/xamplify.io\/l\/EKopMQww",
+        "alias" : "Applying_Customizations_to_your_dashboard",
+        "created_at" : "2024-10-16T06:20:48.350Z",
+        "updated_at" : "2024-10-16T06:20:48.350Z",
+        "module_id" : 5
+      },
+      {
+        "id" : 11,
+        "title" : "Using filters on the dashboard",
+        "description" : "To use dashboard filters, click on the filter tab, pick the column,\nchoose the sheets, and hit apply.",
+        "link" : "https:\/\/xamplify.io\/l\/NIKsFA7g",
+        "alias" : "Using_Filters_on_the_dashboard",
+        "created_at" : "2024-10-16T06:21:58.952Z",
+        "updated_at" : "2024-10-16T06:21:58.952Z",
+        "module_id" : 5
+      },
+      {
+        "id" : 12,
+        "title" : "Adding a new role",
+        "description" : "If theres no fitting role, make one with specific privileges",
+        "link" : "https:\/\/xamplify.io\/l\/7sP7PISZ",
+        "alias" : "Adding_a_new_role",
+        "created_at" : "2024-10-16T06:23:37.328Z",
+        "updated_at" : "2024-10-16T06:23:37.328Z",
+        "module_id" : 6
+      },
+      {
+        "id" : 13,
+        "title" : "Adding a new user",
+        "description" : "A user has specific privileges based on their roles to access the dashboard.",
+        "link" : "https:\/\/xamplify.io\/l\/bMmtXpFr",
+        "alias" : "Adding_a_new_user",
+        "created_at" : "2024-10-16T06:24:41.305Z",
+        "updated_at" : "2024-10-16T06:24:41.305Z",
+        "module_id" : 6
+      },
+      {
+        "id" : 14,
+        "title" : "Steps to publish a public\/Private dashboard",
+        "description" : "After saving your dashboard in Analytify, you can change its \nsettings for access and sharing.",
+        "link" : "https:\/\/xamplify.io\/l\/uJQz1dl8",
+        "alias" : "Steps_to_publish_a_public_Private_dashboard",
+        "created_at" : "2024-10-16T06:26:07.909Z",
+        "updated_at" : "2024-10-16T06:26:07.909Z",
+        "module_id" : 6
+      },
+      {
+        "id" : 15,
+        "title" : "how to apply calculated fields on the sheet page\n",
+        "description" : "Calculated fields are used to create custom metrics, dimensions, or fields that are not directly available in the underlying dataset.\n",
+        "link" : "https:\/\/xamplify.io\/l\/h3AofNaB",
+        "alias" : "Applying_calculated_fields_on_the_sheet_page\n",
+        "created_at" : "2024-12-07T13:18:13.951Z",
+        "updated_at" : "2024-12-07T13:18:13.951Z",
+        "module_id" : 3
+      },
+      {
+        "id" : 16,
+        "title" : "How to use drill downs on the sheet",
+        "description" : "Drill-downs in a sheet page allow users to explore data at multiple levels of detail.\n",
+        "link" : "https:\/\/xamplify.io\/l\/LPii9HF2",
+        "alias" : "Using_drill_downs_on_the_sheet\n",
+        "created_at" : "2024-12-08T08:54:03.997Z",
+        "updated_at" : "2024-12-08T08:54:03.997Z",
+        "module_id" : 3
+      }
+    ]
+  }    
+    
+]

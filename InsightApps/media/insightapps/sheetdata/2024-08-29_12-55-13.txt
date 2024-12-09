@@ -1,0 +1,475 @@
+{
+    "columns": [
+        {
+            "column": "department",
+            "type": "VARCHAR"
+        }
+    ],
+    "columns_data": [
+        [
+            "department",
+            "VARCHAR",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "annual_salary",
+            "type": "avg"
+        }
+    ],
+    "rows_data": [
+        [
+            "annual_salary",
+            "aggregate",
+            "avg"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [
+            105302.5,
+            95000,
+            82500,
+            102675.29,
+            102455,
+            117914.38,
+            108550.48,
+            117250,
+            99000,
+            128854.83,
+            114125,
+            122000,
+            133935.38,
+            95500
+        ],
+        "barXaxis": [
+            "Accounting",
+            "Customer Support",
+            "Design",
+            "Engineering",
+            "Finance",
+            "Human Resources",
+            "IT",
+            "Legal",
+            "Manufacturing",
+            "Marketing",
+            "Operations",
+            "Quality Assurance",
+            "Sales",
+            "Supply Chain"
+        ],
+        "barOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        105302.5,
+                        95000,
+                        82500,
+                        102675.29,
+                        102455,
+                        117914.38,
+                        108550.48,
+                        117250,
+                        99000,
+                        128854.83,
+                        114125,
+                        122000,
+                        133935.38,
+                        95500
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "toolbar": {
+                    "show": true
+                },
+                "type": "bar",
+                "height": 320,
+                "foreColor": "#00a5a2",
+                "zoom": {
+                    "enabled": true,
+                    "type": "x",
+                    "autoScaleYaxis": false,
+                    "zoomedArea": {
+                        "fill": {
+                            "color": "#90CAF9",
+                            "opacity": 0.4
+                        },
+                        "stroke": {
+                            "color": "#0D47A1",
+                            "opacity": 0.4,
+                            "width": 1
+                        }
+                    }
+                }
+            },
+            "title": {
+                "text": "",
+                "offsetY": 10,
+                "align": "center",
+                "style": {
+                    "color": "#00a5a2"
+                }
+            },
+            "xaxis": {
+                "categories": [
+                    "Accounting",
+                    "Customer Support",
+                    "Design",
+                    "Engineering",
+                    "Finance",
+                    "Human Resources",
+                    "IT",
+                    "Legal",
+                    "Manufacturing",
+                    "Marketing",
+                    "Operations",
+                    "Quality Assurance",
+                    "Sales",
+                    "Supply Chain"
+                ],
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "trim": true,
+                    "hideOverlappingLabels": false,
+                    "style": {
+                        "colors": "#00a5a2",
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "axisBorder": {
+                    "show": false
+                },
+                "axisTicks": {
+                    "show": false
+                },
+                "crosshairs": {
+                    "fill": {
+                        "type": "gradient",
+                        "gradient": {
+                            "stops": [
+                                0,
+                                100
+                            ],
+                            "opacityFrom": 0.4,
+                            "opacityTo": 0.5
+                        }
+                    }
+                },
+                "tooltip": {
+                    "enabled": false,
+                    "offsetY": -35
+                },
+                "convertedCatToNumeric": false
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "axisBorder": {
+                    "show": false
+                },
+                "axisTicks": {
+                    "show": false
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#90A4AE",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "hideOverflowingLabels": false,
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "colors": [
+                        "#00a5a2"
+                    ]
+                }
+            },
+            "fill": {
+                "type": "gradient"
+            },
+            "colors": [
+                "#00a5a2"
+            ]
+        },
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "kpiData": [
+            {
+                "col": "avg(annual_salary)",
+                "result_data": [
+                    105302.5,
+                    95000,
+                    82500,
+                    102675.29,
+                    102455,
+                    117914.38,
+                    108550.48,
+                    117250,
+                    99000,
+                    128854.83,
+                    114125,
+                    122000,
+                    133935.38,
+                    95500
+                ]
+            }
+        ],
+        "kpiFontSize": 10.5,
+        "kpicolor": "#1565c0"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            {
+                "name": "",
+                "data": [
+                    105302.5,
+                    95000,
+                    82500,
+                    102675.29,
+                    102455,
+                    117914.38,
+                    108550.48,
+                    117250,
+                    99000,
+                    128854.83,
+                    114125,
+                    122000,
+                    133935.38,
+                    95500
+                ],
+                "group": "apexcharts-axis-0"
+            }
+        ],
+        "chart": {
+            "toolbar": {
+                "show": true
+            },
+            "type": "bar",
+            "height": 320,
+            "foreColor": "#00a5a2",
+            "zoom": {
+                "enabled": true,
+                "type": "x",
+                "autoScaleYaxis": false,
+                "zoomedArea": {
+                    "fill": {
+                        "color": "#90CAF9",
+                        "opacity": 0.4
+                    },
+                    "stroke": {
+                        "color": "#0D47A1",
+                        "opacity": 0.4,
+                        "width": 1
+                    }
+                }
+            }
+        },
+        "title": {
+            "text": "",
+            "offsetY": 10,
+            "align": "center",
+            "style": {
+                "color": "#00a5a2"
+            }
+        },
+        "xaxis": {
+            "categories": [
+                "Accounting",
+                "Customer Support",
+                "Design",
+                "Engineering",
+                "Finance",
+                "Human Resources",
+                "IT",
+                "Legal",
+                "Manufacturing",
+                "Marketing",
+                "Operations",
+                "Quality Assurance",
+                "Sales",
+                "Supply Chain"
+            ],
+            "position": "bottom",
+            "labels": {
+                "show": true,
+                "trim": true,
+                "hideOverlappingLabels": false,
+                "style": {
+                    "colors": "#00a5a2",
+                    "fontSize": "12px",
+                    "fontFamily": "Helvetica, Arial, sans-serif",
+                    "fontWeight": 12
+                }
+            },
+            "axisBorder": {
+                "show": false
+            },
+            "axisTicks": {
+                "show": false
+            },
+            "crosshairs": {
+                "fill": {
+                    "type": "gradient",
+                    "gradient": {
+                        "stops": [
+                            0,
+                            100
+                        ],
+                        "opacityFrom": 0.4,
+                        "opacityTo": 0.5
+                    }
+                }
+            },
+            "tooltip": {
+                "enabled": false,
+                "offsetY": -35
+            },
+            "convertedCatToNumeric": false
+        },
+        "yaxis": {
+            "show": true,
+            "labels": {
+                "show": true,
+                "style": {
+                    "colors": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ],
+                    "fontSize": "12px",
+                    "fontFamily": "Helvetica, Arial, sans-serif",
+                    "fontWeight": 12
+                }
+            },
+            "axisBorder": {
+                "show": false
+            },
+            "axisTicks": {
+                "show": false
+            }
+        },
+        "grid": {
+            "show": true,
+            "borderColor": "#90A4AE",
+            "xaxis": {
+                "lines": {
+                    "show": false
+                }
+            },
+            "yaxis": {
+                "lines": {
+                    "show": false
+                }
+            }
+        },
+        "plotOptions": {
+            "bar": {
+                "dataLabels": {
+                    "hideOverflowingLabels": false,
+                    "position": "top"
+                }
+            }
+        },
+        "dataLabels": {
+            "enabled": true,
+            "offsetY": -20,
+            "style": {
+                "fontSize": "12px",
+                "colors": [
+                    "#00a5a2"
+                ]
+            }
+        },
+        "fill": {
+            "type": "gradient"
+        },
+        "colors": [
+            "#00a5a2"
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

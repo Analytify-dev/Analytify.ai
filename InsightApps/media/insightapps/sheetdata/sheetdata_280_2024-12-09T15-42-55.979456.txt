@@ -1,0 +1,288 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "product_line",
+            "data_type": "string"
+        }
+    ],
+    "columns_data": [
+        [
+            "product_line",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "price_each",
+            "data_type": "float",
+            "type": "sum"
+        },
+        {
+            "column": "msrp",
+            "data_type": "int",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "price_each",
+            "aggregate",
+            "sum",
+            ""
+        ],
+        [
+            "msrp",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [
+        {
+            "column": "product_line",
+            "result_data": [
+                "Classic Cars",
+                "Trains",
+                "Planes",
+                "Trucks and Buses",
+                "Vintage Cars",
+                "Motorcycles",
+                "Ships"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(price_each)",
+            "result_data": [
+                84353.71,
+                5825.4097,
+                25012.71,
+                26345.904,
+                47435.973,
+                27472.2,
+                19622.176
+            ]
+        },
+        {
+            "col": "sum(msrp)",
+            "result_data": [
+                115715,
+                5620,
+                27163,
+                30842,
+                52482,
+                32130,
+                20154
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "total_items": 0,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [
+            {
+                "name": "product_line",
+                "values": [
+                    "Classic Cars",
+                    "Trains",
+                    "Planes",
+                    "Trucks and Buses",
+                    "Vintage Cars",
+                    "Motorcycles",
+                    "Ships"
+                ]
+            }
+        ],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "savedChartOptions": {
+        "backgroundColor": "#fff",
+        "tooltip": {
+            "trigger": "item"
+        },
+        "legend": {
+            "data": [
+                {
+                    "name": "sum(price_each)"
+                },
+                {
+                    "name": "sum(msrp)"
+                }
+            ],
+            "show": false
+        },
+        "radar": {
+            "axisName": {
+                "color": "#00a5a2"
+            },
+            "axisLabel": {
+                "color": "#00a5a2"
+            },
+            "indicator": [
+                {
+                    "name": "Classic Cars"
+                },
+                {
+                    "name": "Trains"
+                },
+                {
+                    "name": "Planes"
+                },
+                {
+                    "name": "Trucks and Buses"
+                },
+                {
+                    "name": "Vintage Cars"
+                },
+                {
+                    "name": "Motorcycles"
+                },
+                {
+                    "name": "Ships"
+                }
+            ]
+        },
+        "series": [
+            {
+                "type": "radar",
+                "data": [
+                    {
+                        "name": "sum(price_each)",
+                        "value": [
+                            84353.71,
+                            5825.4097,
+                            25012.71,
+                            26345.904,
+                            47435.973,
+                            27472.2,
+                            19622.176
+                        ],
+                        "label": {
+                            "show": false,
+                            "formatter": "{c}",
+                            "color": "#000",
+                            "fontSize": 12,
+                            "fontFamily": "Arial"
+                        }
+                    },
+                    {
+                        "name": "sum(msrp)",
+                        "value": [
+                            115715,
+                            5620,
+                            27163,
+                            30842,
+                            52482,
+                            32130,
+                            20154
+                        ],
+                        "label": {
+                            "show": false,
+                            "formatter": "{c}",
+                            "color": "#000",
+                            "fontSize": 12,
+                            "fontFamily": "Arial"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#fff",
+        "color": "#00a5a2",
+        "ylabelFontWeight": 400,
+        "isBold": false,
+        "yLabelFontFamily": "sans-serif",
+        "yLabelFontSize": 12,
+        "bandingSwitch": false,
+        "backgroundColorSwitch": false,
+        "chartColorSwitch": false,
+        "barColorSwitch": false,
+        "lineColorSwitch": false,
+        "gridLineColorSwitch": false,
+        "xLabelColorSwitch": false,
+        "xGridLineColorSwitch": false,
+        "yLabelColorSwitch": false,
+        "yGridLineColorSwitch": false,
+        "bandingColorSwitch": false,
+        "kpiColorSwitch": false,
+        "funnelColorSwitch": false,
+        "kpiColor": "#000000",
+        "barColor": "#4382f7",
+        "lineColor": "#38ff98",
+        "GridColor": "#089ffc",
+        "legendSwitch": false,
+        "dataLabels": false,
+        "label": true,
+        "donutSize": 50,
+        "isDistributed": false,
+        "kpiFontSize": "3",
+        "minValueGuage": 0,
+        "maxValueGuage": 100,
+        "donutDecimalPlaces": 0,
+        "decimalPlaces": 0,
+        "legendsAllignment": "bottom",
+        "displayUnits": "none",
+        "suffix": "",
+        "prefix": "",
+        "dataLabelsFontFamily": "sans-serif",
+        "dataLabelsFontSize": "12px",
+        "dataLabelsFontPosition": "top",
+        "measureAlignment": "center",
+        "dimensionAlignment": "center"
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

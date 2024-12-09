@@ -1,0 +1,85 @@
+<!-- <p>Add index</p> -->
+
+<div class="main-container container-fluid mt-5">
+  <!-- <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3" style="padding: 0px;">
+    <div class="card-body">
+        <div class="form-group mb-0 mt-sm-0 mt-2">
+            <div class="input-group">
+                <input type="text" placeholder="Search" aria-label="Example text with button addon" class="form-control" [(ngModel)]="searchValue">
+                <button type="button" class="btn btn-primary me-1"><i class="fe fe-x"></i></button>
+                <button  type="button" class="btn btn-primary"><i class="fe fe-search" (click)="getSearchData(searchValue)"></i></button>
+            </div>
+        </div>
+    </div>
+  </div> -->
+    <div class="col-sm-12 col-lg-12 col-xl-12 card" style="padding: 0px;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-12">
+                    <div class="card" style="border: none !important;">
+                          <div
+                            ngbAccordion
+                            [closeOthers]="true"
+                            class="accordion"
+                            id="accordionExample"
+                            >
+                            @for (module of ModulesData; track module) {
+                              <div
+                                ngbAccordionItem
+                                [collapsed]="module.id !== userGuideData[0].module_id"
+                                class="accordion-item"
+                                >
+                                <h2 ngbAccordionHeader id="headingOne" class="accordion-header"  (click)="getQuestionaries(module.id)">
+                                  <button
+                                    ngbAccordionButton
+                                    class="accordion-button"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne"
+                                    aria-expanded="true"
+                                    aria-controls="collapseOne"
+                                    >
+                                    {{module.module_name}}
+                                  </button>
+                                </h2>
+                                <div
+                                  ngbAccordionCollapse
+                                  id="collapseOne"
+                                  class="accordion-collapse collapse show"
+                                  aria-labelledby="headingOne"
+                                  data-bs-parent="#accordionExample"
+                                  >
+                                  <div class="accordion-body" ngbAccordionBody style="padding: 10px;">
+                                    <ng-template>
+                                        <ul>
+                                            <a *ngFor="let question of questionariesData" (click)="changeQuestionay(question.alias)"><li class="index-tab-btn" [ngStyle]="{'background-color':(question.title === userGuideData[0].title)? '#93f5f0' : '#ddf4f3'}">{{question.title}}</li></a>
+                                        </ul>
+                                    </ng-template>
+                                  </div>
+                                </div>
+                              </div>
+                            }
+                          </div>
+                
+                          <!-- PANEL-GROUP -->
+                      </div>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12" style="border-left: 1px solid #ebebeb;">
+                    <div class="card" *ngFor="let data of userGuideData">
+                        <div class="mail-info-header d-flex align-items-center flex-wrap">
+                            <div class="flex-fill">
+                                <h6 class="mb-0">{{data.title}}</h6>
+                            </div>
+                        </div>
+                        <iframe [src]="data.link" class="index-tab-height"></iframe>
+                        <!-- <div class="card-body mail-info-body">
+                            <div class="eamil-body">
+                                <iframe [src]="data.link"></iframe>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

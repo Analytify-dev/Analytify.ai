@@ -1,0 +1,100 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [],
+    "columns_data": [],
+    "rows": [
+        {
+            "column": "quantity_ordered",
+            "data_type": "int",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "quantity_ordered",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [],
+    "row": [
+        {
+            "col": "sum(quantity_ordered)",
+            "result_data": [
+                99038
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 1,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiData": [
+            {
+                "col": "sum(quantity_ordered)",
+                "result_data": [
+                    99038
+                ]
+            }
+        ],
+        "kpiFontSize": 1.5,
+        "kpicolor": "#175669",
+        "kpiNumber": "99.04K",
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "K",
+        "kpiDecimalPlaces": 2
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#ffffff",
+        "color": "#00a5a2"
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

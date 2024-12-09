@@ -1,0 +1,145 @@
+[
+    {
+        "schema": "main",
+        "table": "hr_attrition",
+        "columns": [
+            {
+                "column": "id",
+                "datatype": "integer"
+            },
+            {
+                "column": "age",
+                "datatype": "integer"
+            },
+            {
+                "column": "attrition",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "business_travel",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "daily_rate",
+                "datatype": "integer"
+            },
+            {
+                "column": "department",
+                "datatype": "varchar(100)"
+            },
+            {
+                "column": "distance_from_home",
+                "datatype": "integer"
+            },
+            {
+                "column": "education",
+                "datatype": "integer"
+            },
+            {
+                "column": "education_field",
+                "datatype": "varchar(100)"
+            },
+            {
+                "column": "environment_satisfaction",
+                "datatype": "integer"
+            },
+            {
+                "column": "gender",
+                "datatype": "varchar(10)"
+            },
+            {
+                "column": "hourly_rate",
+                "datatype": "integer"
+            },
+            {
+                "column": "job_involvement",
+                "datatype": "integer"
+            },
+            {
+                "column": "job_level",
+                "datatype": "integer"
+            },
+            {
+                "column": "job_role",
+                "datatype": "varchar(100)"
+            },
+            {
+                "column": "job_satisfaction",
+                "datatype": "integer"
+            },
+            {
+                "column": "marital_status",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "monthly_income",
+                "datatype": "integer"
+            },
+            {
+                "column": "monthly_rate",
+                "datatype": "integer"
+            },
+            {
+                "column": "num_companies_worked",
+                "datatype": "integer"
+            },
+            {
+                "column": "over18",
+                "datatype": "varchar(1)"
+            },
+            {
+                "column": "over_time",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "percent_salary_hike",
+                "datatype": "integer"
+            },
+            {
+                "column": "performance_rating",
+                "datatype": "integer"
+            },
+            {
+                "column": "relationship_satisfaction",
+                "datatype": "integer"
+            },
+            {
+                "column": "standard_hours",
+                "datatype": "integer"
+            },
+            {
+                "column": "stock_option_level",
+                "datatype": "integer"
+            },
+            {
+                "column": "total_working_years",
+                "datatype": "integer"
+            },
+            {
+                "column": "training_times_last_year",
+                "datatype": "integer"
+            },
+            {
+                "column": "work_life_balance",
+                "datatype": "integer"
+            },
+            {
+                "column": "years_at_company",
+                "datatype": "integer"
+            },
+            {
+                "column": "years_in_current_role",
+                "datatype": "integer"
+            },
+            {
+                "column": "years_since_last_promotion",
+                "datatype": "integer"
+            },
+            {
+                "column": "years_with_current_manager",
+                "datatype": "integer"
+            }
+        ],
+        "alias": "hr_attrition"
+    }
+]

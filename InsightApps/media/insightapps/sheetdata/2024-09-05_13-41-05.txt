@@ -1,0 +1,150 @@
+{
+    "columns": [
+        {
+            "column": "over_time",
+            "data_type": "string"
+        }
+    ],
+    "columns_data": [
+        [
+            "over_time",
+            "string",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "job_satisfaction",
+            "data_type": "int",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "job_satisfaction",
+            "aggregate",
+            "sum"
+        ]
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [
+            2858,
+            1153
+        ],
+        "pieXaxis": [
+            "No",
+            "Yes"
+        ],
+        "pieOptions": {
+            "series": [
+                2858,
+                1153
+            ],
+            "chart": {
+                "height": 300,
+                "type": "pie"
+            },
+            "colors": [
+                "#00a5a2",
+                "#31d1ce",
+                "#f5b849",
+                "#49b6f5",
+                "#e6533c"
+            ],
+            "labels": [
+                "No",
+                "Yes"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "dropShadow": {
+                    "enabled": false
+                }
+            }
+        },
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "kpiData": [
+            {
+                "col": "sum(job_satisfaction)",
+                "result_data": [
+                    2858,
+                    1153
+                ]
+            }
+        ],
+        "kpiFontSize": 9,
+        "kpicolor": "#42a5f5"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            2858,
+            1153
+        ],
+        "chart": {
+            "height": 300,
+            "type": "pie"
+        },
+        "colors": [
+            "#00a5a2",
+            "#31d1ce",
+            "#f5b849",
+            "#49b6f5",
+            "#e6533c"
+        ],
+        "labels": [
+            "No",
+            "Yes"
+        ],
+        "legend": {
+            "show": true,
+            "position": "bottom"
+        },
+        "dataLabels": {
+            "dropShadow": {
+                "enabled": false
+            }
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

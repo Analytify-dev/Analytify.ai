@@ -1,0 +1,101 @@
+Order_ID,Order_Date,Supplier_ID,Supplier_Name,Product_ID,Product_Name,Product_Category,Quantity_Ordered,Quantity_Received,Order_Status,Lead_Time_Days,Cost_per_Unit,Total_Cost,Shipping_Cost,Warehouse_Location,Inventory_Level,Backorder_Status,Delivery_Date,Supplier_Rating,Order_Comments
+ORD-1000,2023-03-23,SPL-573,Supplier B,PROD-5673,Product 17,Components,323,357,Shipped,19,52.88,7284.25,218.68,North Warehouse,381,No,,4,Delayed
+ORD-1001,2023-01-15,SPL-488,Supplier B,PROD-7930,Product 6,Raw Materials,427,418,Delivered,12,109.29,2092.83,115.51,West Warehouse,739,Yes,2023-01-19,3,Normal
+ORD-1002,2023-01-04,SPL-376,Supplier C,PROD-8973,Product 40,Components,378,217,Pending,16,95.6,9758.32,289.02,East Warehouse,748,No,2023-02-01,5,Urgent
+ORD-1003,2023-04-05,SPL-755,Supplier B,PROD-3536,Product 47,Finished Goods,466,380,Pending,18,94.12,6479.85,304.67,South Warehouse,699,Yes,2023-01-16,1,Delayed
+ORD-1004,2023-02-05,SPL-804,Supplier A,PROD-4111,Product 6,Components,268,94,Delivered,17,173.43,3153.68,406.63,North Warehouse,661,Yes,2023-02-01,5,Normal
+ORD-1005,2023-02-01,SPL-670,Supplier C,PROD-5861,Product 46,Finished Goods,228,440,Delivered,12,198.11,2425.4,126.49,South Warehouse,829,No,2023-01-11,1,Urgent
+ORD-1006,2023-01-29,SPL-324,Supplier D,PROD-4566,Product 27,Components,435,249,Delivered,14,68.02,5957.55,85.54,East Warehouse,432,No,2023-01-12,3,Delayed
+ORD-1007,2023-01-18,SPL-801,Supplier A,PROD-1958,Product 88,Finished Goods,474,480,Pending,24,128.0,5970.26,441.88,West Warehouse,490,No,2023-01-14,1,Delayed
+ORD-1008,2023-04-05,SPL-432,Supplier A,PROD-9883,Product 32,Finished Goods,290,75,Pending,18,125.83,1838.88,328.87,East Warehouse,711,No,2023-02-03,2,Normal
+ORD-1009,2023-01-14,SPL-963,Supplier C,PROD-1998,Product 86,Finished Goods,238,328,Delivered,11,150.62,9930.31,158.37,East Warehouse,643,Yes,2023-01-13,3,Partial shipment
+ORD-1010,2023-03-28,SPL-886,Supplier C,PROD-6138,Product 14,Components,469,283,Shipped,12,190.04,9216.37,460.77,North Warehouse,401,Yes,2023-02-05,4,Partial shipment
+ORD-1011,2023-04-05,SPL-894,Supplier B,PROD-1936,Product 46,Finished Goods,91,23,Delivered,23,49.48,5153.03,114.4,South Warehouse,564,Yes,2023-01-27,5,Normal
+ORD-1012,2023-03-11,SPL-157,Supplier A,PROD-1821,Product 100,Components,390,474,Delivered,15,50.09,2057.2,257.52,East Warehouse,617,No,2023-02-07,2,Normal
+ORD-1013,2023-01-12,SPL-334,Supplier B,PROD-8811,Product 72,Raw Materials,451,211,Pending,9,135.48,8489.29,164.29,East Warehouse,719,Yes,2023-02-05,4,Urgent
+ORD-1014,2023-03-17,SPL-941,Supplier A,PROD-9238,Product 53,Raw Materials,253,313,Delivered,10,39.84,5485.38,164.9,West Warehouse,540,Yes,2023-02-03,1,Partial shipment
+ORD-1015,2023-02-24,SPL-132,Supplier A,PROD-9701,Product 80,Finished Goods,240,298,Pending,9,43.02,7449.43,54.23,West Warehouse,201,Yes,2023-02-05,2,Urgent
+ORD-1016,2023-01-05,SPL-924,Supplier D,PROD-3579,Product 96,Components,142,349,Shipped,8,24.26,5579.85,412.08,South Warehouse,912,Yes,2023-02-07,4,Delayed
+ORD-1017,2023-01-04,SPL-423,Supplier A,PROD-1931,Product 20,Finished Goods,394,23,Delivered,4,10.51,3460.82,455.54,South Warehouse,818,Yes,2023-02-02,3,Normal
+ORD-1018,2023-01-12,SPL-510,Supplier B,PROD-9320,Product 31,Components,136,52,Shipped,24,95.6,8512.52,354.92,North Warehouse,217,No,,1,Urgent
+ORD-1019,2023-01-28,SPL-374,Supplier B,PROD-2312,Product 21,Components,440,339,Delivered,7,122.82,9822.2,121.09,South Warehouse,973,No,2023-01-30,4,Normal
+ORD-1020,2023-01-30,SPL-167,Supplier D,PROD-4044,Product 23,Raw Materials,336,229,Shipped,11,65.34,3193.58,248.78,West Warehouse,770,No,2023-02-09,1,Urgent
+ORD-1021,2023-03-06,SPL-316,Supplier B,PROD-2122,Product 53,Components,151,79,Pending,4,53.98,5961.39,205.5,South Warehouse,766,No,,4,Delayed
+ORD-1022,2023-03-19,SPL-680,Supplier C,PROD-2113,Product 4,Components,402,453,Delivered,24,144.32,4452.27,314.41,East Warehouse,998,Yes,2023-02-02,5,Delayed
+ORD-1023,2023-01-04,SPL-997,Supplier D,PROD-4853,Product 23,Finished Goods,408,246,Delivered,18,143.57,9296.81,337.52,South Warehouse,887,No,2023-01-26,3,Partial shipment
+ORD-1024,2023-03-13,SPL-835,Supplier B,PROD-7615,Product 95,Finished Goods,276,103,Shipped,25,96.27,5574.17,240.94,South Warehouse,664,No,,2,Partial shipment
+ORD-1025,2023-01-26,SPL-422,Supplier B,PROD-2964,Product 43,Components,258,35,Pending,23,140.6,8913.94,162.54,North Warehouse,838,No,2023-01-29,4,Delayed
+ORD-1026,2023-04-02,SPL-317,Supplier C,PROD-5033,Product 53,Raw Materials,330,143,Shipped,6,185.54,8776.24,430.39,East Warehouse,986,Yes,2023-02-24,1,Urgent
+ORD-1027,2023-03-25,SPL-771,Supplier D,PROD-1651,Product 86,Finished Goods,132,204,Shipped,7,159.69,3486.23,139.65,North Warehouse,320,Yes,,3,Normal
+ORD-1028,2023-03-31,SPL-611,Supplier C,PROD-2343,Product 95,Finished Goods,150,177,Pending,7,128.76,8110.06,223.11,West Warehouse,540,Yes,2023-02-11,2,Delayed
+ORD-1029,2023-03-11,SPL-505,Supplier D,PROD-7868,Product 32,Raw Materials,235,118,Shipped,24,135.62,4734.48,267.44,South Warehouse,562,Yes,2023-02-17,1,Delayed
+ORD-1030,2023-02-23,SPL-758,Supplier D,PROD-9565,Product 35,Finished Goods,49,242,Shipped,16,187.4,9408.24,156.74,South Warehouse,333,Yes,2023-02-24,3,Urgent
+ORD-1031,2023-01-29,SPL-569,Supplier A,PROD-6183,Product 21,Components,375,177,Delivered,9,90.78,5569.64,307.37,West Warehouse,523,Yes,2023-02-16,1,Delayed
+ORD-1032,2023-02-27,SPL-246,Supplier B,PROD-5272,Product 90,Components,156,182,Shipped,24,113.47,8384.95,308.67,North Warehouse,447,No,2023-02-21,3,Delayed
+ORD-1033,2023-03-17,SPL-371,Supplier B,PROD-4346,Product 14,Components,130,399,Delivered,19,133.05,3545.55,496.71,East Warehouse,947,No,2023-02-14,2,Urgent
+ORD-1034,2023-02-05,SPL-242,Supplier A,PROD-6147,Product 49,Finished Goods,149,460,Pending,25,182.6,3687.0,182.85,North Warehouse,564,No,2023-02-21,2,Delayed
+ORD-1035,2023-01-01,SPL-352,Supplier C,PROD-4910,Product 5,Finished Goods,181,204,Shipped,17,167.06,6282.44,490.08,North Warehouse,508,No,2023-02-07,1,Partial shipment
+ORD-1036,2023-04-08,SPL-862,Supplier A,PROD-5351,Product 61,Finished Goods,173,152,Pending,20,23.57,9990.12,346.2,East Warehouse,525,No,2023-03-04,3,Partial shipment
+ORD-1037,2023-01-21,SPL-674,Supplier B,PROD-7484,Product 29,Finished Goods,467,395,Delivered,10,41.53,5406.76,173.52,South Warehouse,847,No,2023-02-18,4,Partial shipment
+ORD-1038,2023-03-31,SPL-651,Supplier B,PROD-3144,Product 26,Components,286,497,Delivered,4,68.45,2337.36,304.67,North Warehouse,197,No,2023-02-11,2,Partial shipment
+ORD-1039,2023-02-24,SPL-369,Supplier A,PROD-5915,Product 59,Raw Materials,51,435,Delivered,27,152.3,5847.23,358.61,West Warehouse,420,Yes,2023-02-15,4,Delayed
+ORD-1040,2023-02-13,SPL-864,Supplier A,PROD-8491,Product 45,Components,80,225,Shipped,7,118.15,4106.12,385.1,East Warehouse,537,Yes,,4,Normal
+ORD-1041,2023-02-05,SPL-698,Supplier A,PROD-6180,Product 40,Finished Goods,87,139,Delivered,10,64.84,5967.26,72.07,South Warehouse,420,No,2023-02-26,5,Partial shipment
+ORD-1042,2023-01-20,SPL-538,Supplier B,PROD-2188,Product 30,Components,128,437,Delivered,8,33.63,5890.87,322.88,East Warehouse,781,No,2023-03-04,1,Partial shipment
+ORD-1043,2023-01-28,SPL-697,Supplier A,PROD-1152,Product 29,Raw Materials,206,51,Shipped,12,140.85,5098.1,273.53,West Warehouse,361,Yes,2023-02-25,1,Delayed
+ORD-1044,2023-04-08,SPL-508,Supplier A,PROD-8508,Product 4,Components,365,250,Shipped,6,142.95,3896.0,456.87,East Warehouse,483,No,2023-02-27,1,Delayed
+ORD-1045,2023-02-13,SPL-470,Supplier C,PROD-2638,Product 85,Raw Materials,88,19,Shipped,10,189.11,2697.87,178.79,East Warehouse,256,No,2023-02-26,3,Urgent
+ORD-1046,2023-01-14,SPL-324,Supplier A,PROD-2200,Product 25,Finished Goods,371,393,Delivered,1,105.09,7277.49,409.49,North Warehouse,803,No,2023-02-18,2,Partial shipment
+ORD-1047,2023-01-12,SPL-241,Supplier B,PROD-9808,Product 52,Components,119,286,Delivered,23,103.82,6146.18,323.18,West Warehouse,585,Yes,2023-03-10,2,Urgent
+ORD-1048,2023-02-18,SPL-621,Supplier C,PROD-4492,Product 43,Components,42,36,Shipped,18,25.28,3102.06,208.54,West Warehouse,168,Yes,2023-03-01,5,Partial shipment
+ORD-1049,2023-01-13,SPL-605,Supplier D,PROD-9288,Product 36,Components,222,497,Shipped,5,17.57,7979.9,336.48,West Warehouse,193,No,,5,Normal
+ORD-1050,2023-02-15,SPL-193,Supplier B,PROD-5345,Product 9,Components,218,189,Pending,9,92.09,1392.83,329.4,East Warehouse,951,Yes,2023-03-02,5,Delayed
+ORD-1051,2023-02-14,SPL-873,Supplier B,PROD-3170,Product 99,Finished Goods,179,124,Pending,2,71.24,7702.35,354.99,West Warehouse,187,Yes,2023-03-21,4,Delayed
+ORD-1052,2023-03-19,SPL-148,Supplier D,PROD-6718,Product 36,Raw Materials,287,342,Shipped,2,57.57,7347.05,374.42,West Warehouse,195,Yes,2023-03-24,1,Urgent
+ORD-1053,2023-02-03,SPL-981,Supplier B,PROD-2127,Product 45,Raw Materials,248,45,Shipped,18,27.35,8302.68,346.63,West Warehouse,542,No,2023-02-28,3,Urgent
+ORD-1054,2023-01-06,SPL-212,Supplier D,PROD-5002,Product 83,Components,222,409,Pending,10,192.76,4474.71,427.25,North Warehouse,198,Yes,2023-03-15,2,Delayed
+ORD-1055,2023-04-04,SPL-256,Supplier D,PROD-7054,Product 66,Finished Goods,41,500,Shipped,23,168.83,6973.2,332.71,West Warehouse,862,Yes,2023-03-27,3,Delayed
+ORD-1056,2023-02-28,SPL-742,Supplier B,PROD-5669,Product 52,Raw Materials,115,343,Delivered,5,119.29,8386.73,456.53,East Warehouse,856,No,2023-03-19,1,Delayed
+ORD-1057,2023-03-10,SPL-263,Supplier A,PROD-3584,Product 87,Raw Materials,436,30,Delivered,21,190.65,9827.36,340.85,North Warehouse,481,No,2023-03-12,1,Partial shipment
+ORD-1058,2023-01-16,SPL-911,Supplier A,PROD-8179,Product 69,Raw Materials,225,396,Delivered,28,199.92,5457.96,189.02,West Warehouse,931,No,2023-03-23,2,Partial shipment
+ORD-1059,2023-02-18,SPL-796,Supplier D,PROD-9900,Product 43,Raw Materials,209,25,Shipped,25,137.73,1333.18,248.37,West Warehouse,233,Yes,2023-03-11,4,Normal
+ORD-1060,2023-01-11,SPL-532,Supplier C,PROD-5956,Product 4,Raw Materials,473,496,Shipped,16,61.21,5520.62,310.81,North Warehouse,669,Yes,2023-03-23,5,Partial shipment
+ORD-1061,2023-03-12,SPL-710,Supplier D,PROD-9666,Product 15,Raw Materials,404,136,Pending,4,17.64,6311.62,379.56,West Warehouse,161,No,2023-03-30,4,Delayed
+ORD-1062,2023-02-07,SPL-165,Supplier D,PROD-1128,Product 34,Finished Goods,309,112,Shipped,28,153.69,8827.3,90.56,East Warehouse,700,No,2023-03-27,1,Partial shipment
+ORD-1063,2023-03-22,SPL-494,Supplier D,PROD-5905,Product 23,Components,494,439,Shipped,1,99.4,8867.71,182.8,East Warehouse,675,Yes,2023-03-29,1,Urgent
+ORD-1064,2023-03-21,SPL-490,Supplier A,PROD-2697,Product 75,Raw Materials,366,20,Pending,19,133.79,4962.76,386.37,West Warehouse,675,Yes,2023-04-05,4,Delayed
+ORD-1065,2023-02-16,SPL-710,Supplier A,PROD-3200,Product 34,Finished Goods,20,328,Shipped,10,184.05,5733.56,129.04,East Warehouse,437,No,2023-03-28,5,Partial shipment
+ORD-1066,2023-03-15,SPL-579,Supplier A,PROD-5333,Product 5,Finished Goods,448,88,Pending,16,44.48,5112.35,109.47,North Warehouse,786,Yes,2023-03-25,5,Delayed
+ORD-1067,2023-01-25,SPL-641,Supplier D,PROD-2891,Product 14,Components,460,132,Shipped,16,121.21,7501.99,292.73,West Warehouse,225,No,2023-03-21,1,Urgent
+ORD-1068,2023-04-01,SPL-357,Supplier C,PROD-2753,Product 77,Components,401,74,Shipped,15,130.61,4689.81,487.17,North Warehouse,520,Yes,2023-03-17,5,Urgent
+ORD-1069,2023-01-09,SPL-666,Supplier A,PROD-3546,Product 56,Raw Materials,304,252,Shipped,11,103.43,6893.03,288.88,East Warehouse,462,No,2023-04-05,5,Partial shipment
+ORD-1070,2023-01-06,SPL-981,Supplier B,PROD-5462,Product 45,Components,204,352,Shipped,6,27.34,2389.25,461.07,West Warehouse,994,Yes,2023-03-20,2,Delayed
+ORD-1071,2023-03-26,SPL-111,Supplier B,PROD-5616,Product 94,Components,254,68,Delivered,2,76.11,5225.42,423.71,North Warehouse,781,No,2023-03-18,2,Normal
+ORD-1072,2023-01-30,SPL-796,Supplier B,PROD-4450,Product 41,Finished Goods,13,298,Delivered,9,73.33,9722.83,165.64,East Warehouse,868,Yes,,3,Urgent
+ORD-1073,2023-04-09,SPL-838,Supplier D,PROD-6617,Product 56,Finished Goods,492,495,Shipped,28,137.33,4047.05,421.11,West Warehouse,533,No,2023-03-19,4,Normal
+ORD-1074,2023-02-07,SPL-217,Supplier B,PROD-4335,Product 78,Finished Goods,190,121,Delivered,16,172.97,7234.34,266.83,South Warehouse,988,Yes,2023-04-03,1,Partial shipment
+ORD-1075,2023-01-11,SPL-798,Supplier D,PROD-5325,Product 66,Raw Materials,162,248,Pending,4,72.66,6848.53,412.92,East Warehouse,838,No,2023-04-15,5,Urgent
+ORD-1076,2023-01-30,SPL-649,Supplier B,PROD-9280,Product 15,Raw Materials,395,368,Delivered,27,141.8,8665.89,385.95,East Warehouse,152,No,2023-04-09,3,Normal
+ORD-1077,2023-01-13,SPL-868,Supplier C,PROD-9004,Product 50,Components,209,141,Pending,3,64.76,8671.07,202.42,South Warehouse,394,No,2023-04-13,2,Urgent
+ORD-1078,2023-02-18,SPL-373,Supplier D,PROD-5114,Product 74,Components,446,402,Pending,13,189.59,8734.08,101.83,South Warehouse,714,No,2023-04-09,5,Normal
+ORD-1079,2023-02-05,SPL-887,Supplier B,PROD-1832,Product 25,Raw Materials,466,198,Pending,16,164.58,4420.08,483.3,North Warehouse,419,No,2023-03-27,4,Delayed
+ORD-1080,2023-02-28,SPL-756,Supplier A,PROD-2512,Product 33,Raw Materials,498,95,Delivered,3,114.52,3849.95,113.34,East Warehouse,460,Yes,2023-04-14,2,Delayed
+ORD-1081,2023-03-23,SPL-448,Supplier D,PROD-7939,Product 6,Finished Goods,437,320,Shipped,19,96.42,7468.46,484.93,South Warehouse,206,No,2023-04-18,1,Partial shipment
+ORD-1082,2023-02-16,SPL-214,Supplier A,PROD-5533,Product 91,Raw Materials,224,320,Shipped,21,69.76,7834.62,437.06,West Warehouse,691,Yes,2023-04-17,5,Urgent
+ORD-1083,2023-01-21,SPL-400,Supplier A,PROD-1722,Product 56,Raw Materials,285,392,Delivered,22,71.42,8851.45,375.9,East Warehouse,619,No,2023-04-08,3,Normal
+ORD-1084,2023-02-17,SPL-545,Supplier A,PROD-1058,Product 1,Components,392,377,Pending,2,194.34,1323.09,490.97,North Warehouse,317,Yes,2023-04-19,1,Partial shipment
+ORD-1085,2023-02-15,SPL-261,Supplier A,PROD-6464,Product 67,Components,386,68,Delivered,5,86.79,1615.79,485.27,South Warehouse,258,No,2023-04-11,5,Delayed
+ORD-1086,2023-01-27,SPL-564,Supplier B,PROD-3143,Product 69,Finished Goods,289,408,Shipped,5,107.77,6680.45,412.06,East Warehouse,772,No,2023-04-22,5,Delayed
+ORD-1087,2023-03-27,SPL-103,Supplier B,PROD-5291,Product 88,Raw Materials,419,429,Delivered,26,197.74,9288.36,214.6,East Warehouse,593,Yes,2023-04-13,5,Partial shipment
+ORD-1088,2023-02-04,SPL-839,Supplier D,PROD-3647,Product 93,Components,318,93,Delivered,19,134.96,9976.83,405.81,South Warehouse,329,No,2023-04-07,5,Urgent
+ORD-1089,2023-03-31,SPL-996,Supplier D,PROD-8239,Product 95,Raw Materials,469,169,Shipped,10,113.09,7720.9,56.26,South Warehouse,967,Yes,2023-04-26,5,Normal
+ORD-1090,2023-03-29,SPL-836,Supplier D,PROD-8007,Product 95,Raw Materials,122,65,Shipped,3,88.52,4905.74,291.46,South Warehouse,210,Yes,2023-04-30,1,Delayed
+ORD-1091,2023-03-24,SPL-369,Supplier B,PROD-1158,Product 86,Finished Goods,259,306,Pending,8,45.64,1885.99,254.65,East Warehouse,458,No,2023-04-14,4,Partial shipment
+ORD-1092,2023-01-10,SPL-612,Supplier D,PROD-2832,Product 26,Raw Materials,122,23,Pending,4,78.74,6703.73,352.77,South Warehouse,965,No,2023-04-22,4,Delayed
+ORD-1093,2023-03-19,SPL-880,Supplier A,PROD-2232,Product 47,Finished Goods,149,485,Shipped,18,153.72,8853.21,352.55,South Warehouse,669,Yes,2023-04-19,1,Delayed
+ORD-1094,2023-03-23,SPL-282,Supplier B,PROD-3442,Product 56,Components,233,169,Pending,25,128.83,4993.11,313.05,East Warehouse,476,No,2023-04-30,4,Normal
+ORD-1095,2023-01-22,SPL-619,Supplier D,PROD-9938,Product 9,Components,258,304,Shipped,14,154.4,7246.01,420.09,East Warehouse,217,No,2023-04-23,3,Urgent
+ORD-1096,2023-03-10,SPL-208,Supplier A,PROD-1590,Product 86,Components,24,356,Delivered,20,48.68,9130.82,473.13,North Warehouse,880,No,2023-04-13,3,Urgent
+ORD-1097,2023-04-04,SPL-991,Supplier D,PROD-7049,Product 43,Components,209,474,Pending,20,114.35,1413.92,98.76,West Warehouse,385,Yes,2023-05-04,1,Normal
+ORD-1098,2023-02-01,SPL-740,Supplier C,PROD-3426,Product 80,Finished Goods,182,500,Shipped,26,186.26,8165.29,155.22,East Warehouse,687,No,2023-05-07,3,Partial shipment
+ORD-1099,2023-01-21,SPL-405,Supplier D,PROD-8041,Product 41,Finished Goods,352,202,Delivered,20,93.24,3640.31,61.26,West Warehouse,331,Yes,2023-05-01,1,Partial shipment

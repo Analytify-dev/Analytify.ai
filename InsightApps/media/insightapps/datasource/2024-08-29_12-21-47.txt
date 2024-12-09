@@ -1,0 +1,61 @@
+[
+    {
+        "schema": "main",
+        "table": "employees",
+        "columns": [
+            {
+                "column": "eeid",
+                "datatype": "varchar(10)"
+            },
+            {
+                "column": "full_name",
+                "datatype": "varchar(100)"
+            },
+            {
+                "column": "job_title",
+                "datatype": "varchar(100)"
+            },
+            {
+                "column": "department",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "business_unit",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "gender",
+                "datatype": "varchar(10)"
+            },
+            {
+                "column": "ethnicity",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "age",
+                "datatype": "integer"
+            },
+            {
+                "column": "hire_date",
+                "datatype": "datetime"
+            },
+            {
+                "column": "annual_salary",
+                "datatype": "decimal"
+            },
+            {
+                "column": "bonus_percentage",
+                "datatype": "decimal"
+            },
+            {
+                "column": "country",
+                "datatype": "varchar(50)"
+            },
+            {
+                "column": "city",
+                "datatype": "varchar(50)"
+            }
+        ],
+        "alias": "employees"
+    }
+]

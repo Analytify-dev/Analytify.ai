@@ -1,0 +1,283 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "WHO region",
+            "data_type": "string"
+        }
+    ],
+    "columns_data": [
+        [
+            "WHO region",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "Tot cases/1M pop",
+            "data_type": "int",
+            "type": "sum",
+            "alias": "Total Cases per one Million Pop"
+        },
+        {
+            "column": "Deaths/1M pop",
+            "data_type": "int",
+            "type": "sum",
+            "alias": "Tot deaths by One Million Pop"
+        }
+    ],
+    "rows_data": [
+        [
+            "Tot cases/1M pop",
+            "aggregate",
+            "sum",
+            "Total Cases per one Million Pop"
+        ],
+        [
+            "Deaths/1M pop",
+            "aggregate",
+            "sum",
+            "Tot deaths by One Million Pop"
+        ]
+    ],
+    "col": [
+        {
+            "column": "WHO region",
+            "result_data": [
+                null,
+                "South-EastAsia",
+                "Africa",
+                "EasternMediterranean",
+                "WesternPacific",
+                "Europe",
+                "Americas"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "Total Cases per one Million Pop",
+            "result_data": [
+                82058,
+                13145,
+                43191,
+                133235,
+                13092,
+                233379,
+                146673
+            ]
+        },
+        {
+            "col": "Tot deaths by One Million Pop",
+            "result_data": [
+                1703,
+                109,
+                679,
+                1098,
+                64,
+                9868,
+                4932
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 7,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [
+            {
+                "name": "Total Cases per one Million Pop",
+                "data": [
+                    82058,
+                    13145,
+                    43191,
+                    133235,
+                    13092,
+                    233379,
+                    146673
+                ]
+            },
+            {
+                "name": "Tot deaths by One Million Pop",
+                "data": [
+                    1703,
+                    109,
+                    679,
+                    1098,
+                    64,
+                    9868,
+                    4932
+                ]
+            }
+        ],
+        "barLineXaxis": [
+            {
+                "name": "WHO region",
+                "values": [
+                    null,
+                    "South-EastAsia",
+                    "Africa",
+                    "EasternMediterranean",
+                    "WesternPacific",
+                    "Europe",
+                    "Americas"
+                ]
+            }
+        ],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiNumber": "0.71M",
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "savedChartOptions": {
+        "backgroundColor": "#ffffff",
+        "tooltip": {
+            "trigger": "axis",
+            "axisPointer": {
+                "type": "cross",
+                "crossStyle": {
+                    "color": "#999"
+                },
+                "label": {
+                    "backgroundColor": "#283b56"
+                }
+            }
+        },
+        "dataZoom": {
+            "show": true,
+            "start": 0,
+            "end": 100
+        },
+        "toolbox": {
+            "feature": {
+                "magicType": {
+                    "show": true,
+                    "type": [
+                        "line",
+                        "bar",
+                        "stack"
+                    ]
+                },
+                "restore": {
+                    "show": true
+                },
+                "saveAsImage": {
+                    "show": true
+                }
+            }
+        },
+        "legend": {},
+        "xAxis": [
+            {
+                "type": "category",
+                "data": [
+                    "null",
+                    "South-EastAsia",
+                    "Africa",
+                    "EasternMediterranean",
+                    "WesternPacific",
+                    "Europe",
+                    "Americas"
+                ],
+                "axisPointer": {
+                    "type": "shadow"
+                }
+            }
+        ],
+        "yAxis": [
+            {
+                "type": "value",
+                "name": "Bar"
+            },
+            {
+                "type": "value",
+                "name": "Line"
+            }
+        ],
+        "series": [
+            {
+                "name": "Total Cases per one Million Pop",
+                "type": "bar",
+                "yAxisIndex": 1,
+                "data": [
+                    82058,
+                    13145,
+                    43191,
+                    133235,
+                    13092,
+                    233379,
+                    146673
+                ]
+            },
+            {
+                "name": "Tot deaths by One Million Pop",
+                "type": "line",
+                "yAxisIndex": 1,
+                "lineStyle": {
+                    "color": "red"
+                },
+                "data": [
+                    1703,
+                    109,
+                    679,
+                    1098,
+                    64,
+                    9868,
+                    4932
+                ]
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": true,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#ffffff",
+        "color": "#00a5a2"
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [],
+    "columns_data": [],
+    "rows": [
+        {
+            "column": "hourly_rate",
+            "data_type": "int",
+            "type": "min"
+        }
+    ],
+    "rows_data": [
+        [
+            "hourly_rate",
+            "aggregate",
+            "min"
+        ]
+    ],
+    "col": [],
+    "row": [
+        {
+            "col": "min(hourly_rate)",
+            "result_data": [
+                "100"
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "kpiData": [
+            {
+                "col": "min(hourly_rate)",
+                "result_data": [
+                    "100"
+                ]
+            }
+        ],
+        "kpiFontSize": 4.7,
+        "kpicolor": "#303f9f"
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": false,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

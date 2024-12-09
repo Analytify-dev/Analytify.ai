@@ -1,0 +1,269 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "business_travel",
+            "data_type": "varchar"
+        }
+    ],
+    "columns_data": [
+        [
+            "business_travel",
+            "varchar",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "id",
+            "data_type": "int",
+            "type": "count"
+        }
+    ],
+    "rows_data": [
+        [
+            "id",
+            "aggregate",
+            "count"
+        ]
+    ],
+    "col": [
+        {
+            "column": "business_travel",
+            "result_data": [
+                "Non-Travel",
+                "Travel_Frequently",
+                "Travel_Rarely"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "count(id)",
+            "result_data": [
+                150,
+                277,
+                1043
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [
+            150,
+            277,
+            1043
+        ],
+        "barXaxis": [
+            "Non-Travel",
+            "Travel_Frequently",
+            "Travel_Rarely"
+        ],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": []
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            {
+                "name": "",
+                "data": [
+                    150,
+                    277,
+                    1043
+                ],
+                "group": "apexcharts-axis-0"
+            }
+        ],
+        "annotations": {
+            "points": [
+                {
+                    "x": "zoom",
+                    "seriesIndex": 0,
+                    "label": {
+                        "borderColor": "#775DD0",
+                        "offsetY": 0,
+                        "style": {
+                            "color": "#fff",
+                            "background": "#775DD0"
+                        },
+                        "text": "zoom"
+                    }
+                }
+            ]
+        },
+        "chart": {
+            "toolbar": {
+                "show": true,
+                "offsetX": 0,
+                "offsetY": 0,
+                "tools": {
+                    "download": true,
+                    "selection": true,
+                    "zoom": true,
+                    "zoomin": true,
+                    "zoomout": true,
+                    "pan": true,
+                    "reset": true
+                },
+                "autoSelected": "zoom"
+            },
+            "type": "bar",
+            "height": 320,
+            "foreColor": "#00a5a2",
+            "events": {}
+        },
+        "title": {
+            "text": "",
+            "offsetY": 10,
+            "align": "center",
+            "style": {
+                "color": "#00a5a2"
+            }
+        },
+        "xaxis": {
+            "categories": [
+                "Non-Travel",
+                "Travel_Frequently",
+                "Travel_Rarely"
+            ],
+            "tickPlacement": "on",
+            "position": "bottom",
+            "labels": {
+                "show": true,
+                "trim": true,
+                "hideOverlappingLabels": false,
+                "style": {
+                    "colors": "#00a5a2",
+                    "fontSize": "12px",
+                    "fontFamily": "Helvetica, Arial, sans-serif",
+                    "fontWeight": 12
+                }
+            },
+            "axisBorder": {
+                "show": false
+            },
+            "axisTicks": {
+                "show": false
+            },
+            "crosshairs": {
+                "fill": {
+                    "type": "gradient",
+                    "gradient": {
+                        "stops": [
+                            0,
+                            100
+                        ],
+                        "opacityFrom": 0.4,
+                        "opacityTo": 0.5
+                    }
+                }
+            },
+            "tooltip": {
+                "enabled": false,
+                "offsetY": -35
+            },
+            "convertedCatToNumeric": true
+        },
+        "yaxis": {
+            "show": true,
+            "labels": {
+                "show": true,
+                "style": {
+                    "colors": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ],
+                    "fontSize": "12px",
+                    "fontFamily": "Helvetica, Arial, sans-serif",
+                    "fontWeight": 12
+                }
+            },
+            "axisBorder": {
+                "show": false
+            },
+            "axisTicks": {
+                "show": false
+            }
+        },
+        "grid": {
+            "show": true,
+            "borderColor": "#90A4AE",
+            "xaxis": {
+                "lines": {
+                    "show": false
+                }
+            },
+            "yaxis": {
+                "lines": {
+                    "show": false
+                }
+            }
+        },
+        "plotOptions": {
+            "bar": {
+                "dataLabels": {
+                    "hideOverflowingLabels": false,
+                    "position": "top"
+                }
+            }
+        },
+        "dataLabels": {
+            "enabled": true,
+            "offsetY": -20,
+            "style": {
+                "fontSize": "12px",
+                "colors": [
+                    "#00a5a2"
+                ]
+            }
+        },
+        "fill": {
+            "type": "gradient"
+        },
+        "colors": "#29b6f6"
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

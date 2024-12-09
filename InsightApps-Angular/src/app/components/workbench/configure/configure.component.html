@@ -1,0 +1,66 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> -->
+
+<app-page-header title="Configure" title1="Home" activeitem="Configure"></app-page-header>
+
+<form (ngSubmit)="submitApiKey()">
+    <div class="form-group">
+        <label for="apiKey">OpenAI API KEY</label>
+        <br>
+        <div style="position: relative; display: inline-block; width: 50%;">
+            <input 
+                [type]="showPassword ? 'text' : 'password'"
+                style="width: 100%; padding: 10px; padding-right: 40px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; font-size: 16px;" 
+                id="apiKey" 
+                [(ngModel)]="apiKey" 
+                name="apiKey" 
+                required
+                (keydown)="preventSpaces($event)">
+            
+            <!-- Eye icon for toggling visibility -->
+            <i 
+                class="eye-icon" 
+                [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'" 
+                (click)="togglePasswordVisibility()" 
+                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+                >
+            </i>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!apiKey.trim()">Verify</button>
+</form>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+</div>
+<br><br>
+
+<div class="link-container">
+    <span>
+        <p>Don't have an API key?
+            <a href="https://platform.openai.com/signup" target="_blank">Buy a new API Key</a>
+        </p>
+    </span>
+</div>
+
+<p>
+    <b>Note:</b>
+    <br>
+    We use the GPT API Key to enable the Copilot feature, which assists you in building sheets and charts after
+    connecting to your data source. This integration helps streamline your workflow by providing intelligent suggestions
+    and automating tasks based on your data.
+</p>
+<br>
+<p>While the GPT API Key powers our Copilot feature, providing valuable assistance in building
+    sheets and charts after connecting to your data source, please be aware that suggestions or
+    automated data builds may occasionally fail. This can occur due to various factors, such as the
+    complexity of your data or temporary API limitations. We recommend verifying all suggestions and
+    manually adjusting where needed to ensure the accuracy and relevance of your outputs.</p>
+<!-- 
+<div class="dropdown">
+    <p>While the GPT API Key powers our Copilot feature, providing valuable assistance in building
+        sheets and charts after connecting to your data source, please be aware that suggestions or
+        automated data builds may occasionally fail. This can occur due to various factors, such as the
+        complexity of your data or temporary API limitations. We recommend verifying all suggestions and
+        manually adjusting where needed to ensure the accuracy and relevance of your outputs.</p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->

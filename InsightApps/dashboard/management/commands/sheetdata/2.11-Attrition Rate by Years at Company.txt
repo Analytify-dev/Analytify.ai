@@ -1,0 +1,140 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "attrition",
+            "data_type": "string"
+        }
+    ],
+    "columns_data": [
+        [
+            "attrition",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "years_at_company",
+            "data_type": "int",
+            "type": "avg"
+        }
+    ],
+    "rows_data": [
+        [
+            "years_at_company",
+            "aggregate",
+            "avg"
+        ]
+    ],
+    "col": [
+        {
+            "column": "attrition",
+            "result_data": [
+                "No",
+                "Yes"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "avg(years_at_company)",
+            "result_data": [
+                7.37,
+                5.13
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [
+            "Divorced",
+            "Married",
+            "Single"
+        ],
+        "pieYaxis": [
+            7.37,
+            5.13
+        ],
+        "pieXaxis": [
+            "No",
+            "Yes"
+        ],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": []
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            7.37,
+            5.13
+        ],
+        "chart": {
+            "height": 300,
+            "type": "pie",
+            "events": {}
+        },
+        "colors": [
+            "#00a5a2",
+            "#31d1ce",
+            "#f5b849",
+            "#49b6f5",
+            "#e6533c"
+        ],
+        "labels": [
+            "No",
+            "Yes"
+        ],
+        "legend": {
+            "show": true,
+            "position": "bottom"
+        },
+        "dataLabels": {
+            "enabled": true,
+            "dropShadow": {
+                "enabled": false
+            }
+        },
+        "tooltip": {
+            "enabled": true,
+            "y": {}
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

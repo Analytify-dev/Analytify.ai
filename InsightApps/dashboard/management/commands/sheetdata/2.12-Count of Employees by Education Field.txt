@@ -1,0 +1,165 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "education_field",
+            "data_type": "varchar"
+        }
+    ],
+    "columns_data": [
+        [
+            "education_field",
+            "varchar",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "id",
+            "data_type": "int",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "id",
+            "aggregate",
+            "sum"
+        ]
+    ],
+    "col": [
+        {
+            "column": "education_field",
+            "result_data": [
+                "Human Resources",
+                "Life Sciences",
+                "Marketing",
+                "Medical",
+                "Other",
+                "Technical Degree"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(id)",
+            "result_data": [
+                16885,
+                445991,
+                119630,
+                343860,
+                58794,
+                96025
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "barYaxis": [],
+        "barXaxis": [
+            "Divorced",
+            "Married",
+            "Single"
+        ],
+        "pieYaxis": [
+            16885,
+            445991,
+            119630,
+            343860,
+            58794,
+            96025
+        ],
+        "pieXaxis": [
+            "Human Resources",
+            "Life Sciences",
+            "Marketing",
+            "Medical",
+            "Other",
+            "Technical Degree"
+        ],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": []
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            16885,
+            445991,
+            119630,
+            343860,
+            58794,
+            96025
+        ],
+        "chart": {
+            "height": 300,
+            "type": "pie",
+            "events": {}
+        },
+        "colors": [
+            "#00a5a2",
+            "#31d1ce",
+            "#f5b849",
+            "#49b6f5",
+            "#e6533c",
+            "#00a5a2"
+        ],
+        "labels": [
+            "Human Resources",
+            "Life Sciences",
+            "Marketing",
+            "Medical",
+            "Other",
+            "Technical Degree"
+        ],
+        "legend": {
+            "show": true,
+            "position": "bottom"
+        },
+        "dataLabels": {
+            "enabled": true,
+            "dropShadow": {
+                "enabled": false
+            }
+        },
+        "tooltip": {
+            "enabled": true,
+            "y": {}
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#00a5a2",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#00a5a2",
+        "yLabelSwitch": false,
+        "yGridColor": "#00a5a2",
+        "yGridSwitch": false,
+        "yLabelColor": "#00a5a2",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left"
+    }
+}

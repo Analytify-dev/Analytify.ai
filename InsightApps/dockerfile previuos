@@ -1,0 +1,37 @@
+FROM python:3.10
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+# Install dependencies for ODBC
+RUN apt-get update && apt-get install -y \
+    unixodbc \
+    unixodbc-dev \
+    libsqliteodbc \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /app/
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Prompt for email and password during build
+ARG ADMIN_EMAIL
+ARG ADMIN_PASSWORD
+
+ENV DJANGO_SUPERUSER_EMAIL=$ADMIN_EMAIL
+ENV DJANGO_SUPERUSER_PASSWORD=$ADMIN_PASSWORD
+
+COPY . /app/
+
+# Create a non-interactive superuser
+RUN python manage.py createsuperuser --email $DJANGO_SUPERUSER_EMAIL --noinput || true
+
+# Copy the entrypoint script
+# COPY entrypoint.sh /entrypoint.sh
+# RUN chmod +x /entrypoint.sh
+
+# ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
