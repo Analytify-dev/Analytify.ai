@@ -1,0 +1,170 @@
+// .img-shadow {
+//     box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.16);
+// }
+a {
+    cursor: pointer;
+}
+.dropdown-toggle::after{
+    display: none;
+}
+.card-title{
+    font-size: 16px;
+}
+.card-text{
+    font-size: 14px;
+}
+.card-img-top{
+    width: 100%;
+    height: 150px;
+    object-fit: fill;
+    border-start-start-radius: 0.375rem;
+    border-start-end-radius: 0.375rem;
+}
+.card-img-top-dashboard{
+    width: 100%;
+    height: 110px;
+    object-fit: fill;
+    border-start-start-radius: 0.375rem;
+    border-start-end-radius: 0.375rem; 
+}
+.landing-connect-search {
+    display: flex;
+    justify-content: flex-end;
+}
+.img-cursor{
+    cursor: pointer;
+}
+.table-responsive{
+    height: 523px;
+    overflow: auto;
+}
+.card.img-shadow:hover {
+    box-shadow: 0 16px 32px #21212126;
+}
+tr:hover {
+    box-shadow: 0 0px 30px rgba(33, 33, 33, 0.1490196078);
+    border-radius: 20px;
+}
+
+     // for Mobile Resolution //
+     @media only screen and ( max-width : 578px ) {
+        .h1, h1{
+            font-size: 16px;
+        }
+        .landing-connect-search {
+            display: inline-block;
+            justify-content: flex-end;
+        }
+        .table td{
+            font-size: 12px;
+        }
+        .card-title {
+            font-size: 14px;
+        }
+    }
+
+    // for Tab Resolution //
+    @media ( 768px <= width <= 1198px) {
+        .h1, h1 {
+            font-size: 16px;
+        }
+        .landing-connect-search {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    // for 90% Resolution //
+    @media ( 1420px <= width <= 1560px) {
+        .h1, h1 {
+            font-size: 38px;
+        }
+    
+        h6 {
+            font-size: 14px;
+        }
+        .card-title {
+            font-size: 14px;
+        }
+        .fs-11 {
+            font-size: 11px !important;
+        }
+        .table td{
+            font-size: 12px;
+        }
+        .quick-start-txt {
+            font-size: 13px;
+        }
+        .table-responsive {
+            height: 510px;
+            overflow: hidden;
+        }
+        .card-text {
+            font-size: 12px;
+        }
+    }
+
+      // for 100% Resolution //
+      @media ( 1280px <= width <= 1420px) {
+        h1, h1 {
+            font-size: 37px;
+        }
+        .card-title {
+            font-size: 12px;
+        }
+        .fs-11 {
+            font-size: 9px !important;
+        }
+        .h6, h6 {
+            font-size: 14px;
+        }
+        .quick-start-txt {
+            font-size: 12px;
+        }
+        .table tbody td {
+            font-size: 11px;
+            padding: 8px;
+        }
+      
+        .fs-18 {
+            font-size: 14px !important;
+        }
+        .connect-database-btn {
+            font-size: 11px;
+        }
+        .new-chart-btn {
+            font-size: 11px;
+        }
+        .form-control{
+            padding: 0.275rem 0.75rem;
+        }
+        .input-group-text{
+            padding: 0.275rem 0.75rem;
+        }
+        .table-responsive{
+            height: 493px;
+            overflow: hidden;
+        }
+        .card-text{
+            font-size: 11px;
+        }
+  }
+
+        // for 110% Resolution //
+        @media ( 1163px <= width <= 1279px) {
+            h1, h1 {
+                font-size: 28px;
+            }
+            h6.fw-bold.mb-1 {
+                font-size: 13px;
+            }
+        }
+
+      // for 125% Resolution //
+      @media ( 1024px <= width <= 1163px) {
+        h1.text-.fw-bold.tx-fixed-white.mt-0 {
+            font-size: 25px;
+        }
+        h6.fw-bold.mb-1 {
+            font-size: 13px;
+        }
+    }

@@ -1,0 +1,150 @@
+.card-icon-top{
+  height: 100px;
+  background-color: #86b8b7;
+  }
+.table thead th{
+ color: #fff;
+}
+.card-box-shadow{
+   box-shadow: 5px 10px 10px 5px #0000001a;
+  }
+.dropdown-toggle::after{
+  display: none;
+  }
+a {
+  cursor: pointer;
+}
+.tiled-header-bg {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}
+.fe-more-vertical:before {
+  content: "\e99a";
+  color: #fff;
+}
+td {
+  padding: 5px !important;
+}
+
+// for 90% Resolution //
+@media ( 1420px <= width <= 1560px) {
+  a.float-start {
+    font-size: 13px;
+  }
+  .card-title{
+   font-size: 13px;
+  }
+  .fs-14 {
+    font-size: 13px !important;
+  }
+  .avatar-xl {
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 0.25rem;
+  }
+  .page-title{
+    font-size: 14px;
+  }
+  .table tbody td {
+    border-color: var(--default-border);
+    font-size: 13px;
+  }
+  .btn, .button-slide-out__above{
+    font-size: 10px;
+  }
+  .logo-txt {
+    font-size: 11px;
+  }
+  .tiled-header-bg{
+    padding: 13px;
+  }
+  .tiled-card-body {
+    padding: 13px;
+  }
+  .avatar {
+    width: 2.05rem;
+    height: 2.075rem;
+  }
+  .tiled-card-body-padding {
+    padding: 10px;
+  }
+  .tiled-card-header-padding {
+    padding: 10px !important;
+  }
+  .table thead th {
+    color: #fff;
+    font-size: 12px;
+  }
+  p {
+    font-size: 11px !important;
+  }
+  .w-7 {
+    width: 2rem !important;
+  }
+  .h-7 {
+    height: 2rem !important;
+  }
+}
+
+  // for 100% Resolution //
+  @media ( 1280px <= width <= 1420px) {
+  .page-title{
+    font-size: 12px;
+    }
+  .card-title{
+    font-size: 12px;
+    }
+  a.float-start {
+    font-size: 13px;
+  }
+  .fs-14 {
+    font-size: 12px !important;
+  }
+  .avatar-xl {
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 0.25rem;
+  }
+  .table tbody td {
+    border-color: var(--default-border);
+    font-size: 13px;
+  }
+  .btn, .button-slide-out__above{
+    font-size: 10px;
+  }
+  .logo-txt {
+    font-size: 10px;
+  }
+  .tiled-header-bg{
+    padding: 13px;
+  }
+  .tiled-card-body {
+    padding: 13px;
+  }
+  .avatar {
+    width: 2.05rem;
+    height: 2.075rem;
+  }
+  .tiled-card-body-padding {
+    padding: 10px;
+  }
+  .tiled-card-header-padding {
+    padding: 10px !important;
+  }
+  .table thead th {
+    color: #fff;
+    font-size: 12px;
+  }
+  p {
+    font-size: 11px !important;
+  }
+  .w-7 {
+    width: 2rem !important;
+  }
+  .h-7 {
+    height: 2rem !important;
+  }
+}

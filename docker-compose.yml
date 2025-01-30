@@ -18,29 +18,107 @@
 ##################################
 # version: '3.8'
 
+# services:
+#   backend:
+#     build:
+#       context: ./Analytify
+#       args:
+#         ADMIN_EMAIL: ${ADMIN_EMAIL}
+#         ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+#     volumes:
+#       - ./Analytify:/app
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - clickhouse
+#     environment:
+#       - DJANGO_SETTINGS_MODULE=project.settings
+#       - DATABASE_URL=clickhouse://default@clickhouse:9000
+#       ADMIN_EMAIL: ${ADMIN_EMAIL}
+#       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+#     command: >
+#       sh -c "
+#       python manage.py runserver 0.0.0.0:8000"
+
+
+#   frontend:
+#     build: ./Analytify-Angular
+#     ports:
+#       - "8080:80"
+#     volumes:
+#       - ./dist/Analytify-Angular:/frontend:/usr/share/nginx/html
+
+
+
+version: '3.8'
+
 services:
   backend:
     build:
-      context: ./InsightApps
+      context: ./Analytify
       args:
         ADMIN_EMAIL: ${ADMIN_EMAIL}
         ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     volumes:
-      - ./InsightApps:/app
+      - ./Analytify:/app
     ports:
       - "8000:8000"
+    depends_on:
+      - clickhouse
     environment:
-      ADMIN_EMAIL: ${ADMIN_EMAIL}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      - DJANGO_SETTINGS_MODULE=project.settings
+      # - DATABASE_URL=clickhouse://default@clickhouse:9000
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     command: >
       sh -c "
+      python manage.py migrate &&
       python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - analytify-network
 
+  # frontend:
+  #   build:
+  #     context: ./Analytify-Angular
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./dist/Analytify-Angular:/usr/share/nginx/html
+  #   depends_on:
+  #     - backend
 
   frontend:
-    build: ./InsightApps-Angular
+    build: ./Analytify-Angular
     ports:
       - "8080:80"
     volumes:
-      - ./dist/InsightApps-Angular:/frontend:/usr/share/nginx/html
+      - ./dist/Analytify-Angular:/frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
+    networks:
+      - analytify-network
 
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: clickhouse
+    ports:
+      - "9000:9000"  # ClickHouse client port
+      - "8123:8123"  # HTTP interface port
+    volumes:
+      - clickhouse_data:/var/lib/clickhouseenvironment
+    environment:
+      - CLICKHOUSE_HOST="clickhouse"
+      - CLICKHOUSE_DB= "Analytify_db"
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=
+    
+    
+    networks:
+    - analytify-network
+
+networks:
+  analytify-network: {}  # Define the network explicitly
+  # driver: bridge
+
+volumes:
+  clickhouse_data:

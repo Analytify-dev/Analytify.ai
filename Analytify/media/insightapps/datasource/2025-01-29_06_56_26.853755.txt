@@ -1,0 +1,78 @@
+{
+    "dragged_array": [
+        {
+            "schema": "QWE.AF L",
+            "table": "covid_data",
+            "columns": [
+                {
+                    "column": "country",
+                    "datatype": "string"
+                },
+                {
+                    "column": "continent",
+                    "datatype": "string"
+                },
+                {
+                    "column": "population",
+                    "datatype": "float64"
+                },
+                {
+                    "column": "total_cases",
+                    "datatype": "float64"
+                },
+                {
+                    "column": "new_cases",
+                    "datatype": "string"
+                },
+                {
+                    "column": "total_deaths",
+                    "datatype": "float64"
+                },
+                {
+                    "column": "new_deaths",
+                    "datatype": "string"
+                },
+                {
+                    "column": "total_recovered",
+                    "datatype": "string"
+                },
+                {
+                    "column": "new_recovered",
+                    "datatype": "string"
+                },
+                {
+                    "column": "active_cases",
+                    "datatype": "string"
+                },
+                {
+                    "column": "serious",
+                    "datatype": "string"
+                },
+                {
+                    "column": "Tot cases/1M pop",
+                    "datatype": "float64"
+                },
+                {
+                    "column": "Deaths/1M pop",
+                    "datatype": "float64"
+                },
+                {
+                    "column": "total_tests",
+                    "datatype": "string"
+                },
+                {
+                    "column": "Tests/1M pop",
+                    "datatype": "string"
+                },
+                {
+                    "column": "WHO region",
+                    "datatype": "string"
+                }
+            ],
+            "alias": "covid_data"
+        }
+    ],
+    "dragged_array_indexing": {
+        "covid_data": 1
+    }
+}

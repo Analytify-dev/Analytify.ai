@@ -1,0 +1,250 @@
+{
+    "dragged_array": [
+        {
+            "schema": "sample",
+            "table": "salesforce",
+            "columns": [
+                {
+                    "column": "id",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "totalSize",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "done",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "type",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "url",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Username",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "LastName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "FirstName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "CompanyName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Division",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Department",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Title",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Street",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "City",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "State",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "PostalCode",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Country",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Latitude",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "Longitude",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "GeocodeAccuracy",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "Email",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "EmailPreferencesAutoBcc",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "EmailPreferencesAutoBccStayInTouch",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "EmailPreferencesStayInTouchReminder",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "SenderEmail",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "SenderName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Signature",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "StayInTouchSubject",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "StayInTouchSignature",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "StayInTouchNote",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Phone",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Fax",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "MobilePhone",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Alias",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "CommunityNickname",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "BadgeText",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "IsActive",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "TimeZoneSidKey",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "LocaleSidKey",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "ReceivesInfoEmails",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "ReceivesAdminInfoEmails",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "EmailEncodingKey",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "ProfileId",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "LanguageLocaleKey",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "EmployeeNumber",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "DelegatedApproverId",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "ManagerId",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "LastLoginDate",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "LastPasswordChangeDate",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "CreatedDate",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "CreatedById",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "LastModifiedDate",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "LastModifiedById",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "SystemModstamp",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "NumberOfFailedLogins",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "OfflineTrialExpirationDate",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "OfflinePdaTrialExpirationDate",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "pr_Id",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "salesforce"
+        }
+    ],
+    "dragged_array_indexing": {
+        "salesforce": 1
+    }
+}

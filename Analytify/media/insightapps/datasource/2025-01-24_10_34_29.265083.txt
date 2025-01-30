@@ -1,0 +1,69 @@
+{
+    "dragged_array": [
+        {
+            "schema": "Test",
+            "table": "employees",
+            "columns": [
+                {
+                    "column": "eeid",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "full_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "job_title",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "department",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "business_unit",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "gender",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "ethnicity",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "age",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "hire_date",
+                    "datatype": "nullable(datetime64(3))"
+                },
+                {
+                    "column": "annual_salary",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "bonus_percentage",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "country",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "city",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "employees"
+        }
+    ],
+    "dragged_array_indexing": {
+        "covid_data": 1,
+        "django_migrations": 1,
+        "employees": 1,
+        "hr_attrition": 1
+    }
+}

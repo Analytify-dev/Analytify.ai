@@ -1,0 +1,299 @@
+<p>http-protocal-userguide works!</p>
+<div class="main-container card mt-5">
+    <div class="container">
+        <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3" style="padding: 0px; margin-top: 15px;">
+            <div class="card-body">
+                <div class="heading">
+                    <h4 class="text-center">Converting HTTP to HTTPS for Apache Web Server</h4>
+                    <p class="text-center">
+                        This guide provides detailed steps for converting Application from HTTP to HTTPS 
+                        using the Apache web server(We are taking it as an example if your requirement is another 
+                        web server you need follow their approach). The document incorporates crucial details for 
+                        securing your application and is designed as a user-friendly guide for seamless implementation.
+                    </p>
+                </div>
+                <div class="points mt-5">
+                    <h6 class="ms-0">Why HTTPS Matters:</h6>
+                    <div class="d-flex">
+                        <span>
+                            <i class="mdi mdi-chevron-double-right fs-24 lh-1 text-primary"></i>
+                        </span>
+                        <p class="fs-14">Data Security: HTTPS encrypts the data between users and the server, ensuring privacy and security. </p>
+                    </div>
+                    <div class="d-flex">
+                        <span>
+                            <i class="mdi mdi-chevron-double-right fs-24 lh-1 text-primary"></i>
+                        </span>
+                        <div class=" mb-3">
+                            <p class="fs-14">User Trust: Modern browsers mark HTTP websites as "Not Secure," impacting credibility. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="points">
+                    <h6 class="ms-0">Pre-Requisites:</h6>
+                    <div class="d-flex">
+                        <span>
+                            <i class="mdi mdi-chevron-double-right fs-24 lh-1 text-primary"></i>
+                        </span>
+                        <div class="mb-0">
+                            <p class=" mb-0">Access to Your Server: </p>
+                            <p>Administrative privileges for configuration. </p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <span>
+                            <i class="mdi mdi-chevron-double-right fs-24 lh-1 text-primary"></i>
+                        </span>
+                        <div class="mb-3">
+                            <p class="mb-0">SSL/TLS Certificate:</p>
+                            <p class="mb-0">Obtained from trusted Certificate Authorities (CAs) such as Let’s Encrypt, DigiCert, </p>
+                            <p class="mb-0">or GlobalSign. </p>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <span>
+                            <i class="mdi mdi-chevron-double-right fs-24 lh-1 text-primary"></i>
+                        </span>
+                        <div class="mb-3">
+                            <p class="mb-0">Apache Installed:</p>
+                            <p class="mb-0">Ensure your server runs the Apache web server. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Convert mt-3">
+                    <h5>Steps to Convert HTTP to HTTPS</h5>
+                    <h6>Step 1: Set up a firewall for your server:</h6>
+                    <p>You should have a regular, non-root user with sudo privileges configured on your server. Additionally, you will need to enable a basic firewall to block non-essential ports. 
+                        You can learn how to configure a regular user account and set up a firewall for your server by following below steps
+                    </p>
+                    <div class="Login as root">
+                        <h6>1. Login as root</h6>
+                        <p>To log into your server, you will need to know your server’s public IP address. You will also need the password or — if you installed an SSH key for authentication — the private 
+                            key for the root user’s account. If you have not already logged into your server,If you are not already connected to your server, log in now as the root user using the following command 
+                            (substitute the highlighted portion of the command with your server’s public IP address):
+                        </p>
+                        <span class="tag bg-light fs-14 mb-3">ssh root your_server_ip</span>
+                        <p>Accept the warning about host authenticity if it appears. If you are using password authentication, provide your root password to log in. If you are using an SSH key that is passphrase protected, 
+                            you may be prompted to enter the passphrase the first time you use the key each session. If this is your first time logging into the server with a password, you may also be prompted to change the 
+                            root password.
+                        </p>
+                    </div>
+                    <div class="Create a new user">
+                        <h6>2. Create a new user</h6>
+                        <p>Once you are logged in as root, you’ll be able to add the new user account. In the future, we’ll log in with this new account instead of root.</p>
+                        <span class="tag bg-light fs-14 mb-3">adduser  < username ></span>
+                        <p>You will be asked a few questions, starting with the account password.</p>
+                        <p class="mb-0">Enter a strong password and, optionally, fill in any of the additional information if you would like. </p>
+                        <p>This is not required and you can just hit ENTER in any field you wish to skip. </p>
+                    </div>
+                    <div class="Granting administrative Privileges">
+                        <h6>3. Granting administrative Privileges</h6>
+                        <p>Now we have a new user account with regular account privileges. However, we may sometimes need to do administrative tasks.</p>
+                        <p>To add privileges to our new user, we need to add the user to the sudo group. By default, on Ubuntu 20.04, users who are members of the sudo group are allowed to use the sudo command.</p>
+                        <p>As root, run this command to add your new user to the sudo group (substitute the highlighted username with your new user):</p>
+                        <span class="tag bg-light fs-14 mb-3">usermod -aG sudo  < username></span>
+                        <p>Now, when logged in as your regular user, you can type sudo before commands to run them with superuser privileges. </p>
+                    </div>
+                    <div class="Setting Up a Basic Firewall">
+                        <h6>4. Setting Up a Basic Firewall</h6>
+                        <p>Ubuntu 20.04 servers can use the UFW firewall to make sure only connections to certain services are allowed. We can set up a basic firewall using this application.Applications can register 
+                            their profiles with UFW upon installation. These profiles allow UFW to manage these applications by name. You can seUse  the following commands:</p>
+                        <span class="tag bg-light fs-14 mb-3">ufw app list</span><br>
+                        <span class="tag bg-light fs-14 mb-3">ufw allow OpenSSH</span><br>
+                        <span class="tag bg-light fs-14 mb-3">ufw enable</span><br>
+                        <span class="tag bg-light fs-14 mb-3">ufw status</span>
+                        <p>When you run the above command you see the active mode so it indicates that your firewall setup is done. </p>
+                        <h6>Output:</h6>
+                        <h6>Status: active</h6>
+                    </div>
+                    <div class="table-responsive ms-3" style=" width: fit-content;">
+                        <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>To</th>
+                                    <th>Action</th>
+                                    <th>From</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OpenSSH</td>
+                                    <td> ALLOW  </td>
+                                    <td>Anywhere</td>
+                                </tr>
+                                <tr>
+                                    <td>OpenSSH (v6) </td>
+                                    <td>ALLOW </td>
+                                    <td>Anywhere (v6)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p>When you have an account available, log in as your non-root user to begin.</p>
+                </div>
+                <div class="Obtain and Install mt-4">
+                    <h6>Step 2: Obtain and Install an SSL/TLS Certificate</h6>
+                    <h6>1. Choose the Type of Certificate:</h6>
+                    <p> - Single Domain, Wildcard (subdomains), or Multi-Domain.</p>
+                    <h6>2. Generate a Certificate Signing Request (CSR):</h6>
+                    <p class="mb-0">- Use OpenSSL:</p>
+                    <p>openssl req -new -newkey rsa:2048 -nodes -keyout example.com.key -out example.com.csr</p>
+                    <h6>3. Obtain and Install Certificate:</h6>
+                    <p class="mb-0">  - Submit the CSR to a CA and download the issued certificate.</p>
+                    <p> - Place the certificate and private key in a secure directory, e.g., `/etc/ssl/certs/`.</p>
+                </div>
+                <div class="Configure Apache">
+                    <h6>Step 3: Configure Apache for HTTPS:</h6>
+                    <p class="mb-0">1. Enable SSL Module:</p>
+                    <p class="mb-0">After the certification is completed we need to configure the SSL into the Webserver by following the steps below.</p>
+                    <p>Run the following command.</p>
+                    <span class="tag bg-light fs-14 mb-3"> sudo a2enmod ssl</span><br>
+                    <span class="tag bg-light fs-14 mb-3"> sudo service apache2 restart</span>
+                </div>
+                <div class="Update Application">
+                    <h6>Step 4: Update Application URLs:</h6>
+                    <p class="mb-0">- Replace `http://` with `https://` in application settings and internal links.</p>
+                    <p>- Update hardcoded URLs in databases, templates, and scripts.</p>
+                    <span class="tag bg-light fs-14 mb-3">  sudo systemctl reload apache2</span>
+                </div>
+                <div class="Application setup mt-4">
+                    <h5>Application setup :</h5>
+                    <p>After enabling the HTTPS and SSL configuration in the webserver we need to do some settings in the application by following these steps</p>
+                </div>
+                <div class="Update Application">
+                    <h5>Step 1: Update Application Settings</h5>
+                    <p class="mb-0">1. Update your domain name or public IP in the backend settings to allow HTTPS connections.</p>
+                    <p> - In Backend application, modify `ALLOWED_HOSTS` in `settings.py`:</p>
+                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                        <div class="card-body p-2">
+                            <p>ALLOWED_HOSTS = ['yourdomain.com']</p>
+                        </div>
+                    </div>
+                    <p>  - Add the following for secure cookies:</p>
+                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                        <div class="card-body p-2">
+                            <p>SECURE_SSL_REDIRECT = True</p>
+                            <p>CSRF_COOKIE_SECURE = True</p>
+                            <p>SESSION_COOKIE_SECURE = True</p>
+                        </div>
+                    </div>
+                    <p>2. Update the environments.ts file in the frontend project</p>
+                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                        <div class="card-body p-2">
+                            <p>apiUrl:'https://backend_domain _name/v1',</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="Deploy Application">
+                    <h5>Step 2: Deploy Application</h5>
+                    <p class="mb-0">After setting up the frontend and backend application configurations we need to deploy the application into </p>
+                    <p>the server <b>Deployment Steps</b></p>
+                    <h6>Install Required Packages</h6>
+                    <p>Ensure the required modules for Apache are installed:</p>
+                    <span class="tag bg-light fs-14 mb-3"> sudo apt update</span><br>
+                    <span class="tag bg-light fs-14 mb-3"> sudo apt install apache2 libapache2-mod-wsgi-py3</span>
+                    <h6>Prepare the Angular Application</h6>
+                    <p class="mb-0">1. Build the Angular Project:</p>
+                    <p> Run the following command in your Angular project directory:</p>
+                    <span class="tag bg-light fs-14 mb-3"> ng build --prod --output-path=dist/< your-app-name></span>
+                    <p>Replace `<-app-name>` with the name of your application.</p>
+                    <p class="mb-0">2. Copy Build Files:</p>
+                    <p> Copy the contents of the `dist/< your-app-name>` folder to a directory on your server:</p>
+                    <span class="tag bg-light fs-14 mb-3">  sudo cp -r dist/< your-app-name> /var/www/html/angular-app</span>
+                </div>
+                <div class="Configure Django Backend">
+                    <h6>Configure Django Backend</h6>
+                    <p>1. Set Up a Python Virtual Environment:</p>
+                    <span class="tag bg-light fs-14 mb-3">python3 -m venv /var/www/html/django-env</span><br>
+                    <span class="tag bg-light fs-14 mb-3"> source /var/www/html/django-env/bin/activate</span>
+                    <p class="mb-0">2. Install Dependencies:</p>
+                    <p> Navigate to your Django project folder and install dependencies:</p>
+                    <span class="tag bg-light fs-14 mb-3">pip install -r requirements.txt</span>
+                    <p>3. Collect Static Files:</p>
+                    <p>Run the following command to collect static files:</p>
+                    <span class="tag bg-light fs-14 mb-3"> python3 manage.py collectstatic</span>
+                    <p>4. Set Up Database Migrations:</p>
+                    <span class="tag bg-light fs-14 mb-3"> python3 manage.py makemigrations</span><br>
+                    <span class="tag bg-light fs-14 mb-3">  python3 manage.py migrate</span>
+                    <p>5. Test the Application</p>
+                    <span class="tag bg-light fs-14 mb-3">  python manage.py runserver</span>
+                </div>
+                <div class="Configure Apache Web Server">
+                    <h6>Step 4: Configure Apache Web Server</h6>
+                    <p>1. Enable Required Modules:</p>
+                    <span class="tag bg-light fs-14 mb-3">sudo a2enmod proxy proxy_http rewrite headers wsgi</span><br>
+                    <span class="tag bg-light fs-14 mb-3">sudo systemctl restart apache2</span>
+                    <p> Create a new configuration file for your application, e.g., `/etc/apache2/sites-available/myapp.conf`.</p>
+                    <p>2. Edit Virtual Host Configuration:</p>
+                    <p>  - Open the Apache configuration file for your Application (e.g., `/etc/apache2/sites-available/example.com.conf`).</p>
+                    <p> - Update or create a VirtualHost for port 443:</p>
+                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                        <div class="card-body p-2">
+                            <p>< VirtualHost *:443></p>
+                            <p>ServerName example.com</p>
+                            <p>DocumentRoot /var/www/html</p>
+                            <p>SSLEngine on</p>
+                            <p>SSLCertificateFile /etc/ssl/certs/example.com.crt</p>
+                            <p>SSLCertificateKeyFile /etc/ssl/private/example.com.key</p>
+                            <p>SSLCertificateChainFile /etc/ssl/certs/chain.pem</p>
+                            <p> < /VirtualHost></p>
+                        </div>
+                    </div>
+                    <p>3.Redirect HTTP to HTTPS:</p>
+                    <p>- Add a VirtualHost for port 80 to redirect traffic:</p>
+                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                        <div class="card-body p-2">
+                            <p>< VirtualHost *:80></p>
+                            <p>ServerName example.com</p>
+                            <p>Redirect permanent / https://example.com/</p>
+                            <p> < /VirtualHost></p>
+                        </div>
+                    </div>
+                    <p>4. Test and Reload Configuration: By running  the following commands we can test the configuration file syntaxes </p>
+                    <span class="tag bg-light fs-14 mb-3"> sudo apachectl configtest</span>
+                    <p>After running the above command you need to get <b>ok</b> as output which means the configuration syntax is correct.</p>
+                    <p>3. Enable the Configuration:</p>
+                    <span class="tag bg-light fs-14 mb-3"> sudo a2ensite myapp.conf</span><br>
+                    <span class="tag bg-light fs-14 mb-3">sudo systemctl reload apache2</span>
+                </div>
+                <div class="Test the Deployment">
+                    <h6>Step 6: Test the Deployment</h6>
+                    <p class="mb-0"> 1. Access Frontend:</p>
+                    <p> Navigate to `http://myapp.example.com` or `https://myapp.example.com`.</p>
+                    <p class="mb-0">2. Test API Endpoints:</p>
+                    <p>Test the API endpoints by accessing `https://myapp.example.com/api/< endpoint>`.</p>
+                </div>
+                <div class="Troubleshooting Tips">
+                    <h6>Troubleshooting Tips</h6>
+                    <p class="mb-0"> 1. Static File Issues:</p>
+                    <p class="mb-0"> Ensure the `STATIC_ROOT` setting in `settings.py` points to the correct directory.</p>
+                    <p> Ensure the `Alias` directive in the Apache configuration matches `STATIC_ROOT`.</p>
+                    <p class="mb-0"> 2. Permission Issues:</p>
+                    <p class="mb-0">Check file permissions for `/var/www/html`.</p>
+                    <p class="mb-0">Ensure Apache has access to the application files.</p>
+                    <p class="mb-0">3. Backend Connectivity:</p>
+                    <p>Verify Django’s database connectivity by checking the `DATABASES` configuration in `settings.py`.</p>
+                    <p class="mb-0"> 4. Logs:</p>
+                    <p>Check Apache logs for errors:</p>
+                    <span class="tag bg-light fs-14 mb-3">sudo tail -f /var/log/apache2/error.log</span>
+                </div>
+                <div class="Configure QuickBooks">
+                    <h5>Step 3: Configure QuickBooks and Salesforce Webhooks</h5>
+                    <p class="mb-0">1. For QuickBooks:</p>
+                    <p class="mb-0">- Update the Redirect URI in the developer portal to `https://yourdomain.com/callback`</p>
+                    <p> - Configure scopes and OAuth settings.</p>
+                    <p class="mb-0"> 2. For Salesforce:</p>
+                    <p class="mb-0"> - Update the Callback URL in the connected app settings to `https://yourdomain.com/callback`.</p>
+                    <p> - Configure OAuth 2.0 settings.</p>
+                </div>
+                <div class="Test Setup">
+                    <h5>Step 4: Test Setup</h5>
+                    <p class="mb-0">1. Access your application at `https://yourdomain.com` to verify the HTTPS setup.</p>
+                    <p>2. Test the integration flows with QuickBooks and Salesforce.</p>
+                    <p>By following this detailed guide, you can successfully transition application to HTTPS, ensuring enhanced security benefits</p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

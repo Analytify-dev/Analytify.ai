@@ -1,0 +1,1590 @@
+
+<app-header *ngIf="publicHeader" [isPublicUrl]="publicHeader"></app-header>
+
+<!-- <div *ngIf="dashboardView"> -->
+<app-page-header title="Dashboard" moduleId="dashboard" title1="Home" activeitem="Dashboard"></app-page-header>
+<!-- </div> -->
+<!-- <div *ngIf="sheetsNewDashboard">
+  <app-page-header title="Dashboard" moduleId="dashboard" title1="Home" [multiLevel]="true" title2="sheets" title2Route="/analytify/sheets" activeitem="Dashboard"></app-page-header>
+  </div> -->
+  
+  <div *ngIf="isPublicUrl" style="margin-top: 60px;">
+    
+    <app-page-header (btnClickEvent)="toggleSidebar()" title="{{dashboardName}}" title1="public" [isPublicUrl]="false" activeitem="Dashboard"></app-page-header>
+    </div>
+  <!-- <div *ngIf="publicHeader">
+    <app-page-header [publicHeader]="true"></app-page-header>
+    </div> -->
+    <!-- <div *ngIf="publicHeader" class="col-xxl-2 col-xl-2 col-lg-2 col-md-2 p-1">
+      <a class="header-logo">
+      <img src="./assets/images/brand/insightApps-logo-Public.png" alt="logo" class="desktop-dark">
+  </a>
+  </div> -->
+
+  @if(isSheetsView){
+    <div class="main-container container-fluid">
+      <div class="row" class="card " style="padding-top: 15px;">
+        <div class="col-sm-12 col-lg-12 col-xl-12 p-0" >
+          <div class="d-flex justify-content-between px-5">
+            <div class="connect-txt"><h1 class="page-title">Sheets</h1> 
+            </div>
+            <div class="new-data-btn d-flex text-align-center">  
+              <div class="input-group">
+                <input type="text" class="form-control border-end-0 " [(ngModel)]="searchSheets" (keydown.enter)="fetchSheetsListSearch()" placeholder="Search" >
+                <button class="btn btn-primary border me-2 " (click)="fetchSheetsListSearch()"  type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
+                <button *ngIf="panelscheckbox?.length>0" type="button" [disabled]="sheetIdsDataSet?.length <= 0"  (click)="loadDashboard()" class="btn ripple btn-primary me-2" style="border-radius: 4px 4px 4px 4px;">Move To Dashboard</button>
+                <button *ngIf="panelscheckbox?.length<1" type="button" class="btn ripple btn-primary me-2" (click)="sheetsRoute()" style="border-radius: 4px 4px 4px 4px;"><i class="fa fa-plus"></i> New Sheet</button>
+                <button type="button" class="btn ripple btn-primary me-2" (click)="isSheetsView = false" style="border-radius: 4px 4px 4px 4px;">Close</button>
+
+              </div>
+            </div>
+            </div>
+          @if(panelscheckbox?.length>0){
+            <div class="card-body">
+              <div class="table-responsive border" style="height: 26rem;">
+                <table class="table  text-nowrap text-md-nowrap mb-0">
+                  <thead class="table-primary bg-primary" style="position: sticky;top: -1px; z-index: 5;">
+                                     <tr>
+                                         <th style="color: #fff">Title</th>
+                                         <th style="color: #fff">Database Name</th>
+                                         <th style="color: #fff">Created By</th>
+                                         <th style="color: #fff">Created On</th>
+                                         <th style="color: #fff">Last Modified</th>
+                                     </tr>
+                                 </thead>
+                                   <tbody>
+                                     <tr  *ngFor="let panel of panelscheckbox | paginate : {
+                                      itemsPerPage: itemsPerPage,
+                                       currentPage: page,
+                                        totalItems: totalItems
+                                        }">
+                                       <td class="p-0">
+                                         <div class="app-content page-header mt-0 p-4">
+                                            <div
+                                                 ngbAccordion
+                                                  [closeOthers]="false"
+                                                  class="accordion"
+                                                   id="accordionExample"
+                                                  >
+                                                   <!-- <div  > -->
+                                                  <!-- @for (panel of panelscheckbox; track panel) { -->
+                                                  <div
+                                                       ngbAccordionItem
+                                                       [collapsed]="true"
+                                                       class="accordion-item"
+                                                            >
+                                                        <h2 ngbAccordionHeader class="accordion-header" id="headingOne">
+                                                         <button
+                                                          ngbAccordionButton
+                                                           class="accordion-button"
+                                                           type="button"
+                                                            data-bs-toggle="collapse"
+                                                             data-bs-target="#collapseOne"
+                                                            aria-expanded="true"
+                                                            aria-controls="collapseOne" style="justify-content: space-between;"
+                                                            >
+                                                            <div>
+                                                           <input class="form-check-input me-2 mt-0" name="checkbox1" (click)="checkAllChilds(panel)" [(ngModel)]="panel.is_selected"
+                                                            type="checkbox" value="" id="checkbox1" >
+                                                            {{ panel.queryset_name }}
+                                                            </div>
+                                                            <div *ngIf="panel.sheet_selected">
+                                                              <p class="mb-0 select-text-accordion">selected</p>
+                                                            </div>
+                                                          </button>
+                                                        </h2>
+                                                         <div
+                                                           ngbAccordionCollapse
+                                                           id="collapseOne"
+                                                           class="accordion-collapse collapse show"
+                                                            aria-labelledby="headingOne"
+                                                            data-bs-parent="#accordionExample"
+                                                            >
+                                                            <div class="accordion-body"  ngbAccordionBody>
+                                                               @for (nestedpanel of panel.sheet_data; track nestedpanel) {
+                                                              @if(nestedpanel?.sheet_name){
+                                                               <div class="checkbox-name check-box-line-height" (click)="addSheetIds(nestedpanel,panel);" >
+                                                                 <input type="checkbox" value="{{nestedpanel.sheetId}}" id="checkbox1" [(ngModel)]="nestedpanel.is_selected" class="form-check-input me-2 mt-0">{{nestedpanel?.sheet_name}}
+                                                               </div>
+                                                                }
+                                                                }
+                                                             </div>
+                                                          </div>
+                                                        </div>
+                                                        <!-- } -->
+                                                        <!-- </div> -->
+                                                      </div>
+                                              </div>
+                                        
+                                        </td>
+                                        <td>{{ panel.database_name}}</td>
+                                        <td>{{panel.created_by}}</td>
+                                        <td>{{panel.created_at}}</td>
+                                        <td>{{panel.modified_at}}</td>
+                                     </tr>
+                                   </tbody>
+                           </table>
+                         
+                </div>
+                <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetUserSheetsList((page = $event))"></pagination-controls>
+                <div  style="float: right;font-size: 15px; margin-top: -41px;">
+                  <select  [(ngModel)]="itemsPerPage" (ngModelChange)="fetchSheetsList()" class="form-control" style="cursor: pointer;">
+                   <option  value="10"> 10</option>
+                   <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
+                   <option [disabled]="!(totalItems > 20)" value="30"> 30</option>
+                   </select>
+                </div>
+            </div>
+          } @else{
+            <div style="font-size: medium; margin-left: 1.5%;">There is no sheets, Please Create One!</div>
+          }
+        </div>
+      </div>
+    </div>
+  } @else {
+    
+    <div class="main-container container-fluid" [ngClass]="{ 'public-mtop': isPublicUrl}">
+      <div class="row" style="margin-inline-start: auto !important;" [ngClass]="{ 'header-visibile': isPublicUrl, }">
+
+    <div class="col-xl-2 col-lg-2 col-md-2 p-1 mt-0 card" id="sticky-sidebar">
+	      <div [ngClass]="{ 'sticky-top-publicUrl': isPublicUrl, 'sticky-top': !isPublicUrl }" class="card p-0" >
+        <!-- <div class="card mb-0"> -->
+          <!-- <div class="card-body p-0"> -->
+            <div class="mobile-nav-icon px-2 mb-1" (click)="togglePanel()">
+              <i class="fa fa-filter"></i>
+            </div>
+            <div class="panel panel-primary "[class.hidden]="isPanelHidden">
+              <div class="panel panel-primary p-0">
+                <div class="tab-menu-heading tab-menu-heading-boxed">
+                    <div class="tabs-menu1">
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav panel-tabs " >
+
+                            <li *ngIf="!isPublicUrl" [ngbNavItem]="1">
+                                <a ngbNavLink class="dashboard-tab-padding">Dashboard</a>
+                                <ng-template ngbNavContent>
+                                    <div class="tab-pane active" id="activetabs">
+                                      <div class="panel-body tabs-menu-body p-0">
+                                        <div class="tab-content">
+                                            <!-- <div class="card mb-0 p-4 br-0" style="box-shadow: none;">
+                                                <h6 class="mb-0">Database</h6>
+                                                <p class="mb-0">{{databaseName}}</p>
+                                            </div> -->
+                                            <div class=" mb-0  mt-0 br-0 overflow-auto h-400" >
+                                                <div class="text-wrap">
+                                                    <div class="dropdown-samples">
+                                                      <h6 class="dropdown-header sheets-title bg-light border rounded-3 mb-1" style="display: flex; justify-content: space-between;line-height: 2;">Sheets<app-insights-button *ngIf="!isPublicUrl" [classesList]="'btn btn-outline-primary mt-0'"
+                                                        [buttonName]="'Add'"
+                                                        [previledgeId]="17" [isBtn]="true"
+                                                        (btnClickEvent)="fetchSheetsList();isSheetsView = true;" [toolTip]="'Add Sheets'"
+                                                        [faIconList]="'fa fa-plus'" [isIcon]="true"></app-insights-button></h6>
+                                                        <ul class="dropdown-menu br-0 draggable-item"
+                                                         cdkDropList
+                                                         #originList="cdkDropList"
+                                                        [cdkDropListData]="dashboardNew"
+                                                        [cdkDropListConnectedTo]="[destinationList1,destinationList]"
+                                                        (cdkDropListDropped)="drop($event)">
+                                                           
+                                                            <li *ngFor="let item of dashboardNew" ><a draggable="true" [ngClass]="{ 'sheet-bold': item['selectedSheet']}"
+                                                           class="dropdown-item"  cdkDrag><i data-bs-toggle="tooltip" ngbTooltip="{{item.data.title}}" (click)="viewSheet(item)" class="fa fa-plus-square-o"></i> {{item.data.title | slice:0:15}}<i data-bs-toggle="tooltip"  ngbTooltip="clear" style="float: right;" (click)="clearSheet($event,item)" class="fa fa-close"></i></a></li>
+
+                                                            
+                                                        </ul>
+                                                        <!-- <ul class="dropdown-menu br-0 draggable-item"
+                                                         cdkDropList
+                                                         #originList="cdkDropList"
+                                                        [cdkDropListData]="testData"
+                                                        [cdkDropListConnectedTo]="[destinationList1,destinationList]"
+                                                        (cdkDropListDropped)="drop($event)">
+                                                            <li><h6 class="dropdown-header sheets-title px-4">Sheets</h6></li>
+                                                            <li *ngFor="let item of testData"><a class="dropdown-item"  cdkDrag><i data-bs-toggle="tooltip"  ngbTooltip="{{item.data.title}}" (click)="viewSheet(item['sheetId'])" class="fa fa-plus-square-o"></i> {{item.data.title | slice:0:15}}</a></li>
+
+                                                            
+                                                        </ul> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card mb-0  br-0 "  style="box-shadow: none;">
+                                              <h6 class="mb-0 size-text">Size</h6>
+                                             <div class="custom-size-card d-flex justify-conent-between">
+                                                <p class="mb-0 custom-size-txt">Custom size ({{widthGrid}} * {{heightGrid}})</p>
+                                              
+                                                <div class="col-auto p-0">
+                                                  <div class="d-flex justify-content-end p-1 dropdown" ngbDropdown>
+                                                    <a  href="javascript:void(0);" ngbDropdownToggle data-bs-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"> 
+                                                      <i  class="fa fa-caret-down ms-1 size-icon"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu size-dropdown" ngbDropdownMenu>
+                                                        <h6 class="mb-0">Size</h6>
+                                                        <div class="form-group mb-1">
+                                                          <select class="form-select form-select select2 ">
+                                                            <option value="1">Custom size ({{widthGrid}} * {{heightGrid}})</option>
+                                                              <option value="2">Custom size (1200 * 1100)</option>
+                                                              <option value="3">Custom size (1000 * 900)</option>
+                                                        
+                                                          </select>
+                                                      </div>
+                                                      <div class=" p-1 mt-3">
+                                                        <a style="border: var(--primary-color);" [ngStyle]="gridType === 'fixed' ? { 'background-color': 'var(--primary-color)', 'color': 'white' } : { 'background-color': 'white', 'color': 'var(--primary-color)' }" href="javascript:void(0);" (click)="changeGridType('fixed')" class="btn">Fixed</a>
+                                                        <a style="border: var(--primary-color);" [ngStyle]="gridType === 'scroll' ? { 'background-color': 'var(--primary-color)', 'color': 'white' } : { 'background-color': 'white', 'color': 'var(--primary-color)' }" href="javascript:void(0);" (click)="changeGridType('scroll')" class="btn">Scroll</a>
+                                                    </div>
+                                                     
+                                                       <div class="row">
+                                                        <div class="col-6">
+                                                          <label for="input-rounded-pill" class="form-label">Width</label>
+                                                          <input  type="number" step="100" name="number" [(ngModel)]="widthGrid" class="form-control">
+                                                        </div>
+                                                        <div class="col-6">
+                                                          <label for="input-rounded-pill" class="form-label">Height </label>
+                                                          <input  type="number" step="100" name="number" [(ngModel)]="heightGrid" class="form-control">
+                                                        </div>
+                                                       </div>
+                                                     </div>
+                                                 </div>
+                                              </div>
+                                             </div>
+                                          </div>
+                                          <div class="card mb-0  br-0 p-0 mt-2"  style="box-shadow: none; border: none !important;">
+                                            <div class=" dropdown" ngbDropdown>
+                                              <a  href="javascript:void(0);" ngbDropdownToggle data-bs-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"> 
+                                                <button class="btn btn-primary w-100">
+                                                  <i class="fa fa-image me-2"></i>Add Image
+                                              </button>
+                                              </a>
+                                              <div class="dropdown-menu size-dropdown" ngbDropdownMenu>
+                                                  <h6 class="mb-0 bg-light text-center p-2" (click)="triggerFileUpload()">Upload Image</h6>
+                                                  <div class="form-group">
+                                                    <label class="form-label mt-0">Insert Image File:</label>
+                                                    <input
+                                                    type="file" class="form-control"
+                                                    id="imageUpload"
+                                                    accept="image/*"
+                                                    (change)="onImageSelected($event)"
+                                                  />
+                                                  </div>
+                                                  <div class="url">
+                                                    <label class="form-label">Name:</label>
+                                                    <input type="text" id="input" [(ngModel)]="imageTitle" class="form-control border">
+                                                  </div>
+                                                  <div class=" mt-2 d-flex justify-content-end">
+                                                    <button class="btn btn-primary" [disabled]="!uploadedImage" (click)="uploadInJson()">Upload</button>
+                                                  </div>
+                                               </div>
+                                           </div>
+                                      </div>
+                                          </div>
+                                    </div>
+                                  </div>
+                                </ng-template>
+                            </li>
+                            <ng-template #dashboardFilters let-modal>
+                              <div class="modal-header">
+                                <h6 class="modal-title">Filters</h6>
+                                <button type="button"class="btn-close"aria-label="Close"(click)="columnSearch = '';modal.dismiss('Cross click')">
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="text-wrap">
+                                  <div class="row">
+                                  <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 "style="border-right: 1px solid #f3f6f9;">
+                                    <button *ngIf="editFilters" class="btn btn-primary dropdown-toggle mb-2" (click)="addfilterOnEdit()" type="button"  aria-expanded="false" style="width: 100%;">
+                                      <i class="fa fa-plus"></i> Add Filter
+                                    </button>
+                                    <button *ngFor="let filterList of DahboardListFilters" type="button"  style="border: 1px solid #edebeb;width: 100%;cursor: pointer;" (click)="editFiltersData(filterList.dashboard_filter_id)" class="btn text-left mb-2">{{filterList.filter_name}}
+                                      <a (click)="deleteDashboardFilter(filterList.dashboard_filter_id);$event.stopPropagation()" style="color: red;"><i style="float: right;font-size: 16px;" class="ri-delete-bin-7-line"></i></a>
+                                    </button>
+
+                                    </div>
+                                  <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-6 " >
+                                    <div *ngIf="!editFilters" class="card-content p-0">
+                                        <div class=" mt-2 mb-2">
+                                          <ul class="d filter-popover" aria-labelledby="applyfilters" >
+                                            <div class="setting-text border-bottom text-center">
+                                              <p>Add Filters</p>
+                                            </div>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Filter Name <span  class="text-red">*</span>
+                                              </label>
+                                              <input type="text" placeholder="Enter Filter Name" [(ngModel)]="filterName" class="form-control checkbox-color">
+                                            </div>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Database Name<span class="text-red">*</span>
+                                              </label>
+                                              <select id="databaseSelect" [(ngModel)]="selectedDatabase"  (change)="onDatabaseChange()" class="form-select form-select select2 "  >
+                                              <option value="" disabled selected style="color: #999999 !important;">Select Database name</option>
+                                                <option *ngFor="let database of databaseNames" [value]="database">{{ database }}</option>
+                                              </select>
+                                            </div>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Query Set Name <span class="text-red">*</span>
+                                              </label>
+                                              <!-- <select [(ngModel)]="selectedQuerySetId" (change)="getColumnsForFilter()"   class="form-select form-select select2 " >
+                                                                                            <option value="0" disabled selected style="color: #999999 !important;">Select Queryset name</option>
+                                                                                            @for(querySet of querySetNames;track querySet.queryset_id){
+                                                                                              <option [ngbTooltip]="querySet.queryset_name"
+                                                                                              [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'" value="{{querySet.queryset_id}}">{{querySet.queryset_name}}</option>
+                                                                                            }
+                                                                                        </select> -->
+                                                 
+                                                                                        
+                                                                                        <ng-select
+                                                                                        [(ngModel)]="selectedQuerySetId"
+                                                                                        (change)="getColumnsForFilter()"
+                                                                                        class="form-control p-0"
+                                                                                        [closeOnSelect]="false"
+                                                                                        [multiple]="true"
+                                                                                        placeholder="Select Queryset name"
+                                                                                      >
+                                                                                        <ng-option
+                                                                                          *ngFor="let querySet of querySetNames;"
+                                                                                          [value]="querySet.queryset_id"
+                                                                                          [ngbTooltip]="querySet.queryset_name"
+                                                                                          [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'"
+                                                                                        >
+                                                                                          {{ querySet.queryset_name }}
+                                                                                        </ng-option>
+                                                                                      </ng-select>
+                                            </div>
+                                    
+                                            <div class="form-group p-1">
+                                              <label class="form-label">Column <span class="text-red">*</span>
+                                              </label>
+                                            <ng-select [items]="dropdownOptions"
+                                                       bindLabel="value"
+                                                       [(ngModel)]="selectedOption"
+                                                       [groupBy]="'group'" 
+                                                       [searchable]="true"
+                                                       [searchFn]="customSearch.bind(this)"
+                                                       (change)="onOptionSelected(selectedOption)"
+                                                       placeholder="Select column"
+                                                       [clearable]="false">
+                                            
+                                              <!-- Template for displaying group header -->
+                                              <ng-template ng-optgroup-tmp let-item="item">
+                                                <strong>{{ item.group }}</strong>  <!-- Display the group (table name) -->
+                                              </ng-template>
+                                            
+                                              <!-- Template for displaying each option -->
+                                              <ng-template ng-option-tmp let-item="item">
+                                                {{ item.value }}(<span>{{ item.tableNameForColumn }}</span>) <!-- Display the column name -->
+                                              </ng-template>
+                                            
+                                            </ng-select>
+                                            </div>
+                                              <label class="form-label">Apply to Selected worksheets</label>
+                                           
+                                            <div class="form body border p-2" style="max-height: 200px;  overflow: auto;">
+
+                                              <div *ngIf="sheetsFilterNames?.length > 0" class="form-check">
+
+                                                <input type="checkbox" id="selectAll" [(ngModel)]="isAllSelected" (change)="toggleAllRows($event)" class="form-check-input">
+                                                <label for="selectAll" class="form-check-label">Select All</label>
+                                                </div>
+                                              @for(rows of sheetsFilterNames;track rows;let i = $index){
+                                               
+
+                                              <div class="form-check">
+                                                <input type="checkbox" [id]="'defaultCheck' + i"  name="rows{{i}}"[(ngModel)]="rows.selected" (change)="updateSelectedRows()" class="form-check-input"> 
+                                                <label for="invalidCheck" [for]="'defaultCheck' + i" class="form-check-label "> <p>{{rows?.label?.name}}</p> </label>
+                                              </div>
+                                            }
+                                            </div>
+
+                                            <div class="py-2 mt-3">
+                                              <button type="button" [disabled]="!isAnyRowSelected() || !selectedOption || selectedQuerySetId === 0"  (click)="getSelectedData();columnSearch = ''" class="btn ripple btn-primary me-2">Save</button>
+                                              <button type="button" class="btn ripple btn-secondary " (click)="selectClmn = '';filterName='';columnSearch = '';closeFilterModal();sheetsFilterNames =[];isAllSelected = false;columnFilterNames =[];selectedDatabase=''"> Cancel </button>
+                                          </div>
+                                          </ul>
+                                        </div>
+                                     
+                                    </div>
+<!-- edit filter -->
+                                    <div *ngIf="editFilters" class="card-content p-0">
+                                      <div class=" mt-2 mb-2">
+                                        <ul class="d filter-popover" aria-labelledby="applyfilters" >
+                                          <div class="setting-text border-bottom text-center">
+                                            <h6>Edit Filters</h6>
+                                          </div>
+                                          <div class="form-group p-1 mb-0">
+                                            <label class="form-label">Filter Name <span  class="text-red">*</span>
+                                            </label>
+                                            <input type="text" placeholder="" [(ngModel)]="filterName" class="form-control checkbox-color">
+                                          </div>
+                                          <div class="form-group p-1 mb-0">
+                                            <label class="form-label">Database Name<span class="text-red">*</span>
+                                            </label>
+                                          <button class="btn " style="border: 1px solid #edebeb;width: 100%; text-align: justify;">{{databaseNameForEditFilter}}</button>
+                                          </div>
+                                          <div class="form-group p-1 mb-0">
+                                            <label class="form-label">Query Set Name <span class="text-red">*</span>
+                                            </label>
+                                            <!-- <select [(ngModel)]="selectedQuerySetId" (change)="getColumnsForFilter()"  class="form-select form-select select2 fs-14" >
+                                              @for(querySet of querySetNames;track querySet.queryset_id){
+                                                <option value="{{querySet.queryset_id}}">{{querySet.queryset_name}}</option>
+                                              }
+                                  
+                                          </select> -->
+                                          <!-- <p>{{querysetNameEdit}}</p> -->
+                                          <!-- <button class="btn " style="border: 1px solid #edebeb;width: 100%; text-align: justify;">{{querysetNameEdit}}</button> -->
+
+                                          <ng-select
+                                          [(ngModel)]="selectedQuerySetId"
+                                          (change)="ColumnsForFilterEdit()"
+                                          class="form-control p-0"
+                                          [closeOnSelect]="false"
+                                          [multiple]="true"
+                                          placeholder="Select Queryset name"
+                                        >
+                                          <ng-option
+                                            *ngFor="let querySet of querySetNames;"
+                                            [value]="querySet.queryset_id"
+                                            [ngbTooltip]="querySet.queryset_name"
+                                          >
+                                            {{ querySet.queryset_name }}
+                                          </ng-option>
+                                        </ng-select>
+                                          </div>
+                                  
+                                          <div class="form-group p-1">
+                                
+                                            <!-- <div ngbDropdown class="my-2 dropdown" #nestedDropdown="ngbDropdown" [autoClose]="'outside'">
+                                              <button type="button" ngbDropdownToggle id="dropdownColumns" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn btn-info-light filterColumnbtn">{{selectClmnEdit}} <i class="fa fa-angle-down"></i></button>
+                                              <ul ngbDropdownMenu aria-labelledby="dropdownColumns" class="dropdown-menu" style="background-color: #ffffff;width:100%;max-height: 240px;overflow-y: auto;padding:6px">
+                                                @for(colData of columnFilterNamesEdit;track colData){
+                                                  <li><a class="dropdown-item" ngbDropdownItem (click)="selectClmnEdit = colData.column_name;closeColumnsDropdownEdit(colData.column_name,colData.column_dtype,nestedDropdown)">{{colData.column_name}}</a></li>
+                                                }
+                                              </ul>
+                                          </div> -->
+                                          <label class="form-label">Column <span class="text-red">*</span>
+                                          </label>
+                                          <ng-select [items]="dropdownOptions" bindLabel="value"  bindValue="id" [(ngModel)]="selectedOption" [groupBy]="'group'"
+                                            [searchable]="true" [searchFn]="customSearch.bind(this)" (change)="onOptionSelected($event)"
+                                            placeholder="Select column" [clearable]="false">
+                                          
+                                            <!-- Template for displaying group header -->
+                                            <ng-template ng-optgroup-tmp let-item="item">
+                                              <strong>{{ item.group }}</strong> <!-- Display the group (table name) -->
+                                            </ng-template>
+                                          
+                                            <!-- Template for displaying each option -->
+                                            <ng-template ng-option-tmp let-item="item">
+                                              {{ item.value }} (<span>{{ item.tableNameForColumn }}</span>) <!-- Display the column name -->
+                                            </ng-template>
+                                          
+                                          </ng-select>
+                                          </div>
+                                            <label class="form-label">Apply to Selected worksheets</label>
+                                         
+                                          <div class="form body border p-2" style="max-height: 200px;  overflow: auto;">
+
+                                            <div class="form-check">
+
+                                              <input type="checkbox" id="selectAll" [(ngModel)]="isAllSelected" (change)="toggleAllRowsEdit($event)" class="form-check-input">
+                                              <label for="selectAll" class="form-check-label">Select All</label>
+                                              </div>
+                                            @for(rows1 of sheetsFilterNamesFromEdit;track rows1;let i = $index){
+                                             
+
+                                            <div class="form-check">
+                                              <input type="checkbox" [id]="'defaultCheck' + i"  name="rows1{{i}}"[(ngModel)]="rows1.selected" (change)="updateSelectedRowsEdit()" class="form-check-input"> 
+                                              <label for="invalidCheck" [for]="'defaultCheck' + i" class="form-check-label "> <p>{{rows1.name ? rows1.name : rows1?.label?.name}}</p> </label>
+                                            </div>
+                                          }
+                                          </div>
+
+                                          <div class="py-2 mt-3">
+                                            <button type="button" [disabled]="!isAnySheetSelected() || !selectedOption" (click)="updateFilters()" class="btn ripple btn-primary me-2">Update</button>
+                                            <button type="button" class="btn ripple btn-secondary " (click)="selectClmnEdit = '';filterName='';closeFilterModal();isAllSelected = false"> Cancel </button>
+                                        </div>
+                                        </ul>
+                                      </div>
+                                   
+                                  </div>
+                                  </div>
+                                </div>
+                                </div>
+                            </div>
+                            </ng-template>
+                            <!-- @if(updateDashbpardBoolen){ -->
+                            <li [ngbNavItem]="2" [ngClass]="{'disabled': dashboard.length<1 || !updateDashbpardBoolen}">
+                                 <a ngbNavLink class="dashboard-tab-padding">Filters</a>
+                                    <ng-template ngbNavContent>
+                                        <div class="tab-pane" id="linktabs">
+                                            <div class="card-body p-0">
+                                              <div class="text-wrap">
+                                                  <div class="card-content p-0">
+                                                      <div class=" mt-2 mb-2">
+                                                          <div class="dropdown" ngbDropdown [autoClose]="'outside'" #mainDropdown="ngbDropdown">
+                                                              <button *ngIf="!isPublicUrl" class="btn btn-primary dropdown-toggle" (click)="getQuerySetForFilter();openSuperScaled(dashboardFilters)" id="applyfilters" ngbDropdownToggle type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+                                                              <i class="fa fa-plus"></i> Add/Edit Filters
+                                                              </button>
+                                                              <div >
+                                                                <!-- @for(filterList of DahboardListFilters;track filterList){ -->
+                                                               <div *ngFor="let filterList of DahboardListFilters" class="sub-category-card p-1 mt-2 border  rounded-3 mb-2">
+                                                                <p class="p-1 mb-0 category-text">{{filterList.filter_name}}</p>
+                                          
+                                                                <div ngbDropdown class="dropdown" #nestedDropdown1="ngbDropdown" [autoClose]="'outside'">
+                                                                  <button type="button" *ngIf="!isPublicUrl" ngbDropdownToggle id="dropdownColumns1" (click)="getColDataFromFilterId(filterList.dashboard_filter_id,filterList,false)" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn border filterColumnbtn select-column-text" style="color: #aeb1b6;">{{ getColumnSelectionLabel(filterList) }} <i class="fa fa-angle-down" ></i></button>
+                                                                  <button type="button" *ngIf="isPublicUrl" ngbDropdownToggle id="dropdownColumns1" (click)="getColDataFromFilterIdPublic(filterList.dashboard_filter_id,filterList)" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn border filterColumnbtn select-column-text">Select Column <i class="fa fa-angle-down" ></i></button>
+
+                                                                  <ul ngbDropdownMenu aria-labelledby="dropdownColumns1" class="dropdown-menu dropdwnChechkbox" style="width: 100%;padding: 6px;max-height: 240px;overflow-y: auto;">
+                                                                    <div class="scrollable-content" style="max-height: calc(100% - 50px); overflow-y: auto;"> <!-- Adjust the height to account for buttons -->
+                                                                    <div class="input-group">
+                                                                      <input type="text" [(ngModel)]="filterList.searchText" class="form-control border-end-0" placeholder="Search" aria-describedby="button-addon2">
+                                                                      <button class="btn btn-primary border me-2" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;">
+                                                                        <i class="fe fe-search"></i>
+                                                                      </button>
+                                                                      <button (click)="clearSelectedData(nestedDropdown1,filterList.colData,filterList.dashboard_filter_id, filterList)" class="btn btn-primary " style="padding: 4px;">
+                                                                        <img src="./assets/images/icons/filter-clear.png" alt="logo" class="w-5 h-5">
+                                                                      </button>
+                                                                    </div>
+                                                                    <div class="form-check">
+
+                                                                      <input type="checkbox" id="selectAll" [(ngModel)]="isAllSelected" (change)="toggleAllColumns($event,filterList)" class="form-check-input">
+                                                                      <label for="selectAll" class="form-check-label"><p> Select All</p></label>
+                                                                      </div>
+                                                                    <!-- @for(col of filterList.colData;track col;let i = $index){ -->
+                                                                     
+                                                                      <div *ngFor="let col of getFilteredColumns(filterList); let i = index" class="form-check">
+                                                                        <input type="checkbox" [id]="'defaultCheck' + i"  name="col{{i}}"[(ngModel)]="col.selected" (change)="updateSelectedColmns(filterList,col)" class="form-check-input"> 
+                                                                        <label for="invalidCheck" [for]="'defaultCheck' + i" class="form-check-label"> <p >{{col.label}}</p> </label>
+                                                                      </div>
+                                                                  <!-- } -->
+                                                                </div>
+                                                                  <div class="card mb-0 fixed-buttons p-2" style="display: flex; justify-content: space-between; flex-direction: row;">
+                                                                    <div class="">
+                                                                      <input type="checkbox" id="exclude" (click)="excludeFilterIdList(filterList,$event);" [(ngModel)]="filterList.isExclude" class="form-check-input">
+                                                                      <label for="exclude" class="form-check-label">Exclude</label>
+                                                                    </div>
+                                                                    <button type="button" (click)="closeMainDropdown(nestedDropdown1,filterList.colData,filterList.dashboard_filter_id)"
+                                                                    class="btn ripple btn-primary me-2">Save</button>
+                                                                </div>
+                                                                  </ul>
+                                                              </div>
+                                                                <!-- <div class="dropdown">
+                                                                  <button class="btn btn-secondary dropdown-toggle" type="button" (click)="getColDataFromFilterId(filterList.dashboard_filter_id,filterList)" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    Select 
+                                                                  </button>
+                                                                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    @for(col of filterList.colData;track col;let i = $index){
+                                                                      <div class="form-check">
+                                                                        <input type="checkbox" [id]="'defaultCheck' + i"  name="col{{i}}"[(ngModel)]="col.selected"  class="form-check-input"> 
+                                                                        <label for="invalidCheck" class="form-check-label"> <h6>{{col.label}}</h6> </label>
+                                                                      </div>
+                                                                  }
+                                                                  </div>
+                                                                </div> -->
+                                                              </div>
+                                                            <!-- } -->
+                                                              <div  style="margin-right: 5px; margin-left: 5px;"  *ngIf="DahboardListFilters .length > 0; else noData"> 
+                                                                <button class="btn ripple btn-danger"
+                                                                  (click)="clearAllFilters()">Clear filters</button>
+                                                              
+                                                                <button *ngIf="DahboardListFilters .length > 0; else noData" style="float: right;" class="btn ripple btn-primary"
+                                                                  (click)="isPublicUrl ? getFilteredDataPublic() : getFilteredData()">Apply filters</button>
+                                                              </div>
+                                                            <ng-template #noData>
+                                                              <p>No Filters Available</p>
+                                                            </ng-template>
+                                                            </div>
+                                                          </div>
+                                                      </div>
+                                                   
+                                                  </div>
+                                              </div>
+                                          </div>
+                                        </div>
+                                    </ng-template>
+                            </li>
+
+                            <ng-template #dashboardActions let-modal>
+                              <div class="modal-header">
+                                <h6 class="modal-title">Actions</h6>
+                                <button type="button"class="btn-close"aria-label="Close"(click)="clearActionForm();modal.dismiss('Cross click');editActions = false;">
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="text-wrap">
+                                  <div class="row">
+                                  <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 "style="border-right: 1px solid #f3f6f9;">
+                                    <button *ngIf="editActions" class="btn btn-primary dropdown-toggle mb-2" (click)="editActions = false;clearActionForm();" type="button"  aria-expanded="false" style="width: 100%;">
+                                      <i class="fa fa-plus"></i> Add Action
+                                    </button>
+                                    <button *ngFor="let action of drillThroughActionList" type="button"  style="border: 1px solid #edebeb;width: 100%;cursor: pointer;" [ngStyle]="{'background-color' : action.drill_id == actionId ? 'var(--primary-color)' : 'white', 'color' : action.drill_id == actionId ? 'white' : 'black'}" (click)="getEditActionPreview(action.drill_id)" class="btn text-left mb-2">{{action.action_name}}
+                                      <a (click)="deleteDashboardAction([action.drill_id]);$event.stopPropagation()" style="color: red;"><i style="float: right;font-size: 16px;" class="ri-delete-bin-7-line"></i></a>
+                                    </button>
+
+                                    </div>
+                                  <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-6 " >
+                                    <div *ngIf="!editActions" class="card-content p-0">
+                                        <div class=" mt-2 mb-2">
+                                          <ul class="d filter-popover" aria-labelledby="applyActions" >
+                                            <div class="setting-text border-bottom text-center">
+                                              <p>Add Actions</p>
+                                            </div>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Action Name <span  class="text-red">*</span>
+                                              </label>
+                                              <input type="text" placeholder="Enter Action Name" [(ngModel)]="actionName" class="form-control checkbox-color">
+                                            </div>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Database Name<span class="text-red">*</span>
+                                              </label>
+                                              <select id="databaseSelect" [(ngModel)]="drillThroughDatabaseName"  (change)="onDatabaseChange()" class="form-select form-select select2 "  >
+                                              <option value="" disabled selected style="color: #999999 !important;">Select Database name</option>
+                                                <option *ngFor="let database of databaseNames" [value]="database">{{ database }}</option>
+                                              </select>
+                                            </div>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Query Set Name <span class="text-red">*</span>
+                                              </label>
+                                              <!-- <select [(ngModel)]="drillThroughQuerySetId" (change)="getSheetsForActions()"  class="form-select form-select select2 " >
+                                                <option value="0" disabled selected style="color: #999999 !important;">Select Queryset name</option>
+                                                @for(querySet of querySetNames;track querySet.queryset_id){
+                                                  <option [ngbTooltip]="querySet.queryset_name"
+                                                  [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'" value="{{querySet.queryset_id}}">{{querySet.queryset_name}}</option>
+                                                }
+                                              </select> -->
+                                              <ng-select [(ngModel)]="drillThroughQuerySetId" (change)="getSheetsForActions()" class="form-control p-0"
+                                                [closeOnSelect]="false" [multiple]="true" placeholder="Select Queryset name">
+                                                <ng-option *ngFor="let querySet of querySetNames;" [value]="querySet.queryset_id"
+                                                  [ngbTooltip]="querySet.queryset_name"
+                                                  [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'">
+                                                  {{ querySet.queryset_name }}
+                                                </ng-option>
+                                              </ng-select>
+                                            </div>
+                                    
+                                            <div class="form-group p-1">
+                                              <label class="form-label">Source Sheet <span class="text-red">*</span>
+                                              </label>
+                                              <select [(ngModel)]="sourceSheetId" (change)="getTargetSheetsList()"  class="form-select form-select select2 " >
+                                                <option value="0" disabled selected style="color: #999999 !important;">Select Source Sheet</option>
+                                                @for(sheet of sourceSheetList;track sheet.id){
+                                                  <option [ngbTooltip]="sheet.name" [value]="sheet.id">{{sheet.name}}</option>
+                                                }
+                                            </select>
+                                            </div>
+                                              <label class="form-label">Target Sheets <span class="text-red">*</span></label>
+                                           
+                                            <div [class.disabled]="sourceSheetId === 0"  class="form body border p-2" style="max-height: 200px;  overflow: scroll;">
+
+                                              <div *ngIf="(targetSheetList?.length ?? 0) > 0" class="form-check">
+                                                <input type="checkbox" id="selectAll" [(ngModel)]="isAllTargetSheetsSelected" (change)="toggleAllTargetSheets($event)"
+                                                  class="form-check-input">
+                                                <label for="selectAll" class="form-check-label">Select All</label>
+                                              </div>
+                                              @for(sheet of targetSheetList;track sheet;let i = $index){
+                                              <div class="form-check">
+                                                <input type="checkbox" [id]="'defaultCheck' + i" [(ngModel)]="sheet.selected" (change)="updateSelectedSheets()" class="form-check-input"> 
+                                                <label [for]="'defaultCheck' + i" class="form-check-label "> <p>{{sheet?.name}}</p> </label>
+                                              </div>
+                                              }
+                                            </div>
+
+                                            <div class="py-2 mt-3">
+                                              <button type="button" [disabled]="disableActionSave()"  (click)="saveDrillThroughAction()" class="btn ripple btn-primary me-2">Save</button>
+                                              <button type="button" class="btn ripple btn-secondary " (click)="clearActionForm();modal.dismiss('Cross click');editActions = false;"> Cancel </button>
+                                          </div>
+                                          </ul>
+                                        </div>
+                                     
+                                    </div>
+                                    <!-- edit Action -->
+                                    <div *ngIf="editActions" class="card-content p-0">
+                                      <div class=" mt-2 mb-2">
+                                        <ul class="d filter-popover" aria-labelledby="applyActions" >
+                                          <div class="setting-text border-bottom text-center">
+                                            <h6>Edit Actions</h6>
+                                          </div>
+                                          <div class="form-group p-1 mb-0">
+                                            <label class="form-label">Action Name <span  class="text-red">*</span>
+                                            </label>
+                                            <input type="text" placeholder="" [(ngModel)]="actionName" class="form-control checkbox-color">
+                                          </div>
+                                          <div class="form-group p-1 mb-0">
+                                            <label class="form-label">Database Name<span class="text-red">*</span>
+                                            </label>
+                                            <select disabled id="databaseSelect" [(ngModel)]="drillThroughDatabaseName" (change)="onDatabaseChange()" class="form-select form-select select2 drillThroughDatabseDisabled"  >
+                                              <option value="" disabled selected style="color: #999999 !important;">Select Database name</option>
+                                              <option *ngFor="let database of databaseNames" [value]="database">{{ database }}</option>
+                                            </select>
+                                          </div>
+                                          <div class="form-group p-1 mb-0">
+                                            <label class="form-label">Query Set Name <span class="text-red">*</span>
+                                            </label>
+                                            <!-- <select [(ngModel)]="drillThroughQuerySetId" class="form-select form-select select2 fs-14" >
+                                              @for(querySet of querySetNames;track querySet.queryset_id){
+                                                <option value="{{querySet.queryset_id}}" [ngbTooltip]="querySet.queryset_name" 
+                                                [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'">{{querySet.queryset_name}}</option>
+                                              }
+                                            </select> -->
+                                            <ng-select [(ngModel)]="drillThroughQuerySetId" (change)="getSheetsForActions()" class="form-control p-0"
+                                              [closeOnSelect]="false" [multiple]="true" placeholder="Select Queryset name">
+                                              <ng-option *ngFor="let querySet of querySetNames;" [value]="querySet.queryset_id"
+                                                [ngbTooltip]="querySet.queryset_name"
+                                                [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'">
+                                                {{ querySet.queryset_name }}
+                                              </ng-option>
+                                            </ng-select>
+                                          <!-- <p>{{querysetNameEdit}}</p> -->
+                                          <!-- <button class="btn " style="border: 1px solid #edebeb;width: 100%; text-align: justify;">{{querysetNameEdit}}</button> -->
+                                          </div>
+
+                                          <div class="form-group p-1">
+                                            <label class="form-label">Source Sheet <span class="text-red">*</span>
+                                            </label>
+                                            <select [(ngModel)]="sourceSheetId" (change)="getTargetSheetsList()"  class="form-select form-select select2 " >
+                                              <option value="0" disabled selected style="color: #999999 !important;">Select Source Sheet</option>
+                                              @for(sheet of sourceSheetList;track sheet.id){
+                                                <option [ngbTooltip]="sheet.name" [value]="sheet.id">{{sheet.name}}</option>
+                                              }
+                                            </select>
+                                          </div>
+                                            <label class="form-label">Target Sheets <span class="text-red">*</span></label>
+                                         
+                                          <div [class.disabled]="sourceSheetId === 0"  class="form body border p-2" style="max-height: 200px;  overflow: scroll;">
+
+                                            <div *ngIf="(targetSheetList?.length ?? 0) > 0" class="form-check">
+                                              <input type="checkbox" id="selectAll" [(ngModel)]="isAllTargetSheetsSelected" (change)="toggleAllTargetSheets($event)"
+                                                class="form-check-input">
+                                              <label for="selectAll" class="form-check-label">Select All</label>
+                                            </div>
+                                            @for(sheet of targetSheetList;track sheet;let i = $index){
+                                            <div class="form-check">
+                                              <input type="checkbox" [id]="'defaultCheck' + i" [(ngModel)]="sheet.selected" (change)="updateSelectedSheets()" class="form-check-input">
+                                              <label [for]="'defaultCheck' + i" class="form-check-label ">
+                                                <p>{{sheet?.name}}</p>
+                                              </label>
+                                            </div>
+                                            }
+                                          </div>
+
+                                          <div class="py-2 mt-3">
+                                            <button type="button" [disabled]="disableActionSave()" (click)="updateDrillThroughAction()" class="btn ripple btn-primary me-2">Update</button>
+                                            <button type="button" class="btn ripple btn-secondary " (click)="clearActionForm();modal.dismiss('Cross click');editActions = false;"> Cancel </button>
+                                        </div>
+                                        </ul>
+                                      </div>
+                                   
+                                  </div>
+                                  </div>
+                                </div>
+                                </div>
+                            </div>
+                            </ng-template>
+                            <li [ngbNavItem]="3" [ngClass]="{'disabled': dashboard.length<1 || !updateDashbpardBoolen}">
+                              <a ngbNavLink class="dashboard-tab-padding">Actions</a>
+                                 <ng-template ngbNavContent>
+                                     <div class="tab-pane" id="linktabs">
+                                         <div class="card-body p-0">
+                                           <div class="text-wrap">
+                                               <div class="card-content p-0">
+                                                   <div class=" mt-2 mb-2">
+                                                       <div class="">
+                                                        <button *ngIf="!isPublicUrl" class="btn btn-primary" (click)="getQuerySetForFilter();clearActionForm();openSuperScaleForActions(dashboardActions);getDrillThroughActionList()" id="applyActions" type="button" aria-expanded="false" style="width: 100%;">
+                                                          <i class="fa fa-plus"></i> Add/Edit Actions
+                                                        </button>
+                                                        <div >
+                                                          <ng-container *ngIf="drillThroughActionList.length > 0; else noData">
+                                                            <div *ngFor="let action of drillThroughActionList" class="sub-category-card p-1 mt-2 border  rounded-3 mb-2" (click)="getActionData(action.drill_id);"
+                                                              [ngStyle]="{'background-color': actionId === action.drill_id ? 'var(--primary-color)' : 'white','color': actionId === action.drill_id ? 'white' : 'black'}">
+                                                              <p class="p-1 mb-0 category-text">{{action.action_name}}</p>
+                                                            </div>
+                                                          </ng-container>
+                                                          <ng-template #noData>
+                                                            <p>No Actions Available</p>
+                                                          </ng-template>
+                                                         </div>
+                                                       </div>
+                                                   </div>
+                                                
+                                               </div>
+                                           </div>
+                                       </div>
+                                     </div>
+                                 </ng-template>
+                         </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel-body tabs-menu-body p-1 panel-body-height">
+                    <div class="tab-content">
+                        <div [ngbNavOutlet]="nav"></div>
+
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- </div> -->
+      <!-- </div> -->
+      </div>
+    </div>
+    <!-- <div class="dashboard-area"  [ngClass]="{ 'header-visibile': isPublicUrl, }"> -->
+    <div class="col-xl-10 col-lg-10 col-md-10" id="dashboard-content">
+      <div class="" style="display: flex; align-items: center;">
+        <button type="button" (click)="issheetListPaneOpen = !issheetListPaneOpen; toggleSidebar()" class="btn btn-icon btn-primary-light me-2 rounded-5">
+          <i *ngIf="issheetListPaneOpen" class="fa fa-angle-left" style="font-size: 24px;"></i>
+          <i *ngIf="!issheetListPaneOpen" class="fa fa-angle-right" style="font-size: 24px;"></i>
+        </button>
+      
+         <div *ngIf="!isPublicUrl" class="card mb-1" style="position: sticky;top: 0;z-index:2">
+            <div class="card-body p-1">
+                <div class="dashboard-title-card">
+                  <div class="flex-grow-1">                     
+                    <div class="title-container border" *ngIf="!editor">
+                      <input *ngIf="!dashboardId && !editor" (click)="editor =true && !isPublicUrl" type="text"  placeholder="Title" [(ngModel)]="dashboardName" (input)="updatedashboardName(dashboardName)" aria-label="Sheet" class="form-control" > 
+                      <div *ngIf="dashboardId && !editor" (click)="editor =true && !isPublicUrl" id="htmlContent" [innerHtml]="dashboardTagTitle" [ngStyle]="{'padding-top': dashboardTagName[0] === '<' ? '1.5%' : '0'}"></div>              
+                       
+                        </div>
+                        <ckeditor *ngIf="editor && !isPublicUrl" placeholder="dashbaord Name" (ready)="$event.editing.view.focus();" [editor]="Editor" [config]="editorConfig" [(ngModel)]="dashboardTagName" (ngModelChange)="updatedashboardName(dashboardTagName)" style="color: black;" ></ckeditor>
+                        <!-- <div *ngIf="editor" class="popup">
+                          <div class="popup-content">
+                            <ckeditor placeholder="Sheet Name" [editor]="Editor" [config]="editorConfig" [(ngModel)]="dashboardTagName">
+                            </ckeditor>
+                            <div class="buttons">
+                              <button class="btn btn-danger" (click)="toggleEditor()">Close</button>
+                              <button class="btn btn-primary" (click)="updateSheetName(); toggleEditor()">Update</button>
+                            </div>
+                          </div>
+                        </div> -->
+                        </div>
+
+                        <div class="min-w-fit-content ms-1">              
+                        <span *ngIf="!isPublicUrl" class="title-editor ms-1" (click)="toggleEditor()">
+                          <button  class="btn btn-primary me-1" style="margin-top: 0px !important;"><i class="fa fa-pencil"></i></button>
+                        </span>
+                            <button [disabled]="dashboard.length === 0" class="btn btn-primary mt-0" *ngIf="!updateDashbpardBoolen && !this.isPublicUrl" (click)="saveDashboard();editor =false">Save </button>
+                            <button [disabled]="disableDashboardUpdate" class="btn btn-primary mt-0" *ngIf="updateDashbpardBoolen && !this.isPublicUrl" (click)="updateDashboard();editor =false">Update </button>
+                            <button [disabled]="dashboard.length === 0" ngbTooltip="clear dashbaord" *ngIf="!isPublicUrl && !isSampleDashboard" style="margin-left: 5px;" type="button" class="btn btn-primary mt-0" (click)="clearDashboard();"><img src="./assets/images/icons/erase.png" alt="logo" class="w-4 h-4"></button>
+                            <!-- <button *ngIf="!isPublicUrl" style="margin-left: 5px;" type="button" class="btn btn-primary mt-0" (click)="addTabs();">Add Tab</button> -->
+                            <!-- <button class="btn btn-primary mt-0" (click)="startMethod()">hide </button> -->
+                            <div *ngIf="isPublicUrl" class="dashboard-option">
+                              <div class="d-flex justify-content-end p-1" ngbDropdown>
+                                  <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                      aria-haspopup="true" aria-expanded="false" class=""><i
+                                          class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                                  </a>
+                                  <div class="dropdown-menu" ngbDropdownMenu>
+                                    <a class="dropdown-item" ngbDropdownItem (click)="downloadImageInPublic()">Download Image</a>
+                                    <a class="dropdown-item" ngbDropdownItem (click)="getSavedDashboardDataPublic()">Refresh Dashboard</a>
+
+                                  </div>
+                              </div>
+                            </div>
+                            </div>
+                    <!-- <div class="min-w-fit-content ms-3">
+                            <a href=""><i class="fa fa-filter p-2"></i> </a>
+                            <a href=""><i class="fa fa-edit p-2"></i> </a>
+                            <a href=""><i class="fa fa-share p-2"></i></a>
+                            <a href=""><i class="fa fa-list p-2"></i></a>
+                    </div> -->
+                </div>
+            </div>
+        </div> 
+      </div> 
+        <!-- <input class="col-lg-3 col-md-3 form-control" type="text"  placeholder="Title" [(ngModel)]="gridItemSize"  (change)="changeGridItemSize()" aria-label="Sheet" > -->
+
+    
+       <!-- <div style="margin: auto 0;overflow: scroll;" [style.height.px]="heightGrid" [style.width.px]="widthGrid" > -->
+        <div style="margin: auto 0;height: 100%;" >
+         
+        <div class="d-flex align-items-center justify-content-start  mt-3" [ngClass]="{ 'mt-3': !isPublicUrl }" >
+            <!-- <a mat-raised-button color="accent" (click)="pushItem()" class="btn btn-blue-light mb-0 me-3" > Resize first item and push others</a> -->
+            <!-- <a mat-mini-fab (click)="addItem()" class="btn btn-blue-light mb-0 me-3" ><i class="fa fa-plus"></i> Add</a>  -->
+        </div>
+        @if(displayTabs){
+          <div class="card-footer d-flex p-2">
+            <mat-tab-group [selectedIndex]="selectedTabIndex"
+            (selectedTabChange)="selectedSheetTab($event)" 
+            >
+            @for(tab of sheetTabs;track tab; let index = $index){
+<mat-tab data="tab"  [label]="tab.name">
+</mat-tab>
+}
+</mat-tab-group>
+<button type="button" ngbnavlink="" data-bs-toggle="tab" role="tab" aria-selected="true" id="ngb-nav-24" aria-disabled="false" 
+  tabindex="-1" class="nav-link BtnNewStyle" (click)="addTabs()" style="padding: 13px;margin: 0px;">
+    <i class="fa fa-plus-square-o"></i>
+</button>
+</div>
+        }
+        <!-- <div *ngFor="let tab of sheetTabs;let i = index"> -->
+            <!-- <input  type="text"  placeholder="Title" [(ngModel)]="tab.name" aria-label="Sheet" class="form-control" >
+            <button (click)="selectedSheetTab(tab.id,i)">T</button>
+            <button class="btn btn-primary " (click)="addTabs()" id="applyfilters" type="button">
+              <i class="fa fa-plus"></i>
+            </button> -->
+            <!-- </div> -->
+            <div  cdkDropList #destinationList1="cdkDropList" [cdkDropListData]="dashboardTest"
+            (cdkDropListDropped)="dropTest2($event)">
+            @if(displayTabs){
+            <div *ngIf="sheetTabs !== undefined && sheetTabs.length > 0" id="capture-element-2" style="margin: 0;overflow: auto;"  [style.height.px]="heightGrid"
+              [style.width.px]="widthGrid">
+              <!-- <div style="height: inherit;" > -->
+                <gridster [options]="options" #gridsterTab>
+                  <gridster-item [item]="item" *ngFor="let item of dashboardTest;let i = index"
+                    [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }">
+                    <div class="card mb-0" style="height: 100%;overflow: auto;">
+                      <div class="card-header d-flex justify-content-between p-1">
+                        <h6>{{ item.data?.title }}</h6>       
+                        <div *ngIf="!isPublicUrl" class="dashboard-option">
+                          <div class=" p-1" ngbDropdown>
+                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                              aria-haspopup="true" aria-expanded="false" class=""><i
+                                class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                            </a>
+                            <div class="dropdown-menu" ngbDropdownMenu>
+                              <app-insights-button [classesList]="'dropdown-item'" [buttonName]="'Goto Sheet'"
+                                [previledgeIdsList]="[20,18]" [isBtn]="false" (btnClickEvent)="viewSheet(item)"
+                                [isIcon]="false"></app-insights-button>
+                              <app-insights-button  [classesList]="'dropdown-item'" [buttonName]="'Remove'" [previledgeId]="37"
+                                [isBtn]="false" (btnClickEvent)="removeItem($event, item, true)" [isIcon]="false"></app-insights-button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body p-1">            
+                        <div *ngIf="item['chartType'] === 'Table'">
+                          <div *ngIf="item['chartType'] === 'Table'" class="table-responsive">
+                            <table class="table border text-nowrap text-md-nowrap mb-0">
+                              <thead>
+                                <tr>
+                                  @for(column of item.tableData?.headers;track column){
+                                  <th>{{ column }}</th>
+                                  }
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @for(row of item.tableData?.rows;track row){
+                                <tr>
+                                  @for(column of item.tableData?.headers;track column){
+                                  <td>{{ row[column] }}</td>
+                                  }
+                                </tr>
+                                }
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                        <div *ngIf="item.chartOptions">
+                          <div *ngIf="item['chartId'] === 6">
+            
+                            <apx-chart #test344 id="test344" [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                              [dataLabels]="item.chartOptions.dataLabels!" [plotOptions]="item.chartOptions.plotOptions!"
+                              [xaxis]="item.chartOptions.xaxis!" [colors]="item.chartOptions.colors!"
+                              [grid]="item.chartOptions.grid!" (chartInit)="onChartInit($event, item)">
+                            </apx-chart>
+                          </div>
+                          <!-- <app-charts-store [chartData]="item.chartOptions"></app-charts-store> -->
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 17">
+                          <!-- area -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [xaxis]="item.chartOptions.xaxis!" [stroke]="item.chartOptions.stroke!"
+                            [dataLabels]="item.chartOptions.dataLabels!" [yaxis]="item.chartOptions.yaxis!"
+                            [labels]="item.chartOptions.labels!" [legend]="item.chartOptions.legend!"
+                            [grid]="item.chartOptions.grid!" [title]="item.chartOptions.title!"
+                            [subtitle]="item.chartOptions.subtitle!" [colors]="item.chartOptions.colors!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 13">
+                          <!-- line -->
+                          <apx-chart [series]="item.chartOptions.series! || []" [chart]="item.chartOptions.chart!"
+                            [xaxis]="item.chartOptions.xaxis!" [dataLabels]="item.chartOptions.dataLabels!"
+                            [grid]="item.chartOptions.grid!" [stroke]="item.chartOptions.stroke!" [title]="item.chartOptions.title!"
+                            [colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 24">
+                          <!-- pie -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [legend]="item.chartOptions.legend!" [labels]="item.chartOptions.labels!"
+                            [responsive]="item.chartOptions.responsive!" [colors]="item.chartOptions.colors!"
+                            [dataLabels]="item.chartOptions.dataLabels!" (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 7">
+                          <!-- sidebysidebar -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [dataLabels]="item.chartOptions.dataLabels!" [plotOptions]="item.chartOptions.plotOptions!"
+                            [yaxis]="item.chartOptions.yaxis!" [legend]="item.chartOptions.legend!" [fill]="item.chartOptions.fill!"
+                            [stroke]="item.chartOptions.stroke!" [tooltip]="item.chartOptions.tooltip!"
+                            [colors]="item.chartOptions.colors!" [grid]="item.chartOptions.grid!" [xaxis]="item.chartOptions.xaxis!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 5">
+                          <!-- stockedBar -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [dataLabels]="item.chartOptions.dataLabels!" [plotOptions]="item.chartOptions.plotOptions!"
+                            [responsive]="item.chartOptions.responsive!" [xaxis]="item.chartOptions.xaxis!"
+                            [legend]="item.chartOptions.legend!" [fill]="item.chartOptions.fill!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 4">
+                          <!-- barline -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [yaxis]="item.chartOptions.yaxis!" [xaxis]="item.chartOptions.xaxis!"
+                            [labels]="item.chartOptions.labels!" [stroke]="item.chartOptions.stroke!"
+                            [title]="item.chartOptions.title!" [grid]="item.chartOptions.grid!"
+                            [dataLabels]="item.chartOptions.dataLabels!" [fill]="item.chartOptions.fill!"
+                            [tooltip]="item.chartOptions.tooltip!" [colors]="item.chartOptions.colors!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 2">
+                          <!-- //hstacked -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [dataLabels]="item.chartOptions.dataLabels!" [plotOptions]="item.chartOptions.plotOptions!"
+                            [responsive]="item.chartOptions.responsive!" [xaxis]="item.chartOptions.xaxis!"
+                            [legend]="item.chartOptions.legend!" [fill]="item.chartOptions.fill!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 3">
+                          <!-- hgrouped -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [dataLabels]="item.chartOptions.dataLabels!" [plotOptions]="item.chartOptions.plotOptions!"
+                            [responsive]="item.chartOptions.responsive!" [xaxis]="item.chartOptions.xaxis!"
+                            [legend]="item.chartOptions.legend!" [fill]="item.chartOptions.fill!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 8">
+                          <!-- multiline -->
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [xaxis]="item.chartOptions.xaxis!" [stroke]="item.chartOptions.stroke!"
+                            [tooltip]="item.chartOptions.tooltip!" [dataLabels]="item.chartOptions.dataLabels!"
+                            [legend]="item.chartOptions.legend!" [markers]="item.chartOptions.markers!"
+                            [grid]="item.chartOptions.grid!" [yaxis]="item.chartOptions.yaxis!" [title]="item.chartOptions.title!"
+                            (chartInit)="onChartInit($event, item)"></apx-chart>
+                        </div>
+                        <div *ngIf="item.chartOptions && item['chartId'] === 10">
+                          <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                            [labels]="item.chartOptions.labels!" [responsive]="item.chartOptions.responsive!"
+                            (chartInit)="onChartInit($event, item)">
+                          </apx-chart>
+                        </div>
+                      </div>
+                      <div class="card-footer p-1">
+                        <!-- <button mat-mini-fab (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">
+                                  Delete
+                                </button> -->
+                      </div>
+                    </div>
+                  </gridster-item>
+                </gridster>
+            <!-- </div> -->
+            </div>
+          }
+          </div>
+        
+        <div  id="capture-element" style="margin: auto 0px;"[ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }"  [style.height.px]="heightGrid" [style.width.px]="widthGrid">
+        
+        <gridster [options]="options" cdkDropList #destinationList="cdkDropList"
+        [cdkDropListData]="dashboard" style="margin: 0px;"
+       (cdkDropListDropped)="drop($event)" #gridster>
+            <gridster-item [item]="item" *ngFor="let item of dashboard"  >
+              <div class="card mb-0 grid-item-border" style="height: 100%;"  [style.background-image]="(item['chartType'] === 'KPI' && item['chartId'] === 25) 
+              ? 'url(' + item['kpiData'].kpiImage + ')' 
+              : ''"
+            [style.background-size]="(item['chartType'] === 'KPI' && item['chartId'] === 25) 
+              ? 'cover' 
+              : ''"
+            [style.background-position]="(item['chartType'] === 'KPI' && item['chartId'] === 25) 
+              ? 'center' 
+              : ''" >
+                <div class="card-header d-flex justify-content-between p-1">
+                  @if((item['chartId'] === 6|| item['chartId'] === 24 || item['chartId'] === 10 || item['chartId'] === 29) && item['drillDownHierarchy'] && item['drillDownHierarchy'].length > 0){
+                    <!-- <div class="col-lg-3 col-md-3"> -->
+                      <button class="btn btn-primary " style="margin-right: 10px;" (click)="goDrillDownBack(item)"><i class="fa fa-arrow-left "></i> </button>
+                   <!-- </div> -->
+                  }
+                  @if(actionId && item['sheetId'] == sourceSheetId){
+                    <button class="btn btn-primary " style="margin-right: 10px;" (click)="setDrillThrough('',item)"><i class="fa fa-undo "></i> </button>
+                  }
+                  @if(item['type'] !== 'image'){
+                  <div style="width: 100%;" [innerHtml]="sheetTagTitle[item.data?.title]?sheetTagTitle[item.data?.title]:item.data?.sheetTagName"></div>
+                  }
+                  @if(item['type'] === 'image'){
+                  <div style="width: 100%;">
+                    <h6>{{item['imageTitle']}}</h6>
+                  </div>
+                  }
+                  <div *ngIf="item['chartType'] === 'Table'"  class="sheet-search">
+                    <div class="">
+                    </div>
+                    <div  class="input-group mt-1 p-1 sheet-table-search">
+                        <input type="text" placeholder="Search" aria-describedby="button-addon2"      (mousedown)="disableDragging($event)"
+                        (mouseup)="enableDragging($event)" [(ngModel)]="tableSearch" (keydown.enter)="isPublicUrl ? tableSearchDashboardPublic(item) : tableSearchDashboard(item)" class="form-control border-end-0 ">
+                        <button type="button" id="button-addon2" class="btn btn-primary border me-2" (click)="isPublicUrl ? tableSearchDashboardPublic(item) : tableSearchDashboard(item)" style="border-radius: 0px 4px 4px 0px;">
+                        <i class="fe fe-search"></i></button>
+                    </div>
+                   </div>
+                    <div *ngIf="!isPublicUrl" class="dashboard-option">
+                        <div class=" p-1" ngbDropdown>
+                            <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                    class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                            </a>
+                            <div class="dropdown-menu" ngbDropdownMenu>
+                              <app-insights-button *ngIf="item['type'] !== 'image'" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Goto Sheet'"
+                                                              [previledgeIdsList]="[20,18]" [isBtn]="false"
+                                                              (btnClickEvent)="viewSheet(item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Remove'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="removeItem($event, item, false)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && !item['kpiData'].kpiImage" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Upload Background Image'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="uploadKpiImage(item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && item['kpiData'].kpiImage" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Change Image'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="uploadKpiImage(item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && item['kpiData'].kpiImage" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Remove Image'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="removeKpiImage(item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <input 
+                                                              type="file" 
+                                                              #ImageUploadKPI 
+                                                              (change)="imageFileSelectEvent($event)" 
+                                                              accept="image/*" 
+                                                              style="display: none;" />
+
+                            </div>
+                        </div>
+                      </div>
+                </div>
+                @if(item['type'] === 'image'){
+                  <img [src]="item['imageData']" />
+                }
+                @if(item['isEChart'] && !(item['chartId']=== 29 || item['chartId']=== 25 || item['chartId']=== 1) ){
+                  <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }" [ngStyle]="item['chartId'] === 11 ? {'height': '80vh', 'overflow-y': 'auto'} : {}">
+                    <div id="echartsBar{{item['sheetId']}}" echarts [options]="item['echartOptions']" (chartClick)="onEChartClick($event,item)" class="echart-charts" [ngStyle]="item['chartId'] === 11 ? {'height': '100%'} : {}"></div>
+                    </div>
+                
+              } @else if(item['isEChart'] && item['chartId']=== 29){
+                <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'scroll-overflow': !isOverflowHidden }">
+                  @if(chartType == 'map') {
+                    <app-insight-echart [isZoom]="item['customizeOptions']?.isZoom" [chartType]="chartType" [drillDownIndex]="item['drillDownIndex']"
+                      [draggedDrillDownColumns]="item['drillDownHierarchy']" [drillDownObject]="item['drillDownObject']" (setDrilldowns)="mapchartDrillDown($event, item)"
+                      [chartsColumnData]="chartsColumnData" [chartsRowData]="chartsRowData" [dualAxisRowData]="dualAxisRowData"
+                      [dualAxisColumnData]="dualAxisColumnData"></app-insight-echart>
+                  } @else if(chartType == 'bar') {
+                    <app-insight-echart [isZoom]="item['customizeOptions']?.isZoom" [isBold]="item['customizeOptions']?.isBold" [chartType]="chartType" [chartsRowData]="chartsRowData"
+                    [chartsColumnData]="chartsColumnData" [backgroundColor]="item['customizeOptions']?.backgroundColor" [xlabelAlignment]="item['customizeOptions']?.xlabelAlignment"
+                    [xGridColor]="item['customizeOptions']?.xGridColor" [xGridSwitch]="item['customizeOptions']?.xGridSwitch" [xLabelColor]="item['customizeOptions']?.xLabelColor" [xLabelSwitch]="item['customizeOptions']?.xLabelSwitch"
+                    [xLabelFontFamily]="item['customizeOptions']?.xLabelFontFamily" [xLabelFontSize]="item['customizeOptions']?.xLabelFontSize" [xlabelFontWeight]="item['customizeOptions']?.xlabelFontWeight"
+                    [yLabelColor]="item['customizeOptions']?.yLabelColor" [yGridSwitch]="item['customizeOptions']?.yGridSwitch" [yLabelSwitch]="item['customizeOptions']?.yLabelSwitch"
+                    [yLabelFontFamily]="item['customizeOptions']?.yLabelFontFamily" [yLabelFontSize]="item['customizeOptions']?.yLabelFontSize" [ylabelFontWeight]="item['customizeOptions']?.ylabelFontWeight"
+                    [yGridColor]="item['customizeOptions']?.yGridColor" [yGridSwitch]="item['customizeOptions']?.yGridSwitch" [color]="item['customizeOptions']?.color" [measureColor]="item['customizeOptions']?.measureColor"
+                    [dimensionColor]="item['customizeOptions']?.dimensionColor" [dataLabelsFontSize]="item['customizeOptions']?.dataLabelsFontSize"
+                    [dataLabelsFontFamily]="item['customizeOptions']?.dataLabelsFontFamily" [dataLabelsColor]="item['customizeOptions']?.dataLabelsColor" [displayUnits]="item['customizeOptions']?.displayUnits"
+                    [decimalPlaces]="item['customizeOptions']?.decimalPlaces" [prefix]="item['customizeOptions']?.prefix" [suffix]="item['customizeOptions']?.suffix" [sortType]="item['customizeOptions']?.sortType"
+                    [drillDownIndex]="item['drillDownIndex']" [draggedDrillDownColumns]="item['drillDownHierarchy']" [drillDownObject]="item['drillDownObject']"
+                    (setDrilldowns)="mapchartDrillDown($event, item)"></app-insight-echart>
+                  }
+                </div>
+              } @else if(!item['isEChart'] && !(item['chartId']=== 25 || item['chartId']=== 1)){
+                <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }">
+    
+                  <div *ngIf="item['chartType'] === 'Tags'" id="test567" style="height: 100%;" >
+                    <gridster [options]="options" cdkDropList #destinationList="cdkDropList"
+                    [cdkDropListData]="nestedDashboard" style="margin: 0px;"
+                   (cdkDropListDropped)="dropNested($event,item)" #gridster>
+                   <gridster-item [item]="nestedItem" *ngFor="let nestedItem of nestedDashboard">
+                    <div class="card-header d-flex justify-content-between p-1" style="overflow: auto;">
+                      <h6>{{ nestedItem.data?.title }}</h6>
+                      <div class="dashboard-option">
+                          <div class=" p-1" ngbDropdown>
+                              <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                  aria-haspopup="true" aria-expanded="false" class=""><i
+                                      class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                              </a>
+                              <div class="dropdown-menu" ngbDropdownMenu>
+                                  <a class="dropdown-item" ngbDropdownItem (click)="viewSheet(item)"> Goto Sheet </a>
+                                  <a class="dropdown-item" ngbDropdownItem (mousedown)="removeNestedItem($event, nestedItem)" (touchstart)="removeNestedItem($event, nestedItem)"> Remove</a>
+                              </div>
+                          </div>
+                        </div>
+                  </div>
+                    <div *ngIf="nestedItem.chartOptions">
+                      <div *ngIf="nestedItem['chartId'] === 6">
+                        
+                         <apx-chart #test3 id="test3"
+                         [series]="nestedItem.chartOptions.series!"
+                         [chart]="nestedItem.chartOptions.chart!"
+                         [dataLabels]="nestedItem.chartOptions.dataLabels!"
+                         [plotOptions]="nestedItem.chartOptions.plotOptions!"
+                         [xaxis]="nestedItem.chartOptions.xaxis!"[colors]="nestedItem.chartOptions.colors!"  [grid]="nestedItem.chartOptions.grid!"
+                        (chartInit)="onChartInit($event, nestedItem)">
+                      </apx-chart> 
+                       </div>
+                      <!-- <app-charts-store [chartData]="nestedItem.chartOptions"></app-charts-store> -->
+                      </div>
+                      <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 17">
+                         <apx-chart [series]="nestedItem.chartOptions.series!" [chart]="nestedItem.chartOptions.chart!"
+                         [xaxis]="nestedItem.chartOptions.xaxis!" [stroke]="nestedItem.chartOptions.stroke!"
+                         [dataLabels]="nestedItem.chartOptions.dataLabels!" [yaxis]="nestedItem.chartOptions.yaxis!"
+                         [labels]="nestedItem.chartOptions.labels!" [legend]="nestedItem.chartOptions.legend!"  [grid]="nestedItem.chartOptions.grid!"
+                         [title]="nestedItem.chartOptions.title!" [subtitle]="nestedItem.chartOptions.subtitle!"[colors]="nestedItem.chartOptions.colors!" (chartInit)="onChartInit($event, nestedItem)"></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 13">
+                         <apx-chart [series]="nestedItem.chartOptions.series! || []" [chart]="nestedItem.chartOptions.chart!"
+                             [xaxis]="nestedItem.chartOptions.xaxis!" [dataLabels]="nestedItem.chartOptions.dataLabels!"
+                             [grid]="nestedItem.chartOptions.grid!" [stroke]="nestedItem.chartOptions.stroke!"
+                             [title]="nestedItem.chartOptions.title!" [colors]="nestedItem.chartOptions.colors!" (chartInit)="onChartInit($event, nestedItem)"></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 24">
+                         <apx-chart [series]="nestedItem.chartOptions.series!" [chart]="nestedItem.chartOptions.chart!" [legend]="nestedItem.chartOptions.legend!"
+                         [labels]="nestedItem.chartOptions.labels!" [responsive]="nestedItem.chartOptions.responsive!" [colors]="nestedItem.chartOptions.colors!" [dataLabels]="nestedItem.chartOptions.dataLabels!" (chartInit)="onChartInit($event, nestedItem)"></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 7">
+                         <apx-chart [series]="nestedItem.chartOptions.series!" [chart]="nestedItem.chartOptions.chart!"
+                             [dataLabels]="nestedItem.chartOptions.dataLabels!" [plotOptions]="nestedItem.chartOptions.plotOptions!"
+                             [yaxis]="nestedItem.chartOptions.yaxis!" [legend]="nestedItem.chartOptions.legend!" [fill]="nestedItem.chartOptions.fill!"
+                             [stroke]="nestedItem.chartOptions.stroke!" [tooltip]="nestedItem.chartOptions.tooltip!" [colors]="nestedItem.chartOptions.colors!" [grid]="nestedItem.chartOptions.grid!" 
+                             [xaxis]="nestedItem.chartOptions.xaxis!" (chartInit)="onChartInit($event, nestedItem)"></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 5">
+                         <apx-chart
+                           [series]="nestedItem.chartOptions.series!"
+                           [chart]="nestedItem.chartOptions.chart!"
+                           [dataLabels]="nestedItem.chartOptions.dataLabels!"
+                           [plotOptions]="nestedItem.chartOptions.plotOptions!"
+                           [responsive]="nestedItem.chartOptions.responsive!"
+                           [xaxis]="nestedItem.chartOptions.xaxis!"
+                           [legend]="nestedItem.chartOptions.legend!"
+                           [fill]="nestedItem.chartOptions.fill!" (chartInit)="onChartInit($event, nestedItem)"
+                         ></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 4">
+                         <apx-chart [series]="nestedItem.chartOptions.series!" [chart]="nestedItem.chartOptions.chart!"
+                             [yaxis]="nestedItem.chartOptions.yaxis!" [xaxis]="nestedItem.chartOptions.xaxis!" [labels]="nestedItem.chartOptions.labels!"
+                             [stroke]="nestedItem.chartOptions.stroke!" [title]="nestedItem.chartOptions.title!"  [grid]="nestedItem.chartOptions.grid!"
+                             [dataLabels]="nestedItem.chartOptions.dataLabels!" [fill]="nestedItem.chartOptions.fill!"
+                             [tooltip]="nestedItem.chartOptions.tooltip!"[colors]="nestedItem.chartOptions.colors!" (chartInit)="onChartInit($event, nestedItem)"></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 2">
+                         <apx-chart
+                         [series]="nestedItem.chartOptions.series!"
+                         [chart]="nestedItem.chartOptions.chart!"
+                         [dataLabels]="nestedItem.chartOptions.dataLabels!"
+                         [plotOptions]="nestedItem.chartOptions.plotOptions!"
+                         [responsive]="nestedItem.chartOptions.responsive!"
+                         [xaxis]="nestedItem.chartOptions.xaxis!"
+                         [legend]="nestedItem.chartOptions.legend!"
+                         [fill]="nestedItem.chartOptions.fill!"
+                         (chartInit)="onChartInit($event, nestedItem)"></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 3">
+                         <apx-chart
+                         [series]="nestedItem.chartOptions.series!"
+                         [chart]="nestedItem.chartOptions.chart!"
+                         [dataLabels]="nestedItem.chartOptions.dataLabels!"
+                         [plotOptions]="nestedItem.chartOptions.plotOptions!"
+                         [responsive]="nestedItem.chartOptions.responsive!"
+                         [xaxis]="nestedItem.chartOptions.xaxis!"
+                         [legend]="nestedItem.chartOptions.legend!"
+                         [fill]="nestedItem.chartOptions.fill!" (chartInit)="onChartInit($event, nestedItem)"
+                       ></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 8">
+                         <apx-chart
+                         [series]="nestedItem.chartOptions.series!"
+                         [chart]="nestedItem.chartOptions.chart!"
+                         [xaxis]="nestedItem.chartOptions.xaxis!"
+                         [stroke]="nestedItem.chartOptions.stroke!"
+                         [tooltip]="nestedItem.chartOptions.tooltip!"
+                         [dataLabels]="nestedItem.chartOptions.dataLabels!"
+                         [legend]="nestedItem.chartOptions.legend!"
+                         [markers]="nestedItem.chartOptions.markers!"
+                         [grid]="nestedItem.chartOptions.grid!"
+                         [yaxis]="nestedItem.chartOptions.yaxis!"
+                         [title]="nestedItem.chartOptions.title!" (chartInit)="onChartInit($event, nestedItem)"
+                       ></apx-chart>
+                       </div>
+                       <div *ngIf="nestedItem.chartOptions && nestedItem['chartId'] === 10">
+                         <apx-chart
+                         [series]="nestedItem.chartOptions.series!"
+                         [chart]="nestedItem.chartOptions.chart!"
+                         [labels]="nestedItem.chartOptions.labels!"
+                         [responsive]="nestedItem.chartOptions.responsive!"(chartInit)="onChartInit($event, nestedItem)" >
+                      </apx-chart>
+                       </div>
+                   </gridster-item>
+                  </gridster>
+                  <!-- <app-charts-store [chartData]="item.chartOptions"></app-charts-store> -->
+                  </div>
+                
+                <!-- <p class="mb-1">{{ item.data?.content }}</p> -->
+                
+                <!-- <div *ngIf="item.chartOptions">
+                     <apx-chart 
+                    [series]="item.chartOptions.series!" 
+                    [chart]="item.chartOptions.chart!" 
+                    [xaxis]="item.chartOptions.xaxis!"
+                    (chartInit)="onChartInit($event, item)">
+                  </apx-chart> 
+                  <apx-chart
+                  [series]="item.chartOptions.series!"
+                  [chart]="item.chartOptions.chart!"
+                  [dataLabels]="item.chartOptions.dataLabels!"
+                  [plotOptions]="item.chartOptions.plotOptions!"
+                  [xaxis]="item.chartOptions.xaxis!"[colors]="item.chartOptions.colors!"  [grid]="item.chartOptions.grid!"
+                  (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div> -->
+                  <div *ngIf="item.chartOptions">
+                 <div *ngIf="item['chartId'] === 6">
+                   
+                    <apx-chart #test344 id="test344"
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [plotOptions]="item.chartOptions.plotOptions!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"[colors]="item.chartOptions.colors!"  [grid]="item.chartOptions.grid!"
+                    [yaxis]="item.chartOptions.yaxis!"
+                   (chartInit)="onChartInit($event, item)">
+                 </apx-chart> 
+                  </div>
+                 <!-- <app-charts-store [chartData]="item.chartOptions"></app-charts-store> -->
+                 </div>
+                 <div *ngIf="item.chartOptions && item['chartId'] === 17">
+                    <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }" [stroke]="item.chartOptions.stroke!"
+                    [dataLabels]="item.chartOptions.dataLabels!" [yaxis]="item.chartOptions.yaxis!"
+                    [labels]="item.chartOptions.labels!" [legend]="item.chartOptions.legend!"  [grid]="item.chartOptions.grid!"
+                    [title]="item.chartOptions.title!" [subtitle]="item.chartOptions.subtitle!"[colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 13">
+                    <apx-chart [series]="item.chartOptions.series! || []" [chart]="item.chartOptions.chart!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }" [dataLabels]="item.chartOptions.dataLabels!"
+                    [grid]="item.chartOptions.grid!" [stroke]="item.chartOptions.stroke!" [yaxis]="item.chartOptions.yaxis!"
+                        [title]="item.chartOptions.title!" [colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 24">
+                    <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!" [legend]="item.chartOptions.legend!"
+                    [labels]="item.chartOptions.labels!" [responsive]="item.chartOptions.responsive!" [colors]="item.chartOptions.colors!" [dataLabels]="item.chartOptions.dataLabels!" (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 7">
+                    <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                        [dataLabels]="item.chartOptions.dataLabels!" [plotOptions]="item.chartOptions.plotOptions!"
+                        [yaxis]="item.chartOptions.yaxis!" [legend]="item.chartOptions.legend!" [fill]="item.chartOptions.fill!"
+                        [stroke]="item.chartOptions.stroke!" [tooltip]="item.chartOptions.tooltip!" [colors]="item.chartOptions.colors!" [grid]="item.chartOptions.grid!" 
+                        [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"  (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 5">
+                    <apx-chart
+                      [series]="item.chartOptions.series!"
+                      [chart]="item.chartOptions.chart!"
+                      [dataLabels]="item.chartOptions.dataLabels!"
+                      [plotOptions]="item.chartOptions.plotOptions!"
+                      [responsive]="item.chartOptions.responsive!"
+                      [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"
+                      [yaxis]="item.chartOptions.yaxis!"
+                      [legend]="item.chartOptions.legend!"
+                      [fill]="item.chartOptions.fill!"
+                      [grid]="item.chartOptions.grid!"
+                      [colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)"
+                    ></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 4">
+                    <apx-chart [series]="item.chartOptions.series!" [chart]="item.chartOptions.chart!"
+                        [yaxis]="item.chartOptions.yaxis!" [xaxis]="item.chartOptions.xaxis!" [labels]="item.chartOptions.labels!"
+                        [stroke]="item.chartOptions.stroke!" [title]="item.chartOptions.title!"  [grid]="item.chartOptions.grid!"
+                        [dataLabels]="item.chartOptions.dataLabels!" [fill]="item.chartOptions.fill!"
+                        [tooltip]="item.chartOptions.tooltip!"[colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 2">
+                    <apx-chart
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [plotOptions]="item.chartOptions.plotOptions!"
+                    [responsive]="item.chartOptions.responsive!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"
+                    [yaxis]="item.chartOptions.yaxis!"
+                    [legend]="item.chartOptions.legend!"
+                    [fill]="item.chartOptions.fill!"
+                    [colors]="item.chartOptions.colors!"
+                    [grid]="item.chartOptions.grid!"
+                    (chartInit)="onChartInit($event, item)"></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 3">
+                    <apx-chart
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [plotOptions]="item.chartOptions.plotOptions!"
+                    [responsive]="item.chartOptions.responsive!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"
+                    [yaxis]="item.chartOptions.yaxis!"
+                    [legend]="item.chartOptions.legend!"
+                    [colors]="item.chartOptions.colors!"
+                    [grid]="item.chartOptions.grid!"
+                    [fill]="item.chartOptions.fill!" (chartInit)="onChartInit($event, item)"
+                  ></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 8">
+                    <apx-chart
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"
+                    [stroke]="item.chartOptions.stroke!"
+                    [tooltip]="item.chartOptions.tooltip!"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [legend]="item.chartOptions.legend!"
+                    [markers]="item.chartOptions.markers!"
+                    [grid]="item.chartOptions.grid!"
+                    [yaxis]="item.chartOptions.yaxis!"
+                    [colors]="item.chartOptions.colors!"
+                    [title]="item.chartOptions.title!" (chartInit)="onChartInit($event, item)"
+                  ></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 10" id="donutchart">
+                    <apx-chart #donutchart
+                    [series]="item?.chartOptions?.series!"
+                    [chart]="item?.chartOptions?.chart!"
+                    [labels]="item?.chartOptions?.labels!"
+                    [responsive]="item?.chartOptions?.responsive!"
+                    [legend]="item.chartOptions.legend!"
+                    [plotOptions]="item.chartOptions.plotOptions!"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)" >
+                </apx-chart>
+                  </div>
+
+                  <div *ngIf="item.chartOptions && item['chartId'] === 26">
+                    <apx-chart
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [xaxis]="{ categories: item?.chartOptions?.xaxis?.categories, labels: item?.chartOptions?.xaxis?.labels }"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [legend]="item.chartOptions.legend!"
+                    [grid]="item.chartOptions.grid!"
+                    [yaxis]="item.chartOptions.yaxis!"
+                    [colors]="item.chartOptions.colors!" (chartInit)="onChartInit($event, item)"
+                  ></apx-chart>
+                  </div>
+
+                  <div *ngIf="item.chartOptions && item['chartId'] === 27">
+                    <apx-chart
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [dataLabels]="item.chartOptions.dataLabels!"
+                    [plotOptions]="item.chartOptions.plotOptions!"
+                    [xaxis]="item.chartOptions.xaxis!"
+                    [colors]="item.chartOptions.colors!"
+                    [title]="item.chartOptions.title!"
+                    [legend]="item.chartOptions.legend!"
+                    (chartInit)="onChartInit($event, item)"
+                  ></apx-chart>
+                  </div>
+                  <div *ngIf="item.chartOptions && item['chartId'] === 28">
+                    <apx-chart
+                    [series]="item.chartOptions.series!"
+                    [chart]="item.chartOptions.chart!"
+                    [plotOptions]="item.chartOptions.plotOptions!"
+                    [colors]="item.chartOptions.colors!"
+                    [labels]="item.chartOptions.labels!"
+                    [tooltip]="item.chartOptions.tooltip!"
+                    [stroke]="item.chartOptions.stroke!"
+                    (chartInit)="onChartInit($event, item)"
+                  ></apx-chart>
+                  </div>
+                </div>
+              }
+              <div *ngIf="['Table', 'KPI'].includes(item['chartType'])" class="card-body p-1">
+              @if(item['chartType'] === 'KPI' && item['chartId']=== 25){
+                <div class="big-number-container" >
+                    @for(row of item['kpiData'].rows;track row){
+                      <h1 *ngIf="row?.result_data" class="big-number" [style.font-size]="item['kpiData']?.fontSize+'rem'" [style.color]="item['kpiData']?.color">{{ item['kpiData']?.kpiNumber }}</h1>
+                      }
+                      <i 
+                      class="fa fa-line-chart" 
+                      style="position: absolute; bottom: 0; right: 0; font-size: 1.5rem; color: #888;">
+                    </i>
+                </div>
+              }
+              <div *ngIf="item['chartType'] === 'Table'">
+                <div *ngIf="item['chartType'] === 'Table'" class="table-responsive" >
+                  <table class="table border text-nowrap text-md-nowrap mb-0">
+                      <thead>
+                        <tr>
+                          @for(column of item.tableData?.headers;track column){
+                          <th [ngStyle]="{ 'font-family': item['customizeOptions']?.headerFontFamily, 'font-size': item['customizeOptions']?.headerFontSize, 'text-align': item['customizeOptions']?.headerFontAlignment, 
+                          'font-weight': item['customizeOptions']?.headerFontWeight, 'color': item['customizeOptions']?.headerFontColor, 'font-style': item['customizeOptions']?.headerFontStyle, 'text-decoration': item['customizeOptions']?.headerFontDecoration }">{{ column }}
+                            <!-- <span class=" p-1" style="float: inline-end;" ngbDropdown>
+                              <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
+                                aria-haspopup="true" aria-expanded="false" class=""><i
+                                  class="fe fe-more-vertical fs-18 text-body-secondary"></i>
+                              </a>
+                              <div class="dropdown-menu" ngbDropdownMenu>
+                                <button class="dropdown-item" (click)="tableColumnSort('default', column)">Default</button>
+                                <button class="dropdown-item" (click)="tableColumnSort('ascending', column)">Ascending</button>
+                                <button class="dropdown-item" (click)="tableColumnSort('descending', column)">Descending</button>
+                              </div>
+                            </span> -->
+                          </th>
+                          }
+                        </tr>
+                      </thead>
+                      <tbody>
+                           <!-- @for(row of item.tableData?.rows;track row;let i = $index){ -->
+                    <tr *ngFor="let row of (item?.tableData?.rows || [] | paginate: {itemsPerPage:item?.tableData?.tableItemsPerPage, currentPage:item?.tableData?.tablePage,totalItems:item?.tableData?.tableTotalItems ,id: item.sheetId + 'page'});let i = index" 
+                    [ngClass]="item.tableData?.banding ? (i % 2 === 0 ? 'even-row' : 'odd-row') : ''"
+                    [ngStyle]="{ 'background-color': (i % 2 === 0 ? item?.tableData?.color1 : item?.tableData?.color2) }">
+                      <!-- @for(column of item.tableData?.headers;track column){
+                      <td>{{ row[column] }}</td>
+                      } -->
+                      <td *ngFor="let column of item.tableData?.headers" [ngStyle]="{ 'font-family': item['customizeOptions']?.tableDataFontFamily, 'font-size': item['customizeOptions']?.tableDataFontSize,'font-style': item['customizeOptions']?.tableDataFontStyle,
+                      'text-decoration': item['customizeOptions']?.tableDataFontDecoration, 'text-align': item['customizeOptions']?.tableDataFontAlignment, 'color': item['customizeOptions']?.tableDataFontColor, 'font-weight': item['customizeOptions']?.tableDataFontWeight }">
+                        {{ row[column] }}
+                      </td>
+                    </tr>
+                  
+                      </tbody>
+                  </table>
+                  <pagination-controls previousLabel="Prev" nextLabel="Next" [id]="item.sheetId + 'page'" (pageChange)="isPublicUrl ? pageChangeTableDisplayPublic(item,($event)) : pageChangeTableDisplay(item,($event))"></pagination-controls>
+                  <div  style="float: right;font-size: 15px; margin-top: -41px;">
+                    <select  [(ngModel)]="tableItemsPerPage" (ngModelChange)="isPublicUrl ? pageChangeTableDisplayPublic(item,item?.tableData?.tablePage) : pageChangeTableDisplay(item,item?.tableData?.tablePage)" (mousedown)="stopDragging($event)"class="form-control cursor">
+                          <option  value="10"> 10</option>
+                          <option  value="50"> 50</option>
+                          <option  value="100"> 100</option>
+                          <option  value="500"> 500</option>
+                          <option  value="1000"> 1000</option>
+
+                    </select>
+                 </div>
+              </div>
+              <!-- <app-charts-store [chartData]="item.chartOptions"></app-charts-store> -->
+              </div>
+              </div>
+
+                <!-- <div class="card-footer p-1"> -->
+                    <!-- <button mat-mini-fab (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">
+                      Delete
+                    </button> -->
+                  <!-- </div> -->
+              </div>
+            </gridster-item>
+          </gridster>
+          </div>
+        </div>
+        <!-- <div>
+          <img [src]="screenshotSrc" alt="Screenshot">
+        </div> -->
+    </div>
+    <!-- </div> -->
+</div>
+</div>
+  }
+
+
+
+
+

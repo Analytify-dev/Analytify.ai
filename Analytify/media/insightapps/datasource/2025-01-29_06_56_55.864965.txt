@@ -1,0 +1,191 @@
+{
+    "dragged_array": [
+        {
+            "schema": "QWE.AF L",
+            "table": "quickbooks",
+            "columns": [
+                {
+                    "column": "id",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "Taxable",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "Job",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "BillWithParent",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "Balance",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "BalanceWithJobs",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "value",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "PreferredDeliveryMethod",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "IsProject",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "ClientEntityId",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "domain",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "sparse",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "SyncToken",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "CreateTime",
+                    "datatype": "nullable(datetime64(3))"
+                },
+                {
+                    "column": "LastUpdatedTime",
+                    "datatype": "nullable(datetime64(3))"
+                },
+                {
+                    "column": "FullyQualifiedName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "DisplayName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "PrintOnCheckName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Active",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "V4IDPseudonym",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Address",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Line1",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "City",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Country",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "CountrySubDivisionCode",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "PostalCode",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Notes",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Title",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "GivenName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "MiddleName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "FamilyName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Suffix",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "CompanyName",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "FreeFormNumber",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Lat",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "Long",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "URI",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Level",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "startPosition",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "maxResults",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "time",
+                    "datatype": "nullable(datetime64(3))"
+                },
+                {
+                    "column": "pr_Id",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "quickbooks"
+        }
+    ],
+    "dragged_array_indexing": {
+        "covid_data": 1,
+        "sales": 1,
+        "django_migrations": 1,
+        "employees": 1,
+        "hr_attrition": 1,
+        "quickbooks": 1
+    }
+}

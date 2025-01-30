@@ -1,0 +1,46 @@
+{
+    "dragged_array": [
+        {
+            "schema": "sss",
+            "table": "role",
+            "columns": [
+                {
+                    "column": "role_id",
+                    "datatype": "int32"
+                },
+                {
+                    "column": "role",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "role_desc",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "role"
+        },
+        {
+            "schema": "sss",
+            "table": "user_role",
+            "columns": [
+                {
+                    "column": "id",
+                    "datatype": "int64"
+                },
+                {
+                    "column": "role_id",
+                    "datatype": "int32"
+                },
+                {
+                    "column": "user_id",
+                    "datatype": "int32"
+                }
+            ],
+            "alias": "user_role"
+        }
+    ],
+    "dragged_array_indexing": {
+        "role": 1,
+        "user_role": 1
+    }
+}

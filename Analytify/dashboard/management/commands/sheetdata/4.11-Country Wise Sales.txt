@@ -1,0 +1,332 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "country",
+            "data_type": "string",
+            "table_name": "sales"
+        }
+    ],
+    "columns_data": [
+        [
+            "country",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "sales",
+            "data_type": "int64",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "sales",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [
+        {
+            "column": "country",
+            "result_data": [
+                "Sweden",
+                "Japan",
+                "Finland",
+                "Belgium",
+                "Norway",
+                "Ireland",
+                "Canada",
+                "France",
+                "Italy",
+                "Spain",
+                "UK",
+                "USA",
+                "Austria",
+                "Germany",
+                "Denmark",
+                "Switzerland",
+                "Philippines",
+                "Australia",
+                "Singapore"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(sales)",
+            "result_data": [
+                202807,
+                188169,
+                329583,
+                108412,
+                307465,
+                57755,
+                224080,
+                1110914,
+                374677,
+                1215687,
+                478884,
+                3627977,
+                202067,
+                220473,
+                245638,
+                117712,
+                94015,
+                630618,
+                288491
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 19,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiNumber": "99.04K",
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "savedChartOptions": {
+        "tooltip": {
+            "trigger": "item",
+            "showDelay": 0,
+            "transitionDuration": 0.2
+        },
+        "visualMap": {
+            "min": 57755,
+            "max": 3627977,
+            "text": [
+                "High",
+                "Low"
+            ],
+            "realtime": false,
+            "calculable": true,
+            "inRange": {
+                "color": [
+                    "lightskyblue",
+                    "yellow",
+                    "orangered"
+                ]
+            }
+        },
+        "series": [
+            {
+                "type": "map",
+                "map": "world",
+                "roam": false,
+                "data": [
+                    {
+                        "name": "Sweden",
+                        "value": 202807,
+                        "sum(sales)": 202807
+                    },
+                    {
+                        "name": "Japan",
+                        "value": 188169,
+                        "sum(sales)": 188169
+                    },
+                    {
+                        "name": "Finland",
+                        "value": 329583,
+                        "sum(sales)": 329583
+                    },
+                    {
+                        "name": "Belgium",
+                        "value": 108412,
+                        "sum(sales)": 108412
+                    },
+                    {
+                        "name": "Norway",
+                        "value": 307465,
+                        "sum(sales)": 307465
+                    },
+                    {
+                        "name": "Ireland",
+                        "value": 57755,
+                        "sum(sales)": 57755
+                    },
+                    {
+                        "name": "Canada",
+                        "value": 224080,
+                        "sum(sales)": 224080
+                    },
+                    {
+                        "name": "France",
+                        "value": 1110914,
+                        "sum(sales)": 1110914
+                    },
+                    {
+                        "name": "Italy",
+                        "value": 374677,
+                        "sum(sales)": 374677
+                    },
+                    {
+                        "name": "Spain",
+                        "value": 1215687,
+                        "sum(sales)": 1215687
+                    },
+                    {
+                        "name": "UK",
+                        "value": 478884,
+                        "sum(sales)": 478884
+                    },
+                    {
+                        "name": "USA",
+                        "value": 3627977,
+                        "sum(sales)": 3627977
+                    },
+                    {
+                        "name": "Austria",
+                        "value": 202067,
+                        "sum(sales)": 202067
+                    },
+                    {
+                        "name": "Germany",
+                        "value": 220473,
+                        "sum(sales)": 220473
+                    },
+                    {
+                        "name": "Denmark",
+                        "value": 245638,
+                        "sum(sales)": 245638
+                    },
+                    {
+                        "name": "Switzerland",
+                        "value": 117712,
+                        "sum(sales)": 117712
+                    },
+                    {
+                        "name": "Philippines",
+                        "value": 94015,
+                        "sum(sales)": 94015
+                    },
+                    {
+                        "name": "Australia",
+                        "value": 630618,
+                        "sum(sales)": 630618
+                    },
+                    {
+                        "name": "Singapore",
+                        "value": 288491,
+                        "sum(sales)": 288491
+                    }
+                ]
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#2392c1",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#2392c1",
+        "yLabelSwitch": true,
+        "yGridColor": "#2392c1",
+        "yGridSwitch": false,
+        "yLabelColor": "#2392c1",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#fff",
+        "color": "#2392c1",
+        "ylabelFontWeight": 400,
+        "isBold": false,
+        "yLabelFontFamily": "sans-serif",
+        "yLabelFontSize": 12,
+        "bandingSwitch": false,
+        "backgroundColorSwitch": false,
+        "chartColorSwitch": false,
+        "barColorSwitch": false,
+        "lineColorSwitch": false,
+        "gridLineColorSwitch": false,
+        "xLabelColorSwitch": false,
+        "xGridLineColorSwitch": false,
+        "yLabelColorSwitch": false,
+        "yGridLineColorSwitch": false,
+        "bandingColorSwitch": false,
+        "kpiColorSwitch": false,
+        "funnelColorSwitch": false,
+        "kpiColor": "#000000",
+        "barColor": "#4382f7",
+        "lineColor": "#38ff98",
+        "GridColor": "#089ffc",
+        "legendSwitch": true,
+        "dataLabels": true,
+        "label": true,
+        "donutSize": 50,
+        "isDistributed": false,
+        "kpiFontSize": "3",
+        "minValueGuage": 0,
+        "maxValueGuage": 100,
+        "donutDecimalPlaces": 0,
+        "decimalPlaces": 0,
+        "legendsAllignment": "bottom",
+        "displayUnits": "none",
+        "suffix": "",
+        "prefix": "",
+        "dataLabelsFontFamily": "sans-serif",
+        "dataLabelsFontSize": "12px",
+        "dataLabelsFontPosition": "top",
+        "measureAlignment": "center",
+        "dimensionAlignment": "center",
+        "tableDataFontFamily": "sans-serif",
+        "tableDataFontSize": "12px",
+        "tableDataFontWeight": 400,
+        "tableDataFontStyle": "normal",
+        "tableDataFontDecoration": "none",
+        "tableDataFontColor": "#000000",
+        "tableDataFontAlignment": "left",
+        "headerFontFamily": "'Arial', sans-serif",
+        "headerFontSize": "16px",
+        "headerFontWeight": 700,
+        "headerFontStyle": "normal",
+        "headerFontDecoration": "none",
+        "headerFontColor": "#000000",
+        "headerFontAlignment": "left",
+        "dimeansionColor": "#2392c1",
+        "measureColor": "#2392c1",
+        "dataLabelsColor": "#2392c1",
+        "sortType": 0
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

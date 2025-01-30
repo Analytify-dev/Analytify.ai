@@ -1,0 +1,28 @@
+{
+    "dragged_array": [
+        {
+            "schema": "QWE.AF L",
+            "table": "sqlite_sequence",
+            "columns": [
+                {
+                    "column": "name",
+                    "datatype": "string"
+                },
+                {
+                    "column": "seq",
+                    "datatype": "string"
+                }
+            ],
+            "alias": "sqlite_sequence"
+        }
+    ],
+    "dragged_array_indexing": {
+        "covid_data": 1,
+        "sales": 1,
+        "django_migrations": 1,
+        "employees": 1,
+        "hr_attrition": 1,
+        "quickbooks": 1,
+        "sqlite_sequence": 1
+    }
+}

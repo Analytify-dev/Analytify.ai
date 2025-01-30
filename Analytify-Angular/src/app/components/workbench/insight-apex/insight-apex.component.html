@@ -1,0 +1,217 @@
+@if(chartType === 'bar'){
+    <div class="card-body">
+        <div id="bar-chart" class="chartfit">
+            <apx-chart #barChart 
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [yaxis]="chartOptions.yaxis" 
+            [grid]="chartOptions.grid"
+            [plotOptions]="chartOptions.plotOptions"
+            [dataLabels]="chartOptions.dataLabels"
+            [colors]="chartOptions.colors">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'area'){
+    <div class="card-body">
+        <div id="area-chart">
+            <apx-chart #areaChart
+            [series]="chartOptions.series" 
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [xaxis]="chartOptions.xaxis" 
+            [stroke]="chartOptions.stroke"
+            [dataLabels]="chartOptions.dataLabels" 
+            [yaxis]="chartOptions.yaxis" 
+            [legend]="chartOptions.legend"  
+            [grid]="chartOptions.grid"
+            [colors]="chartOptions.colors">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'line'){
+    <div class="card-body">
+        <div id="line-chart">
+            <apx-chart #lineChart
+            [series]="chartOptions.series || []" 
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis" 
+            [dataLabels]="chartOptions.dataLabels" 
+            [yaxis]="chartOptions.yaxis"
+            [grid]="chartOptions.grid" 
+            [stroke]="chartOptions.stroke"
+            [colors]="chartOptions.colors">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'pie'){
+    <div class="card-body">
+        <div id="pie-basic">
+            <apx-chart #piechart
+            [series]="chartOptions.series" 
+            [chart]="chartOptions.chart" 
+            [legend]="chartOptions.legend"
+            [labels]="chartOptions.labels" 
+            [colors]="chartOptions.colors" 
+            [dataLabels]="chartOptions.dataLabels">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'sidebyside'){
+    <div class="card-body">
+        <div id="column-chart">
+            <apx-chart #sidebyside
+            [series]="chartOptions.series" 
+            [chart]="chartOptions.chart"
+            [dataLabels]="chartOptions.dataLabels" 
+            [plotOptions]="chartOptions.plotOptions"
+            [yaxis]="chartOptions.yaxis" 
+            [legend]="chartOptions.legend" 
+            [fill]="chartOptions.fill"
+            [stroke]="chartOptions.stroke" 
+            [tooltip]="chartOptions.tooltip" 
+            [colors]="chartOptions.colors" 
+            [grid]="chartOptions.grid"
+            [xaxis]="chartOptions.xaxis">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'stocked'){
+    <div id="chart">
+        <apx-chart #stocked
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [dataLabels]="chartOptions.dataLabels"
+          [plotOptions]="chartOptions.plotOptions"
+          [responsive]="chartOptions.responsive"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions.yaxis"
+          [legend]="chartOptions.legend"
+          [fill]="chartOptions.fill"
+          [grid]="chartOptions.grid"
+          [colors]="chartOptions.colors"
+        ></apx-chart>
+    </div>
+} @else if(chartType === 'barline'){
+    <div class="card-body">
+        <div id="mixed-linecolumn">
+            <apx-chart #barline
+            [series]="chartOptions.series" 
+            [chart]="chartOptions.chart"
+            [yaxis]="chartOptions.yaxis" 
+            [xaxis]="chartOptions.xaxis" 
+            [labels]="chartOptions.labels"
+            [stroke]="chartOptions.stroke" 
+            [title]="chartOptions.title"  
+            [grid]="chartOptions.grid"
+            [dataLabels]="chartOptions.dataLabels" 
+            [fill]="chartOptions.fill"
+            [tooltip]="chartOptions.tooltip"
+            [colors]="chartOptions.colors">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'hstocked'){
+    <div id="chart">
+        <apx-chart #horizentalstocked
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [responsive]="chartOptions.responsive"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [grid]="chartOptions.grid"
+        [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill"
+        [colors]="chartOptions.colors">
+        </apx-chart>
+    </div>
+} @else if(chartType === 'hgrouped'){
+    <div id="chart">
+        <apx-chart #grouped
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [responsive]="chartOptions.responsive"
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [grid]="chartOptions.grid"
+        [legend]="chartOptions.legend"
+        [fill]="chartOptions.fill"
+        [colors]="chartOptions.colors">
+        </apx-chart>
+    </div>
+} @else if(chartType === 'multiline'){
+    <div id="chart">
+        <apx-chart #multiline
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [xaxis]="chartOptions.xaxis"
+        [stroke]="chartOptions.stroke"
+        [tooltip]="chartOptions.tooltip"
+        [dataLabels]="chartOptions.dataLabels"
+        [legend]="chartOptions.legend"
+        [markers]="chartOptions.markers"
+        [grid]="chartOptions.grid"
+        [yaxis]="chartOptions.yaxis"
+        [title]="chartOptions.title"
+        [colors]="chartOptions.colors">
+        </apx-chart>
+    </div>
+} @else if(chartType === 'donut'){
+    <div class="card-body">
+        <div id="donutchart">
+            <apx-chart #donutchart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [plotOptions] = "chartOptions.plotOptions"
+            [dataLabels]="chartOptions.dataLabels"
+            [legend]="chartOptions.legend" 
+            [colors]="chartOptions.colors">
+            </apx-chart>
+        </div>
+    </div>
+} @else if(chartType === 'heatmap'){
+    <div id="chart">
+        <apx-chart #heatmapchart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"   
+        [xaxis]="chartOptions.xaxis"
+        [yaxis]="chartOptions.yaxis"
+        [plotOptions]="chartOptions.plotOptions"
+        [dataLabels]="chartOptions.dataLabels"
+        [legend]="chartOptions.legend"
+        [grid]="chartOptions.grid"
+        [colors]="chartOptions.colors">
+        </apx-chart>
+    </div>
+} @else if(chartType === 'funnel'){
+    <div id="chart">
+        <apx-chart #funnelChart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [xaxis]="chartOptions.xaxis"
+        [colors]="chartOptions.colors"
+        [title]="chartOptions.title"
+        [legend]="chartOptions.legend">
+        </apx-chart>
+    </div>
+} @else if(chartType === 'guage'){
+    <div id="chart">
+        <apx-chart #guageChart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"   
+        [plotOptions]="chartOptions.plotOptions"
+        [labels]="chartOptions.labels"
+        [tooltip]="chartOptions.tooltip"
+        [stroke]="chartOptions.stroke"
+        [colors]="chartOptions.colors">
+        </apx-chart>
+    </div>
+}

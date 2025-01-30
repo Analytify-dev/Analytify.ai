@@ -1,0 +1,1796 @@
+[
+    {
+        "id": "1397594d-1ced-4ca4-9625-5202a7c19662",
+        "x": 0,
+        "y": 0,
+        "rows": 4,
+        "cols": 5,
+        "data": {
+            "title": "Total Users",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Users</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1169,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 25,
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 50,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "count(pr_Id)",
+                    "result_data": [
+                        50
+                    ]
+                }
+            ],
+            "fontSize": 3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": null,
+        "row_Data": null,
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "43edac5d-1ba1-4543-8fb8-5f13203fc113",
+        "x": 0,
+        "y": 8,
+        "rows": 4,
+        "cols": 5,
+        "data": {
+            "title": "Active Users",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Active Users</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1170,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 25,
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 22,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "count(pr_Id)",
+                    "result_data": [
+                        22
+                    ]
+                }
+            ],
+            "fontSize": 3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": null,
+        "row_Data": null,
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "93d2c25f-2c7b-4cf3-a3a2-45f31e654d9e",
+        "x": 0,
+        "y": 4,
+        "rows": 4,
+        "cols": 5,
+        "data": {
+            "title": "Inactive Users",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Inactive Users</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1171,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 25,
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 28,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "count(pr_Id)",
+                    "result_data": [
+                        28
+                    ]
+                }
+            ],
+            "fontSize": 3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": null,
+        "row_Data": null,
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "c3fe8d93-96e5-46a4-8126-138162a9d477",
+        "x": 0,
+        "y": 12,
+        "rows": 4,
+        "cols": 5,
+        "data": {
+            "title": "Failed Login Attempts",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Failed Login Attempts</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1172,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 25,
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 127,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "sum(NumberOfFailedLogins)",
+                    "result_data": [
+                        127
+                    ]
+                }
+            ],
+            "fontSize": 3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": null,
+        "row_Data": null,
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "21c1ea2b-2f4f-4df4-b8ee-3e617e0dcf96",
+        "x": 5,
+        "y": 0,
+        "rows": 7,
+        "cols": 15,
+        "data": {
+            "title": "Count of users by year",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Count of users by year</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1217,
+        "chartType": "pie",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 24,
+        "chartOptions": {
+            "backgroundColor": "#fff",
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "orient": "vertical",
+                "left": "left",
+                "type": "scroll",
+                "show": true
+            },
+            "label": {
+                "show": true,
+                "formatter": "{b}: {d}%"
+            },
+            "series": [
+                {
+                    "type": "pie",
+                    "radius": "50%",
+                    "data": [
+                        {
+                            "value": 1,
+                            "name": "2023"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2019"
+                        },
+                        {
+                            "value": 3,
+                            "name": "1983"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2005"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1996"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1972"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1986"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2015"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1988"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2024"
+                        },
+                        {
+                            "value": 2,
+                            "name": "1979"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1998"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2002"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1970"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1981"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2012"
+                        },
+                        {
+                            "value": 3,
+                            "name": "1994"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2007"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1997"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1982"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1973"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2014"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1987"
+                        },
+                        {
+                            "value": 2,
+                            "name": "1971"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1985"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2016"
+                        },
+                        {
+                            "value": 3,
+                            "name": "2003"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2006"
+                        },
+                        {
+                            "value": 4,
+                            "name": "1980"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2013"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1989"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1999"
+                        },
+                        {
+                            "value": 2,
+                            "name": "1978"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2020"
+                        }
+                    ],
+                    "emphasis": {
+                        "itemStyle": {
+                            "shadowBlur": 10,
+                            "shadowOffsetX": 0,
+                            "shadowColor": "rgba(0, 0, 0, 0.5)"
+                        }
+                    },
+                    "label": {
+                        "show": true
+                    }
+                }
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "echartOptions": {
+            "backgroundColor": "#fff",
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "orient": "vertical",
+                "left": "left",
+                "type": "scroll",
+                "show": true
+            },
+            "label": {
+                "show": true,
+                "formatter": "{b}: {d}%"
+            },
+            "series": [
+                {
+                    "type": "pie",
+                    "radius": "50%",
+                    "data": [
+                        {
+                            "value": 1,
+                            "name": "2023"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2019"
+                        },
+                        {
+                            "value": 3,
+                            "name": "1983"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2005"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1996"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1972"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1986"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2015"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1988"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2024"
+                        },
+                        {
+                            "value": 2,
+                            "name": "1979"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1998"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2002"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1970"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1981"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2012"
+                        },
+                        {
+                            "value": 3,
+                            "name": "1994"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2007"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1997"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1982"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1973"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2014"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1987"
+                        },
+                        {
+                            "value": 2,
+                            "name": "1971"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1985"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2016"
+                        },
+                        {
+                            "value": 3,
+                            "name": "2003"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2006"
+                        },
+                        {
+                            "value": 4,
+                            "name": "1980"
+                        },
+                        {
+                            "value": 1,
+                            "name": "2013"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1989"
+                        },
+                        {
+                            "value": 1,
+                            "name": "1999"
+                        },
+                        {
+                            "value": 2,
+                            "name": "1978"
+                        },
+                        {
+                            "value": 2,
+                            "name": "2020"
+                        }
+                    ],
+                    "emphasis": {
+                        "itemStyle": {
+                            "shadowBlur": 10,
+                            "shadowOffsetX": 0,
+                            "shadowColor": "rgba(0, 0, 0, 0.5)"
+                        }
+                    },
+                    "label": {
+                        "show": true
+                    }
+                }
+            ]
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "CreatedDate",
+                "date",
+                "year",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "fcb90a35-5980-44b9-861b-419d2babb2be",
+        "x": 5,
+        "y": 7,
+        "rows": 9,
+        "cols": 15,
+        "data": {
+            "title": "Country Wise Users",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Country Wise Users</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1218,
+        "chartType": "WORLD MAP",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 29,
+        "chartOptions": {
+            "tooltip": {},
+            "visualMap": {
+                "min": 1,
+                "max": 3,
+                "text": [
+                    "High",
+                    "Low"
+                ],
+                "realtime": false,
+                "calculable": true,
+                "inRange": {
+                    "color": [
+                        "lightskyblue",
+                        "yellow",
+                        "orangered"
+                    ]
+                }
+            },
+            "series": [
+                {
+                    "type": "map",
+                    "map": "world",
+                    "roam": false,
+                    "data": [
+                        {
+                            "name": "Sweden",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Malaysia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Botswana",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Uruguay",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Burundi",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Barbados",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Guinea",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Belarus",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Ecuador",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Morocco",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "India",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Portugal",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Latvia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Dominica",
+                            "value": 3,
+                            "count(pr_Id)": 3
+                        },
+                        {
+                            "name": "Angola",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Georgia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Armenia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Italy",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Greece",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Cambodia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Mexico",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Aruba",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Yemen",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Bulgaria",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Switzerland",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Madagascar",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Gibraltar",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Cayman Islands",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Burkina Faso",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Mozambique",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Mauritius",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Guadeloupe",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Guinea-Bissau",
+                            "value": 2,
+                            "count(pr_Id)": 2
+                        },
+                        {
+                            "name": "Singapore",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Hong Kong",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Equatorial Guinea",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Sao Tome and Principe",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Libyan Arab Jamahiriya",
+                            "value": 2,
+                            "count(pr_Id)": 2
+                        },
+                        {
+                            "name": "Trinidad and Tobago",
+                            "value": 3,
+                            "count(pr_Id)": 3
+                        },
+                        {
+                            "name": "Antigua and Barbuda",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Russian Federation",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Bouvet Island (Bouvetoya)",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Saint Pierre and Miquelon",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Lao Peoples Democratic Republic",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "echartOptions": {
+            "tooltip": {},
+            "visualMap": {
+                "min": 1,
+                "max": 3,
+                "text": [
+                    "High",
+                    "Low"
+                ],
+                "realtime": false,
+                "calculable": true,
+                "inRange": {
+                    "color": [
+                        "lightskyblue",
+                        "yellow",
+                        "orangered"
+                    ]
+                }
+            },
+            "series": [
+                {
+                    "type": "map",
+                    "map": "world",
+                    "roam": false,
+                    "data": [
+                        {
+                            "name": "Sweden",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Malaysia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Botswana",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Uruguay",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Burundi",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Barbados",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Guinea",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Belarus",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Ecuador",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Morocco",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "India",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Portugal",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Latvia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Dominica",
+                            "value": 3,
+                            "count(pr_Id)": 3
+                        },
+                        {
+                            "name": "Angola",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Georgia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Armenia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Italy",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Greece",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Cambodia",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Mexico",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Aruba",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Yemen",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Bulgaria",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Switzerland",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Madagascar",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Gibraltar",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Cayman Islands",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Burkina Faso",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Mozambique",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Mauritius",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Guadeloupe",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Guinea-Bissau",
+                            "value": 2,
+                            "count(pr_Id)": 2
+                        },
+                        {
+                            "name": "Singapore",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Hong Kong",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Equatorial Guinea",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Sao Tome and Principe",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Libyan Arab Jamahiriya",
+                            "value": 2,
+                            "count(pr_Id)": 2
+                        },
+                        {
+                            "name": "Trinidad and Tobago",
+                            "value": 3,
+                            "count(pr_Id)": 3
+                        },
+                        {
+                            "name": "Antigua and Barbuda",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Russian Federation",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Bouvet Island (Bouvetoya)",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Saint Pierre and Miquelon",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        },
+                        {
+                            "name": "Lao Peoples Democratic Republic",
+                            "value": 1,
+                            "count(pr_Id)": 1
+                        }
+                    ]
+                }
+            ]
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "Country",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "pr_Id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "0de79e0a-358a-48be-8827-6b81717e9129",
+        "x": 0,
+        "y": 16,
+        "rows": 12,
+        "cols": 20,
+        "data": {
+            "title": "Salesforce Overview",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Salesforce Overview</strong></span></p>"
+        },
+        "sheetType": "Table",
+        "sheetId": 1219,
+        "chartType": "Table",
+        "databaseId": 226,
+        "qrySetId": 357,
+        "chartId": 1,
+        "tableData": {
+            "headers": [
+                "EmployeeNumber",
+                "Username",
+                "Email",
+                "CompanyName",
+                "Department",
+                "Title",
+                "Country"
+            ],
+            "rows": [
+                {
+                    "EmployeeNumber": 80,
+                    "Username": "jacquelinemartin",
+                    "Email": "michael58@example.org",
+                    "CompanyName": "Guerra, Thomas and Stewart",
+                    "Department": "Museum/gallery conservator",
+                    "Title": "Sales promotion account executive",
+                    "Country": "Dominica"
+                },
+                {
+                    "EmployeeNumber": 89,
+                    "Username": "johngraham",
+                    "Email": "tcampbell@example.com",
+                    "CompanyName": "Fernandez, Powers and Hubbard",
+                    "Department": "Medical technical officer",
+                    "Title": "Clinical cytogeneticist",
+                    "Country": "Greece"
+                },
+                {
+                    "EmployeeNumber": 97,
+                    "Username": "julianichols",
+                    "Email": "tim05@example.net",
+                    "CompanyName": "Clayton, Ray and Reilly",
+                    "Department": "Administrator, sports",
+                    "Title": "Midwife",
+                    "Country": "Trinidad and Tobago"
+                },
+                {
+                    "EmployeeNumber": 74,
+                    "Username": "jpearson",
+                    "Email": "swade@example.net",
+                    "CompanyName": "Sanchez-Rogers",
+                    "Department": "Air traffic controller",
+                    "Title": "Engineer, production",
+                    "Country": "Antigua and Barbuda"
+                },
+                {
+                    "EmployeeNumber": 78,
+                    "Username": "andersonwilliam",
+                    "Email": "billy09@example.net",
+                    "CompanyName": "Bradford, Frost and White",
+                    "Department": "Chief Executive Officer",
+                    "Title": "Herbalist",
+                    "Country": "India"
+                },
+                {
+                    "EmployeeNumber": 68,
+                    "Username": "allisonhoward",
+                    "Email": "julie78@example.net",
+                    "CompanyName": "Dixon Ltd",
+                    "Department": "Sport and exercise psychologist",
+                    "Title": "Interpreter",
+                    "Country": "Bulgaria"
+                },
+                {
+                    "EmployeeNumber": 59,
+                    "Username": "larcher",
+                    "Email": "susan76@example.org",
+                    "CompanyName": "Burton, Elliott and Bradley",
+                    "Department": "Herpetologist",
+                    "Title": "Naval architect",
+                    "Country": "Armenia"
+                },
+                {
+                    "EmployeeNumber": 100,
+                    "Username": "charles96",
+                    "Email": "kimberly10@example.org",
+                    "CompanyName": "Hawkins, Lynch and Webb",
+                    "Department": "Exercise physiologist",
+                    "Title": "Engineer, electronics",
+                    "Country": "Latvia"
+                },
+                {
+                    "EmployeeNumber": 69,
+                    "Username": "ddaugherty",
+                    "Email": "karen71@example.net",
+                    "CompanyName": "Johnson, Martin and Solomon",
+                    "Department": "Recruitment consultant",
+                    "Title": "Geographical information systems officer",
+                    "Country": "Uruguay"
+                },
+                {
+                    "EmployeeNumber": 90,
+                    "Username": "rachel60",
+                    "Email": "jaredmiller@example.net",
+                    "CompanyName": "Ryan, Wilson and Hunt",
+                    "Department": "Operations geologist",
+                    "Title": "Scientist, audiological",
+                    "Country": "Sao Tome and Principe"
+                }
+            ],
+            "banding": true,
+            "color1": "#fafafa",
+            "color2": "#eeeeee"
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "drillDownHierarchy": [],
+        "column_Data": null,
+        "row_Data": null,
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": true,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fcfcfc",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": true,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": true,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": true,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "color1": "#fafafa",
+            "color2": "#eeeeee",
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "13px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "center",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    }
+]

@@ -1,0 +1,738 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "Country",
+            "data_type": "string",
+            "table_name": "quickbooks"
+        }
+    ],
+    "columns_data": [
+        [
+            "Country",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "Balance",
+            "data_type": "float32",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "Balance",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [
+        {
+            "column": "Country",
+            "result_data": [
+                "Tuvalu",
+                "Reunion",
+                "Niger",
+                "Uganda",
+                "Chile",
+                "Zimbabwe",
+                "Tonga",
+                "Niue",
+                "Finland",
+                "Mongolia",
+                "Kuwait",
+                "Slovenia",
+                "Kiribati",
+                "Belarus",
+                "Jamaica",
+                "Togo",
+                "Andorra",
+                "Monaco",
+                "Morocco",
+                "Malawi",
+                "Samoa",
+                "Bermuda",
+                "Namibia",
+                "Chad",
+                "China",
+                "Georgia",
+                "Pakistan",
+                "Greece",
+                "Comoros",
+                "Cambodia",
+                "Iraq",
+                "Iran",
+                "Spain",
+                "Palau",
+                "Mexico",
+                "Cyprus",
+                "Yemen",
+                "Tanzania",
+                "Iceland",
+                "Denmark",
+                "Bolivia",
+                "Bhutan",
+                "Venezuela",
+                "Mauritania",
+                "Gibraltar",
+                "Indonesia",
+                "Saint Barthelemy",
+                "Timor-Leste",
+                "Christmas Island",
+                "Cayman Islands",
+                "Western Sahara",
+                "Montserrat",
+                "Mozambique",
+                "French Polynesia",
+                "Pitcairn Islands",
+                "Isle of Man",
+                "Guinea-Bissau",
+                "New Caledonia",
+                "Uzbekistan",
+                "Norfolk Island",
+                "Saint Martin",
+                "Costa Rica",
+                "Turkmenistan",
+                "Solomon Islands",
+                "Micronesia",
+                "Swaziland",
+                "Bosnia and Herzegovina",
+                "Trinidad and Tobago",
+                "Antigua and Barbuda",
+                "Central African Republic",
+                "Russian Federation",
+                "Cocos (Keeling) Islands",
+                "Dominican Republic",
+                "British Indian Ocean Territory (Chagos Archipelago)",
+                "Antarctica (the territory South of 60 deg S)",
+                "Heard Island and McDonald Islands",
+                "Lao Peoples Democratic Republic"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(Balance)",
+            "result_data": [
+                12782.250244140625,
+                2047.1700439453125,
+                1105.1199951171875,
+                4008.8798828125,
+                2571.590087890625,
+                1372.739990234375,
+                1580.550048828125,
+                1123.0899658203125,
+                1490.31005859375,
+                17144.719970703125,
+                1259.6300048828125,
+                4374.06982421875,
+                4489.3701171875,
+                2575.10009765625,
+                3302.159912109375,
+                3779.10009765625,
+                3109.320068359375,
+                1768.719970703125,
+                1724.72998046875,
+                7440.0498046875,
+                2368.89990234375,
+                2299.6201171875,
+                4040.929931640625,
+                5637.1700439453125,
+                2363.080078125,
+                4433.969970703125,
+                1561.9300537109375,
+                4982.669921875,
+                2243.050048828125,
+                3383.3701171875,
+                275.3999938964844,
+                3354.030029296875,
+                3775.56005859375,
+                4352.6201171875,
+                3747.35009765625,
+                3923.9300537109375,
+                375.8399963378906,
+                2915.9700927734375,
+                2350.8798828125,
+                2318.89990234375,
+                4714.85986328125,
+                134.07000732421875,
+                3950.52001953125,
+                924.9999694824219,
+                7756.449951171875,
+                4032.6600341796875,
+                1088.6400146484375,
+                11929.869873046875,
+                608.3699951171875,
+                4376.31982421875,
+                281.6199951171875,
+                8401.330017089844,
+                5256.3499755859375,
+                4412.480041503906,
+                2239.320068359375,
+                3159.739990234375,
+                1453.6500244140625,
+                2689.31005859375,
+                4996.68017578125,
+                1457.3800048828125,
+                4195.58984375,
+                2307.949951171875,
+                372.6499938964844,
+                5376.340087890625,
+                2723.070068359375,
+                1981.3499755859375,
+                3360.280029296875,
+                2568.8798828125,
+                1705.719970703125,
+                3223.580078125,
+                4600.83984375,
+                481.42999267578125,
+                1488.2900390625,
+                4689.85986328125,
+                7086.159912109375,
+                151.94000244140625,
+                460.32000732421875
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 77,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiNumber": "248.33K",
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "savedChartOptions": {
+        "tooltip": {
+            "trigger": "item",
+            "showDelay": 0,
+            "transitionDuration": 0.2
+        },
+        "visualMap": {
+            "min": 134.07000732421875,
+            "max": 17144.719970703125,
+            "text": [
+                "High",
+                "Low"
+            ],
+            "realtime": false,
+            "calculable": true,
+            "inRange": {
+                "color": [
+                    "lightskyblue",
+                    "yellow",
+                    "orangered"
+                ]
+            }
+        },
+        "series": [
+            {
+                "type": "map",
+                "map": "world",
+                "roam": false,
+                "data": [
+                    {
+                        "name": "Tuvalu",
+                        "value": 12782.250244140625,
+                        "sum(Balance)": 12782.250244140625
+                    },
+                    {
+                        "name": "Reunion",
+                        "value": 2047.1700439453125,
+                        "sum(Balance)": 2047.1700439453125
+                    },
+                    {
+                        "name": "Niger",
+                        "value": 1105.1199951171875,
+                        "sum(Balance)": 1105.1199951171875
+                    },
+                    {
+                        "name": "Uganda",
+                        "value": 4008.8798828125,
+                        "sum(Balance)": 4008.8798828125
+                    },
+                    {
+                        "name": "Chile",
+                        "value": 2571.590087890625,
+                        "sum(Balance)": 2571.590087890625
+                    },
+                    {
+                        "name": "Zimbabwe",
+                        "value": 1372.739990234375,
+                        "sum(Balance)": 1372.739990234375
+                    },
+                    {
+                        "name": "Tonga",
+                        "value": 1580.550048828125,
+                        "sum(Balance)": 1580.550048828125
+                    },
+                    {
+                        "name": "Niue",
+                        "value": 1123.0899658203125,
+                        "sum(Balance)": 1123.0899658203125
+                    },
+                    {
+                        "name": "Finland",
+                        "value": 1490.31005859375,
+                        "sum(Balance)": 1490.31005859375
+                    },
+                    {
+                        "name": "Mongolia",
+                        "value": 17144.719970703125,
+                        "sum(Balance)": 17144.719970703125
+                    },
+                    {
+                        "name": "Kuwait",
+                        "value": 1259.6300048828125,
+                        "sum(Balance)": 1259.6300048828125
+                    },
+                    {
+                        "name": "Slovenia",
+                        "value": 4374.06982421875,
+                        "sum(Balance)": 4374.06982421875
+                    },
+                    {
+                        "name": "Kiribati",
+                        "value": 4489.3701171875,
+                        "sum(Balance)": 4489.3701171875
+                    },
+                    {
+                        "name": "Belarus",
+                        "value": 2575.10009765625,
+                        "sum(Balance)": 2575.10009765625
+                    },
+                    {
+                        "name": "Jamaica",
+                        "value": 3302.159912109375,
+                        "sum(Balance)": 3302.159912109375
+                    },
+                    {
+                        "name": "Togo",
+                        "value": 3779.10009765625,
+                        "sum(Balance)": 3779.10009765625
+                    },
+                    {
+                        "name": "Andorra",
+                        "value": 3109.320068359375,
+                        "sum(Balance)": 3109.320068359375
+                    },
+                    {
+                        "name": "Monaco",
+                        "value": 1768.719970703125,
+                        "sum(Balance)": 1768.719970703125
+                    },
+                    {
+                        "name": "Morocco",
+                        "value": 1724.72998046875,
+                        "sum(Balance)": 1724.72998046875
+                    },
+                    {
+                        "name": "Malawi",
+                        "value": 7440.0498046875,
+                        "sum(Balance)": 7440.0498046875
+                    },
+                    {
+                        "name": "Samoa",
+                        "value": 2368.89990234375,
+                        "sum(Balance)": 2368.89990234375
+                    },
+                    {
+                        "name": "Bermuda",
+                        "value": 2299.6201171875,
+                        "sum(Balance)": 2299.6201171875
+                    },
+                    {
+                        "name": "Namibia",
+                        "value": 4040.929931640625,
+                        "sum(Balance)": 4040.929931640625
+                    },
+                    {
+                        "name": "Chad",
+                        "value": 5637.1700439453125,
+                        "sum(Balance)": 5637.1700439453125
+                    },
+                    {
+                        "name": "China",
+                        "value": 2363.080078125,
+                        "sum(Balance)": 2363.080078125
+                    },
+                    {
+                        "name": "Georgia",
+                        "value": 4433.969970703125,
+                        "sum(Balance)": 4433.969970703125
+                    },
+                    {
+                        "name": "Pakistan",
+                        "value": 1561.9300537109375,
+                        "sum(Balance)": 1561.9300537109375
+                    },
+                    {
+                        "name": "Greece",
+                        "value": 4982.669921875,
+                        "sum(Balance)": 4982.669921875
+                    },
+                    {
+                        "name": "Comoros",
+                        "value": 2243.050048828125,
+                        "sum(Balance)": 2243.050048828125
+                    },
+                    {
+                        "name": "Cambodia",
+                        "value": 3383.3701171875,
+                        "sum(Balance)": 3383.3701171875
+                    },
+                    {
+                        "name": "Iraq",
+                        "value": 275.3999938964844,
+                        "sum(Balance)": 275.3999938964844
+                    },
+                    {
+                        "name": "Iran",
+                        "value": 3354.030029296875,
+                        "sum(Balance)": 3354.030029296875
+                    },
+                    {
+                        "name": "Spain",
+                        "value": 3775.56005859375,
+                        "sum(Balance)": 3775.56005859375
+                    },
+                    {
+                        "name": "Palau",
+                        "value": 4352.6201171875,
+                        "sum(Balance)": 4352.6201171875
+                    },
+                    {
+                        "name": "Mexico",
+                        "value": 3747.35009765625,
+                        "sum(Balance)": 3747.35009765625
+                    },
+                    {
+                        "name": "Cyprus",
+                        "value": 3923.9300537109375,
+                        "sum(Balance)": 3923.9300537109375
+                    },
+                    {
+                        "name": "Yemen",
+                        "value": 375.8399963378906,
+                        "sum(Balance)": 375.8399963378906
+                    },
+                    {
+                        "name": "Tanzania",
+                        "value": 2915.9700927734375,
+                        "sum(Balance)": 2915.9700927734375
+                    },
+                    {
+                        "name": "Iceland",
+                        "value": 2350.8798828125,
+                        "sum(Balance)": 2350.8798828125
+                    },
+                    {
+                        "name": "Denmark",
+                        "value": 2318.89990234375,
+                        "sum(Balance)": 2318.89990234375
+                    },
+                    {
+                        "name": "Bolivia",
+                        "value": 4714.85986328125,
+                        "sum(Balance)": 4714.85986328125
+                    },
+                    {
+                        "name": "Bhutan",
+                        "value": 134.07000732421875,
+                        "sum(Balance)": 134.07000732421875
+                    },
+                    {
+                        "name": "Venezuela",
+                        "value": 3950.52001953125,
+                        "sum(Balance)": 3950.52001953125
+                    },
+                    {
+                        "name": "Mauritania",
+                        "value": 924.9999694824219,
+                        "sum(Balance)": 924.9999694824219
+                    },
+                    {
+                        "name": "Gibraltar",
+                        "value": 7756.449951171875,
+                        "sum(Balance)": 7756.449951171875
+                    },
+                    {
+                        "name": "Indonesia",
+                        "value": 4032.6600341796875,
+                        "sum(Balance)": 4032.6600341796875
+                    },
+                    {
+                        "name": "Saint Barthelemy",
+                        "value": 1088.6400146484375,
+                        "sum(Balance)": 1088.6400146484375
+                    },
+                    {
+                        "name": "Timor-Leste",
+                        "value": 11929.869873046875,
+                        "sum(Balance)": 11929.869873046875
+                    },
+                    {
+                        "name": "Christmas Island",
+                        "value": 608.3699951171875,
+                        "sum(Balance)": 608.3699951171875
+                    },
+                    {
+                        "name": "Cayman Islands",
+                        "value": 4376.31982421875,
+                        "sum(Balance)": 4376.31982421875
+                    },
+                    {
+                        "name": "Western Sahara",
+                        "value": 281.6199951171875,
+                        "sum(Balance)": 281.6199951171875
+                    },
+                    {
+                        "name": "Montserrat",
+                        "value": 8401.330017089844,
+                        "sum(Balance)": 8401.330017089844
+                    },
+                    {
+                        "name": "Mozambique",
+                        "value": 5256.3499755859375,
+                        "sum(Balance)": 5256.3499755859375
+                    },
+                    {
+                        "name": "French Polynesia",
+                        "value": 4412.480041503906,
+                        "sum(Balance)": 4412.480041503906
+                    },
+                    {
+                        "name": "Pitcairn Islands",
+                        "value": 2239.320068359375,
+                        "sum(Balance)": 2239.320068359375
+                    },
+                    {
+                        "name": "Isle of Man",
+                        "value": 3159.739990234375,
+                        "sum(Balance)": 3159.739990234375
+                    },
+                    {
+                        "name": "Guinea-Bissau",
+                        "value": 1453.6500244140625,
+                        "sum(Balance)": 1453.6500244140625
+                    },
+                    {
+                        "name": "New Caledonia",
+                        "value": 2689.31005859375,
+                        "sum(Balance)": 2689.31005859375
+                    },
+                    {
+                        "name": "Uzbekistan",
+                        "value": 4996.68017578125,
+                        "sum(Balance)": 4996.68017578125
+                    },
+                    {
+                        "name": "Norfolk Island",
+                        "value": 1457.3800048828125,
+                        "sum(Balance)": 1457.3800048828125
+                    },
+                    {
+                        "name": "Saint Martin",
+                        "value": 4195.58984375,
+                        "sum(Balance)": 4195.58984375
+                    },
+                    {
+                        "name": "Costa Rica",
+                        "value": 2307.949951171875,
+                        "sum(Balance)": 2307.949951171875
+                    },
+                    {
+                        "name": "Turkmenistan",
+                        "value": 372.6499938964844,
+                        "sum(Balance)": 372.6499938964844
+                    },
+                    {
+                        "name": "Solomon Islands",
+                        "value": 5376.340087890625,
+                        "sum(Balance)": 5376.340087890625
+                    },
+                    {
+                        "name": "Micronesia",
+                        "value": 2723.070068359375,
+                        "sum(Balance)": 2723.070068359375
+                    },
+                    {
+                        "name": "Swaziland",
+                        "value": 1981.3499755859375,
+                        "sum(Balance)": 1981.3499755859375
+                    },
+                    {
+                        "name": "Bosnia and Herzegovina",
+                        "value": 3360.280029296875,
+                        "sum(Balance)": 3360.280029296875
+                    },
+                    {
+                        "name": "Trinidad and Tobago",
+                        "value": 2568.8798828125,
+                        "sum(Balance)": 2568.8798828125
+                    },
+                    {
+                        "name": "Antigua and Barbuda",
+                        "value": 1705.719970703125,
+                        "sum(Balance)": 1705.719970703125
+                    },
+                    {
+                        "name": "Central African Republic",
+                        "value": 3223.580078125,
+                        "sum(Balance)": 3223.580078125
+                    },
+                    {
+                        "name": "Russian Federation",
+                        "value": 4600.83984375,
+                        "sum(Balance)": 4600.83984375
+                    },
+                    {
+                        "name": "Cocos (Keeling) Islands",
+                        "value": 481.42999267578125,
+                        "sum(Balance)": 481.42999267578125
+                    },
+                    {
+                        "name": "Dominican Republic",
+                        "value": 1488.2900390625,
+                        "sum(Balance)": 1488.2900390625
+                    },
+                    {
+                        "name": "British Indian Ocean Territory (Chagos Archipelago)",
+                        "value": 4689.85986328125,
+                        "sum(Balance)": 4689.85986328125
+                    },
+                    {
+                        "name": "Antarctica (the territory South of 60 deg S)",
+                        "value": 7086.159912109375,
+                        "sum(Balance)": 7086.159912109375
+                    },
+                    {
+                        "name": "Heard Island and McDonald Islands",
+                        "value": 151.94000244140625,
+                        "sum(Balance)": 151.94000244140625
+                    },
+                    {
+                        "name": "Lao Peoples Democratic Republic",
+                        "value": 460.32000732421875,
+                        "sum(Balance)": 460.32000732421875
+                    }
+                ]
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#2392c1",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#2392c1",
+        "yLabelSwitch": true,
+        "yGridColor": "#2392c1",
+        "yGridSwitch": false,
+        "yLabelColor": "#2392c1",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#fff",
+        "color": "#2392c1",
+        "ylabelFontWeight": 400,
+        "isBold": false,
+        "yLabelFontFamily": "sans-serif",
+        "yLabelFontSize": 12,
+        "bandingSwitch": false,
+        "backgroundColorSwitch": false,
+        "chartColorSwitch": false,
+        "barColorSwitch": false,
+        "lineColorSwitch": false,
+        "gridLineColorSwitch": false,
+        "xLabelColorSwitch": false,
+        "xGridLineColorSwitch": false,
+        "yLabelColorSwitch": false,
+        "yGridLineColorSwitch": false,
+        "bandingColorSwitch": false,
+        "kpiColorSwitch": false,
+        "funnelColorSwitch": false,
+        "kpiColor": "#000000",
+        "barColor": "#4382f7",
+        "lineColor": "#38ff98",
+        "GridColor": "#089ffc",
+        "legendSwitch": true,
+        "dataLabels": true,
+        "label": true,
+        "donutSize": 50,
+        "isDistributed": false,
+        "kpiFontSize": "3",
+        "minValueGuage": 0,
+        "maxValueGuage": 100,
+        "donutDecimalPlaces": 0,
+        "decimalPlaces": 0,
+        "legendsAllignment": "bottom",
+        "displayUnits": "none",
+        "suffix": "",
+        "prefix": "",
+        "dataLabelsFontFamily": "sans-serif",
+        "dataLabelsFontSize": "12px",
+        "dataLabelsFontPosition": "top",
+        "measureAlignment": "center",
+        "dimensionAlignment": "center",
+        "tableDataFontFamily": "sans-serif",
+        "tableDataFontSize": "12px",
+        "tableDataFontWeight": 400,
+        "tableDataFontStyle": "normal",
+        "tableDataFontDecoration": "none",
+        "tableDataFontColor": "#000000",
+        "tableDataFontAlignment": "left",
+        "headerFontFamily": "'Arial', sans-serif",
+        "headerFontSize": "16px",
+        "headerFontWeight": 700,
+        "headerFontStyle": "normal",
+        "headerFontDecoration": "none",
+        "headerFontColor": "#000000",
+        "headerFontAlignment": "left",
+        "dimeansionColor": "#2392c1",
+        "measureColor": "#2392c1",
+        "dataLabelsColor": "#2392c1",
+        "sortType": 0
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

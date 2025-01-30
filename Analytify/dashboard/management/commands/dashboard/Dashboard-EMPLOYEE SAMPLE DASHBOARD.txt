@@ -1,0 +1,2863 @@
+[
+    {
+        "id": "6efc6008-fc6b-4547-b77e-4f99a222874b",
+        "x": 0,
+        "y": 0,
+        "rows": 4,
+        "cols": 6,
+        "data": {
+            "title": "Total Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Total Employees</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5150,
+        "chartType": "KPI",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 115,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "count(eeid)",
+                    "result_data": [
+                        115
+                    ]
+                }
+            ],
+            "fontSize": 4.5,
+            "color": "#0288d1"
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "eeid",
+                "aggregate",
+                "count"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "29aabb35-7ccc-4811-a775-a1807fd92774",
+        "x": 6,
+        "y": 0,
+        "rows": 4,
+        "cols": 6,
+        "data": {
+            "title": "Female Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Female Employees</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5151,
+        "chartType": "KPI",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 61,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "count(eeid)",
+                    "result_data": [
+                        61
+                    ]
+                }
+            ],
+            "fontSize": 4.5,
+            "color": "#0288d1"
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "eeid",
+                "aggregate",
+                "count"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "5f13ad9f-ba47-4f2a-bd5c-615ef5612336",
+        "x": 12,
+        "y": 0,
+        "rows": 4,
+        "cols": 6,
+        "data": {
+            "title": "Male Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Male Employees</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5152,
+        "chartType": "KPI",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 54,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "count(eeid)",
+                    "result_data": [
+                        54
+                    ]
+                }
+            ],
+            "fontSize": 4.5,
+            "color": "#0288d1"
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "eeid",
+                "aggregate",
+                "count"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "bdf3998f-7160-4711-97eb-4a7a80f8525a",
+        "x": 18,
+        "y": 0,
+        "rows": 4,
+        "cols": 7,
+        "data": {
+            "title": "Average Bonus Percentage",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Average Bonus Percentage</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5153,
+        "chartType": "KPI",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 8.01,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "rows": [
+                {
+                    "col": "avg(bonus_percentage)",
+                    "result_data": [
+                        8.01
+                    ]
+                }
+            ],
+            "fontSize": 4.5,
+            "color": "#0288d1"
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "bonus_percentage",
+                "aggregate",
+                "avg"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "fb4d2431-1370-43f0-a782-a3fb272e443e",
+        "x": 0,
+        "y": 4,
+        "rows": 7,
+        "cols": 14,
+        "data": {
+            "title": "Average Annual Salary by Department",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Average Annual Salary by Department</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5154,
+        "chartType": "bar",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 6,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        105302.5,
+                        95000,
+                        82500,
+                        102675.29,
+                        102455,
+                        117914.38,
+                        108550.48,
+                        117250,
+                        99000,
+                        128854.83,
+                        114125,
+                        122000,
+                        133935.38,
+                        95500
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "foreColor": "#f06292",
+                "events": {}
+            },
+            "title": {
+                "text": "",
+                "offsetY": 10,
+                "align": "center",
+                "style": {
+                    "color": "#f06292"
+                }
+            },
+            "xaxis": {
+                "categories": [
+                    "Accounting",
+                    "Customer Support",
+                    "Design",
+                    "Engineering",
+                    "Finance",
+                    "Human Resources",
+                    "IT",
+                    "Legal",
+                    "Manufacturing",
+                    "Marketing",
+                    "Operations",
+                    "Quality Assurance",
+                    "Sales",
+                    "Supply Chain"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "trim": true,
+                    "hideOverlappingLabels": false,
+                    "style": {
+                        "colors": "#f06292",
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "axisBorder": {
+                    "show": false
+                },
+                "axisTicks": {
+                    "show": false
+                },
+                "crosshairs": {
+                    "fill": {
+                        "type": "gradient",
+                        "gradient": {
+                            "stops": [
+                                0,
+                                100
+                            ],
+                            "opacityFrom": 0.4,
+                            "opacityTo": 0.5
+                        }
+                    }
+                },
+                "tooltip": {
+                    "enabled": false,
+                    "offsetY": -35
+                },
+                "convertedCatToNumeric": true
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": false,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "axisBorder": {
+                    "show": false
+                },
+                "axisTicks": {
+                    "show": false
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#90A4AE",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "hideOverflowingLabels": false,
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "colors": [
+                        "#f06292"
+                    ]
+                }
+            },
+            "fill": {
+                "type": "gradient"
+            },
+            "colors": "#e91e63"
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "department",
+                "string",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "annual_salary",
+                "aggregate",
+                "avg"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "b7b3195b-f4a1-4dec-bae9-78a56025a967",
+        "x": 14,
+        "y": 4,
+        "rows": 7,
+        "cols": 11,
+        "data": {
+            "title": "Country Wise Employee Count",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Country Wise Employee Count</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5155,
+        "chartType": "pie",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 24,
+        "chartOptions": {
+            "series": [
+                3,
+                15,
+                6,
+                19,
+                3,
+                4,
+                3,
+                4,
+                3,
+                2,
+                2,
+                5,
+                46
+            ],
+            "chart": {
+                "height": 300,
+                "type": "pie",
+                "events": {}
+            },
+            "colors": [
+                "#00a5a2",
+                "#31d1ce",
+                "#f5b849",
+                "#49b6f5",
+                "#e6533c",
+                "#00a5a2",
+                "#31d1ce",
+                "#f5b849",
+                "#49b6f5",
+                "#e6533c",
+                "#00a5a2",
+                "#31d1ce",
+                "#f5b849"
+            ],
+            "labels": [
+                "Australia",
+                "Brazil",
+                "Canada",
+                "China",
+                "Germany",
+                "India",
+                "Japan",
+                "Mexico",
+                "Singapore",
+                "South Africa",
+                "South Korea",
+                "United Kingdom",
+                "United States"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true,
+                "dropShadow": {
+                    "enabled": false
+                }
+            },
+            "tooltip": {
+                "enabled": true,
+                "y": {}
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "country",
+                "varchar",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "eeid",
+                "aggregate",
+                "count"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "e287d6a7-8c26-4fd0-8bfb-f9256101fa37",
+        "x": 0,
+        "y": 11,
+        "rows": 7,
+        "cols": 13,
+        "data": {
+            "title": "Average Annual Salary by Gender",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Average Annual Salary by Gender</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5156,
+        "chartType": "bar",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 6,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        111589.84,
+                        114881.19
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "foreColor": "#ce93d8",
+                "events": {}
+            },
+            "title": {
+                "text": "",
+                "offsetY": 10,
+                "align": "center",
+                "style": {
+                    "color": "#ce93d8"
+                }
+            },
+            "xaxis": {
+                "categories": [
+                    "Female",
+                    "Male"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "trim": true,
+                    "hideOverlappingLabels": false,
+                    "style": {
+                        "colors": "#ce93d8",
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "axisBorder": {
+                    "show": false
+                },
+                "axisTicks": {
+                    "show": false
+                },
+                "crosshairs": {
+                    "fill": {
+                        "type": "gradient",
+                        "gradient": {
+                            "stops": [
+                                0,
+                                100
+                            ],
+                            "opacityFrom": 0.4,
+                            "opacityTo": 0.5
+                        }
+                    }
+                },
+                "tooltip": {
+                    "enabled": false,
+                    "offsetY": -35
+                },
+                "convertedCatToNumeric": true
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": false,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "axisBorder": {
+                    "show": false
+                },
+                "axisTicks": {
+                    "show": false
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#90A4AE",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "hideOverflowingLabels": false,
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "colors": [
+                        "#ce93d8"
+                    ]
+                }
+            },
+            "fill": {
+                "type": "gradient"
+            },
+            "colors": "#9c27b0"
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "gender",
+                "string",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "annual_salary",
+                "aggregate",
+                "avg"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "66fe2a69-3095-4e8b-a103-ff769a517041",
+        "x": 13,
+        "y": 11,
+        "rows": 7,
+        "cols": 12,
+        "data": {
+            "title": "Gender Distribution",
+            "content": "Content of card New",
+            "sheetTagName": "<p>Gender Distribution</p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5157,
+        "chartType": "pie",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 24,
+        "chartOptions": {
+            "series": [
+                61,
+                54
+            ],
+            "chart": {
+                "height": 300,
+                "type": "pie",
+                "events": {}
+            },
+            "colors": [
+                "#00a5a2",
+                "#31d1ce",
+                "#f5b849",
+                "#49b6f5",
+                "#e6533c"
+            ],
+            "labels": [
+                "Female",
+                "Male"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true,
+                "dropShadow": {
+                    "enabled": false
+                }
+            },
+            "tooltip": {
+                "enabled": true,
+                "y": {}
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "gender",
+                "string",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "eeid",
+                "aggregate",
+                "count"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false
+    },
+    {
+        "id": "f88253ea-5d2d-416d-bf96-315b062413f1",
+        "x": 0,
+        "y": 18,
+        "rows": 8,
+        "cols": 15,
+        "data": {
+            "title": "Bonus Percentage Over Time",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Bonus Percentage Over Time</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5158,
+        "chartType": "line",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 13,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        0,
+                        0,
+                        0,
+                        66,
+                        13,
+                        0,
+                        0,
+                        20,
+                        16,
+                        14,
+                        27,
+                        22,
+                        37,
+                        55,
+                        107,
+                        77,
+                        52,
+                        51,
+                        55,
+                        64,
+                        76,
+                        60,
+                        72,
+                        14,
+                        0,
+                        23
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "height": 200,
+                "type": "line",
+                "reponsive": true,
+                "zoom": {
+                    "enabled": true
+                },
+                "events": {}
+            },
+            "colors": "#ef6c00",
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "colors": [
+                        "#ffa726"
+                    ]
+                }
+            },
+            "stroke": {
+                "curve": "straight",
+                "width": 3
+            },
+            "grid": {
+                "borderColor": "rgba(119, 119, 142, 0.05)",
+                "show": true,
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "tooltip": {
+                    "intersect": true,
+                    "shared": false
+                },
+                "markers": {
+                    "size": 10
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "title": {
+                "text": "",
+                "align": "left",
+                "style": {
+                    "fontSize": "13px",
+                    "fontWeight": "bold",
+                    "color": "#ffa726"
+                }
+            },
+            "xaxis": {
+                "categories": [
+                    "1994",
+                    "1995",
+                    "1997",
+                    "2002",
+                    "2003",
+                    "2004",
+                    "2005",
+                    "2006",
+                    "2007",
+                    "2008",
+                    "2009",
+                    "2010",
+                    "2011",
+                    "2012",
+                    "2013",
+                    "2014",
+                    "2015",
+                    "2016",
+                    "2017",
+                    "2018",
+                    "2019",
+                    "2020",
+                    "2021",
+                    "2022",
+                    "2023",
+                    "2025"
+                ],
+                "tickPlacement": "on",
+                "labels": {
+                    "show": true,
+                    "hideOverlappingLabels": false,
+                    "trim": true,
+                    "style": {
+                        "colors": "#ffa726",
+                        "fontSize": "12px",
+                        "fontFamily": "Helvetica, Arial, sans-serif",
+                        "fontWeight": 12
+                    }
+                },
+                "convertedCatToNumeric": true
+            },
+            "yaxis": {
+                "labels": {
+                    "show": false,
+                    "style": {
+                        "colors": "#ffa726",
+                        "fontSize": "11px",
+                        "fontWeight": 600,
+                        "cssClass": "apexcharts-yaxis-label"
+                    }
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [
+            "year",
+            "quarter",
+            "month",
+            "date"
+        ],
+        "column_Data": [
+            [
+                "hire_date",
+                "date",
+                "year"
+            ]
+        ],
+        "row_Data": [
+            [
+                "bonus_percentage",
+                "aggregate",
+                "sum"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": true
+    },
+    {
+        "id": "84c4852e-6e05-4439-870e-f00a8ab886c7",
+        "x": 15,
+        "y": 18,
+        "rows": 8,
+        "cols": 10,
+        "data": {
+            "title": "Number of Employees by Department",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Number of Employees by Department</strong></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5159,
+        "chartType": "TREE_MAPS",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 10,
+        "chartOptions": {
+            "series": [
+                2,
+                1,
+                2,
+                14,
+                16,
+                8,
+                27,
+                4,
+                1,
+                18,
+                4,
+                1,
+                13,
+                4
+            ],
+            "chart": {
+                "type": "donut",
+                "events": {}
+            },
+            "labels": [
+                "Accounting",
+                "Customer Support",
+                "Design",
+                "Engineering",
+                "Finance",
+                "Human Resources",
+                "IT",
+                "Legal",
+                "Manufacturing",
+                "Marketing",
+                "Operations",
+                "Quality Assurance",
+                "Sales",
+                "Supply Chain"
+            ],
+            "responsive": [
+                {
+                    "breakpoint": 480,
+                    "options": {
+                        "chart": {
+                            "width": 100
+                        },
+                        "legend": {
+                            "position": "bottom"
+                        }
+                    }
+                }
+            ],
+            "legend": {
+                "show": true,
+                "position": "right"
+            },
+            "dataLabels": {
+                "enabled": true
+            },
+            "plotOptions": {
+                "pie": {
+                    "donut": {
+                        "labels": {
+                            "show": true,
+                            "name": {
+                                "show": true
+                            },
+                            "value": {
+                                "show": true
+                            },
+                            "total": {
+                                "show": true,
+                                "showAlways": false
+                            }
+                        },
+                        "size": "60%"
+                    }
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "department",
+                "string",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "eeid",
+                "aggregate",
+                "count"
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": true
+    },
+    {
+        "id": "d2430cb2-b0ad-409d-a49f-61b469668b0e",
+        "x": 0,
+        "y": 26,
+        "rows": 9,
+        "cols": 25,
+        "data": {
+            "title": "Employee Details",
+            "content": "Content of card New",
+            "sheetTagName": "<p><strong>Employee Details</strong></p>"
+        },
+        "sheetType": "Table",
+        "sheetId": 5160,
+        "chartType": "Table",
+        "hierarchy_id": 710,
+        "qrySetId": 4401,
+        "fileId": null,
+        "chartId": 1,
+        "tableData": {
+            "headers": [
+                "eeid",
+                "full_name",
+                "department",
+                "job_title",
+                "business_unit",
+                "gender",
+                "ethnicity",
+                "hire_date",
+                "country",
+                "age",
+                "annual_salary",
+                "bonus_percentage"
+            ],
+            "rows": [
+                {
+                    "eeid": "E00163",
+                    "full_name": "Bella Powell",
+                    "department": "Finance",
+                    "job_title": "Director",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2002",
+                    "country": "United States",
+                    "age": "65",
+                    "annual_salary": "173631",
+                    "bonus_percentage": "20"
+                },
+                {
+                    "eeid": "E00530",
+                    "full_name": "Eli Jones",
+                    "department": "Human Resources",
+                    "job_title": "Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2011",
+                    "country": "United States",
+                    "age": "59",
+                    "annual_salary": "105086",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E00549",
+                    "full_name": "Isabella Xi",
+                    "department": "Marketing",
+                    "job_title": "Vice President",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2013",
+                    "country": "United States",
+                    "age": "41",
+                    "annual_salary": "249270",
+                    "bonus_percentage": "30"
+                },
+                {
+                    "eeid": "E00591",
+                    "full_name": "Savannah Ali",
+                    "department": "Human Resources",
+                    "job_title": "Sr Manger",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2009",
+                    "country": "United States",
+                    "age": "36",
+                    "annual_salary": "157333",
+                    "bonus_percentage": "15"
+                },
+                {
+                    "eeid": "E00644",
+                    "full_name": "Joshua Gupta",
+                    "department": "Sales",
+                    "job_title": "Account Representative",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2017",
+                    "country": "China",
+                    "age": "57",
+                    "annual_salary": "50994",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E00671",
+                    "full_name": "Leonardo Dixon",
+                    "department": "Sales",
+                    "job_title": "Analyst",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "United States",
+                    "age": "37",
+                    "annual_salary": "49998",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E00884",
+                    "full_name": "Camila Silva",
+                    "department": "Marketing",
+                    "job_title": "Sr Manger",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2003",
+                    "country": "United States",
+                    "age": "64",
+                    "annual_salary": "154828",
+                    "bonus_percentage": "13"
+                },
+                {
+                    "eeid": "E01417",
+                    "full_name": "Leah Pena",
+                    "department": "IT",
+                    "job_title": "Enterprise Architect",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "1994",
+                    "country": "Brazil",
+                    "age": "57",
+                    "annual_salary": "82872",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E01550",
+                    "full_name": "Ruby Barnes",
+                    "department": "IT",
+                    "job_title": "Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2020",
+                    "country": "United States",
+                    "age": "27",
+                    "annual_salary": "119746",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E01582",
+                    "full_name": "Lucas Davis",
+                    "department": "Engineering",
+                    "job_title": "Technical Architect",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2004",
+                    "country": "United States",
+                    "age": "52",
+                    "annual_salary": "103234",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E01628",
+                    "full_name": "Jackson Perry",
+                    "department": "Marketing",
+                    "job_title": "Vice President",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "United States",
+                    "age": "27",
+                    "annual_salary": "256420",
+                    "bonus_percentage": "30"
+                },
+                {
+                    "eeid": "E01639",
+                    "full_name": "Austin Vo",
+                    "department": "Finance",
+                    "job_title": "Sr Analyst",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "1995",
+                    "country": "United States",
+                    "age": "55",
+                    "annual_salary": "95409",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E01654",
+                    "full_name": "Aiden Long",
+                    "department": "Marketing",
+                    "job_title": "Analyst",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2017",
+                    "country": "United States",
+                    "age": "29",
+                    "annual_salary": "80304",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E01731",
+                    "full_name": "Emily Kim",
+                    "department": "IT",
+                    "job_title": "Sr Manager",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2010",
+                    "country": "United States",
+                    "age": "49",
+                    "annual_salary": "132741",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E01754",
+                    "full_name": "Owen Lam",
+                    "department": "Human Resources",
+                    "job_title": "Sr Business Partner",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2007",
+                    "country": "China",
+                    "age": "50",
+                    "annual_salary": "179657",
+                    "bonus_percentage": "16"
+                },
+                {
+                    "eeid": "E01783",
+                    "full_name": "Liam Martin",
+                    "department": "Marketing",
+                    "job_title": "Enterprise Architect",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2017",
+                    "country": "China",
+                    "age": "30",
+                    "annual_salary": "98080",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E02071",
+                    "full_name": "Mateo Her",
+                    "department": "Sales",
+                    "job_title": "Vice President",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2014",
+                    "country": "China",
+                    "age": "44",
+                    "annual_salary": "207172",
+                    "bonus_percentage": "31"
+                },
+                {
+                    "eeid": "E02074",
+                    "full_name": "Nora Brown",
+                    "department": "IT",
+                    "job_title": "Enterprise Architect",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2014",
+                    "country": "United States",
+                    "age": "32",
+                    "annual_salary": "99575",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E02088",
+                    "full_name": "Ella King",
+                    "department": "Marketing",
+                    "job_title": "Vice President",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2007",
+                    "country": "China",
+                    "age": "52",
+                    "annual_salary": "281200",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E02206",
+                    "full_name": "Jose Henderson",
+                    "department": "Human Resources",
+                    "job_title": "Director",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2025",
+                    "country": "United States",
+                    "age": "41",
+                    "annual_salary": "152239",
+                    "bonus_percentage": "23"
+                },
+                {
+                    "eeid": "E02378",
+                    "full_name": "Isabella Patel",
+                    "department": "IT",
+                    "job_title": "Sr Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2021",
+                    "country": "Brazil",
+                    "age": "40",
+                    "annual_salary": "148146",
+                    "bonus_percentage": "12"
+                },
+                {
+                    "eeid": "E02387",
+                    "full_name": "Emily Davis",
+                    "department": "IT",
+                    "job_title": "Sr Manger",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2016",
+                    "country": "United States",
+                    "age": "55",
+                    "annual_salary": "141604",
+                    "bonus_percentage": "15"
+                },
+                {
+                    "eeid": "E02572",
+                    "full_name": "Luna Sanders",
+                    "department": "Finance",
+                    "job_title": "Director",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2006",
+                    "country": "United States",
+                    "age": "50",
+                    "annual_salary": "163099",
+                    "bonus_percentage": "20"
+                },
+                {
+                    "eeid": "E02578",
+                    "full_name": "Jack Nguyen",
+                    "department": "Finance",
+                    "job_title": "Analyst",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2014",
+                    "country": "China",
+                    "age": "41",
+                    "annual_salary": "88152",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E02638",
+                    "full_name": "Emma Hernandez",
+                    "department": "IT",
+                    "job_title": "Analyst",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2023",
+                    "country": "United States",
+                    "age": "32",
+                    "annual_salary": "82088",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E02663",
+                    "full_name": "Sofia Wilson",
+                    "department": "Sales",
+                    "job_title": "Director",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2021",
+                    "country": "China",
+                    "age": "39",
+                    "annual_salary": "167999",
+                    "bonus_percentage": "20"
+                },
+                {
+                    "eeid": "E02832",
+                    "full_name": "Penelope Jordan",
+                    "department": "IT",
+                    "job_title": "Computer Systems Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "United States",
+                    "age": "26",
+                    "annual_salary": "84913",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E02995",
+                    "full_name": "Ian Williams",
+                    "department": "IT",
+                    "job_title": "Quality Engineer",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2019",
+                    "country": "China",
+                    "age": "39",
+                    "annual_salary": "102622",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03163",
+                    "full_name": "Talia Sanchez",
+                    "department": "Finance",
+                    "job_title": "Sr Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2018",
+                    "country": "Brazil",
+                    "age": "43",
+                    "annual_salary": "129133",
+                    "bonus_percentage": "17"
+                },
+                {
+                    "eeid": "E03247",
+                    "full_name": "Caroline Jenkins",
+                    "department": "Finance",
+                    "job_title": "Analyst",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2018",
+                    "country": "United States",
+                    "age": "27",
+                    "annual_salary": "49011",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03344",
+                    "full_name": "Camila Rogers",
+                    "department": "Engineering",
+                    "job_title": "Controls Engineer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2021",
+                    "country": "United States",
+                    "age": "27",
+                    "annual_salary": "109851",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03484",
+                    "full_name": "Logan Rivera",
+                    "department": "IT",
+                    "job_title": "Director",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2002",
+                    "country": "Brazil",
+                    "age": "59",
+                    "annual_salary": "172787",
+                    "bonus_percentage": "28"
+                },
+                {
+                    "eeid": "E03488",
+                    "full_name": "Oliver King",
+                    "department": "Engineering",
+                    "job_title": "Analyst",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2020",
+                    "country": "China",
+                    "age": "34",
+                    "annual_salary": "89134",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03496",
+                    "full_name": "Robert Yang",
+                    "department": "Accounting",
+                    "job_title": "Sr Analyst",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2017",
+                    "country": "United States",
+                    "age": "31",
+                    "annual_salary": "97078",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03529",
+                    "full_name": "Maya Brown",
+                    "department": "Marketing",
+                    "job_title": "Analyst",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2022",
+                    "country": "United States",
+                    "age": "31",
+                    "annual_salary": "74892",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03651",
+                    "full_name": "Isabella Bryant",
+                    "department": "Sales",
+                    "job_title": "Technical Architect",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2020",
+                    "country": "China",
+                    "age": "29",
+                    "annual_salary": "91415",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03669",
+                    "full_name": "Isabella Sanchez",
+                    "department": "IT",
+                    "job_title": "Technical Architect",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2015",
+                    "country": "Brazil",
+                    "age": "53",
+                    "annual_salary": "105211",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03680",
+                    "full_name": "Elias Alvarado",
+                    "department": "IT",
+                    "job_title": "Sr Manger",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2012",
+                    "country": "Brazil",
+                    "age": "56",
+                    "annual_salary": "146140",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E03782",
+                    "full_name": "Julian Thomas",
+                    "department": "Marketing",
+                    "job_title": "Director",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2022",
+                    "country": "Brazil",
+                    "age": "45",
+                    "annual_salary": "173358",
+                    "bonus_percentage": "14"
+                },
+                {
+                    "eeid": "E03791",
+                    "full_name": "Avery White",
+                    "department": "Finance",
+                    "job_title": "Analyst",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2022",
+                    "country": "United States",
+                    "age": "40",
+                    "annual_salary": "86564",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E03838",
+                    "full_name": "Madeline Walker",
+                    "department": "Finance",
+                    "job_title": "Sr Analyst",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2018",
+                    "country": "United States",
+                    "age": "34",
+                    "annual_salary": "77203",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04105",
+                    "full_name": "Theodore Dinh",
+                    "department": "IT",
+                    "job_title": "Technical Architect",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "1997",
+                    "country": "China",
+                    "age": "59",
+                    "annual_salary": "99975",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04116",
+                    "full_name": "David Barnes",
+                    "department": "IT",
+                    "job_title": "Director",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2013",
+                    "country": "United States",
+                    "age": "64",
+                    "annual_salary": "186503",
+                    "bonus_percentage": "24"
+                },
+                {
+                    "eeid": "E04152",
+                    "full_name": "Adeline Huang",
+                    "department": "Engineering",
+                    "job_title": "Controls Engineer",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2019",
+                    "country": "China",
+                    "age": "34",
+                    "annual_salary": "99989",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04239",
+                    "full_name": "Everleigh Ng",
+                    "department": "Finance",
+                    "job_title": "Sr Manger",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2021",
+                    "country": "China",
+                    "age": "51",
+                    "annual_salary": "146742",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E04285",
+                    "full_name": "Riley Padilla",
+                    "department": "IT",
+                    "job_title": "Technical Architect",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2013",
+                    "country": "United States",
+                    "age": "35",
+                    "annual_salary": "78940",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04332",
+                    "full_name": "Luke Martin",
+                    "department": "Finance",
+                    "job_title": "Analyst",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2020",
+                    "country": "United States",
+                    "age": "25",
+                    "annual_salary": "41336",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04533",
+                    "full_name": "Easton Bailey",
+                    "department": "Accounting",
+                    "job_title": "Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "United States",
+                    "age": "29",
+                    "annual_salary": "113527",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E04545",
+                    "full_name": "Abigail Mejia",
+                    "department": "Engineering",
+                    "job_title": "Quality Engineer",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2005",
+                    "country": "Brazil",
+                    "age": "56",
+                    "annual_salary": "98581",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04555",
+                    "full_name": "Mia Lee",
+                    "department": "Marketing",
+                    "job_title": "Sr Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2011",
+                    "country": "China",
+                    "age": "51",
+                    "annual_salary": "141035",
+                    "bonus_percentage": "0"
+                },
+                {
+                    "eeid": "E04625",
+                    "full_name": "Adam Dang",
+                    "department": "Sales",
+                    "job_title": "Director",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2002",
+                    "country": "China",
+                    "age": "45",
+                    "annual_salary": "166331",
+                    "bonus_percentage": "18"
+                },
+                {
+                    "eeid": "E04688",
+                    "full_name": "Grace Miller",
+                    "department": "Engineering",
+                    "job_title": "Quality Engineer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2018",
+                    "country": "United States",
+                    "age": "48",
+                    "annual_salary": "124665",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E04732",
+                    "full_name": "Eva Rivera",
+                    "department": "Sales",
+                    "job_title": "Director",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2021",
+                    "country": "United States",
+                    "age": "36",
+                    "annual_salary": "151703",
+                    "bonus_percentage": "21"
+                },
+                {
+                    "eeid": "E04810",
+                    "full_name": "Asher Lee",
+                    "department": "Sales",
+                    "job_title": "Vice President",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2020",
+                    "country": "China",
+                    "age": "61",
+                    "annual_salary": "253233",
+                    "bonus_percentage": "23"
+                },
+                {
+                    "eeid": "E04864",
+                    "full_name": "Sebastian Miller",
+                    "department": "Sales",
+                    "job_title": "Sr Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2008",
+                    "country": "United States",
+                    "age": "46",
+                    "annual_salary": "160315",
+                    "bonus_percentage": "14"
+                },
+                {
+                    "eeid": "E05674",
+                    "full_name": "Noah Mitchell",
+                    "department": "Operations",
+                    "job_title": "Project Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2011",
+                    "country": "United States",
+                    "age": "45",
+                    "annual_salary": "135500",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E05781",
+                    "full_name": "Charlotte Garcia",
+                    "department": "IT",
+                    "job_title": "Data Scientist",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2019",
+                    "country": "Brazil",
+                    "age": "34",
+                    "annual_salary": "123000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E05829",
+                    "full_name": "Elijah Lewis",
+                    "department": "Engineering",
+                    "job_title": "Software Developer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2016",
+                    "country": "China",
+                    "age": "29",
+                    "annual_salary": "97000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E05937",
+                    "full_name": "Sophia Rodriguez",
+                    "department": "Marketing",
+                    "job_title": "UX Designer",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2020",
+                    "country": "United States",
+                    "age": "31",
+                    "annual_salary": "86000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E06025",
+                    "full_name": "James Johnson",
+                    "department": "Finance",
+                    "job_title": "Business Analyst",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2018",
+                    "country": "India",
+                    "age": "39",
+                    "annual_salary": "105000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E06154",
+                    "full_name": "Amelia Anderson",
+                    "department": "Human Resources",
+                    "job_title": "HR Specialist",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2021",
+                    "country": "Canada",
+                    "age": "27",
+                    "annual_salary": "71000",
+                    "bonus_percentage": "4"
+                },
+                {
+                    "eeid": "E06238",
+                    "full_name": "Logan Brown",
+                    "department": "Finance",
+                    "job_title": "Financial Analyst",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2017",
+                    "country": "Brazil",
+                    "age": "33",
+                    "annual_salary": "93000",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E06372",
+                    "full_name": "Emma Thompson",
+                    "department": "Sales",
+                    "job_title": "Sales Executive",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2015",
+                    "country": "China",
+                    "age": "38",
+                    "annual_salary": "112000",
+                    "bonus_percentage": "12"
+                },
+                {
+                    "eeid": "E06485",
+                    "full_name": "William Wilson",
+                    "department": "Operations",
+                    "job_title": "Operations Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2013",
+                    "country": "United States",
+                    "age": "47",
+                    "annual_salary": "126000",
+                    "bonus_percentage": "15"
+                },
+                {
+                    "eeid": "E06513",
+                    "full_name": "Mia Martinez",
+                    "department": "Engineering",
+                    "job_title": "Product Manager",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2014",
+                    "country": "Mexico",
+                    "age": "36",
+                    "annual_salary": "118000",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E06601",
+                    "full_name": "Olivia Davis",
+                    "department": "Marketing",
+                    "job_title": "Marketing Specialist",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "United States",
+                    "age": "29",
+                    "annual_salary": "85000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E06714",
+                    "full_name": "Alexander Miller",
+                    "department": "IT",
+                    "job_title": "DevOps Engineer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2016",
+                    "country": "Canada",
+                    "age": "32",
+                    "annual_salary": "95000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E06827",
+                    "full_name": "Ava Wilson",
+                    "department": "Marketing",
+                    "job_title": "Content Writer",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2020",
+                    "country": "India",
+                    "age": "26",
+                    "annual_salary": "62000",
+                    "bonus_percentage": "4"
+                },
+                {
+                    "eeid": "E06935",
+                    "full_name": "Benjamin Martinez",
+                    "department": "IT",
+                    "job_title": "IT Support Specialist",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2017",
+                    "country": "Brazil",
+                    "age": "35",
+                    "annual_salary": "78000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E07048",
+                    "full_name": "Sophia White",
+                    "department": "Finance",
+                    "job_title": "Accountant",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2014",
+                    "country": "United Kingdom",
+                    "age": "42",
+                    "annual_salary": "89000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E07157",
+                    "full_name": "Jackson Anderson",
+                    "department": "Engineering",
+                    "job_title": "Mechanical Engineer",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2015",
+                    "country": "South Korea",
+                    "age": "37",
+                    "annual_salary": "101000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E07264",
+                    "full_name": "Emily Johnson",
+                    "department": "Human Resources",
+                    "job_title": "HR Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2013",
+                    "country": "United States",
+                    "age": "41",
+                    "annual_salary": "112000",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E07372",
+                    "full_name": "Liam Harris",
+                    "department": "IT",
+                    "job_title": "Network Administrator",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2012",
+                    "country": "Mexico",
+                    "age": "39",
+                    "annual_salary": "89000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E07481",
+                    "full_name": "Isabella Clark",
+                    "department": "Legal",
+                    "job_title": "Legal Counsel",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2010",
+                    "country": "Australia",
+                    "age": "48",
+                    "annual_salary": "142000",
+                    "bonus_percentage": "15"
+                },
+                {
+                    "eeid": "E07593",
+                    "full_name": "Henry Lee",
+                    "department": "Supply Chain",
+                    "job_title": "Procurement Specialist",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2018",
+                    "country": "Singapore",
+                    "age": "36",
+                    "annual_salary": "81000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E07612",
+                    "full_name": "Ella Walker",
+                    "department": "Operations",
+                    "job_title": "Operations Analyst",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2017",
+                    "country": "United States",
+                    "age": "34",
+                    "annual_salary": "97000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E07728",
+                    "full_name": "Lucas Young",
+                    "department": "Quality Assurance",
+                    "job_title": "Quality Assurance Manager",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2011",
+                    "country": "Germany",
+                    "age": "46",
+                    "annual_salary": "122000",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E07834",
+                    "full_name": "Mia Thompson",
+                    "department": "Finance",
+                    "job_title": "Risk Analyst",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2020",
+                    "country": "Japan",
+                    "age": "30",
+                    "annual_salary": "103000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E07945",
+                    "full_name": "William King",
+                    "department": "Sales",
+                    "job_title": "Sales Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2012",
+                    "country": "United States",
+                    "age": "44",
+                    "annual_salary": "118000",
+                    "bonus_percentage": "11"
+                },
+                {
+                    "eeid": "E08051",
+                    "full_name": "Charlotte Wright",
+                    "department": "IT",
+                    "job_title": "Business Intelligence Analyst",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "United Kingdom",
+                    "age": "33",
+                    "annual_salary": "108000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E08163",
+                    "full_name": "James Baker",
+                    "department": "Engineering",
+                    "job_title": "Software Architect",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2015",
+                    "country": "India",
+                    "age": "40",
+                    "annual_salary": "127000",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E08274",
+                    "full_name": "Amelia Green",
+                    "department": "Marketing",
+                    "job_title": "Digital Marketing Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2014",
+                    "country": "Brazil",
+                    "age": "38",
+                    "annual_salary": "95000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E08279",
+                    "full_name": "Grace Campbell",
+                    "department": "IT",
+                    "job_title": "Data Scientist",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2018",
+                    "country": "United States",
+                    "age": "28",
+                    "annual_salary": "95000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E08385",
+                    "full_name": "Daniel Carter",
+                    "department": "IT",
+                    "job_title": "Cybersecurity Analyst",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2018",
+                    "country": "United States",
+                    "age": "31",
+                    "annual_salary": "98000",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E08388",
+                    "full_name": "Daniel Brown",
+                    "department": "Marketing",
+                    "job_title": "Product Manager",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2014",
+                    "country": "Canada",
+                    "age": "35",
+                    "annual_salary": "120000",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E08491",
+                    "full_name": "Sophia Evans",
+                    "department": "Design",
+                    "job_title": "UX Designer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2017",
+                    "country": "Australia",
+                    "age": "31",
+                    "annual_salary": "87000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E08497",
+                    "full_name": "Sophia Nelson",
+                    "department": "Supply Chain",
+                    "job_title": "Logistics Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2013",
+                    "country": "China",
+                    "age": "44",
+                    "annual_salary": "109000",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E08503",
+                    "full_name": "Ethan Lewis",
+                    "department": "Operations",
+                    "job_title": "Operations Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2012",
+                    "country": "United States",
+                    "age": "42",
+                    "annual_salary": "98000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E08513",
+                    "full_name": "Michael Hill",
+                    "department": "IT",
+                    "job_title": "Data Engineer",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2021",
+                    "country": "Mexico",
+                    "age": "28",
+                    "annual_salary": "86000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E08615",
+                    "full_name": "Harper Phillips",
+                    "department": "Legal",
+                    "job_title": "Compliance Officer",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2013",
+                    "country": "United Kingdom",
+                    "age": "39",
+                    "annual_salary": "110000",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E08624",
+                    "full_name": "Olivia Scott",
+                    "department": "Marketing",
+                    "job_title": "Graphic Designer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2019",
+                    "country": "Canada",
+                    "age": "27",
+                    "annual_salary": "67000",
+                    "bonus_percentage": "4"
+                },
+                {
+                    "eeid": "E08726",
+                    "full_name": "Mason Green",
+                    "department": "IT",
+                    "job_title": "Security Analyst",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2016",
+                    "country": "Singapore",
+                    "age": "29",
+                    "annual_salary": "89000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E08738",
+                    "full_name": "Ethan Adams",
+                    "department": "Engineering",
+                    "job_title": "Process Engineer",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2017",
+                    "country": "Japan",
+                    "age": "36",
+                    "annual_salary": "92000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E08839",
+                    "full_name": "Ella Clark",
+                    "department": "Supply Chain",
+                    "job_title": "Supply Chain Manager",
+                    "business_unit": "Manufacturing",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2010",
+                    "country": "South Africa",
+                    "age": "44",
+                    "annual_salary": "102000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E08847",
+                    "full_name": "Mia Turner",
+                    "department": "Marketing",
+                    "job_title": "Public Relations Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2016",
+                    "country": "United States",
+                    "age": "39",
+                    "annual_salary": "93000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E08947",
+                    "full_name": "Lucas Wright",
+                    "department": "Engineering",
+                    "job_title": "Mechanical Engineer",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2015",
+                    "country": "Germany",
+                    "age": "38",
+                    "annual_salary": "92000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E08951",
+                    "full_name": "David Perez",
+                    "department": "IT",
+                    "job_title": "Technical Support Engineer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2018",
+                    "country": "Brazil",
+                    "age": "34",
+                    "annual_salary": "77000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E09058",
+                    "full_name": "Amelia Walker",
+                    "department": "IT",
+                    "job_title": "IT Project Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2012",
+                    "country": "Japan",
+                    "age": "36",
+                    "annual_salary": "115000",
+                    "bonus_percentage": "10"
+                },
+                {
+                    "eeid": "E09063",
+                    "full_name": "Ava Edwards",
+                    "department": "Finance",
+                    "job_title": "Internal Auditor",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2015",
+                    "country": "United States",
+                    "age": "42",
+                    "annual_salary": "107000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E09167",
+                    "full_name": "Noah Robinson",
+                    "department": "Finance",
+                    "job_title": "Financial Analyst",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2017",
+                    "country": "Brazil",
+                    "age": "33",
+                    "annual_salary": "92000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E09175",
+                    "full_name": "James Collins",
+                    "department": "Manufacturing",
+                    "job_title": "Production Supervisor",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Asian",
+                    "hire_date": "2014",
+                    "country": "South Korea",
+                    "age": "38",
+                    "annual_salary": "99000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E09273",
+                    "full_name": "Lily Martinez",
+                    "department": "Customer Support",
+                    "job_title": "Customer Support Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2013",
+                    "country": "United States",
+                    "age": "41",
+                    "annual_salary": "95000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E09286",
+                    "full_name": "Ella Stewart",
+                    "department": "Human Resources",
+                    "job_title": "Corporate Trainer",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2016",
+                    "country": "Mexico",
+                    "age": "35",
+                    "annual_salary": "78000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E09382",
+                    "full_name": "William Carter",
+                    "department": "Marketing",
+                    "job_title": "Marketing Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2011",
+                    "country": "Australia",
+                    "age": "45",
+                    "annual_salary": "115000",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E09392",
+                    "full_name": "Liam Rivera",
+                    "department": "IT",
+                    "job_title": "Database Administrator",
+                    "business_unit": "Speciality Products",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2017",
+                    "country": "United States",
+                    "age": "33",
+                    "annual_salary": "94000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E09405",
+                    "full_name": "Charlotte Mitchell",
+                    "department": "Sales",
+                    "job_title": "Business Development Manager",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2012",
+                    "country": "Canada",
+                    "age": "40",
+                    "annual_salary": "117000",
+                    "bonus_percentage": "9"
+                },
+                {
+                    "eeid": "E09493",
+                    "full_name": "Ava Hill",
+                    "department": "Engineering",
+                    "job_title": "Software Developer",
+                    "business_unit": "Research Development",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2020",
+                    "country": "India",
+                    "age": "27",
+                    "annual_salary": "87000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E09507",
+                    "full_name": "James Adams",
+                    "department": "Legal",
+                    "job_title": "Legal Advisor",
+                    "business_unit": "Corporate",
+                    "gender": "Male",
+                    "ethnicity": "Latino",
+                    "hire_date": "2009",
+                    "country": "United Kingdom",
+                    "age": "50",
+                    "annual_salary": "132000",
+                    "bonus_percentage": "12"
+                },
+                {
+                    "eeid": "E09613",
+                    "full_name": "Mia Nelson",
+                    "department": "Human Resources",
+                    "job_title": "HR Specialist",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Black",
+                    "hire_date": "2014",
+                    "country": "United States",
+                    "age": "38",
+                    "annual_salary": "88000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E09724",
+                    "full_name": "Michael Scott",
+                    "department": "Sales",
+                    "job_title": "Sales Representative",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2016",
+                    "country": "Canada",
+                    "age": "40",
+                    "annual_salary": "95000",
+                    "bonus_percentage": "8"
+                },
+                {
+                    "eeid": "E09835",
+                    "full_name": "Emily Davis",
+                    "department": "Marketing",
+                    "job_title": "Content Strategist",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2018",
+                    "country": "Singapore",
+                    "age": "32",
+                    "annual_salary": "87000",
+                    "bonus_percentage": "6"
+                },
+                {
+                    "eeid": "E09944",
+                    "full_name": "Benjamin Turner",
+                    "department": "Supply Chain",
+                    "job_title": "Supply Chain Analyst",
+                    "business_unit": "Manufacturing",
+                    "gender": "Male",
+                    "ethnicity": "Black",
+                    "hire_date": "2017",
+                    "country": "South Africa",
+                    "age": "29",
+                    "annual_salary": "90000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E10056",
+                    "full_name": "Sofia Thomas",
+                    "department": "Design",
+                    "job_title": "Graphic Designer",
+                    "business_unit": "Speciality Products",
+                    "gender": "Female",
+                    "ethnicity": "Latino",
+                    "hire_date": "2020",
+                    "country": "Brazil",
+                    "age": "26",
+                    "annual_salary": "78000",
+                    "bonus_percentage": "5"
+                },
+                {
+                    "eeid": "E10167",
+                    "full_name": "Jack Wilson",
+                    "department": "Engineering",
+                    "job_title": "DevOps Engineer",
+                    "business_unit": "Research Development",
+                    "gender": "Male",
+                    "ethnicity": "Caucasian",
+                    "hire_date": "2015",
+                    "country": "Germany",
+                    "age": "34",
+                    "annual_salary": "98000",
+                    "bonus_percentage": "7"
+                },
+                {
+                    "eeid": "E10278",
+                    "full_name": "Olivia Harris",
+                    "department": "Legal",
+                    "job_title": "Legal Assistant",
+                    "business_unit": "Corporate",
+                    "gender": "Female",
+                    "ethnicity": "Asian",
+                    "hire_date": "2019",
+                    "country": "United Kingdom",
+                    "age": "30",
+                    "annual_salary": "85000",
+                    "bonus_percentage": "6"
+                }
+            ],
+            "banding": true,
+            "color1": "#f5f5f5",
+            "color2": "#cfd8dc"
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "eeid",
+                "varchar",
+                ""
+            ],
+            [
+                "full_name",
+                "varchar",
+                ""
+            ],
+            [
+                "department",
+                "string",
+                ""
+            ],
+            [
+                "job_title",
+                "varchar",
+                ""
+            ],
+            [
+                "business_unit",
+                "string",
+                ""
+            ],
+            [
+                "gender",
+                "string",
+                ""
+            ],
+            [
+                "ethnicity",
+                "string",
+                ""
+            ],
+            [
+                "hire_date",
+                "date",
+                ""
+            ],
+            [
+                "country",
+                "varchar",
+                ""
+            ],
+            [
+                "age",
+                "int",
+                ""
+            ],
+            [
+                "annual_salary",
+                "int",
+                ""
+            ],
+            [
+                "bonus_percentage",
+                "int",
+                ""
+            ]
+        ],
+        "row_Data": [],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": true
+    }
+]

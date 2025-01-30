@@ -1,0 +1,25 @@
+{
+    "dragged_array": [
+        {
+            "schema": "In Ex",
+            "table": "sqlite_sequence",
+            "columns": [
+                {
+                    "column": "name",
+                    "datatype": "string"
+                },
+                {
+                    "column": "seq",
+                    "datatype": "string"
+                }
+            ],
+            "alias": "sqlite_sequence"
+        }
+    ],
+    "dragged_array_indexing": {
+        "employees": 1,
+        "covid_data": 1,
+        "hr_attrition": 1,
+        "sqlite_sequence": 1
+    }
+}

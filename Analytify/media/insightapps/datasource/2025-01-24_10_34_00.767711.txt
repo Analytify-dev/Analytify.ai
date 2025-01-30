@@ -1,0 +1,31 @@
+{
+    "dragged_array": [
+        {
+            "schema": "Test",
+            "table": "django_migrations",
+            "columns": [
+                {
+                    "column": "id",
+                    "datatype": "nullable(float64)"
+                },
+                {
+                    "column": "app",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "applied",
+                    "datatype": "nullable(datetime64(3))"
+                }
+            ],
+            "alias": "django_migrations"
+        }
+    ],
+    "dragged_array_indexing": {
+        "covid_data": 1,
+        "django_migrations": 1
+    }
+}

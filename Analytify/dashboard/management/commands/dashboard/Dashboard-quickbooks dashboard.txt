@@ -1,0 +1,2713 @@
+[
+    {
+        "id": "4b0279ab-a8a6-44ac-8bb9-04419625be40",
+        "x": 0,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Customers",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Customers</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1054,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 100,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(pr_Id)",
+                    "result_data": [
+                        100
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "pr_Id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "dc4b1622-884a-44d7-87a1-63be8dad2a54",
+        "x": 4,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Active Customers",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Active Customers</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1055,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 54,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(Active)",
+                    "result_data": [
+                        54
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "Active",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "b2270d89-d1d0-46db-beef-9404cf2e31f3",
+        "x": 8,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Inactive Customers",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Inactive Customers</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1056,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 46,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(Active)",
+                    "result_data": [
+                        46
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "Active",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "f33eb405-f284-4321-8c6e-13b4771606d7",
+        "x": 12,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Balance",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Balance</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1057,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": "260.39K",
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "K",
+            "kpiDecimalPlaces": 2,
+            "rows": [
+                {
+                    "col": "sum(Balance)",
+                    "result_data": [
+                        260392.71002197266
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "Balance",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "f08dd347-827d-4fb1-933d-739d6005c6d7",
+        "x": 16,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Balance with Jobs",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Balance with Jobs</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1058,
+        "chartType": "KPI",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": "248.33K",
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "K",
+            "kpiDecimalPlaces": 2,
+            "rows": [
+                {
+                    "col": "sum(BalanceWithJobs)",
+                    "result_data": [
+                        248325.31085205078
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "BalanceWithJobs",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "bf8ea730-5911-4358-afc0-7f3a27ced887",
+        "x": 0,
+        "y": 3,
+        "rows": 8,
+        "cols": 10,
+        "data": {
+            "title": "Year Wise Balance",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Year Wise Balance</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1059,
+        "chartType": "bar",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 6,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        5814.389984130859,
+                        254578.3200378418
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "background": "#fff",
+                "events": {}
+            },
+            "xaxis": {
+                "categories": [
+                    "2023",
+                    "2024"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "colors": [
+                "#7e57c2"
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        5814.389984130859,
+                        254578.3200378418
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "background": "#fff",
+                "events": {}
+            },
+            "xaxis": {
+                "categories": [
+                    "2023",
+                    "2024"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "colors": [
+                "#7e57c2"
+            ]
+        },
+        "drillDownHierarchy": [
+            "year",
+            "quarter",
+            "month",
+            "date"
+        ],
+        "column_Data": [
+            [
+                "CreateTime",
+                "date",
+                "year",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "Balance",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": true,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#7e57c2",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": true,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "0755e8f6-abb1-4ff3-b91a-0f4e33225040",
+        "x": 0,
+        "y": 11,
+        "rows": 7,
+        "cols": 10,
+        "data": {
+            "title": "Customer segmentation by delivery method",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Customer segmentation by delivery method</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1061,
+        "chartType": "pie",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 24,
+        "chartOptions": {
+            "backgroundColor": "#fff",
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "orient": "vertical",
+                "left": "left",
+                "type": "scroll",
+                "show": true
+            },
+            "label": {
+                "show": true,
+                "formatter": "{b}: {d}%"
+            },
+            "series": [
+                {
+                    "type": "pie",
+                    "radius": "50%",
+                    "data": [
+                        {
+                            "value": 34,
+                            "name": "Email"
+                        },
+                        {
+                            "value": 30,
+                            "name": "Mail"
+                        },
+                        {
+                            "value": 36,
+                            "name": "SMS"
+                        }
+                    ],
+                    "emphasis": {
+                        "itemStyle": {
+                            "shadowBlur": 10,
+                            "shadowOffsetX": 0,
+                            "shadowColor": "rgba(0, 0, 0, 0.5)"
+                        }
+                    },
+                    "label": {
+                        "show": true
+                    }
+                }
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "echartOptions": {
+            "backgroundColor": "#fff",
+            "tooltip": {
+                "trigger": "item"
+            },
+            "legend": {
+                "orient": "vertical",
+                "left": "left",
+                "type": "scroll",
+                "show": true
+            },
+            "label": {
+                "show": true,
+                "formatter": "{b}: {d}%"
+            },
+            "series": [
+                {
+                    "type": "pie",
+                    "radius": "50%",
+                    "data": [
+                        {
+                            "value": 34,
+                            "name": "Email"
+                        },
+                        {
+                            "value": 30,
+                            "name": "Mail"
+                        },
+                        {
+                            "value": 36,
+                            "name": "SMS"
+                        }
+                    ],
+                    "emphasis": {
+                        "itemStyle": {
+                            "shadowBlur": 10,
+                            "shadowOffsetX": 0,
+                            "shadowColor": "rgba(0, 0, 0, 0.5)"
+                        }
+                    },
+                    "label": {
+                        "show": true
+                    }
+                }
+            ]
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "PreferredDeliveryMethod",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "pr_Id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "79f6c7c9-9396-4861-9e32-005e395292d9",
+        "x": 10,
+        "y": 11,
+        "rows": 7,
+        "cols": 10,
+        "data": {
+            "title": "Title wise Customer Count",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Title wise Customer Count</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1062,
+        "chartType": "FUNNEL",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 27,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "count(pr_Id)",
+                    "data": [
+                        32,
+                        20,
+                        19,
+                        12,
+                        6,
+                        5,
+                        4,
+                        2
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 350,
+                "background": "#fff",
+                "events": {}
+            },
+            "plotOptions": {
+                "bar": {
+                    "borderRadius": 0,
+                    "horizontal": true,
+                    "barHeight": "80%",
+                    "isFunnel": true,
+                    "distributed": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "title": {},
+            "xaxis": {
+                "categories": [
+                    "Mr.",
+                    "Misc.",
+                    "Ind.",
+                    "Mrs.",
+                    "Mx.",
+                    "Ms.",
+                    "Miss",
+                    "Dr."
+                ],
+                "convertedCatToNumeric": false
+            },
+            "legend": {
+                "show": false
+            },
+            "colors": []
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "count(pr_Id)",
+                    "data": [
+                        32,
+                        20,
+                        19,
+                        12,
+                        6,
+                        5,
+                        4,
+                        2
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 350,
+                "background": "#fff",
+                "events": {}
+            },
+            "plotOptions": {
+                "bar": {
+                    "borderRadius": 0,
+                    "horizontal": true,
+                    "barHeight": "80%",
+                    "isFunnel": true,
+                    "distributed": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "title": {},
+            "xaxis": {
+                "categories": [
+                    "Mr.",
+                    "Misc.",
+                    "Ind.",
+                    "Mrs.",
+                    "Mx.",
+                    "Ms.",
+                    "Miss",
+                    "Dr."
+                ],
+                "convertedCatToNumeric": false
+            },
+            "legend": {
+                "show": false
+            },
+            "colors": []
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "Title",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "pr_Id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": true,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": true,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": true,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": "descending"
+        }
+    },
+    {
+        "id": "84575bc0-ff37-404c-b664-3f42bec7c061",
+        "x": 10,
+        "y": 3,
+        "rows": 8,
+        "cols": 10,
+        "data": {
+            "title": "Country Wise Balance",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Country Wise Balance</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1060,
+        "chartType": "WORLD MAP",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 29,
+        "chartOptions": {
+            "tooltip": {},
+            "visualMap": {
+                "min": 134.07000732421875,
+                "max": 17144.719970703125,
+                "text": [
+                    "High",
+                    "Low"
+                ],
+                "realtime": false,
+                "calculable": true,
+                "inRange": {
+                    "color": [
+                        "lightskyblue",
+                        "yellow",
+                        "orangered"
+                    ]
+                }
+            },
+            "series": [
+                {
+                    "type": "map",
+                    "map": "world",
+                    "roam": false,
+                    "data": [
+                        {
+                            "name": "Tuvalu",
+                            "value": 12782.250244140625,
+                            "sum(Balance)": 12782.250244140625
+                        },
+                        {
+                            "name": "Reunion",
+                            "value": 2047.1700439453125,
+                            "sum(Balance)": 2047.1700439453125
+                        },
+                        {
+                            "name": "Niger",
+                            "value": 1105.1199951171875,
+                            "sum(Balance)": 1105.1199951171875
+                        },
+                        {
+                            "name": "Uganda",
+                            "value": 4008.8798828125,
+                            "sum(Balance)": 4008.8798828125
+                        },
+                        {
+                            "name": "Chile",
+                            "value": 2571.590087890625,
+                            "sum(Balance)": 2571.590087890625
+                        },
+                        {
+                            "name": "Zimbabwe",
+                            "value": 1372.739990234375,
+                            "sum(Balance)": 1372.739990234375
+                        },
+                        {
+                            "name": "Tonga",
+                            "value": 1580.550048828125,
+                            "sum(Balance)": 1580.550048828125
+                        },
+                        {
+                            "name": "Niue",
+                            "value": 1123.0899658203125,
+                            "sum(Balance)": 1123.0899658203125
+                        },
+                        {
+                            "name": "Finland",
+                            "value": 1490.31005859375,
+                            "sum(Balance)": 1490.31005859375
+                        },
+                        {
+                            "name": "Mongolia",
+                            "value": 17144.719970703125,
+                            "sum(Balance)": 17144.719970703125
+                        },
+                        {
+                            "name": "Kuwait",
+                            "value": 1259.6300048828125,
+                            "sum(Balance)": 1259.6300048828125
+                        },
+                        {
+                            "name": "Slovenia",
+                            "value": 4374.06982421875,
+                            "sum(Balance)": 4374.06982421875
+                        },
+                        {
+                            "name": "Kiribati",
+                            "value": 4489.3701171875,
+                            "sum(Balance)": 4489.3701171875
+                        },
+                        {
+                            "name": "Belarus",
+                            "value": 2575.10009765625,
+                            "sum(Balance)": 2575.10009765625
+                        },
+                        {
+                            "name": "Jamaica",
+                            "value": 3302.159912109375,
+                            "sum(Balance)": 3302.159912109375
+                        },
+                        {
+                            "name": "Togo",
+                            "value": 3779.10009765625,
+                            "sum(Balance)": 3779.10009765625
+                        },
+                        {
+                            "name": "Andorra",
+                            "value": 3109.320068359375,
+                            "sum(Balance)": 3109.320068359375
+                        },
+                        {
+                            "name": "Monaco",
+                            "value": 1768.719970703125,
+                            "sum(Balance)": 1768.719970703125
+                        },
+                        {
+                            "name": "Morocco",
+                            "value": 1724.72998046875,
+                            "sum(Balance)": 1724.72998046875
+                        },
+                        {
+                            "name": "Malawi",
+                            "value": 7440.0498046875,
+                            "sum(Balance)": 7440.0498046875
+                        },
+                        {
+                            "name": "Samoa",
+                            "value": 2368.89990234375,
+                            "sum(Balance)": 2368.89990234375
+                        },
+                        {
+                            "name": "Bermuda",
+                            "value": 2299.6201171875,
+                            "sum(Balance)": 2299.6201171875
+                        },
+                        {
+                            "name": "Namibia",
+                            "value": 4040.929931640625,
+                            "sum(Balance)": 4040.929931640625
+                        },
+                        {
+                            "name": "Chad",
+                            "value": 5637.1700439453125,
+                            "sum(Balance)": 5637.1700439453125
+                        },
+                        {
+                            "name": "China",
+                            "value": 2363.080078125,
+                            "sum(Balance)": 2363.080078125
+                        },
+                        {
+                            "name": "Georgia",
+                            "value": 4433.969970703125,
+                            "sum(Balance)": 4433.969970703125
+                        },
+                        {
+                            "name": "Pakistan",
+                            "value": 1561.9300537109375,
+                            "sum(Balance)": 1561.9300537109375
+                        },
+                        {
+                            "name": "Greece",
+                            "value": 4982.669921875,
+                            "sum(Balance)": 4982.669921875
+                        },
+                        {
+                            "name": "Comoros",
+                            "value": 2243.050048828125,
+                            "sum(Balance)": 2243.050048828125
+                        },
+                        {
+                            "name": "Cambodia",
+                            "value": 3383.3701171875,
+                            "sum(Balance)": 3383.3701171875
+                        },
+                        {
+                            "name": "Iraq",
+                            "value": 275.3999938964844,
+                            "sum(Balance)": 275.3999938964844
+                        },
+                        {
+                            "name": "Iran",
+                            "value": 3354.030029296875,
+                            "sum(Balance)": 3354.030029296875
+                        },
+                        {
+                            "name": "Spain",
+                            "value": 3775.56005859375,
+                            "sum(Balance)": 3775.56005859375
+                        },
+                        {
+                            "name": "Palau",
+                            "value": 4352.6201171875,
+                            "sum(Balance)": 4352.6201171875
+                        },
+                        {
+                            "name": "Mexico",
+                            "value": 3747.35009765625,
+                            "sum(Balance)": 3747.35009765625
+                        },
+                        {
+                            "name": "Cyprus",
+                            "value": 3923.9300537109375,
+                            "sum(Balance)": 3923.9300537109375
+                        },
+                        {
+                            "name": "Yemen",
+                            "value": 375.8399963378906,
+                            "sum(Balance)": 375.8399963378906
+                        },
+                        {
+                            "name": "Tanzania",
+                            "value": 2915.9700927734375,
+                            "sum(Balance)": 2915.9700927734375
+                        },
+                        {
+                            "name": "Iceland",
+                            "value": 2350.8798828125,
+                            "sum(Balance)": 2350.8798828125
+                        },
+                        {
+                            "name": "Denmark",
+                            "value": 2318.89990234375,
+                            "sum(Balance)": 2318.89990234375
+                        },
+                        {
+                            "name": "Bolivia",
+                            "value": 4714.85986328125,
+                            "sum(Balance)": 4714.85986328125
+                        },
+                        {
+                            "name": "Bhutan",
+                            "value": 134.07000732421875,
+                            "sum(Balance)": 134.07000732421875
+                        },
+                        {
+                            "name": "Venezuela",
+                            "value": 3950.52001953125,
+                            "sum(Balance)": 3950.52001953125
+                        },
+                        {
+                            "name": "Mauritania",
+                            "value": 924.9999694824219,
+                            "sum(Balance)": 924.9999694824219
+                        },
+                        {
+                            "name": "Gibraltar",
+                            "value": 7756.449951171875,
+                            "sum(Balance)": 7756.449951171875
+                        },
+                        {
+                            "name": "Indonesia",
+                            "value": 4032.6600341796875,
+                            "sum(Balance)": 4032.6600341796875
+                        },
+                        {
+                            "name": "Saint Barthelemy",
+                            "value": 1088.6400146484375,
+                            "sum(Balance)": 1088.6400146484375
+                        },
+                        {
+                            "name": "Timor-Leste",
+                            "value": 11929.869873046875,
+                            "sum(Balance)": 11929.869873046875
+                        },
+                        {
+                            "name": "Christmas Island",
+                            "value": 608.3699951171875,
+                            "sum(Balance)": 608.3699951171875
+                        },
+                        {
+                            "name": "Cayman Islands",
+                            "value": 4376.31982421875,
+                            "sum(Balance)": 4376.31982421875
+                        },
+                        {
+                            "name": "Western Sahara",
+                            "value": 281.6199951171875,
+                            "sum(Balance)": 281.6199951171875
+                        },
+                        {
+                            "name": "Montserrat",
+                            "value": 8401.330017089844,
+                            "sum(Balance)": 8401.330017089844
+                        },
+                        {
+                            "name": "Mozambique",
+                            "value": 5256.3499755859375,
+                            "sum(Balance)": 5256.3499755859375
+                        },
+                        {
+                            "name": "French Polynesia",
+                            "value": 4412.480041503906,
+                            "sum(Balance)": 4412.480041503906
+                        },
+                        {
+                            "name": "Pitcairn Islands",
+                            "value": 2239.320068359375,
+                            "sum(Balance)": 2239.320068359375
+                        },
+                        {
+                            "name": "Isle of Man",
+                            "value": 3159.739990234375,
+                            "sum(Balance)": 3159.739990234375
+                        },
+                        {
+                            "name": "Guinea-Bissau",
+                            "value": 1453.6500244140625,
+                            "sum(Balance)": 1453.6500244140625
+                        },
+                        {
+                            "name": "New Caledonia",
+                            "value": 2689.31005859375,
+                            "sum(Balance)": 2689.31005859375
+                        },
+                        {
+                            "name": "Uzbekistan",
+                            "value": 4996.68017578125,
+                            "sum(Balance)": 4996.68017578125
+                        },
+                        {
+                            "name": "Norfolk Island",
+                            "value": 1457.3800048828125,
+                            "sum(Balance)": 1457.3800048828125
+                        },
+                        {
+                            "name": "Saint Martin",
+                            "value": 4195.58984375,
+                            "sum(Balance)": 4195.58984375
+                        },
+                        {
+                            "name": "Costa Rica",
+                            "value": 2307.949951171875,
+                            "sum(Balance)": 2307.949951171875
+                        },
+                        {
+                            "name": "Turkmenistan",
+                            "value": 372.6499938964844,
+                            "sum(Balance)": 372.6499938964844
+                        },
+                        {
+                            "name": "Solomon Islands",
+                            "value": 5376.340087890625,
+                            "sum(Balance)": 5376.340087890625
+                        },
+                        {
+                            "name": "Micronesia",
+                            "value": 2723.070068359375,
+                            "sum(Balance)": 2723.070068359375
+                        },
+                        {
+                            "name": "Swaziland",
+                            "value": 1981.3499755859375,
+                            "sum(Balance)": 1981.3499755859375
+                        },
+                        {
+                            "name": "Bosnia and Herzegovina",
+                            "value": 3360.280029296875,
+                            "sum(Balance)": 3360.280029296875
+                        },
+                        {
+                            "name": "Trinidad and Tobago",
+                            "value": 2568.8798828125,
+                            "sum(Balance)": 2568.8798828125
+                        },
+                        {
+                            "name": "Antigua and Barbuda",
+                            "value": 1705.719970703125,
+                            "sum(Balance)": 1705.719970703125
+                        },
+                        {
+                            "name": "Central African Republic",
+                            "value": 3223.580078125,
+                            "sum(Balance)": 3223.580078125
+                        },
+                        {
+                            "name": "Russian Federation",
+                            "value": 4600.83984375,
+                            "sum(Balance)": 4600.83984375
+                        },
+                        {
+                            "name": "Cocos (Keeling) Islands",
+                            "value": 481.42999267578125,
+                            "sum(Balance)": 481.42999267578125
+                        },
+                        {
+                            "name": "Dominican Republic",
+                            "value": 1488.2900390625,
+                            "sum(Balance)": 1488.2900390625
+                        },
+                        {
+                            "name": "British Indian Ocean Territory (Chagos Archipelago)",
+                            "value": 4689.85986328125,
+                            "sum(Balance)": 4689.85986328125
+                        },
+                        {
+                            "name": "Antarctica (the territory South of 60 deg S)",
+                            "value": 7086.159912109375,
+                            "sum(Balance)": 7086.159912109375
+                        },
+                        {
+                            "name": "Heard Island and McDonald Islands",
+                            "value": 151.94000244140625,
+                            "sum(Balance)": 151.94000244140625
+                        },
+                        {
+                            "name": "Lao Peoples Democratic Republic",
+                            "value": 460.32000732421875,
+                            "sum(Balance)": 460.32000732421875
+                        }
+                    ]
+                }
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "echartOptions": {
+            "tooltip": {},
+            "visualMap": {
+                "min": 134.07000732421875,
+                "max": 17144.719970703125,
+                "text": [
+                    "High",
+                    "Low"
+                ],
+                "realtime": false,
+                "calculable": true,
+                "inRange": {
+                    "color": [
+                        "lightskyblue",
+                        "yellow",
+                        "orangered"
+                    ]
+                }
+            },
+            "series": [
+                {
+                    "type": "map",
+                    "map": "world",
+                    "roam": false,
+                    "data": [
+                        {
+                            "name": "Tuvalu",
+                            "value": 12782.250244140625,
+                            "sum(Balance)": 12782.250244140625
+                        },
+                        {
+                            "name": "Reunion",
+                            "value": 2047.1700439453125,
+                            "sum(Balance)": 2047.1700439453125
+                        },
+                        {
+                            "name": "Niger",
+                            "value": 1105.1199951171875,
+                            "sum(Balance)": 1105.1199951171875
+                        },
+                        {
+                            "name": "Uganda",
+                            "value": 4008.8798828125,
+                            "sum(Balance)": 4008.8798828125
+                        },
+                        {
+                            "name": "Chile",
+                            "value": 2571.590087890625,
+                            "sum(Balance)": 2571.590087890625
+                        },
+                        {
+                            "name": "Zimbabwe",
+                            "value": 1372.739990234375,
+                            "sum(Balance)": 1372.739990234375
+                        },
+                        {
+                            "name": "Tonga",
+                            "value": 1580.550048828125,
+                            "sum(Balance)": 1580.550048828125
+                        },
+                        {
+                            "name": "Niue",
+                            "value": 1123.0899658203125,
+                            "sum(Balance)": 1123.0899658203125
+                        },
+                        {
+                            "name": "Finland",
+                            "value": 1490.31005859375,
+                            "sum(Balance)": 1490.31005859375
+                        },
+                        {
+                            "name": "Mongolia",
+                            "value": 17144.719970703125,
+                            "sum(Balance)": 17144.719970703125
+                        },
+                        {
+                            "name": "Kuwait",
+                            "value": 1259.6300048828125,
+                            "sum(Balance)": 1259.6300048828125
+                        },
+                        {
+                            "name": "Slovenia",
+                            "value": 4374.06982421875,
+                            "sum(Balance)": 4374.06982421875
+                        },
+                        {
+                            "name": "Kiribati",
+                            "value": 4489.3701171875,
+                            "sum(Balance)": 4489.3701171875
+                        },
+                        {
+                            "name": "Belarus",
+                            "value": 2575.10009765625,
+                            "sum(Balance)": 2575.10009765625
+                        },
+                        {
+                            "name": "Jamaica",
+                            "value": 3302.159912109375,
+                            "sum(Balance)": 3302.159912109375
+                        },
+                        {
+                            "name": "Togo",
+                            "value": 3779.10009765625,
+                            "sum(Balance)": 3779.10009765625
+                        },
+                        {
+                            "name": "Andorra",
+                            "value": 3109.320068359375,
+                            "sum(Balance)": 3109.320068359375
+                        },
+                        {
+                            "name": "Monaco",
+                            "value": 1768.719970703125,
+                            "sum(Balance)": 1768.719970703125
+                        },
+                        {
+                            "name": "Morocco",
+                            "value": 1724.72998046875,
+                            "sum(Balance)": 1724.72998046875
+                        },
+                        {
+                            "name": "Malawi",
+                            "value": 7440.0498046875,
+                            "sum(Balance)": 7440.0498046875
+                        },
+                        {
+                            "name": "Samoa",
+                            "value": 2368.89990234375,
+                            "sum(Balance)": 2368.89990234375
+                        },
+                        {
+                            "name": "Bermuda",
+                            "value": 2299.6201171875,
+                            "sum(Balance)": 2299.6201171875
+                        },
+                        {
+                            "name": "Namibia",
+                            "value": 4040.929931640625,
+                            "sum(Balance)": 4040.929931640625
+                        },
+                        {
+                            "name": "Chad",
+                            "value": 5637.1700439453125,
+                            "sum(Balance)": 5637.1700439453125
+                        },
+                        {
+                            "name": "China",
+                            "value": 2363.080078125,
+                            "sum(Balance)": 2363.080078125
+                        },
+                        {
+                            "name": "Georgia",
+                            "value": 4433.969970703125,
+                            "sum(Balance)": 4433.969970703125
+                        },
+                        {
+                            "name": "Pakistan",
+                            "value": 1561.9300537109375,
+                            "sum(Balance)": 1561.9300537109375
+                        },
+                        {
+                            "name": "Greece",
+                            "value": 4982.669921875,
+                            "sum(Balance)": 4982.669921875
+                        },
+                        {
+                            "name": "Comoros",
+                            "value": 2243.050048828125,
+                            "sum(Balance)": 2243.050048828125
+                        },
+                        {
+                            "name": "Cambodia",
+                            "value": 3383.3701171875,
+                            "sum(Balance)": 3383.3701171875
+                        },
+                        {
+                            "name": "Iraq",
+                            "value": 275.3999938964844,
+                            "sum(Balance)": 275.3999938964844
+                        },
+                        {
+                            "name": "Iran",
+                            "value": 3354.030029296875,
+                            "sum(Balance)": 3354.030029296875
+                        },
+                        {
+                            "name": "Spain",
+                            "value": 3775.56005859375,
+                            "sum(Balance)": 3775.56005859375
+                        },
+                        {
+                            "name": "Palau",
+                            "value": 4352.6201171875,
+                            "sum(Balance)": 4352.6201171875
+                        },
+                        {
+                            "name": "Mexico",
+                            "value": 3747.35009765625,
+                            "sum(Balance)": 3747.35009765625
+                        },
+                        {
+                            "name": "Cyprus",
+                            "value": 3923.9300537109375,
+                            "sum(Balance)": 3923.9300537109375
+                        },
+                        {
+                            "name": "Yemen",
+                            "value": 375.8399963378906,
+                            "sum(Balance)": 375.8399963378906
+                        },
+                        {
+                            "name": "Tanzania",
+                            "value": 2915.9700927734375,
+                            "sum(Balance)": 2915.9700927734375
+                        },
+                        {
+                            "name": "Iceland",
+                            "value": 2350.8798828125,
+                            "sum(Balance)": 2350.8798828125
+                        },
+                        {
+                            "name": "Denmark",
+                            "value": 2318.89990234375,
+                            "sum(Balance)": 2318.89990234375
+                        },
+                        {
+                            "name": "Bolivia",
+                            "value": 4714.85986328125,
+                            "sum(Balance)": 4714.85986328125
+                        },
+                        {
+                            "name": "Bhutan",
+                            "value": 134.07000732421875,
+                            "sum(Balance)": 134.07000732421875
+                        },
+                        {
+                            "name": "Venezuela",
+                            "value": 3950.52001953125,
+                            "sum(Balance)": 3950.52001953125
+                        },
+                        {
+                            "name": "Mauritania",
+                            "value": 924.9999694824219,
+                            "sum(Balance)": 924.9999694824219
+                        },
+                        {
+                            "name": "Gibraltar",
+                            "value": 7756.449951171875,
+                            "sum(Balance)": 7756.449951171875
+                        },
+                        {
+                            "name": "Indonesia",
+                            "value": 4032.6600341796875,
+                            "sum(Balance)": 4032.6600341796875
+                        },
+                        {
+                            "name": "Saint Barthelemy",
+                            "value": 1088.6400146484375,
+                            "sum(Balance)": 1088.6400146484375
+                        },
+                        {
+                            "name": "Timor-Leste",
+                            "value": 11929.869873046875,
+                            "sum(Balance)": 11929.869873046875
+                        },
+                        {
+                            "name": "Christmas Island",
+                            "value": 608.3699951171875,
+                            "sum(Balance)": 608.3699951171875
+                        },
+                        {
+                            "name": "Cayman Islands",
+                            "value": 4376.31982421875,
+                            "sum(Balance)": 4376.31982421875
+                        },
+                        {
+                            "name": "Western Sahara",
+                            "value": 281.6199951171875,
+                            "sum(Balance)": 281.6199951171875
+                        },
+                        {
+                            "name": "Montserrat",
+                            "value": 8401.330017089844,
+                            "sum(Balance)": 8401.330017089844
+                        },
+                        {
+                            "name": "Mozambique",
+                            "value": 5256.3499755859375,
+                            "sum(Balance)": 5256.3499755859375
+                        },
+                        {
+                            "name": "French Polynesia",
+                            "value": 4412.480041503906,
+                            "sum(Balance)": 4412.480041503906
+                        },
+                        {
+                            "name": "Pitcairn Islands",
+                            "value": 2239.320068359375,
+                            "sum(Balance)": 2239.320068359375
+                        },
+                        {
+                            "name": "Isle of Man",
+                            "value": 3159.739990234375,
+                            "sum(Balance)": 3159.739990234375
+                        },
+                        {
+                            "name": "Guinea-Bissau",
+                            "value": 1453.6500244140625,
+                            "sum(Balance)": 1453.6500244140625
+                        },
+                        {
+                            "name": "New Caledonia",
+                            "value": 2689.31005859375,
+                            "sum(Balance)": 2689.31005859375
+                        },
+                        {
+                            "name": "Uzbekistan",
+                            "value": 4996.68017578125,
+                            "sum(Balance)": 4996.68017578125
+                        },
+                        {
+                            "name": "Norfolk Island",
+                            "value": 1457.3800048828125,
+                            "sum(Balance)": 1457.3800048828125
+                        },
+                        {
+                            "name": "Saint Martin",
+                            "value": 4195.58984375,
+                            "sum(Balance)": 4195.58984375
+                        },
+                        {
+                            "name": "Costa Rica",
+                            "value": 2307.949951171875,
+                            "sum(Balance)": 2307.949951171875
+                        },
+                        {
+                            "name": "Turkmenistan",
+                            "value": 372.6499938964844,
+                            "sum(Balance)": 372.6499938964844
+                        },
+                        {
+                            "name": "Solomon Islands",
+                            "value": 5376.340087890625,
+                            "sum(Balance)": 5376.340087890625
+                        },
+                        {
+                            "name": "Micronesia",
+                            "value": 2723.070068359375,
+                            "sum(Balance)": 2723.070068359375
+                        },
+                        {
+                            "name": "Swaziland",
+                            "value": 1981.3499755859375,
+                            "sum(Balance)": 1981.3499755859375
+                        },
+                        {
+                            "name": "Bosnia and Herzegovina",
+                            "value": 3360.280029296875,
+                            "sum(Balance)": 3360.280029296875
+                        },
+                        {
+                            "name": "Trinidad and Tobago",
+                            "value": 2568.8798828125,
+                            "sum(Balance)": 2568.8798828125
+                        },
+                        {
+                            "name": "Antigua and Barbuda",
+                            "value": 1705.719970703125,
+                            "sum(Balance)": 1705.719970703125
+                        },
+                        {
+                            "name": "Central African Republic",
+                            "value": 3223.580078125,
+                            "sum(Balance)": 3223.580078125
+                        },
+                        {
+                            "name": "Russian Federation",
+                            "value": 4600.83984375,
+                            "sum(Balance)": 4600.83984375
+                        },
+                        {
+                            "name": "Cocos (Keeling) Islands",
+                            "value": 481.42999267578125,
+                            "sum(Balance)": 481.42999267578125
+                        },
+                        {
+                            "name": "Dominican Republic",
+                            "value": 1488.2900390625,
+                            "sum(Balance)": 1488.2900390625
+                        },
+                        {
+                            "name": "British Indian Ocean Territory (Chagos Archipelago)",
+                            "value": 4689.85986328125,
+                            "sum(Balance)": 4689.85986328125
+                        },
+                        {
+                            "name": "Antarctica (the territory South of 60 deg S)",
+                            "value": 7086.159912109375,
+                            "sum(Balance)": 7086.159912109375
+                        },
+                        {
+                            "name": "Heard Island and McDonald Islands",
+                            "value": 151.94000244140625,
+                            "sum(Balance)": 151.94000244140625
+                        },
+                        {
+                            "name": "Lao Peoples Democratic Republic",
+                            "value": 460.32000732421875,
+                            "sum(Balance)": 460.32000732421875
+                        }
+                    ]
+                }
+            ]
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "Country",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "Balance",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "4188a8d7-eb5e-46cb-b947-339729f861f9",
+        "x": 0,
+        "y": 18,
+        "rows": 12,
+        "cols": 20,
+        "data": {
+            "title": "Quickbooks Customer Overview",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Quickbooks Customer Overview</strong></span></p>"
+        },
+        "sheetType": "Table",
+        "sheetId": 1063,
+        "chartType": "Table",
+        "databaseId": 226,
+        "qrySetId": 342,
+        "chartId": 1,
+        "tableData": {
+            "headers": [
+                "pr_Id",
+                "CompanyName",
+                "domain",
+                "Country",
+                "Balance",
+                "BalanceWithJobs"
+            ],
+            "rows": [
+                {
+                    "pr_Id": "CUST-016",
+                    "CompanyName": "Vasquez Group",
+                    "domain": "martinez.info",
+                    "Country": "Mozambique",
+                    "Balance": 3520.93,
+                    "BalanceWithJobs": 273.72
+                },
+                {
+                    "pr_Id": "CUST-068",
+                    "CompanyName": "Briggs-Montoya",
+                    "domain": "williams.com",
+                    "Country": "Morocco",
+                    "Balance": 1724.73,
+                    "BalanceWithJobs": 4540.13
+                },
+                {
+                    "pr_Id": "CUST-086",
+                    "CompanyName": "Woodard Ltd",
+                    "domain": "murray-jones.com",
+                    "Country": "Mozambique",
+                    "Balance": 1735.42,
+                    "BalanceWithJobs": 2585.94
+                },
+                {
+                    "pr_Id": "CUST-087",
+                    "CompanyName": "Williams, Cox and Reed",
+                    "domain": "arroyo-thomas.org",
+                    "Country": "Kuwait",
+                    "Balance": 1259.63,
+                    "BalanceWithJobs": 1801.2
+                },
+                {
+                    "pr_Id": "CUST-097",
+                    "CompanyName": "White-Oliver",
+                    "domain": "houston.com",
+                    "Country": "Saint Barthelemy",
+                    "Balance": 1088.64,
+                    "BalanceWithJobs": 4975.33
+                },
+                {
+                    "pr_Id": "CUST-003",
+                    "CompanyName": "Wilson-Morgan",
+                    "domain": "henry-matthews.biz",
+                    "Country": "Timor-Leste",
+                    "Balance": 3953.45,
+                    "BalanceWithJobs": 3435.86
+                },
+                {
+                    "pr_Id": "CUST-014",
+                    "CompanyName": "Espinoza, Erickson and Phillips",
+                    "domain": "boyd.com",
+                    "Country": "Micronesia",
+                    "Balance": 2723.07,
+                    "BalanceWithJobs": 4286.16
+                },
+                {
+                    "pr_Id": "CUST-053",
+                    "CompanyName": "Pollard, Wong and Garcia",
+                    "domain": "macdonald.com",
+                    "Country": "Iran",
+                    "Balance": 1815.78,
+                    "BalanceWithJobs": 3678.96
+                },
+                {
+                    "pr_Id": "CUST-081",
+                    "CompanyName": "Parks, Novak and Smith",
+                    "domain": "daniels.com",
+                    "Country": "Monaco",
+                    "Balance": 1768.72,
+                    "BalanceWithJobs": 4370.99
+                },
+                {
+                    "pr_Id": "CUST-015",
+                    "CompanyName": "Martin-Clements",
+                    "domain": "anderson.com",
+                    "Country": "Trinidad and Tobago",
+                    "Balance": 2568.88,
+                    "BalanceWithJobs": 1074.04
+                }
+            ],
+            "banding": false
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "pr_Id",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "CompanyName",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "domain",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "Country",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "Balance",
+                "float32",
+                "",
+                ""
+            ],
+            [
+                "BalanceWithJobs",
+                "float32",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": true,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fcfcfc",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    }
+]

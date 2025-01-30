@@ -1,0 +1,94 @@
+{
+    "dragged_array": [
+        {
+            "schema": "In Ex",
+            "table": "supply_chain",
+            "columns": [
+                {
+                    "column": "order_id",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "order_date",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "supplier_id",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "supplier_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "product_id",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "product_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "product_category",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "quantity_ordered",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "quantity_received",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "order_status",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "lead_time_days",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "cost_per_unit",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "total_cost",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "shipping_cost",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "warehouse_location",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "inventory_level",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "backorder_status",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "delivery_date",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "supplier_rating",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "order_comments",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "supply_chain"
+        }
+    ],
+    "dragged_array_indexing": {
+        "supply_chain": 1
+    }
+}

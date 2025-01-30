@@ -1,0 +1,202 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "attrition",
+            "data_type": "string",
+            "table_name": "hr_attrition"
+        }
+    ],
+    "columns_data": [
+        [
+            "attrition",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "years_at_company",
+            "data_type": "int64",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "years_at_company",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [
+        {
+            "column": "attrition",
+            "result_data": [
+                "Yes",
+                "No"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(years_at_company)",
+            "result_data": [
+                1216,
+                9086
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 2,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [
+            1216,
+            9086
+        ],
+        "pieXaxis": [
+            "Yes",
+            "No"
+        ],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiNumber": 588,
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": true,
+    "isEChart": false,
+    "savedChartOptions": {
+        "series": [
+            1216,
+            9086
+        ],
+        "chart": {
+            "height": 300,
+            "type": "pie",
+            "background": "#fff",
+            "events": {}
+        },
+        "labels": [
+            "Yes",
+            "No"
+        ],
+        "legend": {
+            "show": true,
+            "position": "bottom"
+        },
+        "dataLabels": {
+            "enabled": true,
+            "dropShadow": {
+                "enabled": false
+            }
+        }
+    },
+    "customizeOptions": {
+        "isZoom": false,
+        "xGridColor": "#2392c1",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#2392c1",
+        "yLabelSwitch": true,
+        "yGridColor": "#2392c1",
+        "yGridSwitch": false,
+        "yLabelColor": "#2392c1",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#fff",
+        "color": "#2392c1",
+        "ylabelFontWeight": 400,
+        "isBold": false,
+        "yLabelFontFamily": "sans-serif",
+        "yLabelFontSize": 12,
+        "bandingSwitch": false,
+        "backgroundColorSwitch": false,
+        "chartColorSwitch": false,
+        "barColorSwitch": false,
+        "lineColorSwitch": false,
+        "gridLineColorSwitch": false,
+        "xLabelColorSwitch": false,
+        "xGridLineColorSwitch": false,
+        "yLabelColorSwitch": false,
+        "yGridLineColorSwitch": false,
+        "bandingColorSwitch": false,
+        "kpiColorSwitch": false,
+        "funnelColorSwitch": false,
+        "kpiColor": "#000000",
+        "barColor": "#4382f7",
+        "lineColor": "#38ff98",
+        "GridColor": "#089ffc",
+        "legendSwitch": true,
+        "dataLabels": true,
+        "label": true,
+        "donutSize": 50,
+        "isDistributed": false,
+        "kpiFontSize": "3",
+        "minValueGuage": 0,
+        "maxValueGuage": 100,
+        "donutDecimalPlaces": 0,
+        "decimalPlaces": 0,
+        "legendsAllignment": "bottom",
+        "displayUnits": "none",
+        "suffix": "",
+        "prefix": "",
+        "dataLabelsFontFamily": "sans-serif",
+        "dataLabelsFontSize": "12px",
+        "dataLabelsFontPosition": "top",
+        "measureAlignment": "center",
+        "dimensionAlignment": "center",
+        "tableDataFontFamily": "sans-serif",
+        "tableDataFontSize": "12px",
+        "tableDataFontWeight": 400,
+        "tableDataFontStyle": "normal",
+        "tableDataFontDecoration": "none",
+        "tableDataFontColor": "#000000",
+        "tableDataFontAlignment": "left",
+        "headerFontFamily": "'Arial', sans-serif",
+        "headerFontSize": "16px",
+        "headerFontWeight": 700,
+        "headerFontStyle": "normal",
+        "headerFontDecoration": "none",
+        "headerFontColor": "#000000",
+        "headerFontAlignment": "left",
+        "dimeansionColor": "#2392c1",
+        "measureColor": "#2392c1",
+        "dataLabelsColor": "#2392c1",
+        "sortType": 0
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}
