@@ -1,26 +1,17 @@
-.card-icon-top{
-  height: 100px;
-   background-color: #86b8b7;
-  }
-.table thead th{
-  color: #fff;
-}
-.dropdown-toggle::after{
-  display: none;
-}
-a {
- cursor: pointer;
-}
-.user-card .user-image .card-icon-top{
-   width: 100%;
-   height: auto;
-}
-.user-card .user-image::before{
-  background-color: transparent !important;
- }
-.card-box-shadow{
- box-shadow: 5px 10px 10px 5px #0000001a;
-}
-.img-cursor{
- cursor: pointer;
-}
+.card-icon-top{ height: 100px;  background-color: #86b8b7; }
+.table thead th{ color: #fff;}
+.dropdown-toggle::after{ display: none;}
+a { cursor: pointer;}
+.user-card .user-image .card-icon-top{ width: 100%; height: auto;}
+.user-card .user-image::before{ background-color: transparent !important;}
+.card-box-shadow{box-shadow: 5px 10px 10px 5px #0000001a;}
+.img-cursor{ cursor: pointer;}
+.search-icon-border-radius{ border-radius: 0px 4px 4px 0px !important; }
+.card-padding-top { padding-top: 15px; }
+.new-sheet-btn-radius{ border-radius: 4px 4px 4px 4px !important;}
+.table-responsive-height { height: 26rem; }
+.table-primary-position { position: sticky; top: -1px; }
+.cursor-pointer{ cursor: pointer;}
+.dashboard-user-img-h { height: 140px;}
+.pagination-count { float: right; font-size: 15px; margin-top: -34px;  }
+.Dashboard-properties-modalpopup{ height: 500px; overflow: scroll;}

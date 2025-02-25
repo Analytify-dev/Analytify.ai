@@ -175,6 +175,7 @@ class ChartFilters(TimeStampedModel):
     field_logic = models.TextField(null=True,blank=True,default=None)
     is_calculated =models.BooleanField(default = False,null=True)
     top_bottom = models.TextField(null=True,blank=True,default=None)
+    relative_date = models.TextField(null=True,blank=True,default=None)
 
     class Meta:
         db_table = 'chart_filters'
@@ -191,6 +192,7 @@ class DataSourceFilter(TimeStampedModel):
     filter_data = models.TextField(null=True)
     row_data = models.TextField(null=True)
     format_type = models.CharField(null=True,max_length=500)
+    is_exclude = models.BooleanField(default = False,null=True)
 
     class Meta:
         db_table = 'datasource_filters'
@@ -315,6 +317,7 @@ class SheetFilter_querysets(TimeStampedModel):
     columns = models.TextField(null=True,blank=True)
     rows = models.TextField(null=True,blank=True)
     custom_query = models.TextField(null=True,blank=True)
+    pivot_measure = models.TextField(null=True,blank=True)
     
     class Meta:
         db_table = 'sheetFilter_querysets'
@@ -346,9 +349,17 @@ class parent_ids(models.Model):
     table_id=models.CharField(max_length=100,null=True,blank=True,db_column='table_primary_key')
     # table_id=models.IntegerField(null=True,blank=True,db_column='table_primary_key')
     parameter=models.CharField(max_length=500,null=True,blank=True,db_column='table')
+    is_cross_database=models.BooleanField(default=False)
 
     class Meta:
         db_table = 'parent_child_table_ids'
+
+
+class cross_db_ids(models.Model):
+    id=models.AutoField(primary_key=True)
+    hierarchy_ids = models.TextField(blank=True,null=True,db_column='hierarchy_ids')
+    class Meta:
+        db_table = 'cross_database_ids'
         
 
 class Modules(models.Model):

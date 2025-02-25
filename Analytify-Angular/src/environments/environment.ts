@@ -22,6 +22,7 @@ export const environment = {
         // apiUrl:'https://api.qa.insightapps.ai/v1',
     // demo url
       // apiUrl:'https://api.insightapps.ai/v1'
+      
 };
 
 

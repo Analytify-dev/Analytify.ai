@@ -49,6 +49,10 @@ import { SharedService } from '../../../shared/services/shared.service';
 // import { series } from '../../charts/apexcharts/data';
 import { tap } from 'rxjs/operators'; 
 import { InsightEchartComponent } from '../insight-echart/insight-echart.component';
+import iconsData from '../../../../assets/iconfonts/font-awesome/metadata/icons.json';
+import { FilterIconsPipe } from '../../../shared/pipes/iconsFilterPipe';
+import 'pivottable';
+import { FormatMeasurePipe } from '../../../shared/pipes/format-measure.pipe';
 
 interface TableRow {
   [key: string]: any;
@@ -84,6 +88,7 @@ interface KpiData {
   kpiDecimalUnit : string;
   kpiDecimalPlaces: number;
 }
+declare var $:any;
 
 @Component({
   selector: 'app-sheetsdashboard',
@@ -96,7 +101,8 @@ interface KpiData {
   ],
   imports: [NgxEchartsModule,SharedModule,NgbModule,CommonModule,ResizableModule,GridsterModule,
     CommonModule,GridsterItemComponent,GridsterComponent,NgApexchartsModule,CdkDropListGroup, NgSelectModule,
-    CdkDropList, CdkDrag,ChartsStoreComponent,FormsModule, MatTabsModule , CKEditorModule , InsightsButtonComponent, NgxPaginationModule,NgSelectModule, InsightEchartComponent],
+    CdkDropList, CdkDrag,ChartsStoreComponent,FormsModule, MatTabsModule , CKEditorModule , InsightsButtonComponent,
+    NgxPaginationModule,NgSelectModule, InsightEchartComponent,SharedModule,FilterIconsPipe,FormatMeasurePipe],
   templateUrl: './sheetsdashboard.component.html',
   styleUrl: './sheetsdashboard.component.scss'
 })
@@ -194,6 +200,9 @@ export class SheetsdashboardComponent {
   drillThroughActionList : any[] =[];
   drillThroughDatabaseName : any = '';
 
+  calendarTotalHeight : string = '400px';
+  @ViewChild('pivotTableContainer', { static: false }) pivotContainer!: ElementRef;
+
   constructor(private workbechService:WorkbenchService,private route:ActivatedRoute,private router:Router,private screenshotService: ScreenshotService,
     private loaderService:LoaderService,private modalService:NgbModal, private viewTemplateService:ViewTemplateDrivenService,private toasterService:ToastrService,
      private sanitizer: DomSanitizer,private cdr: ChangeDetectorRef, private http: HttpClient,private sharedService:SharedService){
@@ -249,7 +258,7 @@ export class SheetsdashboardComponent {
   options!: GridsterConfig;
   nestedDashboard: Array<GridsterItem & { data?: any,   chartOptions?: ApexOptions,  chartInstance?: ApexCharts,chartData?: any[],tableData?: { headers: any[], rows: any[], banding: any, color1: any, color2: any ,tableItemsPerPage : any, tableTotalItems : any }
 }> = [];
-  dashboard!: Array<GridsterItem & { sheetId?: number ,data?: any, chartType?: any,   chartOptions?: ApexOptions, echartOptions : any, chartInstance?: ApexCharts,chartData?: any[],tableData?: { headers: any[], rows: any[], banding: any, color1: any, color2: any, tableItemsPerPage : any, tableTotalItems : any ,tablePage : number  }, numberFormat?: {donutDecimalPlaces: any,decimalPlaces: any,displayUnits: any,prefix:any,suffix:any}
+  dashboard!: Array<GridsterItem & { sheetId?: number ,data?: any, chartType?: any,   chartOptions?: ApexOptions, echartOptions : any, chartInstance?: ApexCharts,chartData?: any[],tableData?: { headers: any[], rows: any[], banding: any, color1: any, color2: any, tableItemsPerPage : any, tableTotalItems : any ,tablePage : number  }, numberFormat?: {donutDecimalPlaces: any,decimalPlaces: any,displayUnits: any,prefix:any,suffix:any}, pivotData?:any
   }>;
   dashboardTest: Array<GridsterItem & { data?: any, chartType?: any,   chartOptions?: ApexOptions,  chartInstance?: ApexCharts,chartData?: any[],tableData?: { headers: any[], rows: any[], banding: any, color1: any, color2: any, tableItemsPerPage : any, tableTotalItems : any  }
 }> = [];
@@ -280,19 +289,44 @@ export class SheetsdashboardComponent {
   @ViewChild('nestedDropdown', { static: true }) nestedDropdown: NgbDropdown | undefined;
   @ViewChild('ImageUploadKPI') ImageUploadKPI!: ElementRef;
   @ViewChild('imageUpload') imageUpload!: ElementRef<HTMLInputElement>;
-
-
+  // iconList = [
+  //   { class: 'fa-solid fa-arrow-trend-up', name: 'Trend Up' },
+  //   { class: 'fa-solid fa-arrow-trend-down', name: 'Trend Down' },
+  //   { class: 'fa-solid fa-house', name: 'Home' },
+  //   { class: 'fa-solid fa-magnifying-glass', name: 'Magnifying Glass' },
+  //   { class: 'fa-solid fa-user', name: 'User' },
+  //   { class: 'fa-brands fa-facebook', name: 'Facebook' },
+  //   { class: 'fa-solid fa-check', name: 'Check' },
+  //   { class: 'fa-solid fa-download', name: 'Download' },
+  //   { class: 'fa-brands fa-twitter', name: 'Twitter' },
+  //   { class: 'fa-brands fa-instagram', name: 'Instagram' },
+  //   { class: 'fa-solid fa-envelope', name: 'Envelope' },
+  //   { class: 'fa-brands fa-linkedin', name: 'LinkedIn' },
+  //   { class: 'fa-solid fa-arrow-up', name: 'Up Arrow' },
+  //   { class: 'fa-solid fa-file', name: 'File' },
+  //   { class: 'fa-solid fa-calendar-days', name: 'Calendar Days' },
+  //   { class: 'fa-solid fa-circle-down', name: 'Circle Down' },
+  //   { class: 'fa-solid fa-address-book', name: 'Address Book' },
+  //   { class: 'fa-solid fa-handshake', name: 'Hand Shake' },
+  //   { class: 'fa-solid fa-layer-group', name: 'Layer Group' },
+  //   { class: 'fa-solid fa-users', name: 'Users' },
+  //   { class: 'fa-solid fa-link', name: 'Link' },
+  //   { class: 'fa-solid fa-sack-dollar', name: 'Sack Dollar' }
+  // ];
+  iconList: any[] = []
   static itemChange(
     item: GridsterItem,
-    itemComponent: GridsterItemComponentInterface
+    itemComponent: GridsterItemComponentInterface,
+    compInstance: SheetsdashboardComponent
   ): void {
     console.info('itemChanged', item, itemComponent);
+    compInstance.canNavigateToAnotherPage = true;
   }
 
   static itemResize(
     item: GridsterItem,
     itemComponent: GridsterItemComponentInterface
-  ): void {
+  ) : void {
     console.info('itemResized', item, itemComponent);
     const resize$ = fromEvent(window, 'resize');
     resize$
@@ -302,6 +336,7 @@ export class SheetsdashboardComponent {
       )
       .subscribe((event) => {
         console.log('resize is finished');
+        
       });
      window.dispatchEvent(new Event('resize'));
     }
@@ -349,8 +384,27 @@ export class SheetsdashboardComponent {
       ]
     }
   }
+  private mapStyleToClass(style: string): string {
+    switch (style) {
+      case 'solid':
+        return 'fas';
+      case 'regular':
+        return 'far';
+      case 'brands':
+        return 'fab';
+      default:
+        return ''; // Handle unsupported styles
+    }
+  }
   ngOnInit() {  
     let displayGrid = DisplayGrid.Always;
+    this.iconList = Object.entries(iconsData).map(([key, value]: [string, any]) => ({
+      name: key,
+      styles: value.styles.map((style: string) => this.mapStyleToClass(style)), // Map styles to class prefixes
+      label: value.label, 
+    }));
+    this.updateFilteredIcons(); // Update the initial filtered icons
+
     if(this.isPublicUrl){
       displayGrid = DisplayGrid.None;
     }
@@ -391,7 +445,7 @@ export class SheetsdashboardComponent {
       initCallback: SheetsdashboardComponent.gridInit,
       destroyCallback: SheetsdashboardComponent.gridDestroy,
       gridSizeChangedCallback: SheetsdashboardComponent.gridSizeChanged,
-      itemChangeCallback: SheetsdashboardComponent.itemChange,
+      itemChangeCallback: (item, itemComponent) => this.onItemResize(item, itemComponent),
       itemResizeCallback: SheetsdashboardComponent.itemResize,
       itemInitCallback: SheetsdashboardComponent.itemInit,
       itemRemovedCallback: SheetsdashboardComponent.itemRemoved,
@@ -419,7 +473,6 @@ export class SheetsdashboardComponent {
       },
       resizable: {
         enabled: this.editDashboard,
-        // stop: this.onResizeStop.bind(this)
       }
     };
     const savedItems = JSON.parse(localStorage.getItem('dashboardItems') || '[]');
@@ -433,6 +486,10 @@ export class SheetsdashboardComponent {
       this.getSavedDashboardDataPublic();
     });
 
+  }
+
+  onItemResize(item: GridsterItem, itemComponent: any): void {
+    SheetsdashboardComponent.itemChange(item, itemComponent, this);
   }
   changeGridType(gridType : string){
     let displayGrid = DisplayGrid.Always;
@@ -448,7 +505,7 @@ export class SheetsdashboardComponent {
       initCallback: SheetsdashboardComponent.gridInit,
       destroyCallback: SheetsdashboardComponent.gridDestroy,
       gridSizeChangedCallback: SheetsdashboardComponent.gridSizeChanged,
-      itemChangeCallback: SheetsdashboardComponent.itemChange,
+      itemChangeCallback: (item, itemComponent) => this.onItemResize(item, itemComponent),
       itemResizeCallback: SheetsdashboardComponent.itemResize,
       itemInitCallback: SheetsdashboardComponent.itemInit,
       itemRemovedCallback: SheetsdashboardComponent.itemRemoved,
@@ -469,7 +526,10 @@ export class SheetsdashboardComponent {
       pushItems: true,
       draggable: {
         enabled: this.editDashboard,
-        
+        stop: (item: GridsterItem, itemComponent: GridsterItemComponentInterface, event: MouseEvent) => {
+          // Optional logic when dragging stops
+          console.log('Drag stopped for item', item);
+        }
       },
       resizable: {
         enabled: this.editDashboard,
@@ -485,7 +545,7 @@ export class SheetsdashboardComponent {
       initCallback: SheetsdashboardComponent.gridInit,
       destroyCallback: SheetsdashboardComponent.gridDestroy,
       gridSizeChangedCallback: SheetsdashboardComponent.gridSizeChanged,
-      itemChangeCallback: SheetsdashboardComponent.itemChange,
+      itemChangeCallback: (item, itemComponent) => this.onItemResize(item, itemComponent),
       itemResizeCallback: SheetsdashboardComponent.itemResize,
       itemInitCallback: SheetsdashboardComponent.itemInit,
       itemRemovedCallback: SheetsdashboardComponent.itemRemoved,
@@ -505,10 +565,14 @@ export class SheetsdashboardComponent {
       pushItems: true,
       draggable: {
         enabled: this.editDashboard,
-        
+        stop: (item: GridsterItem, itemComponent: GridsterItemComponentInterface, event: MouseEvent) => {
+          // Optional logic when dragging stops
+          console.log('Drag stopped for item', item);
+        }
       },
       resizable: {
         enabled: this.editDashboard,
+
         // stop: this.onResizeStop.bind(this)
       }
     };
@@ -523,7 +587,7 @@ export class SheetsdashboardComponent {
         initCallback: SheetsdashboardComponent.gridInit,
         destroyCallback: SheetsdashboardComponent.gridDestroy,
         gridSizeChangedCallback: SheetsdashboardComponent.gridSizeChanged,
-        itemChangeCallback: SheetsdashboardComponent.itemChange,
+        itemChangeCallback: (item, itemComponent) => this.onItemResize(item, itemComponent),
         itemResizeCallback: SheetsdashboardComponent.itemResize,
         itemInitCallback: SheetsdashboardComponent.itemInit,
         itemRemovedCallback: SheetsdashboardComponent.itemRemoved,
@@ -543,11 +607,13 @@ export class SheetsdashboardComponent {
         pushItems: true,
         draggable: {
           enabled: this.editDashboard,
-          
+          stop: (item: GridsterItem, itemComponent: GridsterItemComponentInterface, event: MouseEvent) => {
+            // Optional logic when dragging stops
+            console.log('Drag stopped for item', item);
+          }
         },
         resizable: {
           enabled: this.editDashboard,
-          // stop: this.onResizeStop.bind(this)
         }
       };
     } else {
@@ -558,7 +624,7 @@ export class SheetsdashboardComponent {
         initCallback: SheetsdashboardComponent.gridInit,
         destroyCallback: SheetsdashboardComponent.gridDestroy,
         gridSizeChangedCallback: SheetsdashboardComponent.gridSizeChanged,
-        itemChangeCallback: SheetsdashboardComponent.itemChange,
+        itemChangeCallback: (item, itemComponent) => this.onItemResize(item, itemComponent),
         itemResizeCallback: SheetsdashboardComponent.itemResize,
         itemInitCallback: SheetsdashboardComponent.itemInit,
         itemRemovedCallback: SheetsdashboardComponent.itemRemoved,
@@ -578,7 +644,10 @@ export class SheetsdashboardComponent {
         pushItems: true,
         draggable: {
           enabled: this.editDashboard,
-          
+          stop: (item: GridsterItem, itemComponent: GridsterItemComponentInterface, event: MouseEvent) => {
+            // Optional logic when dragging stops
+            console.log('Drag stopped for item', item);
+          }
         },
         resizable: {
           enabled: this.editDashboard,
@@ -589,6 +658,7 @@ export class SheetsdashboardComponent {
 
     // window.dispatchEvent(new Event('resize'));
   }
+
   restoreChartOptions(chartType: ChartType,xval:any,yval:any){
     return {
       chart: {
@@ -662,6 +732,11 @@ export class SheetsdashboardComponent {
           displayUnits:sheet?.sheet_data?.numberFormat?.displayUnits,
           prefix:sheet?.sheet_data?.numberFormat?.prefix,
           suffix:sheet?.sheet_data?.numberFormat?.suffix
+        },
+        pivotData:{
+          pivotMeasureData:sheet?.sheet_data?.pivotMeasure_Data,
+          pivotRowData:sheet?.sheet_data?.row,
+          pivotColData:sheet?.sheet_data.col
         },
         customizeOptions: sheet?.sheet_data?.customizeOptions
       }));
@@ -861,6 +936,69 @@ export class SheetsdashboardComponent {
               const date = params.data[0];
               const value = params.data[1];
               return `Date: ${date}<br/>Value: ${value}`;
+            };
+            this.calendarTotalHeight = ((150 * sheet.echartOptions.calendar.length) + 25) + 'px';
+          }
+          if(chartId == 9){
+            let transformedData :any =[];
+            let headers: string[] = [];
+  
+           let columnKeys = sheet.pivotData?.pivotColData?.map((col: any) => col.column); 
+           let rowKeys = sheet.pivotData?.pivotRowData?.map((row: any) => row.col);
+          let valueKeys = sheet.pivotData?.pivotMeasureData?.map((col:any) =>col.col)
+          sheet.pivotData?.pivotColData?.forEach((colObj: any) => {
+            headers.push(colObj.column);
+          });
+      
+          sheet.pivotData?.pivotRowData?.forEach((rowObj: any) => {
+            headers.push(rowObj.col);
+          });
+          sheet.pivotData?.pivotMeasureData?.forEach((colObj: any) => {
+            headers.push(colObj.col);
+          });
+      
+          transformedData.push(headers); 
+          // let numRows = sheet.pivotData?.pivotColData[0]?.result_data.length;
+          let numRows = 0;
+          if (sheet.pivotData?.pivotColData?.length > 0) {
+              numRows = sheet.pivotData.pivotColData[0]?.result_data?.length || 0;
+          } else if (sheet.pivotData?.pivotRowData?.length > 0) {
+              numRows = sheet.pivotData.pivotRowData[0]?.result_data?.length || 0;
+          } else if (sheet.pivotData?.pivotMeasureData?.length > 0) {
+              numRows = sheet.pivotData.pivotMeasureData[0]?.result_data?.length || 0;
+          }
+          for (let i = 0; i < numRows; i++) {
+            let rowArray: any[] = []; 
+            sheet.pivotData?.pivotColData.forEach((colObj: any) => {
+              rowArray.push(colObj.result_data[i]);
+            });
+            sheet.pivotData?.pivotRowData.forEach((rowObj: any) => {
+              rowArray.push(rowObj.result_data[i]);
+            });
+            sheet.pivotData?.pivotMeasureData.forEach((rowObj: any) => {
+              rowArray.push(rowObj.result_data[i]);
+            });
+  
+            transformedData.push(rowArray);
+          }
+            setTimeout(() => {
+            if (this.pivotContainer && this.pivotContainer.nativeElement) {
+                ($(this.pivotContainer.nativeElement) as any).pivot(transformedData, {
+                  rows: columnKeys,  
+                  cols: valueKeys, 
+                  // vals: this.valueKeys, 
+                  aggregator:$.pivotUtilities.aggregators["Sum"](rowKeys),
+                  rendererName: "Table"
+                });
+            }        
+          }, 1000);
+        }
+          if(chartId == 1){
+            if(sheet?.tableData?.tableItemsPerPage){
+              sheet.tableData.tableItemsPerPage = 10;
+            }
+            if(sheet?.tableData?.tablePage){
+              sheet.tableData.tablePage = 1;
             }
           }
         })
@@ -1127,9 +1265,10 @@ export class SheetsdashboardComponent {
      })
    
   }
-  updateDashboard(){
-    this.canNavigateToAnotherPage = false;
-    this.takeScreenshot();
+  updateDashboard(isLiveReloadData : boolean){
+    if(!isLiveReloadData){
+      this.takeScreenshot();
+    }
     this.sheetsIdArray = this.dashboard
     .filter(item => item['type'] !== 'image') // Filter out items with type 'image'
     .map(item => item['sheetId']);
@@ -1194,8 +1333,11 @@ export class SheetsdashboardComponent {
         //   width: '400px',
         // })
         this.dashboardsheetsIdArray = this.sheetsIdArray;
+        this.canNavigateToAnotherPage = false;
         this.toasterService.success('Dashboard Updated Successfully','success',{ positionClass: 'toast-top-right'});
-        this.saveDashboardimageUpdate();
+        if(!isLiveReloadData){
+          this.saveDashboardimageUpdate();
+        }
         this.endMethod(); 
       },
       error:(error)=>{
@@ -1229,6 +1371,10 @@ export class SheetsdashboardComponent {
           item1['tableData'] = item1['originalData']['tableData'];
           delete item1['originalData'];
           }
+          if(item1.chartId == '9' && item1['originalData']){//pivot
+            item1['pivotData'] = item1['originalData']['pivotData'];
+            delete item1['originalData'];
+            }
         if(item1.chartId == '25' && item1['originalData']){//KPI
           item1['kpiData'] = item1['originalData'];
           delete item1['originalData'];
@@ -1410,6 +1556,13 @@ export class SheetsdashboardComponent {
         prefix:sheet?.sheet_data?.numberFormat?.prefix,
         suffix:sheet?.sheet_data?.numberFormat?.suffix
       },
+      pivotData: sheet.sheet_type === 'PIVOT' ? {
+        pivotDataTransformed:sheet?.sheet_data?.pivotTransformedData,
+        pivotRowData:sheet?.sheet_data?.row,
+        pivotMeasureData:sheet?.sheet_data?.pivotMeasure_Data,
+        pivotColData:sheet?.sheet_data?.col
+      }
+      : undefined,
       customizeOptions: sheet?.sheet_data?.customizeOptions
     }));
     this.sheetIdsDataSet = this.dashboardNew.map(item => item['sheetId']);
@@ -1541,6 +1694,12 @@ export class SheetsdashboardComponent {
     });
   }
   getChartOptionsBasedOnType(sheet:any){
+    if(sheet.chart_id === 9){
+      let xaxis = sheet.sheet_data?.results?.barXaxis;
+      let yaxis = sheet.sheet_data?.results?.barYaxis;
+      let savedOptions = sheet.sheet_data.savedChartOptions;
+      return this.barChartOptions(xaxis,yaxis,savedOptions,sheet.sheet_data.isEChart) 
+    }
     if(sheet.chart_id === 6){
       let xaxis = sheet.sheet_data?.results?.barXaxis;
       let yaxis = sheet.sheet_data?.results?.barYaxis;
@@ -1548,7 +1707,11 @@ export class SheetsdashboardComponent {
       return this.barChartOptions(xaxis,yaxis,savedOptions,sheet.sheet_data.isEChart) 
     }
     if(sheet.chart_id === 29){
+      let xaxis = sheet.sheet_data?.results?.mapChartXaxis;
+      let yaxis = sheet.sheet_data?.results?.mapChartYaxis;
+      let savedOptions = sheet.sheet_data.savedChartOptions;
       return sheet.sheet_data.savedChartOptions;
+      // return this.mapChartOptions(xaxis,yaxis,savedOptions) 
     }
     if(sheet.chart_id === 17){
       let xaxis = sheet.sheet_data?.results?.areaXaxis;
@@ -1693,7 +1856,6 @@ getTableData(tableData: any): { headers: any[], rows: any[],banding: any, color1
       tablePage : 1
     };
   }
-
   onDrag(event: any, item: any){
     let data = JSON.stringify(item);
         event.dataTransfer.setData('item', data);
@@ -1758,7 +1920,8 @@ allowDrop(ev : any): void {
       drillDownIndex : 0,
       isDrillDownData : copy.isDrillDownData,
       numberFormat : copy.numberFormat,
-      customizeOptions: copy.customizeOptions
+      customizeOptions: copy.customizeOptions,
+      pivotData:copy.pivotData
       };
       // this.qrySetId.push(copy.qrySetId);
       // if(copy.fileId){
@@ -1916,6 +2079,60 @@ allowDrop(ev : any): void {
           }
       }
     }
+    if(element.chartId == 9){
+      let transformedData :any =[];
+      let headers: string[] = [];
+
+     let columnKeys = element.pivotData?.pivotColData?.map((col: any) => col.column); 
+     let rowKeys = element.pivotData?.pivotRowData?.map((row: any) => row.col);
+    let valueKeys = element.pivotData?.pivotMeasureData?.map((col:any) =>col.col)
+    element.pivotData?.pivotColData?.forEach((colObj: any) => {
+      headers.push(colObj.column);
+    });
+
+    element.pivotData?.pivotRowData?.forEach((rowObj: any) => {
+      headers.push(rowObj.col);
+    });
+    element.pivotData?.pivotMeasureData?.forEach((colObj: any) => {
+      headers.push(colObj.col);
+    });
+
+    transformedData.push(headers); 
+    let numRows = 0;
+    if (element.pivotData?.pivotColData?.length > 0) {
+        numRows = element.pivotData.pivotColData[0]?.result_data?.length || 0;
+    } else if (element.pivotData?.pivotRowData?.length > 0) {
+        numRows = element.pivotData.pivotRowData[0]?.result_data?.length || 0;
+    } else if (element.pivotData?.pivotMeasureData?.length > 0) {
+        numRows = element.pivotData.pivotMeasureData[0]?.result_data?.length || 0;
+    }
+
+    for (let i = 0; i < numRows; i++) {
+      let rowArray: any[] = []; 
+      element.pivotData?.pivotColData.forEach((colObj: any) => {
+        rowArray.push(colObj.result_data[i]);
+      });
+      element.pivotData?.pivotRowData.forEach((rowObj: any) => {
+        rowArray.push(rowObj.result_data[i]);
+      });
+      element.pivotData?.pivotMeasureData.forEach((rowObj: any) => {
+        rowArray.push(rowObj.result_data[i]);
+      });
+
+      transformedData.push(rowArray);
+    }
+      setTimeout(() => {
+      if (this.pivotContainer && this.pivotContainer.nativeElement) {
+          ($(this.pivotContainer.nativeElement) as any).pivot(transformedData, {
+            rows: columnKeys,  
+            cols: valueKeys, 
+            // vals: this.valueKeys, 
+            aggregator:$.pivotUtilities.aggregators["Sum"](rowKeys),
+            rendererName: "Table"
+          });
+      }        
+    }, 1000);
+  }
         this.dashboard.push(element);
       }
     //  } else {
@@ -1981,6 +2198,15 @@ allowDrop(ev : any): void {
           const date = params.data[0];
           const value = params.data[1];
           return `Date: ${date}<br/>Value: ${value}`;
+        };
+        this.calendarTotalHeight = ((150 * sheet.echartOptions.calendar.length) + 25) + 'px';
+      }
+      if(chartId == 1){
+        if(sheet?.tableData?.tableItemsPerPage){
+          sheet.tableData.tableItemsPerPage = 10;
+        }
+        if(sheet?.tableData?.tablePage){
+          sheet.tableData.tablePage = 1;
         }
       }
     });
@@ -2059,9 +2285,9 @@ arraysHaveSameData(arr1: number[], arr2: number[]): boolean {
   viewSheet(sheetdata: any) {
     if (this.dashboardId) {
       this.sheetsIdArray = this.dashboard.map(item => item['sheetId']);
-      if (this.sheetsIdArray && this.dashboardsheetsIdArray && !this.arraysHaveSameData(this.sheetsIdArray , this.dashboardsheetsIdArray)) {
-        this.toasterService.info('Please Update the dashboard.', 'info', { positionClass: 'toast-top-center' })
-      } else {
+      // if (this.sheetsIdArray && this.dashboardsheetsIdArray && !this.arraysHaveSameData(this.sheetsIdArray , this.dashboardsheetsIdArray)) {
+      //   this.toasterService.info('Please Update the dashboard.', 'info', { positionClass: 'toast-top-center' })
+      // } else {
         let sheetId = sheetdata.sheetId;
         // if (sheetdata.fileId) {
         //   this.fileId = sheetdata.fileId;
@@ -2073,15 +2299,15 @@ arraysHaveSameData(arr1: number[], arr2: number[]): boolean {
 
         //   this.router.navigate(['/insights/sheetsdashboard/sheets/fileId/' + encodedServerId + '/' + encodedQuerySetId + '/' + encodedSheetId + '/' + encodedDashboardId])
         // } else {
-          this.databaseId = sheetdata.databaseId;
+          let databaseId = sheetdata.databaseId;
           this.qrySetId = sheetdata.qrySetId;
-          const encodedServerId = btoa(this.databaseId.toString());
+          const encodedServerId = btoa(databaseId.toString());
           const encodedQuerySetId = btoa(this.qrySetId.toString());
           const encodedSheetId = btoa(sheetId.toString());
           const encodedDashboardId = btoa(this.dashboardId.toString());
 
           this.router.navigate(['/analytify/sheetsdashboard/sheets/' + encodedServerId + '/' + encodedQuerySetId + '/' + encodedSheetId + '/' + encodedDashboardId])
-        }
+        // }
       // }
     } else {
       this.toasterService.info('Please save the dashboard.', 'info', { positionClass: 'toast-top-center' })
@@ -2125,6 +2351,7 @@ arraysHaveSameData(arr1: number[], arr2: number[]): boolean {
       // }
       }
     }
+    this.canNavigateToAnotherPage = true;
     }
     this.setDashboardNewSheets(item.sheetId, false);
   }
@@ -2139,7 +2366,8 @@ arraysHaveSameData(arr1: number[], arr2: number[]): boolean {
       next:(data)=>{
         console.log(data);
         this.loaderService.hide();
-        this.toasterService.info('Filters on Removed Sheet will be deleted.','info',{ positionClass: 'toast-top-center'})
+        this.toasterService.info('Filters on Removed Sheet will be deleted.','info',{ positionClass: 'toast-top-center'});
+        this.getDashboardFilterredList(true);
     },
       error:(error)=>{
         console.log(error)
@@ -2478,11 +2706,11 @@ arraysHaveSameData(arr1: number[], arr2: number[]): boolean {
 /////chartOptions
 barChartOptions(xaxis:any,yaxis:any,savedOptions : any, isEchart : boolean){
   if (isEchart) {
-    savedOptions.series.data = yaxis;
+    savedOptions.series[0].data = yaxis;
     savedOptions.xAxis.data = xaxis;
     return savedOptions;
   } else {
-    savedOptions.series.data = yaxis;
+    savedOptions.series[0].data = yaxis;
     savedOptions.xaxis.categories = xaxis.map((category : any)  => category === null ? 'null' : category);
     return savedOptions;
   }
@@ -2632,12 +2860,18 @@ donutChartOptions(xaxis:any,yaxis:any,savedOptions:any, isEchart : boolean){
 heatMapChartOptions(savedOptions:any){
   return savedOptions;
 }
-
+addIcon(iconModal:any,item:any){
+  this.modalService.open(iconModal, {
+    centered: true,
+    windowClass: 'animate__animated animate__zoomIn',
+  });
+  this.KpiIconItem = item;
+}
 
 //filters
 openSuperScaled(modal: any) {
   this.modalService.open(modal, {
-    centered: true,
+    centered: true,size:'lg',
     windowClass: 'animate__animated animate__zoomIn',
   });
 this.editFilters = false;
@@ -2653,7 +2887,7 @@ this.selectedColumnQuerySetId = null;
 //Actions
 openSuperScaleForActions(modal : any){
   this.modalService.open(modal, {
-    centered: true,
+    centered: true,size:'lg',
     windowClass: 'animate__animated animate__zoomIn',
   });
 }
@@ -2943,6 +3177,7 @@ if(this.filterName === ''){
       this.toasterService.success('Filter Added Successfully','success',{ positionClass: 'toast-top-center'})
       this.selectedOption = null;
       this.selectedQuerySetId = 0;
+      this.clearAllFilters();
     },
     error:(error)=>{
       console.log(error)
@@ -2958,7 +3193,7 @@ if(this.filterName === ''){
 }
 }
 
-getDashboardFilterredList(){
+getDashboardFilterredList(onSheetRemove? : boolean){
   const Obj ={
     dashboard_id:this.dashboardId
   }
@@ -2966,6 +3201,9 @@ getDashboardFilterredList(){
     next:(data)=>{
       console.log(data);
       this.DahboardListFilters = data
+      if(onSheetRemove && data?.length <= 0){
+        this.active = 1;
+      }
     },
     error:(error)=>{
       console.log(error)
@@ -3111,6 +3349,7 @@ getFilteredData(){
       // console.log(this.tablePreviewColumn);
       // console.log(this.tablePreviewRow);
       // localStorage.removeItem('filterid')
+      this.sheetFilters = data;
       data.forEach((item: any) => {
         this.filteredRowData = [];
         this.filteredColumnData = [];
@@ -3133,11 +3372,11 @@ getFilteredData(){
         console.log('filterowData',this.filteredRowData)
       });
       if(item.chart_id === 1){
-        this.pageChangeTableDisplay(item,1)
+        this.pageChangeTableDisplay(item,1,false,0)
         // this.tablePageNo =1;
         this.tablePage=1
       }else{
-      this.setDashboardSheetData(item, true , true, false, false, '');
+      this.setDashboardSheetData(item, true , true, false, false, '', false,0);
       }
     });
       },
@@ -3183,11 +3422,11 @@ clearAllFilters(): void {
 }
 
 
-setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boolean, isDrillDown : boolean, isDrillThrough : boolean, drillThroughSheetId: any){
+setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boolean, isDrillDown : boolean, isDrillThrough : boolean, drillThroughSheetId: any, isLiveReloadData : boolean,liveSheetIndex:any){
   this.dashboard.forEach((item1:any) => {
     if((((item1.sheetId == item.sheet_id || item1.sheetId == item.sheetId) && (isFilter || isDrillDown)) || (isDrillThrough && item1.sheetId == drillThroughSheetId))){
       if(item.chart_id == '1'){//table
-        if(!item1.originalData){
+        if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = _.cloneDeep({tableData: item1.tableData});
         }
         this.tablePreviewColumn = item.columns;
@@ -3213,10 +3452,75 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           });
           item1.tableData.rows.push(row);
       }
+      if(item1?.tableData?.tableTotalItems){
+        item1.tableData.tableTotalItems = this.tableTotalItems;
+      }
+      if(item1?.tableData?.tableItemsPerPage){
+        item1.tableData.tableItemsPerPage = this.tableItemsPerPage;
+      }
     }
+    if(item.chart_id == '9'){
+      if(!item1.originalData && !isLiveReloadData){
+        item1['originalData'] = _.cloneDeep({pivotData: item1.pivotData});
+      }
+      let transformedData :any =[];
+      let headers: string[] = [];
+
+     let columnKeys = item?.columns?.map((col: any) => col.column); 
+     let rowKeys = item?.rows?.map((row: any) => row.column);
+    let valueKeys = item?.pivot?.map((col:any) =>col.column)
+
+    item?.columns?.forEach((colObj: any) => {
+      headers.push(colObj.column);
+    });
+
+    item?.rows?.forEach((rowObj: any) => {
+      headers.push(rowObj.column);
+    });
+    item?.pivot?.forEach((colObj: any) => {
+      headers.push(colObj.column);
+    });
+
+    transformedData.push(headers); 
+    let numRows = 0;
+    if (item?.columns?.length > 0) {
+        numRows = item.columns[0]?.result?.length || 0;
+    } else if (item?.rows?.length > 0) {
+        numRows = item.rows[0]?.result?.length || 0;
+    } else if (item?.pivot?.length > 0) {
+        numRows = item.pivot[0]?.result?.length || 0;
+    }
+    for (let i = 0; i < numRows; i++) {
+      let rowArray: any[] = []; 
+      item?.columns?.forEach((colObj: any) => {
+        rowArray.push(colObj.result[i]);
+      });
+      item?.rows?.forEach((rowObj: any) => {
+        rowArray.push(rowObj.result[i]);
+      });
+      item?.pivot?.forEach((rowObj: any) => {
+        rowArray.push(rowObj.result[i]);
+      });
+
+      transformedData.push(rowArray);
+    }
+    setTimeout(() => {
+      if (this.pivotContainer && this.pivotContainer.nativeElement) {
+          ($(this.pivotContainer.nativeElement) as any).pivot(transformedData, {
+            rows: columnKeys,  
+            cols: valueKeys, 
+            // vals: this.valueKeys, 
+            aggregator:$.pivotUtilities.aggregators["Sum"](rowKeys),
+            rendererName: "Table"
+          });
+      }        
+    }, 1000);
+    }
+
+
       if((item.chart_id == '6' || item.chartId == '6' && (isFilter || isDrillDown)) || (item1.chartId == '6' && isDrillThrough)){//bar
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3230,7 +3534,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
 
         };
         } else {
-        if(!item1.originalData){
+        if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
         }
         if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3242,7 +3546,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
       }
     }
       if((item.chart_id == '25' || item.chartId == '25' && (isFilter || isDrillDown)) || (item1.chartId == '25' && isDrillThrough)){//KPI
-        if(!item1.originalData ){
+        if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = _.cloneDeep(item1['kpiData']);
         }
         let obj = {column : item.rows[0].column , result_data : item.rows[0].result}
@@ -3251,7 +3555,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
       }
       if((item.chart_id == '24' || item.chartId == '24' && (isFilter || isDrillDown)) || (item1.chartId == '24' && isDrillThrough)){//pie
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3267,7 +3571,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           ...item1.echartOptions,
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3280,7 +3584,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
     }
       if((item.chart_id == '10'|| item.chartId == '10' && (isFilter || isDrillDown)) || (item1.chartId == '10' && isDrillThrough)){//donut
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3296,7 +3600,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           ...item1.echartOptions
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3309,7 +3613,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
     }
       if((item.chart_id == '13'|| item.chartId == '13' && (isFilter || isDrillDown)) || (item1.chartId == '13' && isDrillThrough)){//line
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3323,7 +3627,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
 
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.xaxis.categories = this.filteredColumnData[0].values;
@@ -3332,7 +3636,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
       }
       if((item.chart_id == '17'|| item.chartId == '17' && (isFilter || isDrillDown)) || (item1.chartId == '17' && isDrillThrough)){//area
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           if(onApplyFilterClick && ((item1.drillDownHierarchy && item1.drillDownHierarchy.length > 0) || item1.drillDownIndex)){
@@ -3346,7 +3650,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
 
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.labels = this.filteredColumnData[0].values;
@@ -3357,7 +3661,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           this.filteredRowData.forEach((bar : any)=>{
@@ -3370,7 +3674,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         };
         } else {
        
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.xaxis.categories = categories;
@@ -3381,7 +3685,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           this.filteredRowData.forEach((bar : any)=>{
@@ -3394,7 +3698,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           ...item1.echartOptions,
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.xaxis.categories = categories;
@@ -3405,7 +3709,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           this.filteredRowData.forEach((bar : any)=>{
@@ -3418,7 +3722,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           ...item1.echartOptions,
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.xaxis.categories = categories;
@@ -3429,7 +3733,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           item1.echartOptions.xAxis[0].data = categories;
@@ -3439,7 +3743,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           ...item1.echartOptions,
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.labels = categories;
@@ -3452,7 +3756,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
             this.filteredRowData.forEach((bar : any)=>{
@@ -3464,7 +3768,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
             ...item1.echartOptions,
           };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.xaxis.categories = categories;
@@ -3475,7 +3779,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           this.filteredRowData.forEach((bar : any)=>{
@@ -3488,7 +3792,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           ...item1.echartOptions,
         };
         } else {
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.chartOptions});
           }
         item1.chartOptions.xaxis.categories = categories;
@@ -3499,7 +3803,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
       }
       }
       if((item.chart_id == '28' && (isFilter || isDrillDown)) || (item1.chartId == '28' && isDrillThrough)){//guage
-        if(!item1.originalData){
+        if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
         }
         let seriesval =[Math.round(( this.filteredRowData[0]?.data[0]/ (item1.chartOptions.plotOptions.radialBar.max-item1.chartOptions.plotOptions.radialBar.min))*100)]
@@ -3519,7 +3823,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
           value: obj.data   
         }));
         if(item1.isEChart){ 
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
         item1.echartOptions.radar.indicator = radarArray;
@@ -3532,7 +3836,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
       }
       }
       if((item.chart_id == '29' && (isFilter || isDrillDown)) || (item1.chartId == '29' && isDrillThrough)){//world MAP
-        if(!item1.originalData){
+        if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
         }
         let minData = 0;
@@ -3588,7 +3892,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
 
       if((item.chart_id == '27' && (isFilter || isDrillDown)) || (item1.chartId == '27' && isDrillThrough)){//funnel
         if(item1.isEChart){
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
             const combinedArray: any[] = [];
@@ -3609,7 +3913,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         } else {
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
-        if(!item1.originalData){
+        if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = {categories: item1.chartOptions.xaxis.categories , data:item1.chartOptions.series };
         }
         if(isDrillThrough){
@@ -3632,7 +3936,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
         const dimensions: Dimension[] = this.filteredColumnData
         const categories = this.flattenDimensions(dimensions)
         if(item1.isEChart){
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           item1.echartOptions.xAxis.data = _.cloneDeep(categories);
@@ -3649,7 +3953,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
             ...item1.echartOptions,     
           };
          }
-        else{ if(!item1.originalData){
+        else{ if(!item1.originalData && !isLiveReloadData){
           item1['originalData'] = {categories: item1.chartOptions.xaxis.categories , data:item1.chartOptions.series };
         }
         item1.chartOptions.xaxis.categories = categories;
@@ -3658,7 +3962,7 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
     }
       if((item.chart_id == '11' && (isFilter || isDrillDown)) || (item1.chartId == '11' && isDrillThrough)){//calendar
         if(item1.isEChart){
-          if(!item1.originalData){
+          if(!item1.originalData && !isLiveReloadData){
             item1['originalData'] = _.cloneDeep({chartOptions: item1.echartOptions});
           }
           let calendarData : any[]= [];
@@ -3727,6 +4031,9 @@ setDashboardSheetData(item:any , isFilter : boolean , onApplyFilterClick : boole
       console.log('filtered dashboard-data',item1)
     }
 })
+if(isLiveReloadData && liveSheetIndex == this.dashboard.length-1){
+  this.updateDashboard(isLiveReloadData);
+}
 }
 
 formatKPINumber(value : number, KPIDisplayUnits: string, KPIDecimalPlaces : number,KPIPrefix: string,KPISuffix: string  ) {
@@ -3745,6 +4052,11 @@ formatKPINumber(value : number, KPIDisplayUnits: string, KPIDecimalPlaces : numb
         break;
       case 'G':
         formattedNumber = (value / 1_000_000_000_000).toFixed(KPIDecimalPlaces) + 'G';
+        break;
+      case '%':
+        let KPIPercentageDivisor = Math.pow(10, Math.floor(Math.log10(value)) + 1); // Get next power of 10
+        let percentageValue = (value / KPIPercentageDivisor) * 100; // Convert to percentage
+        formattedNumber = percentageValue.toFixed(KPIDecimalPlaces) + ' %'; // Keep decimals
         break;
     }
   } else {
@@ -3798,7 +4110,7 @@ deleteDashboardFilter(id:any){
               this.filteredRowData.push(obj);
               console.log('filterowData',this.filteredRowData)
             });
-            this.setDashboardSheetData(item, true, false, false, false, '');
+            this.setDashboardSheetData(item, true, false, false, false, '', false,0);
           });
           this.toasterService.success('Filter Deleted Succesfully','success',{ positionClass: 'toast-top-center'})
           this.getFilteredData();
@@ -3965,6 +4277,7 @@ const obj ={
       this.getDashboardFilterredList();
       this.toasterService.success('Filter Updated Successfully','success',{ positionClass: 'toast-top-right'});
       this.selectedOption = null;
+      this.clearAllFilters();
     },
     error:(error)=>{
       console.log(error)
@@ -4132,6 +4445,13 @@ kpiData?: KpiData;
           prefix:sheet?.sheet_data?.numberFormat?.prefix,
           suffix:sheet?.sheet_data?.numberFormat?.suffix
         },
+        pivotData: sheet.sheet_type === 'PIVOT' ? {
+          pivotDataTransformed:sheet?.sheet_data?.pivotTransformedData,
+          pivotRowData:sheet?.sheet_data?.row,
+          pivotMeasureData:sheet?.sheet_data?.pivotMeasure_Data,
+          pivotColData:sheet?.sheet_data?.col
+        }
+        : undefined,
         customizeOptions: sheet?.sheet_data?.customizeOptions
       }));
       this.setSelectedSheetData();
@@ -4168,7 +4488,7 @@ kpiData?: KpiData;
       obj ={
         sheet_ids : this.sheetIdsDataSet,
         page_no : this.pageNo,
-        search : this.searchSheets,
+        // search : this.searchSheets,
         page_count:this.itemsPerPage
 
       }
@@ -4182,6 +4502,7 @@ kpiData?: KpiData;
        this.itemsPerPage = data.items_per_page;
       },
       error:(error)=>{
+        this.panelscheckbox = [];
         console.log(error)
       }
     })
@@ -4265,7 +4586,7 @@ kpiData?: KpiData;
         this.dashboard.forEach((sheet : any)=>{
           console.log('Before sanitization:', sheet.data.sheetTagName);
           this.sheetTagTitle[sheet.data.title] = this.sanitizer.bypassSecurityTrustHtml(sheet.data.sheetTagName);
-          if((sheet && sheet.chartOptions && sheet.chartOptions.chart) || sheet.isDrillDownData) {
+          if((sheet && sheet.chartOptions && sheet.chartOptions.chart)) {
             sheet.chartOptions.chart.events = {
               markerClick: (event: any, chartContext: any, config: any) => {
                 let selectedXValue;
@@ -4380,6 +4701,15 @@ kpiData?: KpiData;
               const date = params.data[0];
               const value = params.data[1];
               return `Date: ${date}<br/>Value: ${value}`;
+            };
+            this.calendarTotalHeight = ((150 * sheet.echartOptions.calendar.length) + 25) + 'px';
+          }
+          if(chartId == 1){
+            if(sheet?.tableData?.tableItemsPerPage){
+              sheet.tableData.tableItemsPerPage = 10;
+            }
+            if(sheet?.tableData?.tablePage){
+              sheet.tableData.tablePage = 1;
             }
           }
         })
@@ -4441,6 +4771,7 @@ kpiData?: KpiData;
         // console.log(this.tablePreviewColumn);
         // console.log(this.tablePreviewRow);
         // localStorage.removeItem('filterid')
+        this.sheetFilters = data;
         data.forEach((item: any) => {
           this.tablePreviewColumn.push(item.columns);
       this.tablePreviewRow.push(item.rows);
@@ -4464,7 +4795,7 @@ kpiData?: KpiData;
         if(item.chart_id === 1){
           this.pageChangeTableDisplayPublic(item,1)
         }else{
-        this.setDashboardSheetData(item, true , true, false, false, '');
+        this.setDashboardSheetData(item, true , true, false, false, '', false,0);
         }
       });
         },
@@ -4534,7 +4865,8 @@ kpiData?: KpiData;
       // "file_id": item.fileId,
       "is_date":item.isDrillDownData,
   "drill_down":item.drillDownObject,
-  "next_drill_down":item.drillDownHierarchy[item.drillDownIndex]
+  "next_drill_down":item.drillDownHierarchy[item.drillDownIndex],
+  "is_exclude":this.excludeFilterIdArray
     }
     this.workbechService.getPublicDashboardDrillDowndata(Obj).subscribe({
       next:(data)=>{
@@ -4563,15 +4895,15 @@ kpiData?: KpiData;
         }
         console.log('filterowData',this.filteredRowData)
       });
-      this.setDashboardSheetData(item, false, false, true, false, '');
-      if(item.chartId == '29'){
-        if (item.drillDownIndex != 0) {
-          this.chartType = 'bar';
-        }
-        else {
-          this.chartType = 'map';
-        }
-      }
+      this.setDashboardSheetData(item, false, false, true, false, '', false,0);
+      // if(item.chartId == '29'){
+      //   if (item.drillDownIndex != 0) {
+      //     this.chartType = 'bar';
+      //   }
+      //   else {
+      //     this.chartType = 'map';
+      //   }
+      // }
         },
       error:(error)=>{
         console.log(error)
@@ -4605,7 +4937,8 @@ kpiData?: KpiData;
       "hierarchy_id":item.databaseId,
       "is_date":item.isDrillDownData,
   "drill_down":item.drillDownObject,
-  "next_drill_down":item.drillDownHierarchy[item.drillDownIndex]
+  "next_drill_down":item.drillDownHierarchy[item.drillDownIndex],
+  "is_exclude":this.excludeFilterIdArray
     }
     this.workbechService.getDashboardDrillDowndata(Obj).subscribe({
       next:(data)=>{
@@ -4634,15 +4967,15 @@ kpiData?: KpiData;
         }
         console.log('filterowData',this.filteredRowData)
       });
-      this.setDashboardSheetData(item, false, false, true, false, '');
-      if(item.chartId == '29'){
-        if (item.drillDownIndex != 0) {
-          this.chartType = 'bar';
-        }
-        else {
-          this.chartType = 'map';
-        }
-      }
+      this.setDashboardSheetData(item, false, false, true, false, '', false,0);
+      // if(item.chartId == '29'){
+      //   if (item.drillDownIndex != 0) {
+      //     this.chartType = 'bar';
+      //   }
+      //   else {
+      //     this.chartType = 'map';
+      //   }
+      // }
         },
       error:(error)=>{
         console.log(error)
@@ -4704,11 +5037,12 @@ kpiData?: KpiData;
   }
 }
 //tablePagination
-tableSearchDashboard(item:any){
+tableSearchDashboard(item:any,value:any){
   this.tablePageNo=1;
-  this.pageChangeTableDisplay(item,1);
+  this.tableSearch = value;
+  this.pageChangeTableDisplay(item,1,false,0);
 }
-pageChangeTableDisplay(item:any,page:any){
+pageChangeTableDisplay(item:any,page:any,isLiveReloadData : boolean,liveSheetIndex:any){
   if(item.tableData){
   item.tableData.tablePage = page;
   }
@@ -4721,7 +5055,8 @@ pageChangeTableDisplay(item:any,page:any){
     page_no: page,
     page_count: this.tableItemsPerPage,
     dashboard_id:this.dashboardId,
-    search:this.tableSearch
+    search:this.tableSearch,
+    is_exclude:this.excludeFilterIdArray
   }
   if(obj.search === '' || obj.search === null){
     delete obj.search;
@@ -4732,22 +5067,21 @@ pageChangeTableDisplay(item:any,page:any){
       data.data['sheet_id']=item.sheetId ?? item.sheet_id,
       this.tableItemsPerPage = data.items_per_page;
       this.tableTotalItems = data.total_items;
-      this.setDashboardSheetData(data.data, true , false, false, false, '');
+      this.setDashboardSheetData(data.data, true , false, false, false, '', isLiveReloadData,liveSheetIndex);
     },error:(error)=>{
       console.log(error.error.message);
     }
   })  
 }
-tableSearchDashboardPublic(item:any){
+tableSearchDashboardPublic(item:any,value:any){
   this.tablePageNo=1;
+  this.tableSearch = value;
   this.pageChangeTableDisplayPublic(item,1);
 }
 pageChangeTableDisplayPublic(item:any,page:any){
   if(item?.tableData?.tablePage ){
     item.tableData.tablePage = page;
   }
- 
-  
   const obj={
     sheet_id:item.sheetId ?? item.sheet_id,
     id:this.keysArray,
@@ -4757,7 +5091,8 @@ pageChangeTableDisplayPublic(item:any,page:any){
     page_no: page,
     page_count: this.tableItemsPerPage,
     dashboard_id:this.dashboardId,
-    search:this.tableSearch
+    search:this.tableSearch,
+    is_exclude:this.excludeFilterIdArray
   }
   if(obj.search === '' || obj.search === null){
     delete obj.search;
@@ -4768,7 +5103,7 @@ pageChangeTableDisplayPublic(item:any,page:any){
       data.data['sheet_id']=item.sheetId ?? item.sheet_id,
       this.tableItemsPerPage = data.items_per_page;
       this.tableTotalItems = data.total_items;
-      this.setDashboardSheetData(data.data, false , false, false, false, '');
+      this.setDashboardSheetData(data.data, true , false, false, false, '', false,0);
     },error:(error)=>{
       console.log(error.error.message);
     }
@@ -5174,6 +5509,7 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
       next: (data) => {
         console.log(data);
         this.getDrillThroughActionList();
+        this.actionId = '';
         this.clearActionForm();
         this.editActions = false;
         this.toasterService.success('Action Deleted Successfully', 'Success', { positionClass: 'toast-top-center' });
@@ -5264,7 +5600,7 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
             }
             this.filteredRowData.push(rowObject);
           }
-          this.setDashboardSheetData(item,false,false, false,true,sheet.sheet_id);
+          this.setDashboardSheetData(item,false,false, false,true,sheet.sheet_id, false,0);
         });
       },
       error: (error) => {
@@ -5321,7 +5657,7 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
             this.filteredRowData.push(rowObject);
             console.log('filterowData', this.filteredRowData);
           });
-          this.setDashboardSheetData([],false,false, false,true,sheet.sheet_id);
+          this.setDashboardSheetData([],false,false, false,true,sheet.sheet_id, false,0);
         });
       },
       error: (error) => {
@@ -5392,6 +5728,7 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
 	   // image upload inn sheets
      uploadedImage: any;
      imageTitle:any;
+     fileName: string = 'No file chosen';
      triggerFileUpload() {
        const fileInput = document.getElementById('imageUpload') as HTMLElement;
        fileInput.click();
@@ -5401,33 +5738,47 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
      onImageSelected(event: any) {
        const file = event.target.files[0];
        if (file) {
+        if (!file.type.startsWith('image/')) {
+         this.toasterService.error('Not a supported file format. Please select an image file.','info',{ positionClass: 'toast-top-center'})
+          event.target.value = ''; // Reset file input
+          this.fileName = 'No file chosen';
+          return;
+        }else{
          const reader = new FileReader();
          reader.onload = (e: any) => {
            this.uploadedImage = e.target.result; // Image data as Base64
            console.log('Uploaded Image:', this.uploadedImage);
          };
          reader.readAsDataURL(file);
+         this.fileName = file.name; 
+        }
+       }else{
+        this.fileName = 'No file chosen'; 
        }
      }
      uploadInJson(){
       if (this.uploadedImage) {
         let element :any= {
-          id: uuidv4(), // Unique ID
+          id: uuidv4(), 
           x: 10,
           y: 20,
-          rows: 2, // Adjust size
-          cols: 2, // Adjust size
-          type: 'image', // Identify it as an image
+          rows: 2,
+          cols: 2, 
+          type: 'image', 
           imageData: this.uploadedImage, // Store Base64 image data
           imageTitle:this.imageTitle
         };
         this.dashboard.push(element);
         console.log('Updated Dashboard:', this.dashboard);
-  
-        // Clear uploadedImage after adding to the dashboard
-        this.imageTitle = '';
-        this.uploadedImage = null;
-        this.imageUpload.nativeElement.value = ''; // Clear the file input
+        this.canNavigateToAnotherPage = true;
+        const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
+        if (fileInput) {
+          fileInput.value = '';
+          this.imageTitle = '';
+          this.uploadedImage = null;
+          this.fileName = 'No file chosen'; 
+          this.imageUpload.nativeElement.value = '';
+      }
       }
      }
      kpiItem:any;
@@ -5439,6 +5790,11 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
      imageFileSelectEvent(event:any){
       const file = event.target.files[0];
        if (file) {
+        if (!file.type.startsWith('image/')) {
+          this.toasterService.error('Not a supported file format. Please select an image file.','info',{ positionClass: 'toast-top-center'})
+          event.target.value = ''; // Reset file input
+          return;
+        }else{
          const reader = new FileReader();
          reader.onload = (e: any) => {
            this.uploadedKpiImage = e.target.result; 
@@ -5448,25 +5804,28 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
             }
          };
          reader.readAsDataURL(file);
+        }
        }
      }
      updateKPIImage(item:any,KpiImage:any){
       const itemIndex = this.dashboard.findIndex((d) => d['id'] === item.id);
       if (itemIndex !== -1) {
         // const item1 = this.dashboard[itemIndex];
-        if (item['kpiData']) {
+        if (item['kpiImage']) {
           // Add the kpiImage key to kpiData
           this.dashboard[itemIndex] = {
             ...item,
-            kpiData: {
-              ...item.kpiData,
-              kpiImage: KpiImage,
-            },
+            kpiImage: KpiImage,
           };
-          console.log('addedKpiImage',this.dashboard)
+       
         } else {
-          console.error('kpiData is undefined for the item:', item);
+          this.dashboard[itemIndex] = {
+            ...item,
+            kpiImage: KpiImage,
+          };    
         }
+        console.log('addedKpiImage',this.dashboard);
+        this.canNavigateToAnotherPage = true;
       } else {
         console.error('Item not found in dashboard:', item);
       } 
@@ -5476,14 +5835,15 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
       if (itemIndex !== -1) {
         const updatedItem = {
           ...this.dashboard[itemIndex],
-          kpiData: { ...this.dashboard[itemIndex]['kpiData'] },
+          kpiImage: { ...this.dashboard[itemIndex]['kpiImage'] },
         };
   
         // Delete kpiImage key if it exists
-        delete updatedItem.kpiData.kpiImage;
+        delete updatedItem.kpiImage;
   
         // Update the dashboard array
         this.dashboard[itemIndex] = updatedItem;
+        this.canNavigateToAnotherPage = true;
       } else {
         console.error('Item not found in dashboard:', item);
       }
@@ -5515,7 +5875,223 @@ formatNumber(value: number,decimalPlaces:number,displayUnits:string,prefix:strin
         }
       });
     }
+    selectedIcon: string | null = null;
+    searchText: string = ''; // Search input value
+    KpiIconItem:any;
+    selectedIconFontSize: string = '24'; // Default size
+    selectedIconColor: string = '#888'; // Default color
+    selectedIconPosition: string = 'bottom-right';
+    selectIcon(icon: any) {
+      console.log('Selected Icon:', icon);
+      this.selectedIcon = `${icon.styles[0]} fa-${icon.name}`;
 
+    
+    }
+    changeSize(event:any): void {
+      const size = event.target.value;
+      this.selectedIconFontSize = `${size}`;
+      console.log('kpiSize',this.selectedIconFontSize)
+    }
+  
+    changeColor(event:any): void {
+      const color = event.target.value;
+      this.selectedIconColor = color;
+      console.log('kpiColor',this.selectedIconColor)
+    }
+    positions = [
+      { value: 'top-left', iconClass: 'dollar-top-left' },
+      { value: 'top-middle', iconClass: 'dollar-top-center' },
+      { value: 'top-right', iconClass: 'dollar-top-right' },
+      { value: 'left-middle', iconClass: 'dollar-center-left' },
+      { value: 'center', iconClass: '' },
+      { value: 'right-middle', iconClass: 'dollar-center-right' },
+      { value: 'bottom-left', iconClass: 'dollar-bottom-left' },
+      { value: 'bottom-middle', iconClass: 'dollar-bottom-center' },
+      { value: 'bottom-right', iconClass: 'dollar-bottom-right' }
+    ];
+    selectPosition(position: string): void {
+      this.selectedIconPosition = position;
+      console.log('kpiPosition',this.selectedIconPosition)
+    }
+    applyIconInKpi(){
+      const itemIndex = this.dashboard.findIndex((d) => d['id'] === this.KpiIconItem.id);
+      if (itemIndex !== -1) {
+        if (!this.KpiIconItem.kpiIconsArray) {
+          this.KpiIconItem.kpiIconsArray = {};
+        }
+            const newIconObject = {
+          kpiIcon: this.selectedIcon,
+          kpiIconSize: this.selectedIconFontSize,
+          kpiIconColor: this.selectedIconColor,
+          kpiIconPosition: this.selectedIconPosition
+        };
+        this.KpiIconItem.kpiIconsArray = newIconObject;
+            this.dashboard[itemIndex] = { 
+          ...this.KpiIconItem 
+        };
+    
+        this.modalService.dismissAll();
+        console.log('Updated kpiIconsArray:', this.dashboard);
+        this.canNavigateToAnotherPage = true;
+        this.selectedIcon = null;
+      } else {
+        console.error('Item not found in dashboard:', this.KpiIconItem);
+      }
+    
+    }
+
+    getIconPositionStyles(position: string) {
+      let styles = {};
+      const offset = '10px'; // Distance from the edges
+      switch (position) {
+          case 'top-left':
+            return { top: offset, left: offset, transform: 'none' };
+          case 'top-middle':
+            return { top: offset, left: '50%', transform: 'translateX(-50%)' };
+          case 'top-right':
+            return { top: offset, right: offset, transform: 'none' };
+          case 'left-middle':
+            return { top: '50%', left: offset, transform: 'translateY(-50%)' };
+          case 'center':
+            return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' };
+          case 'right-middle':
+            return { top: '50%', right: offset, transform: 'translateY(-50%)' };
+          case 'bottom-left':
+            return { bottom: offset, left: offset, transform: 'none' };
+          case 'bottom-middle':
+            return { bottom: offset, left: '50%', transform: 'translateX(-50%)' };
+          case 'bottom-right':
+            return { bottom: offset, right: offset, transform: 'none' };
+        default:
+          styles = { bottom: '0', right: '0' }; 
+          break;
+      }
+    
+      return styles;
+    }
+    getIconClass(icon: any): string {
+      return `${icon.styles[0]} fa-${icon.name}`; 
+    }
+    priorityIcons: string[] = ['arrow-trend-up','arrow-trend-down','house','magnifying-glass','user','facebook','check','download','twitter','instagram','envelope','linkedin','arrow-up','file','calendar-days','circle-down','address-book','handshake','layer-group','users','link','sack-dollar'
+    ];; 
+  filteredIcons: any[] = [];
+  showAll: boolean = false; 
+
+  updateFilteredIcons(): void {
+    const searchFilter = this.iconList.filter(
+      (icon) =>
+        !this.searchText ||
+        icon.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        icon.label.toLowerCase().includes(this.searchText.toLowerCase())
+    );
+
+    this.filteredIcons = this.showAll
+      ? searchFilter 
+      : searchFilter.filter((icon) => this.priorityIcons.includes(icon.name)); 
+  }
+  toggleShowAll(): void {
+    this.showAll = !this.showAll;
+    this.updateFilteredIcons();
+  }
+  editKpiIcon(iconModal:any,item:any){
+    this.modalService.open(iconModal, {
+      centered: true,
+      windowClass: 'animate__animated animate__zoomIn',
+    });
+    this.KpiIconItem = item;
+    console.log('editKpi',item);
+    const kpiIconsArray = item.kpiIconsArray
+    this.selectedIconColor = kpiIconsArray.kpiIconColor ?? '#888'
+    this.selectedIconFontSize = kpiIconsArray.kpiIconSize ?? '24'
+    this.selectedIconPosition = kpiIconsArray.kpiIconPosition ?? 'bottom-right'
+    this.selectedIcon = kpiIconsArray.kpiIcon ?? null
+ 
+  }
+  removeKpiIcon(item: any): void {
+    const itemIndex = this.dashboard.findIndex((d) => d['id'] === item.id);
+    if (itemIndex !== -1) {
+      const updatedItem = {
+        ...this.dashboard[itemIndex],
+        kpiIconsArray: { ...this.dashboard[itemIndex]['kpiIconsArray'] },
+      };
+
+      // Delete kpiIcon key if it exists
+      delete updatedItem.kpiIconsArray.kpiIcon;
+      delete updatedItem.kpiIconsArray.kpiIconPosition;
+      delete updatedItem.kpiIconsArray.kpiIconColor;
+      delete updatedItem.kpiIconsArray.kpiIconSize;
+      // Update the dashboard array
+      this.dashboard[itemIndex] = updatedItem;
+      this.canNavigateToAnotherPage = true;
+      this.deselectIconChanges()
+    } else {
+      console.error('Item not found in dashboard:', item);
+    }
+  }
+  deselectIconChanges(){
+    this.selectedIcon = null;
+      this.selectedIconColor = '#888';
+      this.selectedIconFontSize = '24';
+      this.selectedIconPosition = 'bottom-right';
+  }
+  isCustomizeVisible: boolean = true; // Controls visibility
+  toggleCustomize(): void {
+    this.isCustomizeVisible = !this.isCustomizeVisible;
+  }
+    // selectIcon(icon: { class: string; name: string }) {
+    //   this.selectedIcon = icon.class;
+    //   console.log('Selected Icon:', icon);
+    //   // Close the modal or perform other actions here
+    // }
+    sheetFilters : any[] = [];
+    // [{sheet_id:10924,is_filter_applied:true,filter_count:3}];
+    refreshDashboard(){
+      let object ={
+        "dashboard_id": this.dashboardId
+      }
+      this.workbechService.refreshDashboardData(object).subscribe({
+        next:(data)=>{
+          console.log(data);
+          data.forEach((item: any,index:any) => {
+          this.filteredRowData = [];
+          this.filteredColumnData = [];
+          this.tablePreviewColumn.push(item.columns);
+          this.tablePreviewRow.push(item.rows);
+          item.columns.forEach((res:any) => {      
+            let obj1={
+              name:res.column,
+              values: res.result
+            }
+            this.filteredColumnData.push(obj1);
+            console.log('filtercolumn',this.filteredColumnData)
+          });
+          item.rows.forEach((res:any) => {
+            let obj={
+              name: res.column,
+              data: res.result
+            }
+            this.filteredRowData.push(obj);
+            console.log('filterowData',this.filteredRowData)
+          });
+          if(item.chart_id === 1){
+            this.pageChangeTableDisplay(item,1,true,index)
+            this.tablePage=1
+          }else{
+          this.setDashboardSheetData(item, true , true, false, false, '',true,index);
+          }
+        });
+          },
+        error:(error)=>{
+          console.log(error)
+          Swal.fire({
+            icon: 'error',
+            title: 'oops!',
+            text: error.error.message,
+            width: '400px',
+          })
+        }
+      });
+    }
 }
 // export interface CustomGridsterItem extends GridsterItem {
 //   title: string;

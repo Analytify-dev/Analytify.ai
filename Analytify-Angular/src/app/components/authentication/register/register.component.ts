@@ -141,6 +141,14 @@ onSubmit(){
       {
         next:(data:any) => {
           console.log(data);
+          if(data){
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Registration Successful',
+              width: '400px',
+            })
+          }
           // this.emailActivationToken = data.emailActivationToken;
           // this.authService.emailActivationToken = data.emailActivationToken;
           this.router.navigate(['/authentication/login']);

@@ -11,6 +11,7 @@ from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
+from sqlalchemy import text,inspect
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.template.loader import render_to_string
@@ -34,30 +35,47 @@ qb_urls = [
 # ["CompanyInfo","Preferences"]
 
 def file_name_indexing(dis_names_list,comp_name):
-    dis_names=[tk['display_name'] for tk in dis_names_list]
-    cleaned_list1 = [re.sub(r'\s*\(.*?\)', '', filename) for filename in dis_names if filename is not None]
-    cleaned_list = [filename.strip() for filename in cleaned_list1]
-    name_di=str(comp_name).replace('-', '').replace('_', '').replace(' ', '').replace('&', '')
-    if name_di in cleaned_list:
-        count_s1 = cleaned_list.count(name_di)
-        #### to add the no to file() based on the highest existing file no()
-        filtered_files = [filename for filename in dis_names if isinstance(filename, str) and '(' in filename and ')' in filename]
-        numbers = []
-        for filename in filtered_files:
-            match = re.search(r'\((\d+)\)', filename)
-            if match:
-                numbers.append(int(match.group(1)))
-        highest_number = max(numbers) if numbers else None ## Fetch the highest no in file()
-        if highest_number is not None or highest_number != None:
-            fn_count=highest_number
+    if comp_name==None or comp_name=='' or comp_name=="":
+        max_id = None 
+        max_i=[]
+        for item in dis_names_list:
+            if max_id is None or item['id'] > max_id:
+                max_id = item['id']
+                max_i.append(max_id)
+        tk_tb=models.TokenStoring.objects.get(id=max_i[0])
+        name=tk_tb.display_name
+        match = re.search(r'\((\d+)\)$', name)
+        if match:
+            new_number = int(match.group(1)) + 1
+            new_name = re.sub(r'\(\d+\)$', f'({new_number})', name)
         else:
-            fn_count=count_s1
-        final_dis_name = f'{name_di}({fn_count+1})'
-        final_name=final_dis_name
+            new_name = f"{name} (1)"
+        return new_name
     else:
-        final_dis_name = name_di
-        final_name=str(final_dis_name).replace('-','').replace('_','').replace(' ','').replace('&','')
-    return final_name
+        dis_names=[tk['display_name'] for tk in dis_names_list]
+        cleaned_list1 = [re.sub(r'\s*\(.*?\)', '', filename) for filename in dis_names if filename is not None]
+        cleaned_list = [filename.strip() for filename in cleaned_list1]
+        name_di=str(comp_name).replace('-', '').replace('_', '').replace(' ', '').replace('&', '')
+        if name_di in cleaned_list:
+            count_s1 = cleaned_list.count(name_di)
+            #### to add the no to file() based on the highest existing file no()
+            filtered_files = [filename for filename in dis_names if isinstance(filename, str) and '(' in filename and ')' in filename]
+            numbers = []
+            for filename in filtered_files:
+                match = re.search(r'\((\d+)\)', filename)
+                if match:
+                    numbers.append(int(match.group(1)))
+            highest_number = max(numbers) if numbers else None ## Fetch the highest no in file()
+            if highest_number is not None or highest_number != None:
+                fn_count=highest_number
+            else:
+                fn_count=count_s1
+            final_dis_name = f'{name_di}({fn_count+1})'
+            final_name=final_dis_name
+        else:
+            final_dis_name = name_di
+            final_name=str(final_dis_name).replace('-','').replace('_','').replace(' ','').replace('&','')
+        return final_name
 
 
 def quickbooks_token(sf_id,tok1):
@@ -260,13 +278,40 @@ def apis_keys():
 
 
 
-def token_create(redirect_response,user_id,realm_id): #,display_name
+def token_create(hierarchy_id,redirect_response,user_id,realm_id,para): #,display_name
+    keys = apis_keys()
+    oauth = OAuth2Session(keys['client_id'], redirect_uri=keys['redirect_uri'], scope=keys['scopes'])
+    token_url = 'https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer'
     try:
-        keys = apis_keys()
-        oauth = OAuth2Session(keys['client_id'], redirect_uri=keys['redirect_uri'], scope=keys['scopes'])
-        token_url = 'https://oauth.platform.intuit.com/oauth2/v1/tokens/bearer'
         token = oauth.fetch_token(token_url, authorization_response=redirect_response, auth=HTTPBasicAuth(keys['client_id'], keys['client_secret']))
-        models.TokenStoring.objects.filter(user=user_id,token_code=redirect_response).delete()
+    except Exception as e:
+        data = {
+            "status":406,
+            "message":str(e)
+        }        
+        return data
+    models.TokenStoring.objects.filter(user=user_id,token_code=redirect_response).delete()
+    if para=='UPDATE':
+        parameter='quickbooks'
+        pr_id=columns_extract.parent_child_ids(hierarchy_id,parameter)
+        models.TokenStoring.objects.filter(user=user_id,qbuserid=pr_id).update(accesstoken=token['access_token'],refreshtoken=token['refresh_token'],idtoken=token['id_token'],token_code=redirect_response,realm_id=realm_id,expiry_date=expired_at)
+        tbtk=models.TokenStoring.objects.get(user=user_id,qbuserid=pr_id)
+        tok1={}
+        tok1['user_id']=user_id
+        click = clickhouse.Clickhouse()
+        click.cursor.execute(text(f'TRUNCATE ALL TABLES FROM \"{tbtk.display_name}\"'))
+        result=click.json_to_table(qb_urls,tok1,hierarchy_id,tbtk.display_name,'quickbooks')
+        if not result['status']==200:
+            return result
+        data = {
+            "status":200,
+            "quickbooks_id":hierarchy_id,            #tb.qbuserid,
+            "message":"Success",
+            "quickbooksConnected":True,
+            "accesstoken":token['access_token']
+        }
+        return data
+    else:
         tb = models.TokenStoring.objects.create(tokentype=token['token_type'],accesstoken=token['access_token'],refreshtoken=token['refresh_token'],
                                                 idtoken=token['id_token'],updated_at=updated_at,created_at=created_at,expiry_date=expired_at,user=user_id,realm_id=realm_id,
                                                 parameter="quickbooks",token_code=redirect_response) #,display_name=display_name
@@ -275,34 +320,38 @@ def token_create(redirect_response,user_id,realm_id): #,display_name
         parent_ids=dshb_models.parent_ids.objects.create(table_id=tb.id,parameter="quickbooks")
         tok1={}
         tok1["user_id"]=user_id
-        comp_info=endpoints_data.company_details(tok1,parent_ids.id)
-        tk_cmp_tb=models.TokenStoring.objects.filter(user=user_id,parameter='quickbooks').values()
-        comp_name = comp_info['data']['company_name']
-        final_dis_name = file_name_indexing(tk_cmp_tb,comp_name)
-        if final_dis_name==None or final_dis_name=='' or final_dis_name=="":
-            final_dis_name=='Quickbooks_'+str(tb.id)
+        if (settings.DATABASES['default']['NAME']=='analytify_qa') or (settings.DATABASES['default']['NAME']=='analytify_demo'):
+            database='Quickbooks_'+str(tb.id)
         else:
-            final_dis_name=final_dis_name
-        models.TokenStoring.objects.filter(id=tb.id).update(display_name=final_dis_name)
-        database = final_dis_name
+            comp_info=endpoints_data.company_details(tok1,parent_ids.id)
+            tk_cmp_tb=models.TokenStoring.objects.filter(user=user_id,parameter='quickbooks').values()
+            comp_name = comp_info['data']['company_name']
+            final_dis_name = file_name_indexing(tk_cmp_tb,comp_name)
+            if final_dis_name==None or final_dis_name=='' or final_dis_name=="" or final_dis_name==[] or final_dis_name==' ':
+                final_dis_name='Quickbooks_'+str(tb.id)
+            else:
+                final_dis_name=final_dis_name
+            database = final_dis_name
+        print("database",database)
+        models.TokenStoring.objects.filter(id=tb.id,user=user_id).update(display_name=database) #,domain_url=final_dis_name
         click = clickhouse.Clickhouse()
         click.client.query(f'Create Database if Not Exists \"{database}\"')
         result = click.json_to_table(qb_urls,tok1,parent_ids.id,database,'quickbooks')
-        data = {
-            "status":200,
-            "quickbooks_id":parent_ids.id,            #tb.qbuserid,
-            "message":"Success",
-            "quickbooksConnected":True,
-            "accesstoken":token['access_token']
-        }
-        return data
-    except:
-        data = {
-            "status":400,
-            "message":"please login again in quickbooks",
-            "quickbooksConnected":False,
-        }
-        return data
+        if result['status']==200:
+            data = {
+                "status":200,
+                "quickbooks_id":parent_ids.id,            #tb.qbuserid,
+                "message":"Success",
+                "quickbooksConnected":True,
+                "accesstoken":token['access_token']
+            }
+            return data
+        else:
+            data = {
+                "status":406,
+                "message":str(result)
+            }        
+            return data
         
 
 
@@ -316,24 +365,31 @@ def acess_refresh_token(refresh_token,user_id,realm_id,qb_id):
         'client_secret': keys['client_secret'],
         'realm_id':realm_id
     }
-    response = requests.post(token_endpoint, data=data)
-    token_data = response.json()
+    try:
+        response = requests.post(token_endpoint, data=data)
+        token_data = response.json()
+    except Exception as e:
+        d1 = {
+                'status': 400, 
+                'message': str(e)
+            }
+        return d1
     if response.status_code == 200:
         # new_access_token = token_data.get('access_token')
         models.TokenStoring.objects.filter(user=user_id,qbuserid=qb_id).update(accesstoken=token_data['access_token'],refreshtoken=token_data['refresh_token'],created_at=created_at,expiry_date=expired_at,realm_id=realm_id)
         tk1=models.TokenStoring.objects.get(qbuserid=qb_id)
         parent_ids=dshb_models.parent_ids.objects.get(table_id=tk1.id,parameter='quickbooks')
-        tok1={}
-        tok1["user_id"]=user_id
-        comp_info=endpoints_data.company_details(tok1,parent_ids.id)
-        tk_cmp_tb=models.TokenStoring.objects.filter(user=user_id,parameter='quickbooks').values()
-        comp_name = comp_info['data']['company_name']
-        final_dis_name = file_name_indexing(tk_cmp_tb,comp_name)
-        if final_dis_name==None or final_dis_name=='' or final_dis_name=="":
-            final_dis_name=='Quickbooks_'+str(tk1.id)
-        else:
-            final_dis_name=final_dis_name
-        models.TokenStoring.objects.filter(id=tk1.id).update(display_name=final_dis_name)
+        # tok1={}
+        # tok1["user_id"]=user_id
+        # comp_info=endpoints_data.company_details(tok1,parent_ids.id)
+        # tk_cmp_tb=models.TokenStoring.objects.filter(user=user_id,parameter='quickbooks').values()
+        # comp_name = comp_info['data']['company_name']
+        # final_dis_name = file_name_indexing(tk_cmp_tb,comp_name)
+        # if final_dis_name==None or final_dis_name=='' or final_dis_name=="":
+        #     final_dis_name='Quickbooks_'+str(tk1.id)
+        # else:
+        #     final_dis_name=final_dis_name
+        # models.TokenStoring.objects.filter(id=tk1.id,user=user_id).update(display_name=final_dis_name) #,domain_url=final_dis_name
         data = {
             "status":200,
             "quickbooks_id":parent_ids.id,
@@ -374,7 +430,7 @@ def authentication_quickbooks(request,token):
 
 ##### GET the token from reirect url
 class token_api(CreateAPIView):
-    serializer_class = serializers.token_serializer
+    serializer_class = serializers.display_name
 
     def post(self,request,token):
         tok1 = views.test_token(token)
@@ -382,6 +438,7 @@ class token_api(CreateAPIView):
             serializer = self.get_serializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
                 redirect_response1 = serializer.validated_data['redirect_url']
+                hierarchy_id=serializer.validated_data['hierarchy_id']
                 # display_name = serializer.validated_data['display_name']
                 # r1 = settings.token_url
                 str12 = 'https://demo.insightapps.ai'
@@ -390,32 +447,38 @@ class token_api(CreateAPIView):
                 query_params = parse_qs(parsed_url.query)
                 realm_id = query_params.get('realmId', [None])[0]
                 parameter="quickbooks"
+                print(redirect_response)
                 # if models.TokenStoring.objects.filter(user=tok1['user_id'],display_name=display_name,parameter=parameter).exists():
                 #     return Response({'message':'Display name already exists, please change display name'},status=status.HTTP_406_NOT_ACCEPTABLE)
-                ac_token=token_create(redirect_response,tok1['user_id'],realm_id) #,display_name
+                ac_token=token_create(hierarchy_id,redirect_response,tok1['user_id'],realm_id,para='SAVE') #,display_name
                 if ac_token['status']==200:
                     return Response(ac_token,status=status.HTTP_200_OK)
-                elif ac_token['status']==400:
+                elif ac_token['status']!=200:
                     if models.TokenStoring.objects.filter(user=tok1['user_id'],parameter=parameter,token_code=redirect_response).exists(): #,display_name=display_name
                         tokac = models.TokenStoring.objects.get(user=tok1['user_id'],parameter=parameter,token_code=redirect_response) #,display_name=display_name
                         parent_ids=dshb_models.parent_ids.objects.get(table_id=tokac.id,parameter='quickbooks')
                         database = tokac.display_name
                         if tokac.expiry_date < datetime.datetime.now(utc):#+datetime.timedelta(hours=5,minutes=30)
                             refer = acess_refresh_token(tokac.refreshtoken,tok1['user_id'],realm_id,tokac.qbuserid)
+                            if not refer['status']==200:
+                                return refer
                             click = clickhouse.Clickhouse()
                             click.client.query(f'Create Database if Not Exists \"{database}\"')
                             result = click.json_to_table(qb_urls,tok1,parent_ids.id,database,'quickbooks')
-                            if refer['status']==200:
+                            if result['status']==200:
                                 return Response(refer,status=status.HTTP_200_OK)
                             else:
-                                return Response(refer,status=status.HTTP_400_BAD_REQUEST)
+                                return Response({'message':str(result)},status=status.HTTP_400_BAD_REQUEST)
                         else:
                             # tk1=models.TokenStoring.objects.get(qbuserid=tokac.qbuserid)
                             # parent_ids=dshb_models.parent_ids.objects.get(table_id=tk1.id,parameter='quickbooks')
                             click = clickhouse.Clickhouse()
                             click.client.query(f'Create Database if Not Exists \"{database}\"')
                             result = click.json_to_table(qb_urls,tok1,parent_ids.id,database,'quickbooks')
-                            return Response({"message":"Success","quickbooksConnected":True,"quickbooks_id":parent_ids.id},status=status.HTTP_200_OK)
+                            if result['status']==200:
+                                return Response({"message":"Success","quickbooksConnected":True,"quickbooks_id":parent_ids.id},status=status.HTTP_200_OK)
+                            else:
+                                return Response({'message':str(result)},status=status.HTTP_400_BAD_REQUEST)
                     else:
                         return Response({'message':'token not exists, please login again'},status=status.HTTP_400_BAD_REQUEST)
                 else:
@@ -424,6 +487,36 @@ class token_api(CreateAPIView):
                 return Response({"message":"Serializer value error"},status=status.HTTP_404_NOT_FOUND)
         else:
             return Response(tok1,status=tok1['status'])
+        
+
+    def put(self,request,token):
+        tok1 = views.test_token(token)
+        if tok1['status']==200:
+            serializer = self.get_serializer(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                redirect_response1 = serializer.validated_data['redirect_url']
+                hierarchy_id=serializer.validated_data['hierarchy_id']
+                # display_name = serializer.validated_data['display_name']
+                # r1 = settings.token_url
+                str12 = 'https://demo.insightapps.ai'
+                redirect_response = str(str12)+str(redirect_response1)
+                parsed_url = urlparse(redirect_response)
+                query_params = parse_qs(parsed_url.query)
+                realm_id = query_params.get('realmId', [None])[0]
+                parameter="quickbooks"
+                print(redirect_response)
+                # if models.TokenStoring.objects.filter(user=tok1['user_id'],display_name=display_name,parameter=parameter).exists():
+                #     return Response({'message':'Display name already exists, please change display name'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                ac_token=token_create(hierarchy_id,redirect_response,tok1['user_id'],realm_id,para='UPDATE') #,display_name
+                if ac_token['status']==200:
+                    return Response(ac_token,status=status.HTTP_200_OK)
+                else:
+                    return Response(ac_token,status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({"message":"Serializer value error"},status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(tok1,status=tok1['status'])
+
 
 
 ##### Disconnection quickbooks 
@@ -545,6 +638,15 @@ def quickbooks_query_data(server_id,tok1,tabl_name):
     response = requests.request("GET", api_url, json=account_data, headers=headers)
     if response.status_code == 200:
         data = response.json()
-        return data
+        d1 = {
+            "data":data,
+            "status":200
+        }
+        # return d1
     else:
-        return Response({'message':'session expired, login to quickbooks again',"quickbooksConnected":False,},status=token_status['status'])
+        d1 = {
+            "data":None,
+            "status":400
+        }
+    return d1
+        # return Response({'message':'session expired, login to quickbooks again',"quickbooksConnected":False,},status=token_status['status'])

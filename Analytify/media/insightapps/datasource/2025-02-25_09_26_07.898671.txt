@@ -1,0 +1,31 @@
+{
+    "dragged_array": [
+        {
+            "schema": "xam",
+            "table": "xt_user_profile1",
+            "columns": [
+                {
+                    "column": "user_id",
+                    "datatype": "nullable(int32)"
+                },
+                {
+                    "column": "email_id",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "user_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "created_time",
+                    "datatype": "nullable(date)"
+                }
+            ],
+            "alias": "xt_user_profile1"
+        }
+    ],
+    "dragged_array_indexing": {
+        "xt_user_profile1": 1,
+        "xt_user_profile": 1
+    }
+}

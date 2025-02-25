@@ -1,5 +1,5 @@
 <div class="main-container container-fluid">
-    <div class="main-demo main-demo-1 overflow-hidden reveal landing-top-header active" id="home" #home style="  border-radius: 0px 0px 15px 15px;">
+    <div class="main-demo main-demo-1 overflow-hidden reveal landing-top-header active header-bg-radius" id="home" #home>
         <div class="container px-sm-0">
         <div class="row justify-content-center">
             <div class="col-xl-8 col-lg-6 pb-5 text-center my-auto animation-zidex pos-relative landing-main-heading">
@@ -29,7 +29,7 @@
     </div>
     <div class="row mt-1">
         <div class="col-xl-9">
-            <div *ngIf="viewDashboardList" class="card border" style="padding: 15px;">
+            <div *ngIf="viewDashboardList" class="card border p-4">
                 <div class="row">
                     <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
                         <h6 class="fw-bold mb-1">Saved Dashboards</h6>
@@ -58,9 +58,8 @@
                                     src="{{dashboardList.dashboard_image}}" class="card-img-top-dashboard img-cursor" alt="img">
                                 <div class="card-body p-2 d-flex align-items-center justify-content-between">
                                     <div class="dashboard-card-title">
-                                        <h5 class="card-title   mb-1" ngbTooltip="{{dashboardList.dashboard_name}}"
-                                            (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
-                                            style="cursor: pointer;">
+                                        <h5 class="card-title   mb-1 cursor-pointer" ngbTooltip="{{dashboardList.dashboard_name}}"
+                                            (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)">
                                             {{dashboardList.dashboard_name | slice:0:11}}</h5>
                                         <p class="card-text">Modified on {{dashboardList.Modified}} </p>
                                     </div>
@@ -94,9 +93,8 @@
                                     src="{{dashboardList.dashboard_image}}" class="card-img-top-dashboard img-cursor" alt="img">
                                 <div class="card-body p-2 d-flex align-items-center justify-content-between">
                                     <div class="dashboard-card-title">
-                                        <h5 class="card-title   mb-1" ngbTooltip="{{dashboardList.dashboard_name}}"
-                                            (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)"
-                                            style="cursor: pointer;">
+                                        <h5 class="card-title   mb-1 cursor-pointer" ngbTooltip="{{dashboardList.dashboard_name}}"
+                                            (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)">
                                             {{dashboardList.dashboard_name | slice:0:11}}</h5>
                                         <p class="card-text">Modified on {{dashboardList.Modified}} </p>
                                     </div>
@@ -128,8 +126,7 @@
                     <div *ngIf="!showAllDasboards && savedDashboardList.length > 10" class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                         <div class="p-5 d-flex align-items-center justify-content-start">
                             <div class="dashboard-card-title">
-                                <h5 (click)="viewAllDashboards()" class="card-title   mb-1"
-                                    style="cursor: pointer;border-bottom: 1px solid;"> View All <i
+                                <h5 (click)="viewAllDashboards()" class="card-title mb-1 cursor-pointer border-bottom"> View All <i
                                         class="fa fa-angle-double-right"></i> </h5>
                                 <p class="card-text"></p>
                             </div>
@@ -137,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="viewSheets" class="card border" style="padding: 15px;">
+            <div *ngIf="viewSheets" class="card border p-4">
                 <div class="row">
                     <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
                         <h6 class="fw-bold mb-1">Saved Charts</h6>
@@ -167,7 +164,7 @@
                             <div *ngIf="showAllSheets && i < 4" class="card  img-shadow mb-0">
                                 <!-- <img src="./assets/images/Landingpage-images/recently-view/recent-1.jpg" class="card-img-top " alt="img"> -->
                                 <div class="card-body p-2 d-flex align-items-center justify-content-between">
-                                    <span class="avatar avatar-sm avatar-radius w-6 h-6 border">
+                                    <span class="avatar avatar-sm avatar-radius w-6 h-6 border me-1">
                                         <!-- <img  alt="product" class="avatar-radius" src="./assets/images/icons/postSQL-icon.jpg"> -->
                                         <img *ngIf="sheetlist.chart_id === 1"
                                             src="./assets/images/Tiled view sheet icons/table-tiled-icon.jpg" alt=""
@@ -219,12 +216,14 @@
                                             class="avatar-radius">
                                         <img *ngIf="sheetlist.chart_id === 11" src="./assets/images/Tiled view sheet icons/calendar-bg.png" alt=""
                                             class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 9" src="./assets/images/Tiled view sheet icons/pivot-table.jpg" alt=""
+                                            class="avatar-radius">
                                     </span>
                                     <div class="dashboard-card-title">
-                                        <h5 class="card-title   mb-1" ngbTooltip="{{sheetlist.sheet_name}}"
+                                        <h5 class="card-title   mb-1 cursor-pointer" ngbTooltip="{{sheetlist.sheet_name}}"
                                             (click)="viewSheet(sheetlist.hierarchy_id,sheetlist.queryset_id,sheetlist.sheet_id)"
-                                            style="cursor: pointer;"> {{sheetlist.sheet_name | slice:0:11}}</h5>
-                                        <p class="card-text">Modified on {{sheetlist.Modified}} </p>
+                                            > {{sheetlist.sheet_name | slice:0:11}}</h5>
+                                        <p class="card-text text-truncate">Modified on {{sheetlist.Modified}} </p>
                                     </div>
                                     <div class="dashboard-option">
                                         <div class="d-flex justify-content-end p-1" ngbDropdown>
@@ -302,11 +301,13 @@
                                             class="avatar-radius">
                                         <img *ngIf="sheetlist.chart_id === 11" src="./assets/images/Tiled view sheet icons/calendar-bg.png" alt=""
                                             class="avatar-radius">
+                                        <img *ngIf="sheetlist.chart_id === 9" src="./assets/images/Tiled view sheet icons/pivot-table.jpg" alt=""
+                                            class="avatar-radius">
                                     </span>
                                     <div class="dashboard-card-title">
-                                        <h5 class="card-title   mb-1" ngbTooltip="{{sheetlist.sheet_name}}"
+                                        <h5 class="card-title   mb-1 cursor-pointer" ngbTooltip="{{sheetlist.sheet_name}}"
                                             (click)="viewSheet(sheetlist.hierarchy_id,sheetlist.queryset_id,sheetlist.sheet_id)"
-                                            style="cursor: pointer;"> {{sheetlist.sheet_name | slice:0:16}}</h5>
+                                            > {{sheetlist.sheet_name | slice:0:16}}</h5>
                                         <p class="card-text">Modified on {{sheetlist.Modified}} </p>
                                     </div>
                                     <div class="dashboard-option">
@@ -336,8 +337,7 @@
                     <div *ngIf="!showAllSheets && userSheetsList.length > 10" class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                         <div class="p-5 d-flex align-items-center justify-content-start">
                             <div class="dashboard-card-title">
-                                <h5 (click)="viewAllSheets()" class="card-title   mb-1"
-                                    style="cursor: pointer;border-bottom: 1px solid;"> View All <i
+                                <h5 (click)="viewAllSheets()" class="card-title mb-1 cursor-pointer border-bottom"> View All <i
                                         class="fa fa-angle-double-right"></i> </h5>
                                 <p class="card-text"></p>
                             </div>
@@ -345,7 +345,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="viewCustomSql" class="card border" style="padding: 15px;">
+            <div *ngIf="viewCustomSql" class="card border p-4">
                 <div class="row ">
                     <div class="d-flex align-items-center justify-content-between border-bottom mb-3">
                         <h6 class="fw-bold mb-1">Saved Queries</h6>
@@ -374,9 +374,9 @@
                             <div *ngIf="showAllSavedQueries && i < 4" class="card img-shadow mb-0">
                                 <div class="card-body p-2 d-flex align-items-center justify-content-between">
                                     <div class="dashboard-card-title">
-                                        <h5 class="card-title   mb-1"
+                                        <h5 class="card-title mb-1 cursor-pointer"
                                             (click)="gotoSavedQuery(savedQuery.hierarchy_id,savedQuery.queryset_id,savedQuery.is_custom_sql,savedQuery?.datasource_filterdata[0]?.datasource_querysetid)"
-                                            ngbTooltip="{{savedQuery.queryset_name}}" style="cursor: pointer;">
+                                            ngbTooltip="{{savedQuery.queryset_name}}" >
                                             {{savedQuery.queryset_name | slice:0:20}}</h5>
                                         <p class="card-text">Modified on {{savedQuery.modified}} </p>
                                     </div>
@@ -404,9 +404,9 @@
                                 <!-- <img src="./assets/images/Landingpage-images/recently-view/recent-1.jpg" class="card-img-top " alt="img"> -->
                                 <div class="card-body p-2 d-flex align-items-center justify-content-between">
                                     <div class="dashboard-card-title">
-                                        <h5 class="card-title   mb-1"
+                                        <h5 class="card-title mb-1 cursor-pointer"
                                             (click)="gotoSavedQuery(savedQuery.hierarchy_id,savedQuery.queryset_id,savedQuery.is_custom_sql,savedQuery?.datasource_filterdata[0]?.datasource_querysetid)"
-                                            ngbTooltip="{{savedQuery.queryset_name}}" style="cursor: pointer;">
+                                            ngbTooltip="{{savedQuery.queryset_name}}">
                                             {{savedQuery.queryset_name | slice:0:20}}</h5>
                                         <p class="card-text">Modified on {{savedQuery.modified}} </p>
                                     </div>
@@ -437,8 +437,7 @@
                     <div *ngIf="!showAllSavedQueries && savedQueryList.length > 10" class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                         <div class="p-5 d-flex align-items-center justify-content-start">
                             <div class="dashboard-card-title">
-                                <h5 (click)="viewAllSavedQueries()" class="card-title   mb-1"
-                                    style="cursor: pointer;border-bottom: 1px solid;"> View All <i
+                                <h5 (click)="viewAllSavedQueries()" class="card-title mb-1 cursor-pointer border-bottom"> View All <i
                                         class="fa fa-angle-double-right"></i> </h5>
                                 <p class="card-text "></p>
                             </div>
@@ -446,7 +445,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card border" style="padding: 15px;">
+            <div class="card border p-4" >
                 <div class="row mb-0">
                     <div class="d-flex align-items-center justify-content-between border-bottom mb-2">
                         <h6 class="fw-bold mb-1 fs-18"> Quick Start</h6>
@@ -470,11 +469,11 @@
                         <div 
                             class="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                             <div class=" card img-shadow mb-0 ">
-                                <div class="card overflow-hidden mb-0 " style="cursor: pointer;">
+                                <div class="card overflow-hidden mb-0 cursor-pointer">
                                     <img (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)" src="{{dashboardList.dashboard_image}}" alt="img" class="card-img-top">
                                 </div>
                                 <div class="card-body p-2 d-flex justify-content-between">
-                                    <h5 (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)" class="card-title mb-0" style="cursor: pointer; ">{{dashboardList.dashboard_name}}</h5>
+                                    <h5 (click)="viewDashboard(dashboardList.server_id,dashboardList.queryset_id,dashboardList.dashboard_id)" class="card-title mb-0 cursor-pointer">{{dashboardList.dashboard_name}}</h5>
                                     <div class="dashboard-option">
                                         <div class="d-flex justify-content-end p-1" ngbDropdown>
                                             <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button"  ngbDropdownToggle
@@ -556,11 +555,11 @@
                                         | lowercase}}
                                     </td>
                                     <td *ngIf="database.server_type === 'QUICKBOOKS'">
-                                        <img alt="product" src="./assets/images/icons/salesforce-icon.jpg"
+                                        <img alt="product" src="./assets/images/icons/quickbooks-icon.jpg"
                                             class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
                                     </td>
                                     <td *ngIf="database.server_type === 'SALESFORCE'">
-                                        <img alt="product" src="./assets/images/icons/quickbooks-icon.jpg"
+                                        <img alt="product" src="./assets/images/icons/salesforce-icon.jpg"
                                             class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
                                     </td>
                                     <td *ngIf="database.server_type === 'CONNECTWISE'">
@@ -569,6 +568,14 @@
                                     </td>
                                     <td *ngIf="database.server_type === 'HALOPS'">
                                         <img alt="product" src="./assets/images/icons/Halopsa-icon.png"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'SHOPIFY'">
+                                        <img alt="product" src="./assets/images/icons/shopify-large-1.jpg"
+                                            class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
+                                    </td>
+                                    <td *ngIf="database.server_type === 'GOOGLE_SHEETS'">
+                                        <img alt="product" src="./assets/images/icons/google-sheets.jpg"
                                             class="w-5 h-5 border me-2">{{database.server_type | lowercase}}
                                     </td>
                                     <!-- <td>{{database.server_type}}</td> -->
@@ -592,23 +599,22 @@
         </button>
       </div>
     
-      <div class="modal-body" style="height: 500px; overflow: scroll;">
+      <div class="modal-body properties-modal-height">
           <div class="">
-              <label for="input-label" class="form-label">Title</label>
-              <p class="fw-semibold mb-2 mt-3 border p-1">{{dashboardPropertyTitle}}</p>
+              <label for="input-label" class="form-label mb-0 mt-0">Title</label>
+              <p class="fw-semibold mb-2 mt-0 border p-1 rounded-2">{{dashboardPropertyTitle}}</p>
 
           </div>
           <div class="">
-            
-            <p class="fw-semibold mb-2 mt-3">Share/publish</p>
+            <p class="fw-semibold mb-0 mt-3">Share/publish</p>
             <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button" (change)="sharePublish($event)" [closeOnSelect]="true" placeholder="Share or Publish">
              <ng-option  value="public" selected>Public</ng-option>
              <ng-option  value="private" selected>Private</ng-option>
             </ng-select>
-       </div>
+           </div>
           <div *ngIf="shareAsPrivate" class="">
             
-               <p class="fw-semibold mb-2 mt-3">Roles</p>
+               <p class="fw-semibold mb-0 mt-3">Roles</p>
                <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button" (change)="onRolesChange($event)" [closeOnSelect]="false" [(ngModel)]="selectedRoleIds"  [multiple]="true" placeholder="Select Roles">
                 <ng-option *ngFor="let role of roleDetails" value="{{role.id}}" selected>{{role.role}}</ng-option>
                    
@@ -616,7 +622,7 @@
           </div>
           <div *ngIf="shareAsPrivate" class="">
             
-            <p class="fw-semibold mb-2 mt-3">Users</p>
+            <p class="fw-semibold mb-0 mt-3">Users</p>
             <ng-select class="form-control p-0" name="choices-multiple-remove-button" id="choices-multiple-remove-button1"(click)="getUsersforRole()" (change)="getSelectedUsers($event)" [(ngModel)]="selectedUserIds"  [closeOnSelect]="false"  [multiple]="true" placeholder="Select Users">
                 <ng-option *ngFor="let user of usersOnSelectedRole" value="{{user.user_id}}">{{user.username}}</ng-option>
               
@@ -625,7 +631,7 @@
        <div *ngIf="publishedDashboard" class="">
             
         <p class="fw-semibold mb-2 mt-3">Url</p>
-        <button class="btn text-left" style="border: 1px solid #edebeb;width: 100%;">{{publicUrl}}
+        <button class="btn text-left border">{{publicUrl}}
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" viewBox="0 0 488.3 488.3" width="16px" height="16px" xml:space="preserve" (click)="copyUrl()">
             <g>
               <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/>
@@ -653,16 +659,16 @@
         </button>
       </div>
     
-      <div class="modal-body" style="overflow: scroll;">
+      <div class="modal-body overflow">
           <div class="">
               <label for="input-label" class="form-label">Title</label>
-              <p class="fw-semibold mb-2 mt-3 border p-1">{{dashboardPropertyTitle}}</p>
+              <p class="fw-semibold mb-2 mt-0 border p-1 rounded-2">{{dashboardPropertyTitle}}</p>
 
           </div>
        <div *ngIf="publishedDashboard" class="">
             
         <p class="fw-semibold mb-2 mt-3">Url</p>
-        <button class="btn text-left" style="border: 1px solid #edebeb;width: 100%;">{{publicUrl}}
+        <button class="btn text-left border">{{publicUrl}}
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" viewBox="0 0 488.3 488.3" width="16px" height="16px" xml:space="preserve" (click)="copyUrl()">
             <g>
               <path d="M314.25,85.4h-227c-21.3,0-38.6,17.3-38.6,38.6v325.7c0,21.3,17.3,38.6,38.6,38.6h227c21.3,0,38.6-17.3,38.6-38.6V124    C352.75,102.7,335.45,85.4,314.25,85.4z M325.75,449.6c0,6.4-5.2,11.6-11.6,11.6h-227c-6.4,0-11.6-5.2-11.6-11.6V124    c0-6.4,5.2-11.6,11.6-11.6h227c6.4,0,11.6,5.2,11.6,11.6V449.6z"/>

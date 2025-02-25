@@ -148,7 +148,8 @@ export class DatabaseComponent {
   filterParamPass:any;
   itemCounters: any={};
   sheetCustmSqlDisable = true;
-  saveQueryCheck = false
+  saveQueryCheck = false;
+  isExclude = false;
   constructor( private workbechService:WorkbenchService,private router:Router,private route:ActivatedRoute,private modalService: NgbModal,private toasterService:ToastrService,private loaderService:LoaderService){
     const currentUrl = this.router.url;
     if(currentUrl.includes('/analytify/database-connection/tables/')){
@@ -290,6 +291,9 @@ export class DatabaseComponent {
         this.showingRowsCustomQuery=data.no_of_rows
         this.totalRowsCustomQuery=data.total_rows;
         this.datasourceQuerysetId = data.datasorce_queryset_id;
+        if(this.datasourceQuerysetId){
+          this.getfilteredCustomSqlData();
+        }
         // if(this.fromSavedQuery){
         //   if(data.file_id === null)
         //   this.getSchemaTablesFromConnectedDb();
@@ -1266,6 +1270,7 @@ selectedColumnGetRows(col:any,datatype:any){
   }
   this.colName = col;
   this.dataType = datatype;
+  this.isExclude = false;
   this.workbechService.selectedColumnGetRows(obj).subscribe(
     {
       next:(data:any) =>{
@@ -1323,7 +1328,8 @@ getSelectedRows() {
     select_values:this.selectedRows,
     range_values:null,
     col_name:this.colName,
-    data_type:this.dataType
+    data_type:this.dataType,
+    is_exclude:this.isExclude
   }
   this.workbechService.getSelectedRowsFilter(obj).subscribe(
     {
@@ -1436,7 +1442,8 @@ editFilter(id:any){
         this.editFilterList = data.result;
         this.colName=data.column_name,
         this.dataType = data.data_type
-        this.searchEditFilterList = this.editFilterList
+        this.searchEditFilterList = this.editFilterList;
+        this.isExclude = data.is_exclude;
       },
       error:(error:any)=>{
       console.log(error);
@@ -1535,13 +1542,19 @@ getSelectedRowsFromEdit() {
     select_values:this.selectedRows,
     range_values:null,
     col_name:this.colName,
-    data_type:this.dataType
+    data_type:this.dataType,
+    is_exclude:this.isExclude
   }
   this.workbechService.getSelectedRowsFilter(obj).subscribe(
     {
       next:(data:any) =>{
         console.log(data)
         this.datasourceFilterId = data.filter_id;
+        if(this.filterParamPass === 'fromcustomsql'){
+          this.datasourceFilterIdArrayCustomQuery.push(data.filter_id)
+        }else{
+         this.datasourceFilterIdArray.push(data.filter_id);
+        }
         this.getDsQuerysetId();
          this.modalService.dismissAll('close')
       },

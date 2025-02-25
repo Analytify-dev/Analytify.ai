@@ -215,17 +215,17 @@ class list_of_roles(CreateAPIView):
 
 def user_status(firstname,lastname,username,email,password,conformpassword,role):
     if firstname=='' or firstname==None or firstname==' ' or firstname=="":
-        return Response({'message':'empty role name field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':'empty firstname field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif lastname=='' or lastname==None or lastname==' ' or lastname=="":
-        return Response({'message':'empty role name field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':'empty lastname field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif username=='' or username==None or username==' ' or username=="":
-        return Response({'message':'empty role name field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':'empty username field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif email=='' or email==None or email==' ' or email=="":
-        return Response({'message':'empty role name field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':'empty email field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif password=='' or password==None or password==' ' or password=="":
-        return Response({'message':'empty role name field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':'empty password field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif conformpassword=='' or conformpassword==None or conformpassword==' ' or conformpassword=="":
-        return Response({'message':'empty role name field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':'empty conformpassword field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
     # elif role=='' or role==[] or role=="" or role==None:
     #     return Response({'message':'empty role field is not acceptable, User had atleast one role'},status=status.HTTP_406_NOT_ACCEPTABLE)
     else:

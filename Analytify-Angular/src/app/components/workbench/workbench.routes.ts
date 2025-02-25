@@ -22,7 +22,18 @@ export const admin: Routes = [
         loadComponent: () =>
           import('./workbench/workbench.component').then((m) => m.WorkbenchComponent),
       },
-
+      {
+        path: 'datasources/google-sheets/:id',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./workbench/workbench.component').then((m) => m.WorkbenchComponent),
+      },
+      {
+        path: 'datasources/google-sheets',
+        canActivate: [authGuard],
+        loadComponent: () =>
+          import('./workbench/workbench.component').then((m) => m.WorkbenchComponent),
+      },
       //  {
       //   path: 'database-connection/tables/:id',
       //   canActivate:[authGuard],

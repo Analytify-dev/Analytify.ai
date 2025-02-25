@@ -1,7 +1,7 @@
 <!-- <p>Add index</p> -->
 
-<div class="main-container container-fluid mt-5">
-  <!-- <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3" style="padding: 0px;">
+<div class="main-container container-fluid mt-3">
+  <!-- <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3" >
     <div class="card-body">
         <div class="form-group mb-0 mt-sm-0 mt-2">
             <div class="input-group">
@@ -12,11 +12,11 @@
         </div>
     </div>
   </div> -->
-    <div class="col-sm-12 col-lg-12 col-xl-12 card" style="padding: 0px;">
-        <div class="card-body">
+    <div class="col-sm-12 col-lg-12 col-xl-12 card p-0" >
+        <div class="card-body ms-3">
             <div class="row">
-                <div class="col-lg-3 col-md-3 col-sm-12">
-                    <div class="card" style="border: none !important;">
+                <div class="col-lg-3 col-md-3 col-sm-12 p-0 border rounded-2">
+                    <div class="card mb-0 help-guide-qus-border">
                           <div
                             ngbAccordion
                             [closeOthers]="true"
@@ -29,7 +29,7 @@
                                 [collapsed]="module.id !== userGuideData[0].module_id"
                                 class="accordion-item"
                                 >
-                                <h2 ngbAccordionHeader id="headingOne" class="accordion-header"  (click)="getQuestionaries(module.id)">
+                                <h2 ngbAccordionHeader id="headingOne" class="accordion-header"  (click)="getQuestionaries(module.id,true)">
                                   <button
                                     ngbAccordionButton
                                     class="accordion-button"
@@ -49,7 +49,7 @@
                                   aria-labelledby="headingOne"
                                   data-bs-parent="#accordionExample"
                                   >
-                                  <div class="accordion-body" ngbAccordionBody style="padding: 10px;">
+                                  <div class="accordion-body p-2" ngbAccordionBody>
                                     <ng-template>
                                         <ul>
                                             <a *ngFor="let question of questionariesData" (click)="changeQuestionay(question.alias)"><li class="index-tab-btn" [ngStyle]="{'background-color':(question.title === userGuideData[0].title)? '#93f5f0' : '#ddf4f3'}">{{question.title}}</li></a>
@@ -64,14 +64,14 @@
                           <!-- PANEL-GROUP -->
                       </div>
                 </div>
-                <div class="col-lg-9 col-md-9 col-sm-12" style="border-left: 1px solid #ebebeb;">
-                    <div class="card" *ngFor="let data of userGuideData">
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                    <div class="card mb-0" *ngFor="let data of userGuideData">
                         <div class="mail-info-header d-flex align-items-center flex-wrap">
                             <div class="flex-fill">
                                 <h6 class="mb-0">{{data.title}}</h6>
                             </div>
                         </div>
-                        <iframe [src]="data.link" class="index-tab-height"></iframe>
+                        <iframe [src]="data.link" class="index-tab-height rounded-2"></iframe>
                         <!-- <div class="card-body mail-info-body">
                             <div class="eamil-body">
                                 <iframe [src]="data.link"></iframe>

@@ -157,7 +157,7 @@ login(email: string, password: string) {
     })
   }
 register(data:any){
-  return this.http.post<any>(`${environment.apiUrl}/new_signup`, data )  
+  return this.http.post<any>(`${environment.apiUrl}/signup/`, data )  
 
 }
 validateOtp(otp:any){

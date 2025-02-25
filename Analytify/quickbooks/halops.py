@@ -73,16 +73,18 @@ def connection_error_messages(site_url,client_id,client_secret,display_name,user
 def halops_main(serializer,parameter,tok1):
     site_url = serializer.validated_data['site_url']
     client_id = serializer.validated_data['client_id']
-    client_secret = serializer.validated_data['client_secret']
+    client_secret1 = serializer.validated_data['client_secret']
     display_name = serializer.validated_data['display_name']
     halops_id = serializer.validated_data['hierarchy_id']
+
+    client_secret=views.encode_string(client_secret1)
 
     if parameter=='UPDATE':
         parent_ids=dshb_models.parent_ids.objects.get(id=halops_id,parameter='halops')
         halo_id=parent_ids.table_id
     else:
         halo_id=halops_id
-    error_msg=connection_error_messages(site_url,client_id,client_secret,display_name,tok1['user_id'],halo_id)
+    error_msg=connection_error_messages(site_url,client_id,client_secret1,display_name,tok1['user_id'],halo_id)
     if error_msg==200:
         pass
     else:
@@ -96,7 +98,7 @@ def halops_main(serializer,parameter,tok1):
     payload = {
         'grant_type': 'client_credentials',
         'client_id': client_id,
-        'client_secret': client_secret,
+        'client_secret': client_secret1,
         'scope':'all'
     }
     response = requests.post(url, headers=headers, data=payload)
@@ -165,20 +167,70 @@ class halops_integrate(CreateAPIView):
                 return Response({"message":"Serializer value error"},status=status.HTTP_404_NOT_FOUND)
         else:
             return Response(tok1,status=tok1['status'])
-                    
+        
 
-def halops_data(urlendpoint,cn_id):
+def halops_refresh_token(cn_id):
     pr_id=dshb_models.parent_ids.objects.get(id=cn_id,parameter='halops')
     cn_data=models.HaloPs.objects.get(id=pr_id.table_id)
+    cl_client=views.decode_string(cn_data.client_secret)
+    url="{}/auth/token".format(cn_data.site_url)
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    payload = {
+        'grant_type': 'client_credentials',
+        'client_id': cn_data.client_id,
+        'client_secret': cl_client,
+        'scope':'all'
+    }
+    response = requests.post(url, headers=headers, data=payload)
+    data = response.json()
+    models.HaloPs.objects.filter(id=pr_id.table_id).update(access_token=data['access_token'],expiry_date=expired_at)
+
+
+def main_data(cn_data,urlendpoint):
     headers = {
         "Authorization": f"Bearer {cn_data.access_token}",
         "Content-Type": "application/json"
     }
     api_endpoint="{}/api/{}".format(cn_data.site_url,urlendpoint)
-    # params=None
-    response = requests.get(api_endpoint, headers=headers)  #, params=params
-    if response.status_code == 200:
-        data1 = response.json()
-        return data1
+    response = requests.get(api_endpoint, headers=headers)
+    if response.status_code==200:
+        data1=response.json()
+        return response.status_code,data1
     else:
-        return 400
+        data1=None
+        return response.status_code,data1
+
+
+def halops_data(urlendpoint,cn_id):
+    pr_id=dshb_models.parent_ids.objects.get(id=cn_id,parameter='halops')
+    cn_data=models.HaloPs.objects.get(id=pr_id.table_id)
+    response,data=main_data(cn_data,urlendpoint)
+    if response == 200:
+        data1 = data
+        d1 = {
+            "data":data1,
+            "status":200
+        }
+    elif response == 401:
+        halops_refresh_token(cn_id)
+        cn_data1=models.HaloPs.objects.get(id=pr_id.table_id)
+        response,data11=main_data(cn_data1,urlendpoint)
+        if response==200:
+            data1=data11
+            d1 = {
+                "data":data1,
+                "status":200
+            }
+        else:
+            d1 = {
+                "data":None,
+                "status":400
+            }
+    else:
+        d1 = {
+            "data":None,
+            "status":400
+        }
+    return d1

@@ -81,7 +81,6 @@ def relation1(tables, table_col, dbtype, join_conditions, new_joining_cond):
 
             # Find common keys efficiently using set intersection
             intersection_keys = dict(set(dict1.items()) & set(dict2.items()))
-            print(intersection_keys)
             if intersection_keys:
                 final_data = [f'{key}:{dict1[key]}' for key in intersection_keys.keys()] + [f'{key}:{dict1[key]}' for key in intersection_keys.keys()]
                 relation_tables.append((table1, table2))
@@ -210,11 +209,12 @@ class rdbmsjoins_new(CreateAPIView):
                     converted_query = query_parsing(query1,'sqlite',conn_type)
                     query_set_id = query_set_id if query_set_id else 0
                     file_path = file_save_1(dragged_array,hierarchy_id,query_set_id,'datasource',"")
+                    converted_query1= converted_query+ f' limit 1 '
                     try:
                         if conn_type.lower() =='microsoftsqlserver':
-                            result_proxy = cur.execute(converted_query)
+                            result_proxy = cur.execute(converted_query1)
                         else:
-                            result_proxy = cur.execute(text(converted_query))
+                            result_proxy = cur.execute(text(converted_query1))
                     except SQLAlchemyError as e:
                         error_message = str(e.orig) if hasattr(e, 'orig') else str(e)
                         main_error_line = error_message.splitlines()[0]  # Get the main error line
@@ -343,7 +343,6 @@ def building_query1(self,tables,join_conditions,join_types,engine,dbtype,new_joi
             get_data = relation1(tables, table_col, dbtype, join_conditions, new_joining_cond)
             if get_data['status'] != 200:
                 return {'status':400,"message": get_data['message']}
-            print(get_data)
             # Process relationship data
             comp = get_data['comp']
             relation_tables = get_data['relation']

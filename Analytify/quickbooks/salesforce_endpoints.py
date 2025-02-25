@@ -28,7 +28,7 @@ def salesforce_token(sf_id,tok1):
         }
         return data
     else:
-        rftk=salesforce.token_access_refresh(sf_id,tok1['user_id'])
+        rftk=salesforce.token_access_refresh(qb_id_1,tok1['user_id'])
         if rftk['status']==200:
             tokac = qb_models.TokenStoring.objects.get(user=tok1['user_id'],salesuserid=qb_id_1)
             data = {
@@ -101,50 +101,137 @@ def table_columns(sf_id,tok1,display_name,queryset_name,search):
         return Response({'message':'session expired, login to salesforce again',"SalesforceConnected":False},status=response.status_code)
 
 
-def salesforce_query_data(server_id,tok1,tabl_name):
-    token_status=salesforce_token(server_id,tok1)
-    if token_status['status']==200:
-        tokac=token_status['data']
+
+def sales_token_update(user_id,qb_id_1):
+    keys = salesforce.apis_keys()
+    tokac=qb_models.TokenStoring.objects.get(user=user_id,salesuserid=qb_id_1)
+    data = {
+        'grant_type': 'refresh_token',
+        'refresh_token': tokac.refreshtoken,
+        'client_id': keys['client_id'],
+        'client_secret': keys['client_secret'],
+    }
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    response = requests.post(keys['tok_url'], data=data, headers=headers)
+    if response.status_code == 200:
+        token_data = response.json()
+        qb_models.TokenStoring.objects.filter(user=user_id,salesuserid=qb_id_1).update(accesstoken=token_data['access_token'],expiry_date=salesforce.expired_at)
+        return response.status_code
     else:
-        return Response({'message':'session expired, login to salesforce again',"SalesforceConnected":False},status=token_status['status'])
+        token_data=None
+        return response.status_code
+
+
+
+def sales_data_new(tokac,tabl_name):
     print(tokac.domain_url)
     describe_endpoint = f'{str(tokac.domain_url)}/services/data/v53.0/sobjects/{tabl_name}/describe'
     print(describe_endpoint)
-    # url = f"{str(tokac.domain_url)}/services/data/v57.0/sobjects/{tabl_name}/"
     headers = {
         'Authorization': f'Bearer {str(tokac.accesstoken)}',
         'Content-Type': 'application/json'
     }
     response = requests.get(describe_endpoint, headers=headers)
-    if response.status_code != 200:
-            return Response(
-                {
-                    'message': 'Failed to fetch metadata from describe API',
-                    "SalesforceConnected": False,
-                    "error": response.text
-                },
-                status=response.status_code
-            )
-    column_names = [field['name'] for field in response.json().get('fields', [])]
+    if response.status_code==200:       
+        column_names = [field['name'] for field in response.json().get('fields', [])]
 
-    columns_string = ', '.join(column_names)
-    soql_query = f"SELECT {columns_string} FROM {tabl_name}"
+        columns_string = ', '.join(column_names)
+        soql_query = f"SELECT {columns_string} FROM {tabl_name}"
 
-    base_url = f'{str(tokac.domain_url)}/services/data/v53.0'
+        base_url = f'{str(tokac.domain_url)}/services/data/v53.0'
 
-    query_endpoint = f"{base_url}/query/?q={soql_query}"
-    query_response = requests.get(query_endpoint, headers=headers)
-    if query_response.status_code == 200:
-        return query_response.json()['records']
+        query_endpoint = f"{base_url}/query/?q={soql_query}"
+        query_response = requests.get(query_endpoint, headers=headers)
+        data = query_response.json()['records']
+        return response.status_code,data
     else:
-        return Response(
-            {
-                'message': 'Failed to fetch data from query API',
-                "SalesforceConnected": False,
-                "error": query_response.text
-            },
-            status=query_response.status_code
-        )
+        data1 = {
+            'message': 'Failed to fetch metadata from describe API',
+            "SalesforceConnected": False,
+            "data": response.text,
+            "status":response.status_code
+        }
+        return response.status_code,data1
+
+
+
+def salesforce_query_data(server_id,tok1,tabl_name):
+    token_status=salesforce_token(server_id,tok1)
+    print(token_status)
+    if token_status['status']==200:
+        tokac=token_status['data']
+    else:
+        data = {'message':'session expired, login to salesforce again',"SalesforceConnected":False,"status":token_status['status']}
+        return data
+    response,data=sales_data_new(tokac,tabl_name)
+    print(response)
+    if response==200:
+        d1 = {
+                "data":data,
+                "status":200
+            }
+        return d1
+    else:
+        fn_tk=sales_token_update(tokac.user,tokac.salesuserid)
+        if fn_tk==200:
+            tokac=qb_models.TokenStoring.objects.get(user=tok1['user_id'],salesuserid=tokac.salesuserid)
+            response,data=sales_data_new(tokac,tabl_name)
+            if response==200:
+                d1 = {
+                    "data":data,
+                    "status":200
+                }
+            else:
+                d1 = {
+                    "data":data,
+                    "status":response
+                }
+        else:
+            d1 = {
+                "data":None,
+                "status":fn_tk
+            }
+        return d1
+    
+    # print(tokac.domain_url)
+    # describe_endpoint = f'{str(tokac.domain_url)}/services/data/v53.0/sobjects/{tabl_name}/describe'
+    # print(describe_endpoint)
+    # headers = {
+    #     'Authorization': f'Bearer {str(tokac.accesstoken)}',
+    #     'Content-Type': 'application/json'
+    # }
+    # response = requests.get(describe_endpoint, headers=headers)
+    # if response.status_code != 200:
+    #     data1 = {
+    #                 'message': 'Failed to fetch metadata from describe API',
+    #                 "SalesforceConnected": False,
+    #                 "data": response.text,
+    #                 "status":response.status_code
+    #             }
+    #     return data1
+    # column_names = [field['name'] for field in response.json().get('fields', [])]
+
+    # columns_string = ', '.join(column_names)
+    # soql_query = f"SELECT {columns_string} FROM {tabl_name}"
+
+    # base_url = f'{str(tokac.domain_url)}/services/data/v53.0'
+
+    # query_endpoint = f"{base_url}/query/?q={soql_query}"
+    # query_response = requests.get(query_endpoint, headers=headers)
+    # if query_response.status_code == 200:
+    #     data = query_response.json()['records']
+    #     d1 = {
+    #             "data":data,
+    #             "status":200
+    #         }
+    # else:
+    #     d1 = {
+    #         "data":None,
+    #         "status":400
+    #     }
+    # return d1
     
 
 # def salesforce_query_data(server_id,tok1,tabl_name):

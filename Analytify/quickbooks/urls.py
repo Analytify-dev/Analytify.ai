@@ -1,5 +1,7 @@
 from django.urls import path
-from quickbooks import views,endpoints_data,salesforce,salesforce_endpoints,connectwise,halops
+from quickbooks import views,endpoints_data,salesforce,salesforce_endpoints,connectwise,halops,shopify,reload
+from quickbooks.googlesheets import *
+from quickbooks.googledrive import *
 
 urlpatterns = [
     #### sales force
@@ -46,4 +48,24 @@ urlpatterns = [
 
     ##### HalloPs
     path('halops/<token>',halops.halops_integrate.as_view(),name='halops'),# ['POST','PUT']
+
+    ##### Shpopify
+    path('shopify_authentication/<token>',shopify.shopify_authentication.as_view(),name='shopify_authentication'), # ['POST','PUT']
+
+    #### reload
+    path('data_reload_functionality/<token>/<int:dsh_id>',reload.data_reload,name='data_reload'), # ['GET]
+
+    # Google Authnentication
+    path('auth/google/<token>',GoogleAuthView.as_view(),name='google_auth'),
+    path('auth/google/callback/<token>',GoogleAuthSheetsView.as_view(),name='google_callback'),
+    
+    #### Google Sheets APIs
+    # path('sheets/<token>',GoogleSheetsView.as_view(),name='get_sheets'),
+    path('google_sheets_data/<token>/<parent_id>/<str:spreadsheet_id>',GoogleSpreadsheetDataView.as_view(),name='get_sheet_data'),
+
+    #### Google Drive APIs
+    path('drive/files/<token>', GoogleDriveListFilesView.as_view(), name='drive-list-files'),
+    path('drive/file/<token>/<str:file_id>', GoogleDriveFileDetailsView.as_view(), name='drive-file-details'),
+    path('drive/search/<token>', GoogleDriveSearchView.as_view(), name='drive-search'),
+    path('drive/data/<token>/<str:file_id>/<range>', GoogleDriveDownloadView.as_view(), name='drive-download'),
 ]

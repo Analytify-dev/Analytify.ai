@@ -1,0 +1,353 @@
+{
+    "drillDownHierarchy": [],
+    "isDrillDownData": false,
+    "columns": [
+        {
+            "column": "product_line",
+            "data_type": "string",
+            "table_name": "sales"
+        }
+    ],
+    "columns_data": [
+        [
+            "product_line",
+            "string",
+            "",
+            ""
+        ]
+    ],
+    "rows": [
+        {
+            "column": "price_each",
+            "data_type": "float32",
+            "type": "sum"
+        },
+        {
+            "column": "MSRP",
+            "data_type": "int64",
+            "type": "sum"
+        }
+    ],
+    "rows_data": [
+        [
+            "price_each",
+            "aggregate",
+            "sum",
+            ""
+        ],
+        [
+            "MSRP",
+            "aggregate",
+            "sum",
+            ""
+        ]
+    ],
+    "col": [
+        {
+            "column": "product_line",
+            "result_data": [
+                "Trains",
+                "Ships",
+                "Planes",
+                "Motorcycles",
+                "Vintage Cars",
+                "Classic Cars",
+                "Trucks and Buses"
+            ]
+        }
+    ],
+    "row": [
+        {
+            "col": "sum(price_each)",
+            "result_data": [
+                5825.410003662109,
+                19622.179969787598,
+                25012.719928741455,
+                27472.190006256104,
+                47435.96000480652,
+                84353.69998931885,
+                26345.909992218018
+            ]
+        },
+        {
+            "col": "sum(MSRP)",
+            "result_data": [
+                5620,
+                20154,
+                27163,
+                32130,
+                52482,
+                115715,
+                30842
+            ]
+        }
+    ],
+    "results": {
+        "tableData": [],
+        "tableColumns": [],
+        "banding": false,
+        "items_per_page": 10,
+        "total_items": 0,
+        "barYaxis": [],
+        "barXaxis": [],
+        "pieYaxis": [],
+        "pieXaxis": [],
+        "lineYaxis": [],
+        "lineXaxis": [],
+        "areaYaxis": [],
+        "areaXaxis": [],
+        "sidebysideBarYaxis": [],
+        "sidebysideBarXaxis": [],
+        "stokedBarYaxis": [],
+        "stokedBarXaxis": [],
+        "barLineYaxis": [],
+        "barLineXaxis": [
+            {
+                "name": "product_line",
+                "values": [
+                    "Trains",
+                    "Ships",
+                    "Planes",
+                    "Motorcycles",
+                    "Vintage Cars",
+                    "Classic Cars",
+                    "Trucks and Buses"
+                ]
+            }
+        ],
+        "hStockedYaxis": [],
+        "hStockedXaxis": [],
+        "hgroupedYaxis": [],
+        "hgroupedXaxis": [],
+        "multiLineYaxis": [],
+        "multiLineXaxis": [],
+        "donutYaxis": [],
+        "donutXaxis": [],
+        "decimalplaces": 0,
+        "kpiNumber": "99.04K",
+        "kpiPrefix": "",
+        "kpiSuffix": "",
+        "kpiDecimalUnit": "none",
+        "kpiDecimalPlaces": 0
+    },
+    "isApexChart": false,
+    "isEChart": true,
+    "savedChartOptions": {
+        "backgroundColor": "#fff",
+        "tooltip": {
+            "trigger": "item"
+        },
+        "legend": {
+            "data": [
+                {
+                    "name": "sum(price_each)"
+                },
+                {
+                    "name": "sum(MSRP)"
+                },
+                {
+                    "name": "sum(price_each)"
+                },
+                {
+                    "name": "sum(MSRP)"
+                }
+            ],
+            "show": true
+        },
+        "radar": {
+            "axisName": {
+                "color": "#2392c1"
+            },
+            "axisLabel": {
+                "color": "#2392c1"
+            },
+            "indicator": [
+                {
+                    "name": "Trains"
+                },
+                {
+                    "name": "Ships"
+                },
+                {
+                    "name": "Planes"
+                },
+                {
+                    "name": "Motorcycles"
+                },
+                {
+                    "name": "Vintage Cars"
+                },
+                {
+                    "name": "Classic Cars"
+                },
+                {
+                    "name": "Trucks and Buses"
+                }
+            ]
+        },
+        "series": [
+            {
+                "type": "radar",
+                "data": [
+                    {
+                        "name": "sum(price_each)",
+                        "value": [
+                            5825.410003662109,
+                            19622.179969787598,
+                            25012.719928741455,
+                            27472.190006256104,
+                            47435.96000480652,
+                            84353.69998931885,
+                            26345.909992218018
+                        ],
+                        "label": {
+                            "show": false,
+                            "fontFamily": "sans-serif",
+                            "fontSize": "12px",
+                            "fontWeight": 400,
+                            "color": "#2392c1"
+                        }
+                    },
+                    {
+                        "name": "sum(MSRP)",
+                        "value": [
+                            5620,
+                            20154,
+                            27163,
+                            32130,
+                            52482,
+                            115715,
+                            30842
+                        ],
+                        "label": {
+                            "show": false,
+                            "fontFamily": "sans-serif",
+                            "fontSize": "12px",
+                            "fontWeight": 400,
+                            "color": "#2392c1"
+                        }
+                    },
+                    {
+                        "name": "sum(price_each)",
+                        "value": [
+                            5825.410003662109,
+                            19622.179969787598,
+                            25012.719928741455,
+                            27472.190006256104,
+                            47435.96000480652,
+                            84353.69998931885,
+                            26345.909992218018
+                        ],
+                        "label": {
+                            "show": false,
+                            "fontFamily": "sans-serif",
+                            "fontSize": "12px",
+                            "fontWeight": 400,
+                            "color": "#2392c1"
+                        }
+                    },
+                    {
+                        "name": "sum(MSRP)",
+                        "value": [
+                            5620,
+                            20154,
+                            27163,
+                            32130,
+                            52482,
+                            115715,
+                            30842
+                        ],
+                        "label": {
+                            "show": false,
+                            "fontFamily": "sans-serif",
+                            "fontSize": "12px",
+                            "fontWeight": 400,
+                            "color": "#2392c1"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "customizeOptions": {
+        "isZoom": true,
+        "xGridColor": "#2392c1",
+        "xGridSwitch": false,
+        "xLabelSwitch": true,
+        "xLabelColor": "#2392c1",
+        "yLabelSwitch": true,
+        "yGridColor": "#2392c1",
+        "yGridSwitch": false,
+        "yLabelColor": "#2392c1",
+        "xLabelFontFamily": "sans-serif",
+        "xLabelFontSize": 12,
+        "xlabelFontWeight": 400,
+        "labelAlignment": "left",
+        "backgroundColor": "#fff",
+        "color": "#2392c1",
+        "ylabelFontWeight": 400,
+        "isBold": false,
+        "yLabelFontFamily": "sans-serif",
+        "yLabelFontSize": 12,
+        "bandingSwitch": false,
+        "backgroundColorSwitch": false,
+        "chartColorSwitch": false,
+        "barColorSwitch": false,
+        "lineColorSwitch": false,
+        "gridLineColorSwitch": false,
+        "xLabelColorSwitch": false,
+        "xGridLineColorSwitch": false,
+        "yLabelColorSwitch": false,
+        "yGridLineColorSwitch": false,
+        "bandingColorSwitch": false,
+        "kpiColorSwitch": false,
+        "funnelColorSwitch": false,
+        "kpiColor": "#000000",
+        "barColor": "#4382f7",
+        "lineColor": "#38ff98",
+        "GridColor": "#089ffc",
+        "legendSwitch": true,
+        "dataLabels": false,
+        "label": true,
+        "donutSize": 50,
+        "isDistributed": false,
+        "kpiFontSize": "3",
+        "minValueGuage": 0,
+        "maxValueGuage": 100,
+        "donutDecimalPlaces": 0,
+        "decimalPlaces": 0,
+        "legendsAllignment": "bottom",
+        "displayUnits": "none",
+        "suffix": "",
+        "prefix": "",
+        "dataLabelsFontFamily": "sans-serif",
+        "dataLabelsFontSize": "12px",
+        "dataLabelsFontPosition": "top",
+        "measureAlignment": "center",
+        "dimensionAlignment": "center",
+        "tableDataFontFamily": "sans-serif",
+        "tableDataFontSize": "12px",
+        "tableDataFontWeight": 400,
+        "tableDataFontStyle": "normal",
+        "tableDataFontDecoration": "none",
+        "tableDataFontColor": "#000000",
+        "tableDataFontAlignment": "left",
+        "headerFontFamily": "'Arial', sans-serif",
+        "headerFontSize": "16px",
+        "headerFontWeight": 700,
+        "headerFontStyle": "normal",
+        "headerFontDecoration": "none",
+        "headerFontColor": "#000000",
+        "headerFontAlignment": "left",
+        "dimeansionColor": "#2392c1",
+        "measureColor": "#2392c1",
+        "dataLabelsColor": "#2392c1",
+        "sortType": 0
+    },
+    "numberFormat": {
+        "decimalPlaces": 0,
+        "displayUnits": "none",
+        "prefix": "",
+        "suffix": ""
+    }
+}

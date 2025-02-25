@@ -729,29 +729,16 @@ def dashboard_data_main(sheets_ids_list,parameter,cursor,tok1,dashboard_table):
         row_data=[]
         sh_tb=dshb_models.sheet_data.objects.get(id=shid)
         sh_fltr_tb=dshb_models.SheetFilter_querysets.objects.get(Sheetqueryset_id=sh_tb.sheet_filt_id)
-        # print(sh_tb.sheet_name)
-        # print(sh_fltr_tb.Sheetqueryset_id)
-        # print(text(sh_fltr_tb.custom_query))
         fn_query=sh_fltr_tb.custom_query.replace('\\','')
         result = cursor.execute(text(fn_query))
         if parameter.upper()=="MICROSOFTSQLSERVER":
-            # result = cursor.execute(text(sh_fltr_tb.custom_query))
             columns_info = cursor.description
             column_list = [column[0] for column in columns_info]
             rows = result.fetchall()
         else:
-            # result = cursor.execute(text(sh_fltr_tb.custom_query))
             column_names = result.keys()
             column_list = [column for column in column_names]
             rows = result.fetchall()
-        # print(column_list)
-        # print(rows)
-        # ro_data =[]
-        # for i in rows:
-        #     a = list(i)
-        #     ro_data.append(a)
-        # column_data = column_list
-        # rows_data = ro_data
         transposed_rows = list(zip(*rows))
         for col,row in zip(column_list,transposed_rows):
             data = {
@@ -780,13 +767,14 @@ def dashboard_data_main(sheets_ids_list,parameter,cursor,tok1,dashboard_table):
         else:
             data=requests.get(sh_tb.datasrc)
             sheet_data=data.json() 
-        # sheets data
         d1 = {
             "sheet_id":sh_tb.id,
             "sheet_name":sh_tb.sheet_name,
             "chart_id":sh_tb.chart_id,
+            "hierarchy_id":sh_tb.hierarchy_id,
             "sheet_tag_name":sh_tb.sheet_tag_name,
             "sheet_data":sheet_data,
+            "queryset_id":sh_tb.queryset_id,
             "created_by":tok1['user_id'],
             "sheet_filter_ids":Connections.litera_eval(sh_tb.filter_ids),
             "sheet_filter_quereyset_ids":sh_tb.sheet_filt_id,
@@ -878,7 +866,7 @@ def quickbooks_dashbaord(request,hierarchy_id,token):
         tok1 = views.test_token(token)
         if tok1['status']==200:
             try:
-                dis_name=Connections.display_name(hierarchy_id)
+                dis_name,para=Connections.display_name(hierarchy_id)
                 database_name=dis_name.display_name
             except:
                 return Response({'message':'Invalid Id'},status=status.HTTP_404_NOT_FOUND)

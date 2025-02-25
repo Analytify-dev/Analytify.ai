@@ -26,7 +26,11 @@ import requests
 from base64 import b64encode
 
 
-apicn_urls = ['company/companies','company/configurations','service/tickets']
+# apicn_urls = ['company/companies','company/configurations','service/tickets']
+
+apicn_urls = ['company/companies','company/configurations','service/tickets','company/contacts','sales/stages',
+              'sales/opportunities','sales/probabilities','system/departments','procurement/catalog','company/countries',
+              'marketing/groups/info']
 
 # urls = ['companies','configurations','tickets']
 
@@ -37,7 +41,7 @@ expired_at=datetime.datetime.now(utc)+datetime.timedelta(minutes=60)
 # swagger_url = "https://api-na.myconnectwise.net/v4_6_release/apis/3.0/swagger/docs/v1"
 # swagger_url = https://api.tierpoint.com/api/v1/connectwise/swagger-ui/index.html?utm_source=chatgpt.com
 
-def connection_error_messages(company_id,site_url,public_key,client_id,display_name,user_id,conne_id):
+def connection_error_messages(company_id,site_url,public_key,private_key,client_id,display_name,user_id,conne_id):
     print(conne_id)
     if display_name=='' or display_name==None or display_name ==' ' or display_name=="":
         return Response({'message':"Display name Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -46,7 +50,9 @@ def connection_error_messages(company_id,site_url,public_key,client_id,display_n
     elif site_url=='' or site_url==None or site_url ==' ' or site_url=="":
         return Response({'message':"site_url Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif public_key=='' or public_key==None or public_key ==' 'or public_key=="":
-        return Response({'message':"Port Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response({'message':"Public key be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
+    elif private_key=='' or private_key==None or private_key ==' 'or private_key=="":
+        return Response({'message':"Private key be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif models.connectwise.objects.filter(user_id=user_id,display_name=display_name).exclude(id=conne_id).exists():
         return Response({'message':"Display Name Already Exists"},status=status.HTTP_406_NOT_ACCEPTABLE)
     elif client_id==None or client_id=='' or client_id=="" or client_id==' ': 
@@ -66,10 +72,12 @@ def connectwise_main(serializer,parameter,tok1):
     company_id = serializer.validated_data['company_id']
     site_url = serializer.validated_data['site_url']
     public_key = serializer.validated_data['public_key']
-    private_key = serializer.validated_data['private_key']
+    private_key1 = serializer.validated_data['private_key']
     client_id = serializer.validated_data['client_id']
     display_name = serializer.validated_data['display_name']
     connectwise_id = serializer.validated_data['hierarchy_id']
+
+    private_key=views.encode_string(private_key1)
 
     if parameter=='UPDATE':
         parent_ids=dshb_models.parent_ids.objects.get(id=connectwise_id,parameter='connectwise')
@@ -77,7 +85,7 @@ def connectwise_main(serializer,parameter,tok1):
     else:
         connect_id=connectwise_id
 
-    error_msg=connection_error_messages(company_id,site_url,public_key,client_id,display_name,tok1['user_id'],connect_id)
+    error_msg=connection_error_messages(company_id,site_url,public_key,private_key1,client_id,display_name,tok1['user_id'],connect_id)
     if error_msg==200:
         pass
     else:
@@ -85,7 +93,7 @@ def connectwise_main(serializer,parameter,tok1):
 
     endpoint = "/v4_6_release/apis/3.0/company/companies"
     auth_token = b64encode(
-        f"{company_id}+{public_key}:{private_key}".encode()).decode()
+        f"{company_id}+{public_key}:{private_key1}".encode()).decode()
     headers = {
         "Authorization": f"Basic {auth_token}",
         "clientID": client_id,
@@ -164,8 +172,9 @@ def connectwise_data(urlendpoint,cn_id):
     pr_id=dshb_models.parent_ids.objects.get(id=cn_id,parameter='connectwise')
     cn_data=models.connectwise.objects.get(id=pr_id.table_id)
     endpoint = "/v4_6_release/apis/3.0/{}".format(urlendpoint)
+    password1234=views.decode_string(cn_data.private_key)
     auth_token = b64encode(
-        f"{cn_data.company_id}+{cn_data.public_key}:{cn_data.private_key}".encode()).decode()
+        f"{cn_data.company_id}+{cn_data.public_key}:{password1234}".encode()).decode()
     headers = {
         "Authorization": f"Basic {auth_token}",
         "clientID": cn_data.client_id,
@@ -174,7 +183,14 @@ def connectwise_data(urlendpoint,cn_id):
     response = requests.get(f"{cn_data.site_url}{endpoint}", headers=headers)
     if response.status_code == 200:
         data1 = response.json()
-        return data1
+        d1 = {
+            "data":data1,
+            "status":200
+        }
     else:
-        return 400
+        d1 = {
+            "data":None,
+            "status":400
+        }
+    return d1
 

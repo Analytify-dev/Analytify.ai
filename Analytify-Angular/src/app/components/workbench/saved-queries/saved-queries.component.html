@@ -1,8 +1,8 @@
 <app-page-header title="Database Connections" moduleId="customSql" title1="Home" activeitem="Data Source"></app-page-header>
 
 <div class="main-container container-fluid">
-    <div class="row" class="card" style="padding-top: 15px;">
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+    <div class="row" class="card card-padding-top">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0">
       <div class="d-flex justify-content-between px-5">
         <div class="connect-txt">
           <h4 class="card-title mt-2">Saved Queries</h4>
@@ -15,7 +15,7 @@
           <button *ngIf="!gridView" type="button" class="btn btn-icon btn-outline-primary me-3" ><i class="fa fa-th-list"></i></button>
           <div class="input-group">
             <input type="text" class="form-control border-end-0 " placeholder="Search" [(ngModel)]="searchName" aria-describedby="button-addon2" (keyup.enter)="getSavedQueriesSearch()">
-            <button class="btn btn-primary border me-2" (click)="getSavedQueriesSearch()" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
+            <button class="btn btn-primary border me-2 search-icon-border-radius" (click)="getSavedQueriesSearch()" type="button" id="button-addon2"><i class="fe fe-search "></i></button>
           </div>
         </div>
     </div>
@@ -27,9 +27,9 @@
     </div>
         <div *ngIf="viewSavedQueries && savedQueryList.length > 0" class="card-body">
           @if(!gridView){
-            <div class="table-responsive border" style="height: 26rem;">
+            <div class="table-responsive border table-responsive-height" >
                 <table class="table border text-nowrap text-md-nowrap mb-0">
-                    <thead class="table-primary bg-primary" style="position: sticky;top: -1px;">
+                    <thead class="table-primary bg-primary table-primary-position">
                         <tr>
                             <th>Query</th>
                             <th>Database</th>
@@ -147,7 +147,7 @@
         </div>
       }
             <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangeSavedQueries((page = $event))"></pagination-controls>
-            <div  style="float: right;font-size: 15px; margin-top: -30px;">
+            <div class="pagination-count" >
               <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getSavedQueries()" class="form-control">
                     <option  value="10"> 10</option>
                     <option [disabled]="!(totalItems > 10)" value="20"> 20</option>

@@ -10,7 +10,7 @@
   
   <div *ngIf="isPublicUrl" style="margin-top: 60px;">
     
-    <app-page-header (btnClickEvent)="toggleSidebar()" title="{{dashboardName}}" title1="public" [isPublicUrl]="false" activeitem="Dashboard"></app-page-header>
+    <app-page-header (btnClickEvent)="toggleSidebar()" title="{{dashboardTagName}}" title1="public" [isPublicUrl]="false" activeitem="Dashboard"></app-page-header>
     </div>
   <!-- <div *ngIf="publicHeader">
     <app-page-header [publicHeader]="true"></app-page-header>
@@ -23,33 +23,33 @@
 
   @if(isSheetsView){
     <div class="main-container container-fluid">
-      <div class="row" class="card " style="padding-top: 15px;">
+      <div class="row" class="card card-padding-top">
         <div class="col-sm-12 col-lg-12 col-xl-12 p-0" >
-          <div class="d-flex justify-content-between px-5">
+          <div class="d-flex justify-content-between p-2">
             <div class="connect-txt"><h1 class="page-title">Sheets</h1> 
             </div>
             <div class="new-data-btn d-flex text-align-center">  
               <div class="input-group">
                 <input type="text" class="form-control border-end-0 " [(ngModel)]="searchSheets" (keydown.enter)="fetchSheetsListSearch()" placeholder="Search" >
-                <button class="btn btn-primary border me-2 " (click)="fetchSheetsListSearch()"  type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
-                <button *ngIf="panelscheckbox?.length>0" type="button" [disabled]="sheetIdsDataSet?.length <= 0"  (click)="loadDashboard()" class="btn ripple btn-primary me-2" style="border-radius: 4px 4px 4px 4px;">Move To Dashboard</button>
-                <button *ngIf="panelscheckbox?.length<1" type="button" class="btn ripple btn-primary me-2" (click)="sheetsRoute()" style="border-radius: 4px 4px 4px 4px;"><i class="fa fa-plus"></i> New Sheet</button>
-                <button type="button" class="btn ripple btn-primary me-2" (click)="isSheetsView = false" style="border-radius: 4px 4px 4px 4px;">Close</button>
+                <button class="btn btn-primary border me-2  search-icon-border-radius" (click)="fetchSheetsListSearch()"  type="button" id="button-addon2"><i class="fe fe-search "></i></button>
+                <button *ngIf="panelscheckbox?.length>0" type="button" [disabled]="sheetIdsDataSet?.length <= 0"  (click)="loadDashboard()" class="btn ripple btn-primary me-2 new-sheet-btn-radius" >Move To Dashboard</button>
+                <button *ngIf="panelscheckbox?.length<1" type="button" class="btn ripple btn-primary me-2 new-sheet-btn-radius" (click)="sheetsRoute()" ><i class="fa fa-plus"></i> New Sheet</button>
+                <button type="button" class="btn ripple btn-primary me-2 new-sheet-btn-radius" (click)="isSheetsView = false" >Close</button>
 
               </div>
             </div>
             </div>
           @if(panelscheckbox?.length>0){
-            <div class="card-body">
-              <div class="table-responsive border" style="height: 26rem;">
+            <div class="card-body p-2">
+              <div class="table-responsive border table-responsive-height">
                 <table class="table  text-nowrap text-md-nowrap mb-0">
-                  <thead class="table-primary bg-primary" style="position: sticky;top: -1px; z-index: 5;">
+                  <thead class="table-primary bg-primary table-primary-position">
                                      <tr>
-                                         <th style="color: #fff">Title</th>
-                                         <th style="color: #fff">Database Name</th>
-                                         <th style="color: #fff">Created By</th>
-                                         <th style="color: #fff">Created On</th>
-                                         <th style="color: #fff">Last Modified</th>
+                                         <th>Title</th>
+                                         <th>Database Name</th>
+                                         <th>Created By</th>
+                                         <th>Created On</th>
+                                         <th>Last Modified</th>
                                      </tr>
                                  </thead>
                                    <tbody>
@@ -84,7 +84,7 @@
                                                             aria-controls="collapseOne" style="justify-content: space-between;"
                                                             >
                                                             <div>
-                                                           <input class="form-check-input me-2 mt-0" name="checkbox1" (click)="checkAllChilds(panel)" [(ngModel)]="panel.is_selected"
+                                                           <input class="form-check-input me-2 mt-0 border" name="checkbox1" (click)="checkAllChilds(panel)" [(ngModel)]="panel.is_selected"
                                                             type="checkbox" value="" id="checkbox1" >
                                                             {{ panel.queryset_name }}
                                                             </div>
@@ -127,8 +127,8 @@
                          
                 </div>
                 <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetUserSheetsList((page = $event))"></pagination-controls>
-                <div  style="float: right;font-size: 15px; margin-top: -41px;">
-                  <select  [(ngModel)]="itemsPerPage" (ngModelChange)="fetchSheetsList()" class="form-control" style="cursor: pointer;">
+                <div class="pagination-count">
+                  <select  [(ngModel)]="itemsPerPage" (ngModelChange)="fetchSheetsList()" class="form-control cursor-pointer">
                    <option  value="10"> 10</option>
                    <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
                    <option [disabled]="!(totalItems > 20)" value="30"> 30</option>
@@ -136,7 +136,7 @@
                 </div>
             </div>
           } @else{
-            <div style="font-size: medium; margin-left: 1.5%;">There is no sheets, Please Create One!</div>
+            <div class="no-sheets-text">There is no sheets, Please Create One!</div>
           }
         </div>
       </div>
@@ -157,7 +157,7 @@
               <div class="panel panel-primary p-0">
                 <div class="tab-menu-heading tab-menu-heading-boxed">
                     <div class="tabs-menu1">
-                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav panel-tabs " >
+                        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav panel-tabs dashboard-tabs-space">
 
                             <li *ngIf="!isPublicUrl" [ngbNavItem]="1">
                                 <a ngbNavLink class="dashboard-tab-padding">Dashboard</a>
@@ -165,14 +165,14 @@
                                     <div class="tab-pane active" id="activetabs">
                                       <div class="panel-body tabs-menu-body p-0">
                                         <div class="tab-content">
-                                            <!-- <div class="card mb-0 p-4 br-0" style="box-shadow: none;">
+                                            <!-- <div class="card mb-0 p-4 br-0">
                                                 <h6 class="mb-0">Database</h6>
                                                 <p class="mb-0">{{databaseName}}</p>
                                             </div> -->
                                             <div class=" mb-0  mt-0 br-0 overflow-auto h-400" >
                                                 <div class="text-wrap">
                                                     <div class="dropdown-samples">
-                                                      <h6 class="dropdown-header sheets-title bg-light border rounded-3 mb-1" style="display: flex; justify-content: space-between;line-height: 2;">Sheets<app-insights-button *ngIf="!isPublicUrl" [classesList]="'btn btn-outline-primary mt-0'"
+                                                      <h6 class="dropdown-header sheets-title bg-light border rounded-3 mb-1 dashboard-sheet-text">Sheets<app-insights-button *ngIf="!isPublicUrl" [classesList]="'btn btn-outline-primary mt-0'"
                                                         [buttonName]="'Add'"
                                                         [previledgeId]="17" [isBtn]="true"
                                                         (btnClickEvent)="fetchSheetsList();isSheetsView = true;" [toolTip]="'Add Sheets'"
@@ -185,7 +185,7 @@
                                                         (cdkDropListDropped)="drop($event)">
                                                            
                                                             <li *ngFor="let item of dashboardNew" ><a draggable="true" [ngClass]="{ 'sheet-bold': item['selectedSheet']}"
-                                                           class="dropdown-item"  cdkDrag><i data-bs-toggle="tooltip" ngbTooltip="{{item.data.title}}" (click)="viewSheet(item)" class="fa fa-plus-square-o"></i> {{item.data.title | slice:0:15}}<i data-bs-toggle="tooltip"  ngbTooltip="clear" style="float: right;" (click)="clearSheet($event,item)" class="fa fa-close"></i></a></li>
+                                                           class="dropdown-item"  cdkDrag><i data-bs-toggle="tooltip" ngbTooltip="{{item.data.title}}" (click)="viewSheet(item)" class="fa fa-plus-square icon-outline"></i> {{item.data.title | slice:0:15}}<i data-bs-toggle="tooltip"  ngbTooltip="clear"  (click)="clearSheet($event,item)" class="fa fa-close float-right mt-1"></i></a></li>
 
                                                             
                                                         </ul>
@@ -203,7 +203,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card mb-0  br-0 "  style="box-shadow: none;">
+                                            <div class="card mb-0  br-0 size-card-dashboard">
                                               <h6 class="mb-0 size-text">Size</h6>
                                              <div class="custom-size-card d-flex justify-conent-between">
                                                 <p class="mb-0 custom-size-txt">Custom size ({{widthGrid}} * {{heightGrid}})</p>
@@ -243,26 +243,32 @@
                                               </div>
                                              </div>
                                           </div>
-                                          <div class="card mb-0  br-0 p-0 mt-2"  style="box-shadow: none; border: none !important;">
+                                          <div class=" mb-0  br-0 p-0 mt-2 ">
                                             <div class=" dropdown" ngbDropdown>
                                               <a  href="javascript:void(0);" ngbDropdownToggle data-bs-toggle="dropdown" role="button"  aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"> 
                                                 <button class="btn btn-primary w-100">
                                                   <i class="fa fa-image me-2"></i>Add Image
                                               </button>
                                               </a>
-                                              <div class="dropdown-menu size-dropdown" ngbDropdownMenu>
-                                                  <h6 class="mb-0 bg-light text-center p-2" (click)="triggerFileUpload()">Upload Image</h6>
-                                                  <div class="form-group">
-                                                    <label class="form-label mt-0">Insert Image File:</label>
-                                                    <input
+                                              <div class="dropdown-menu size-dropdown upload-image-position" ngbDropdownMenu>
+                                                  <p class="mb-0 bg-light text-center p-2">Upload Image</p>
+                                                  <div class="form-group d-flex align-items-center flex-wrap justify-content-between mb-0 mt-3">
+                                                    <label class="form-label mt-1 me-2">Insert Image File:</label>
+                                                    <!-- <input
                                                     type="file" class="form-control"
                                                     id="imageUpload"
                                                     accept="image/*"
                                                     (change)="onImageSelected($event)"
-                                                  />
+                                                  />  -->
+                                                 
+                                                        <div class="btn btn-primary custom-file-input cursor-pointer">
+                                                            Choose
+                                                            <input type="file" id="imageUpload" accept="image/*" (change)="onImageSelected($event)" class="cursor-pointer">
+                                                        </div>
                                                   </div>
+                                                  <input type="text" id="input" [value]="fileName" placeholder="No image chosen" class="form-control border mt-1 bg-white-transparent" readonly>
                                                   <div class="url">
-                                                    <label class="form-label">Name:</label>
+                                                    <label class="form-label mt-3 mb-1">Name:</label>
                                                     <input type="text" id="input" [(ngModel)]="imageTitle" class="form-control border">
                                                   </div>
                                                   <div class=" mt-2 d-flex justify-content-end">
@@ -285,16 +291,16 @@
                               <div class="modal-body">
                                 <div class="text-wrap">
                                   <div class="row">
-                                  <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 "style="border-right: 1px solid #f3f6f9;">
-                                    <button *ngIf="editFilters" class="btn btn-primary dropdown-toggle mb-2" (click)="addfilterOnEdit()" type="button"  aria-expanded="false" style="width: 100%;">
+                                  <div class="col-xl-5 col-lg-5 col-md-5 bg-light p-2 rounded-2 border">
+                                    <button *ngIf="editFilters" class="btn btn-primary dropdown-toggle mb-2 w-100" (click)="addfilterOnEdit()" type="button"  aria-expanded="false">
                                       <i class="fa fa-plus"></i> Add Filter
                                     </button>
-                                    <button *ngFor="let filterList of DahboardListFilters" type="button"  style="border: 1px solid #edebeb;width: 100%;cursor: pointer;" (click)="editFiltersData(filterList.dashboard_filter_id)" class="btn text-left mb-2">{{filterList.filter_name}}
-                                      <a (click)="deleteDashboardFilter(filterList.dashboard_filter_id);$event.stopPropagation()" style="color: red;"><i style="float: right;font-size: 16px;" class="ri-delete-bin-7-line"></i></a>
+                                    <button *ngFor="let filterList of DahboardListFilters" type="button"  (click)="editFiltersData(filterList.dashboard_filter_id)" class="btn text-left mb-2 bg-white border w-100 cursor-pointer d-flex justify-content-between align-items-center">{{filterList.filter_name}}
+                                      <a (click)="deleteDashboardFilter(filterList.dashboard_filter_id);$event.stopPropagation()" ><i class="ri-delete-bin-7-line btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"></i></a>
                                     </button>
 
                                     </div>
-                                  <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-6 " >
+                                  <div class="col-xl-7 col-lg-7 col-md-7 " >
                                     <div *ngIf="!editFilters" class="card-content p-0">
                                         <div class=" mt-2 mb-2">
                                           <ul class="d filter-popover" aria-labelledby="applyfilters" >
@@ -302,23 +308,23 @@
                                               <p>Add Filters</p>
                                             </div>
                                             <div class="form-group p-1 mb-0">
-                                              <label class="form-label">Filter Name <span  class="text-red">*</span>
+                                              <label class="form-label">Filter Name <span  class="text-red">*</span><i ngbTooltip="Enter a unique name for your custom filter to easily identify it for future reference." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
-                                              <input type="text" placeholder="Enter Filter Name" [(ngModel)]="filterName" class="form-control checkbox-color">
+                                              <input type="text" placeholder="Enter Filter Name" [(ngModel)]="filterName" class="form-control border">
                                             </div>
                                             <div class="form-group p-1 mb-0">
-                                              <label class="form-label">Database Name<span class="text-red">*</span>
+                                              <label class="form-label">Database Name<span class="text-red">*</span><i ngbTooltip="Choose the database you wish to query from the available options." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
                                               <select id="databaseSelect" [(ngModel)]="selectedDatabase"  (change)="onDatabaseChange()" class="form-select form-select select2 "  >
-                                              <option value="" disabled selected style="color: #999999 !important;">Select Database name</option>
+                                              <option value="" disabled selected>Select Database name</option>
                                                 <option *ngFor="let database of databaseNames" [value]="database">{{ database }}</option>
                                               </select>
                                             </div>
                                             <div class="form-group p-1 mb-0">
-                                              <label class="form-label">Query Set Name <span class="text-red">*</span>
+                                              <label class="form-label">Query Set Name <span class="text-red">*</span><i ngbTooltip="Select the specific queryset you want to apply the filter to, narrowing down the data results." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
                                               <!-- <select [(ngModel)]="selectedQuerySetId" (change)="getColumnsForFilter()"   class="form-select form-select select2 " >
-                                                                                            <option value="0" disabled selected style="color: #999999 !important;">Select Queryset name</option>
+                                                                                            <option value="0" disabled selected >Select Queryset name</option>
                                                                                             @for(querySet of querySetNames;track querySet.queryset_id){
                                                                                               <option [ngbTooltip]="querySet.queryset_name"
                                                                                               [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'" value="{{querySet.queryset_id}}">{{querySet.queryset_name}}</option>
@@ -345,8 +351,8 @@
                                                                                       </ng-select>
                                             </div>
                                     
-                                            <div class="form-group p-1">
-                                              <label class="form-label">Column <span class="text-red">*</span>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Column <span class="text-red">*</span><i ngbTooltip="Pick the columns you want to display or analyze from the selected queryset." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
                                             <ng-select [items]="dropdownOptions"
                                                        bindLabel="value"
@@ -370,24 +376,27 @@
                                             
                                             </ng-select>
                                             </div>
-                                              <label class="form-label">Apply to Selected worksheets</label>
-                                           
-                                            <div class="form body border p-2" style="max-height: 200px;  overflow: auto;">
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Apply to Selected worksheets <i ngbTooltip="Confirm and apply the custom filter settings to the currently active worksheet for data manipulation." class="icon icon-info ms-1 cursor-pointer"></i></label>
+                                              <div class="form body border p-2 rounded-2 Selected-worksheets-h">
 
-                                              <div *ngIf="sheetsFilterNames?.length > 0" class="form-check">
-
-                                                <input type="checkbox" id="selectAll" [(ngModel)]="isAllSelected" (change)="toggleAllRows($event)" class="form-check-input">
-                                                <label for="selectAll" class="form-check-label">Select All</label>
+                                                <div *ngIf="sheetsFilterNames?.length > 0" class="form-check">
+  
+                                                  <input type="checkbox" id="selectAll" [(ngModel)]="isAllSelected" (change)="toggleAllRows($event)" class="form-check-input">
+                                                  <label for="selectAll" class="form-check-label">Select All</label>
+                                                  </div>
+                                                @for(rows of sheetsFilterNames;track rows;let i = $index){
+                                                 
+  
+                                                <div class="form-check">
+                                                  <input type="checkbox" [id]="'defaultCheck' + i"  name="rows{{i}}"[(ngModel)]="rows.selected" (change)="updateSelectedRows()" class="form-check-input"> 
+                                                  <label for="invalidCheck" [for]="'defaultCheck' + i" class="form-check-label "> <p>{{rows?.label?.name}}</p> </label>
                                                 </div>
-                                              @for(rows of sheetsFilterNames;track rows;let i = $index){
-                                               
-
-                                              <div class="form-check">
-                                                <input type="checkbox" [id]="'defaultCheck' + i"  name="rows{{i}}"[(ngModel)]="rows.selected" (change)="updateSelectedRows()" class="form-check-input"> 
-                                                <label for="invalidCheck" [for]="'defaultCheck' + i" class="form-check-label "> <p>{{rows?.label?.name}}</p> </label>
+                                              }
                                               </div>
-                                            }
                                             </div>
+                                           
+                                           
 
                                             <div class="py-2 mt-3">
                                               <button type="button" [disabled]="!isAnyRowSelected() || !selectedOption || selectedQuerySetId === 0"  (click)="getSelectedData();columnSearch = ''" class="btn ripple btn-primary me-2">Save</button>
@@ -407,12 +416,12 @@
                                           <div class="form-group p-1 mb-0">
                                             <label class="form-label">Filter Name <span  class="text-red">*</span>
                                             </label>
-                                            <input type="text" placeholder="" [(ngModel)]="filterName" class="form-control checkbox-color">
+                                            <input type="text" placeholder="" [(ngModel)]="filterName" class="form-control border">
                                           </div>
                                           <div class="form-group p-1 mb-0">
                                             <label class="form-label">Database Name<span class="text-red">*</span>
                                             </label>
-                                          <button class="btn " style="border: 1px solid #edebeb;width: 100%; text-align: justify;">{{databaseNameForEditFilter}}</button>
+                                          <button class="btn border w-100 text-start">{{databaseNameForEditFilter}}</button>
                                           </div>
                                           <div class="form-group p-1 mb-0">
                                             <label class="form-label">Query Set Name <span class="text-red">*</span>
@@ -424,7 +433,7 @@
                                   
                                           </select> -->
                                           <!-- <p>{{querysetNameEdit}}</p> -->
-                                          <!-- <button class="btn " style="border: 1px solid #edebeb;width: 100%; text-align: justify;">{{querysetNameEdit}}</button> -->
+                                          <!-- <button class="btn " >{{querysetNameEdit}}</button> -->
 
                                           <ng-select
                                           [(ngModel)]="selectedQuerySetId"
@@ -448,7 +457,7 @@
                                 
                                             <!-- <div ngbDropdown class="my-2 dropdown" #nestedDropdown="ngbDropdown" [autoClose]="'outside'">
                                               <button type="button" ngbDropdownToggle id="dropdownColumns" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn btn-info-light filterColumnbtn">{{selectClmnEdit}} <i class="fa fa-angle-down"></i></button>
-                                              <ul ngbDropdownMenu aria-labelledby="dropdownColumns" class="dropdown-menu" style="background-color: #ffffff;width:100%;max-height: 240px;overflow-y: auto;padding:6px">
+                                              <ul ngbDropdownMenu aria-labelledby="dropdownColumns" class="dropdown-menu" >
                                                 @for(colData of columnFilterNamesEdit;track colData){
                                                   <li><a class="dropdown-item" ngbDropdownItem (click)="selectClmnEdit = colData.column_name;closeColumnsDropdownEdit(colData.column_name,colData.column_dtype,nestedDropdown)">{{colData.column_name}}</a></li>
                                                 }
@@ -474,7 +483,7 @@
                                           </div>
                                             <label class="form-label">Apply to Selected worksheets</label>
                                          
-                                          <div class="form body border p-2" style="max-height: 200px;  overflow: auto;">
+                                          <div class="form body border p-2 Selected-worksheets-h">
 
                                             <div class="form-check">
 
@@ -504,9 +513,24 @@
                                 </div>
                             </div>
                             </ng-template>
-                            <!-- @if(updateDashbpardBoolen){ -->
-                            <li [ngbNavItem]="2" [ngClass]="{'disabled': dashboard.length<1 || !updateDashbpardBoolen}">
-                                 <a ngbNavLink class="dashboard-tab-padding">Filters</a>
+                            <!-- @if(updateDashbpardBoolen){ -->                           
+                            <li [ngbNavItem]="2">
+                              <div class="tooltip-wrapper"
+                                [ngbTooltip]="(dashboard.length < 1 || !updateDashbpardBoolen || canNavigateToAnotherPage) ? 'Please save / update the dashboard' : null"
+                                [tooltipClass]="(dashboard.length < 1 || !updateDashbpardBoolen || canNavigateToAnotherPage) ? 'tooltip-disabled' : ''">
+
+                                <ng-container *ngIf="dashboard.length >= 1 && updateDashbpardBoolen && !canNavigateToAnotherPage ; else disabledTemplate">
+                                  <a ngbNavLink class="dashboard-tab-padding">
+                                    Filters
+                                  </a>
+                                </ng-container>
+
+                                <ng-template #disabledTemplate>
+                                  <span class="dashboard-tab-padding disabled" tabindex="-1">
+                                    Filters
+                                  </span>
+                                </ng-template>
+                              </div>
                                     <ng-template ngbNavContent>
                                         <div class="tab-pane" id="linktabs">
                                             <div class="card-body p-0">
@@ -514,7 +538,7 @@
                                                   <div class="card-content p-0">
                                                       <div class=" mt-2 mb-2">
                                                           <div class="dropdown" ngbDropdown [autoClose]="'outside'" #mainDropdown="ngbDropdown">
-                                                              <button *ngIf="!isPublicUrl" class="btn btn-primary dropdown-toggle" (click)="getQuerySetForFilter();openSuperScaled(dashboardFilters)" id="applyfilters" ngbDropdownToggle type="button" data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
+                                                              <button *ngIf="!isPublicUrl" [disabled]="dashboard.length < 1 || canNavigateToAnotherPage" class="btn btn-primary dropdown-toggle w-100" (click)="getQuerySetForFilter();openSuperScaled(dashboardFilters)" id="applyfilters" ngbDropdownToggle type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                               <i class="fa fa-plus"></i> Add/Edit Filters
                                                               </button>
                                                               <div >
@@ -523,17 +547,17 @@
                                                                 <p class="p-1 mb-0 category-text">{{filterList.filter_name}}</p>
                                           
                                                                 <div ngbDropdown class="dropdown" #nestedDropdown1="ngbDropdown" [autoClose]="'outside'">
-                                                                  <button type="button" *ngIf="!isPublicUrl" ngbDropdownToggle id="dropdownColumns1" (click)="getColDataFromFilterId(filterList.dashboard_filter_id,filterList,false)" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn border filterColumnbtn select-column-text" style="color: #aeb1b6;">{{ getColumnSelectionLabel(filterList) }} <i class="fa fa-angle-down" ></i></button>
+                                                                  <button type="button" *ngIf="!isPublicUrl" ngbDropdownToggle id="dropdownColumns1" (click)="getColDataFromFilterId(filterList.dashboard_filter_id,filterList,false)" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn border filterColumnbtn select-column-text">{{ getColumnSelectionLabel(filterList) }} <i class="fa fa-angle-down" ></i></button>
                                                                   <button type="button" *ngIf="isPublicUrl" ngbDropdownToggle id="dropdownColumns1" (click)="getColDataFromFilterIdPublic(filterList.dashboard_filter_id,filterList)" data-bs-toggle="dropdown" aria-expanded="false" class="dropdown-toggle btn border filterColumnbtn select-column-text">Select Column <i class="fa fa-angle-down" ></i></button>
 
-                                                                  <ul ngbDropdownMenu aria-labelledby="dropdownColumns1" class="dropdown-menu dropdwnChechkbox" style="width: 100%;padding: 6px;max-height: 240px;overflow-y: auto;">
+                                                                  <ul ngbDropdownMenu aria-labelledby="dropdownColumns1" class="dropdown-menu dropdwnChechkbox select-data-card-a">
                                                                     <div class="scrollable-content" style="max-height: calc(100% - 50px); overflow-y: auto;"> <!-- Adjust the height to account for buttons -->
                                                                     <div class="input-group">
                                                                       <input type="text" [(ngModel)]="filterList.searchText" class="form-control border-end-0" placeholder="Search" aria-describedby="button-addon2">
-                                                                      <button class="btn btn-primary border me-2" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;">
+                                                                      <button class="btn btn-primary border me-2 search-icon-border-radius" type="button" id="button-addon2" >
                                                                         <i class="fe fe-search"></i>
                                                                       </button>
-                                                                      <button (click)="clearSelectedData(nestedDropdown1,filterList.colData,filterList.dashboard_filter_id, filterList)" class="btn btn-primary " style="padding: 4px;">
+                                                                      <button (click)="clearSelectedData(nestedDropdown1,filterList.colData,filterList.dashboard_filter_id, filterList)" class="btn btn-primary p-1 ">
                                                                         <img src="./assets/images/icons/filter-clear.png" alt="logo" class="w-5 h-5">
                                                                       </button>
                                                                     </div>
@@ -550,13 +574,13 @@
                                                                       </div>
                                                                   <!-- } -->
                                                                 </div>
-                                                                  <div class="card mb-0 fixed-buttons p-2" style="display: flex; justify-content: space-between; flex-direction: row;">
+                                                                  <div class="card mb-0 fixed-buttons p-2 Exclude-check ">
                                                                     <div class="">
                                                                       <input type="checkbox" id="exclude" (click)="excludeFilterIdList(filterList,$event);" [(ngModel)]="filterList.isExclude" class="form-check-input">
                                                                       <label for="exclude" class="form-check-label">Exclude</label>
                                                                     </div>
                                                                     <button type="button" (click)="closeMainDropdown(nestedDropdown1,filterList.colData,filterList.dashboard_filter_id)"
-                                                                    class="btn ripple btn-primary me-2">Save</button>
+                                                                    class="btn ripple btn-primary ">Save</button>
                                                                 </div>
                                                                   </ul>
                                                               </div>
@@ -575,11 +599,11 @@
                                                                 </div> -->
                                                               </div>
                                                             <!-- } -->
-                                                              <div  style="margin-right: 5px; margin-left: 5px;"  *ngIf="DahboardListFilters .length > 0; else noData"> 
+                                                              <div class="clear-filter-btn"  *ngIf="DahboardListFilters .length > 0; else noData"> 
                                                                 <button class="btn ripple btn-danger"
                                                                   (click)="clearAllFilters()">Clear filters</button>
                                                               
-                                                                <button *ngIf="DahboardListFilters .length > 0; else noData" style="float: right;" class="btn ripple btn-primary"
+                                                                <button *ngIf="DahboardListFilters .length > 0; else noData"  class="btn ripple btn-primary float-right"
                                                                   (click)="isPublicUrl ? getFilteredDataPublic() : getFilteredData()">Apply filters</button>
                                                               </div>
                                                             <ng-template #noData>
@@ -605,16 +629,16 @@
                               <div class="modal-body">
                                 <div class="text-wrap">
                                   <div class="row">
-                                  <div class="col-xxl-5 col-xl-5 col-lg-5 col-md-6 "style="border-right: 1px solid #f3f6f9;">
-                                    <button *ngIf="editActions" class="btn btn-primary dropdown-toggle mb-2" (click)="editActions = false;clearActionForm();" type="button"  aria-expanded="false" style="width: 100%;">
+                                  <div class="col-xl-5 col-lg-5 col-md-5 bg-light p-2 rounded-2 border">
+                                    <button *ngIf="editActions" class="btn btn-primary dropdown-toggle mb-2 w-100" (click)="editActions = false;clearActionForm();" type="button"  aria-expanded="false">
                                       <i class="fa fa-plus"></i> Add Action
                                     </button>
-                                    <button *ngFor="let action of drillThroughActionList" type="button"  style="border: 1px solid #edebeb;width: 100%;cursor: pointer;" [ngStyle]="{'background-color' : action.drill_id == actionId ? 'var(--primary-color)' : 'white', 'color' : action.drill_id == actionId ? 'white' : 'black'}" (click)="getEditActionPreview(action.drill_id)" class="btn text-left mb-2">{{action.action_name}}
-                                      <a (click)="deleteDashboardAction([action.drill_id]);$event.stopPropagation()" style="color: red;"><i style="float: right;font-size: 16px;" class="ri-delete-bin-7-line"></i></a>
+                                    <button *ngFor="let action of drillThroughActionList" type="button"  [ngStyle]="{'background-color' : action.drill_id == actionId ? 'var(--primary-color) !important' : 'white !important', 'color' : action.drill_id == actionId ? 'white' : 'black'}" (click)="getEditActionPreview(action.drill_id)" class="btn text-left mb-2 bg-white border w-100 cursor-pointer d-flex justify-content-between align-items-center">{{action.action_name}}
+                                      <a (click)="deleteDashboardAction([action.drill_id]);$event.stopPropagation()"><i class="ri-delete-bin-7-line btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light"></i></a>
                                     </button>
 
                                     </div>
-                                  <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-6 " >
+                                  <div class="col-xl-7 col-lg-7 col-md-7 " >
                                     <div *ngIf="!editActions" class="card-content p-0">
                                         <div class=" mt-2 mb-2">
                                           <ul class="d filter-popover" aria-labelledby="applyActions" >
@@ -622,23 +646,23 @@
                                               <p>Add Actions</p>
                                             </div>
                                             <div class="form-group p-1 mb-0">
-                                              <label class="form-label">Action Name <span  class="text-red">*</span>
+                                              <label class="form-label">Action Name <span  class="text-red">*</span><i ngbTooltip="Provide a descriptive name for your custom action to easily recognize its purpose within the drill-through process." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
-                                              <input type="text" placeholder="Enter Action Name" [(ngModel)]="actionName" class="form-control checkbox-color">
+                                              <input type="text" placeholder="Enter Action Name" [(ngModel)]="actionName" class="form-control border">
                                             </div>
                                             <div class="form-group p-1 mb-0">
-                                              <label class="form-label">Database Name<span class="text-red">*</span>
+                                              <label class="form-label">Database Name<span class="text-red">*</span><i ngbTooltip="Choose the database you wish to query from the available options." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
                                               <select id="databaseSelect" [(ngModel)]="drillThroughDatabaseName"  (change)="onDatabaseChange()" class="form-select form-select select2 "  >
-                                              <option value="" disabled selected style="color: #999999 !important;">Select Database name</option>
+                                              <option value="" disabled selected >Select Database name</option>
                                                 <option *ngFor="let database of databaseNames" [value]="database">{{ database }}</option>
                                               </select>
                                             </div>
                                             <div class="form-group p-1 mb-0">
-                                              <label class="form-label">Query Set Name <span class="text-red">*</span>
+                                              <label class="form-label">Query Set Name <span class="text-red">*</span><i ngbTooltip="Choose the specific queryset that will serve as the basis for the drill-through operation, determining the data context." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
                                               <!-- <select [(ngModel)]="drillThroughQuerySetId" (change)="getSheetsForActions()"  class="form-select form-select select2 " >
-                                                <option value="0" disabled selected style="color: #999999 !important;">Select Queryset name</option>
+                                                <option value="0" disabled selected >Select Queryset name</option>
                                                 @for(querySet of querySetNames;track querySet.queryset_id){
                                                   <option [ngbTooltip]="querySet.queryset_name"
                                                   [attr.title]="querySet.database_name ? 'Database Name: ' + querySet.database_name : 'Database Name: Not Available'" value="{{querySet.queryset_id}}">{{querySet.queryset_name}}</option>
@@ -654,33 +678,33 @@
                                               </ng-select>
                                             </div>
                                     
-                                            <div class="form-group p-1">
-                                              <label class="form-label">Source Sheet <span class="text-red">*</span>
+                                            <div class="form-group p-1 mb-0">
+                                              <label class="form-label">Source Sheet <span class="text-red">*</span><i ngbTooltip="Select the source sheet that contains the initial data or metrics you want to analyze further through the drill-through action." class="icon icon-info ms-1 cursor-pointer"></i>
                                               </label>
                                               <select [(ngModel)]="sourceSheetId" (change)="getTargetSheetsList()"  class="form-select form-select select2 " >
-                                                <option value="0" disabled selected style="color: #999999 !important;">Select Source Sheet</option>
+                                                <option value="0" disabled selected>Select Source Sheet</option>
                                                 @for(sheet of sourceSheetList;track sheet.id){
                                                   <option [ngbTooltip]="sheet.name" [value]="sheet.id">{{sheet.name}}</option>
                                                 }
                                             </select>
                                             </div>
-                                              <label class="form-label">Target Sheets <span class="text-red">*</span></label>
-                                           
-                                            <div [class.disabled]="sourceSheetId === 0"  class="form body border p-2" style="max-height: 200px;  overflow: scroll;">
+                                            <div class="form-group p-1">
+                                              <label class="form-label">Target Sheets <span class="text-red">*</span> <i ngbTooltip="Specify the target sheet where the drill-through results will be displayed, allowing for detailed exploration of the selected data." class="icon icon-info ms-1 cursor-pointer"></i></label>
+                                              <div [class.disabled]="sourceSheetId === 0"  class="form body border p-2 rounded-2 Target-sheets-h">
 
-                                              <div *ngIf="(targetSheetList?.length ?? 0) > 0" class="form-check">
-                                                <input type="checkbox" id="selectAll" [(ngModel)]="isAllTargetSheetsSelected" (change)="toggleAllTargetSheets($event)"
-                                                  class="form-check-input">
-                                                <label for="selectAll" class="form-check-label">Select All</label>
+                                                <div *ngIf="(targetSheetList?.length ?? 0) > 0" class="form-check">
+                                                  <input type="checkbox" id="selectAll" [(ngModel)]="isAllTargetSheetsSelected" (change)="toggleAllTargetSheets($event)"
+                                                    class="form-check-input">
+                                                  <label for="selectAll" class="form-check-label">Select All</label>
+                                                </div>
+                                                @for(sheet of targetSheetList;track sheet;let i = $index){
+                                                <div class="form-check">
+                                                  <input type="checkbox" [id]="'defaultCheck' + i" [(ngModel)]="sheet.selected" (change)="updateSelectedSheets()" class="form-check-input"> 
+                                                  <label [for]="'defaultCheck' + i" class="form-check-label "> <p>{{sheet?.name}}</p> </label>
+                                                </div>
+                                                }
                                               </div>
-                                              @for(sheet of targetSheetList;track sheet;let i = $index){
-                                              <div class="form-check">
-                                                <input type="checkbox" [id]="'defaultCheck' + i" [(ngModel)]="sheet.selected" (change)="updateSelectedSheets()" class="form-check-input"> 
-                                                <label [for]="'defaultCheck' + i" class="form-check-label "> <p>{{sheet?.name}}</p> </label>
-                                              </div>
-                                              }
                                             </div>
-
                                             <div class="py-2 mt-3">
                                               <button type="button" [disabled]="disableActionSave()"  (click)="saveDrillThroughAction()" class="btn ripple btn-primary me-2">Save</button>
                                               <button type="button" class="btn ripple btn-secondary " (click)="clearActionForm();modal.dismiss('Cross click');editActions = false;"> Cancel </button>
@@ -699,13 +723,13 @@
                                           <div class="form-group p-1 mb-0">
                                             <label class="form-label">Action Name <span  class="text-red">*</span>
                                             </label>
-                                            <input type="text" placeholder="" [(ngModel)]="actionName" class="form-control checkbox-color">
+                                            <input type="text" placeholder="" [(ngModel)]="actionName" class="form-control border">
                                           </div>
                                           <div class="form-group p-1 mb-0">
                                             <label class="form-label">Database Name<span class="text-red">*</span>
                                             </label>
                                             <select disabled id="databaseSelect" [(ngModel)]="drillThroughDatabaseName" (change)="onDatabaseChange()" class="form-select form-select select2 drillThroughDatabseDisabled"  >
-                                              <option value="" disabled selected style="color: #999999 !important;">Select Database name</option>
+                                              <option value="" disabled selected >Select Database name</option>
                                               <option *ngFor="let database of databaseNames" [value]="database">{{ database }}</option>
                                             </select>
                                           </div>
@@ -727,14 +751,14 @@
                                               </ng-option>
                                             </ng-select>
                                           <!-- <p>{{querysetNameEdit}}</p> -->
-                                          <!-- <button class="btn " style="border: 1px solid #edebeb;width: 100%; text-align: justify;">{{querysetNameEdit}}</button> -->
+                                          <!-- <button class="btn ">{{querysetNameEdit}}</button> -->
                                           </div>
 
                                           <div class="form-group p-1">
                                             <label class="form-label">Source Sheet <span class="text-red">*</span>
                                             </label>
                                             <select [(ngModel)]="sourceSheetId" (change)="getTargetSheetsList()"  class="form-select form-select select2 " >
-                                              <option value="0" disabled selected style="color: #999999 !important;">Select Source Sheet</option>
+                                              <option value="0" disabled selected >Select Source Sheet</option>
                                               @for(sheet of sourceSheetList;track sheet.id){
                                                 <option [ngbTooltip]="sheet.name" [value]="sheet.id">{{sheet.name}}</option>
                                               }
@@ -742,7 +766,7 @@
                                           </div>
                                             <label class="form-label">Target Sheets <span class="text-red">*</span></label>
                                          
-                                          <div [class.disabled]="sourceSheetId === 0"  class="form body border p-2" style="max-height: 200px;  overflow: scroll;">
+                                          <div [class.disabled]="sourceSheetId === 0"  class="form body border p-2 Target-sheets-h">
 
                                             <div *ngIf="(targetSheetList?.length ?? 0) > 0" class="form-check">
                                               <input type="checkbox" id="selectAll" [(ngModel)]="isAllTargetSheetsSelected" (change)="toggleAllTargetSheets($event)"
@@ -772,16 +796,32 @@
                                 </div>
                             </div>
                             </ng-template>
-                            <li [ngbNavItem]="3" [ngClass]="{'disabled': dashboard.length<1 || !updateDashbpardBoolen}">
-                              <a ngbNavLink class="dashboard-tab-padding">Actions</a>
-                                 <ng-template ngbNavContent>
+                            <li [ngbNavItem]="3">
+                              <div 
+                              class="tooltip-wrapper" 
+                              [ngbTooltip]="(dashboard.length < 1 || !updateDashbpardBoolen || canNavigateToAnotherPage) ? 'Please save / update the dashboard' : null"
+                              [tooltipClass]="(dashboard.length < 1 || !updateDashbpardBoolen || canNavigateToAnotherPage) ? 'tooltip-disabled' : ''">
+                              
+                              <ng-container *ngIf="dashboard.length >= 1 && updateDashbpardBoolen && !canNavigateToAnotherPage; else disabledTemplateActions">
+                                  <a ngbNavLink class="dashboard-tab-padding">
+                                      Actions
+                                  </a>
+                              </ng-container>
+                              
+                              <ng-template #disabledTemplateActions>
+                                  <span class="dashboard-tab-padding disabled" tabindex="-1">
+                                      Actions
+                                  </span>
+                              </ng-template>
+                          </div>
+                                   <ng-template ngbNavContent>
                                      <div class="tab-pane" id="linktabs">
                                          <div class="card-body p-0">
                                            <div class="text-wrap">
                                                <div class="card-content p-0">
                                                    <div class=" mt-2 mb-2">
                                                        <div class="">
-                                                        <button *ngIf="!isPublicUrl" class="btn btn-primary" (click)="getQuerySetForFilter();clearActionForm();openSuperScaleForActions(dashboardActions);getDrillThroughActionList()" id="applyActions" type="button" aria-expanded="false" style="width: 100%;">
+                                                        <button *ngIf="!isPublicUrl" [disabled]="dashboard.length < 1 || canNavigateToAnotherPage" class="btn btn-primary w-100" (click)="getQuerySetForFilter();clearActionForm();openSuperScaleForActions(dashboardActions);getDrillThroughActionList()" id="applyActions" type="button" aria-expanded="false">
                                                           <i class="fa fa-plus"></i> Add/Edit Actions
                                                         </button>
                                                         <div >
@@ -822,17 +862,17 @@
     </div>
     <!-- <div class="dashboard-area"  [ngClass]="{ 'header-visibile': isPublicUrl, }"> -->
     <div class="col-xl-10 col-lg-10 col-md-10" id="dashboard-content">
-      <div class="" style="display: flex; align-items: center;">
-        <button type="button" (click)="issheetListPaneOpen = !issheetListPaneOpen; toggleSidebar()" class="btn btn-icon btn-primary-light me-2 rounded-5">
-          <i *ngIf="issheetListPaneOpen" class="fa fa-angle-left" style="font-size: 24px;"></i>
-          <i *ngIf="!issheetListPaneOpen" class="fa fa-angle-right" style="font-size: 24px;"></i>
-        </button>
-      
-         <div *ngIf="!isPublicUrl" class="card mb-1" style="position: sticky;top: 0;z-index:2">
+      <div type="button" (click)="issheetListPaneOpen = !issheetListPaneOpen; toggleSidebar()" class="card mb-0 hide-show-btn btn-primary">
+        <i *ngIf="issheetListPaneOpen" class="fa fa-angle-left fs-18"></i>
+        <i *ngIf="!issheetListPaneOpen" class="fa fa-angle-right fs-18"></i>
+      </div>
+      <div class="dashboard-edit-title-card">
+        
+         <div *ngIf="!isPublicUrl" class="card mb-1 public-url-position">
             <div class="card-body p-1">
                 <div class="dashboard-title-card">
                   <div class="flex-grow-1">                     
-                    <div class="title-container border" *ngIf="!editor">
+                    <div class="title-container" [ngClass]="{'border': dashboardId}" *ngIf="!editor">
                       <input *ngIf="!dashboardId && !editor" (click)="editor =true && !isPublicUrl" type="text"  placeholder="Title" [(ngModel)]="dashboardName" (input)="updatedashboardName(dashboardName)" aria-label="Sheet" class="form-control" > 
                       <div *ngIf="dashboardId && !editor" (click)="editor =true && !isPublicUrl" id="htmlContent" [innerHtml]="dashboardTagTitle" [ngStyle]="{'padding-top': dashboardTagName[0] === '<' ? '1.5%' : '0'}"></div>              
                        
@@ -852,11 +892,12 @@
 
                         <div class="min-w-fit-content ms-1">              
                         <span *ngIf="!isPublicUrl" class="title-editor ms-1" (click)="toggleEditor()">
-                          <button  class="btn btn-primary me-1" style="margin-top: 0px !important;"><i class="fa fa-pencil"></i></button>
+                          <button  class="btn btn-primary me-1"><i class="fa fa-pencil"></i></button>
                         </span>
                             <button [disabled]="dashboard.length === 0" class="btn btn-primary mt-0" *ngIf="!updateDashbpardBoolen && !this.isPublicUrl" (click)="saveDashboard();editor =false">Save </button>
-                            <button [disabled]="disableDashboardUpdate" class="btn btn-primary mt-0" *ngIf="updateDashbpardBoolen && !this.isPublicUrl" (click)="updateDashboard();editor =false">Update </button>
+                            <button [disabled]="disableDashboardUpdate" class="btn btn-primary mt-0" *ngIf="updateDashbpardBoolen && !this.isPublicUrl" (click)="updateDashboard(false);editor =false">Update </button>
                             <button [disabled]="dashboard.length === 0" ngbTooltip="clear dashbaord" *ngIf="!isPublicUrl && !isSampleDashboard" style="margin-left: 5px;" type="button" class="btn btn-primary mt-0" (click)="clearDashboard();"><img src="./assets/images/icons/erase.png" alt="logo" class="w-4 h-4"></button>
+                            <button [disabled]="dashboard.length === 0 || !updateDashbpardBoolen" ngbTooltip="Sync data" *ngIf="!isPublicUrl && !isSampleDashboard" style="margin-left: 5px;" type="button" class="btn btn-primary mt-0" (click)="refreshDashboard();"><i class="fa fa-refresh"></i></button>
                             <!-- <button *ngIf="!isPublicUrl" style="margin-left: 5px;" type="button" class="btn btn-primary mt-0" (click)="addTabs();">Add Tab</button> -->
                             <!-- <button class="btn btn-primary mt-0" (click)="startMethod()">hide </button> -->
                             <div *ngIf="isPublicUrl" class="dashboard-option">
@@ -879,15 +920,16 @@
                             <a href=""><i class="fa fa-share p-2"></i></a>
                             <a href=""><i class="fa fa-list p-2"></i></a>
                     </div> -->
-                </div>
+                
             </div>
         </div> 
+       </div>
       </div> 
         <!-- <input class="col-lg-3 col-md-3 form-control" type="text"  placeholder="Title" [(ngModel)]="gridItemSize"  (change)="changeGridItemSize()" aria-label="Sheet" > -->
 
     
        <!-- <div style="margin: auto 0;overflow: scroll;" [style.height.px]="heightGrid" [style.width.px]="widthGrid" > -->
-        <div style="margin: auto 0;height: 100%;" >
+        <div class="cdkdrag-parent-card">
          
         <div class="d-flex align-items-center justify-content-start  mt-3" [ngClass]="{ 'mt-3': !isPublicUrl }" >
             <!-- <a mat-raised-button color="accent" (click)="pushItem()" class="btn btn-blue-light mb-0 me-3" > Resize first item and push others</a> -->
@@ -944,7 +986,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="card-body p-1">            
+                      <div class="card-body p-1 overflow-auto">            
                         <div *ngIf="item['chartType'] === 'Table'">
                           <div *ngIf="item['chartType'] === 'Table'" class="table-responsive">
                             <table class="table border text-nowrap text-md-nowrap mb-0">
@@ -1080,8 +1122,8 @@
         [cdkDropListData]="dashboard" style="margin: 0px;"
        (cdkDropListDropped)="drop($event)" #gridster>
             <gridster-item [item]="item" *ngFor="let item of dashboard"  >
-              <div class="card mb-0 grid-item-border" style="height: 100%;"  [style.background-image]="(item['chartType'] === 'KPI' && item['chartId'] === 25) 
-              ? 'url(' + item['kpiData'].kpiImage + ')' 
+              <div class="card mb-0 grid-item-border card-panel" style="height: 100%;"  [style.background-image]="(item['chartType'] === 'KPI' && item['chartId'] === 25) 
+              ? 'url(' + item['kpiImage'] + ')' 
               : ''"
             [style.background-size]="(item['chartType'] === 'KPI' && item['chartId'] === 25) 
               ? 'cover' 
@@ -1110,19 +1152,24 @@
                     <div class="">
                     </div>
                     <div  class="input-group mt-1 p-1 sheet-table-search">
-                        <input type="text" placeholder="Search" aria-describedby="button-addon2"      (mousedown)="disableDragging($event)"
-                        (mouseup)="enableDragging($event)" [(ngModel)]="tableSearch" (keydown.enter)="isPublicUrl ? tableSearchDashboardPublic(item) : tableSearchDashboard(item)" class="form-control border-end-0 ">
-                        <button type="button" id="button-addon2" class="btn btn-primary border me-2" (click)="isPublicUrl ? tableSearchDashboardPublic(item) : tableSearchDashboard(item)" style="border-radius: 0px 4px 4px 0px;">
+                        <input #searchInput type="text" placeholder="Search" aria-describedby="button-addon2"      (mousedown)="disableDragging($event)"
+                        (mouseup)="enableDragging($event)" (keydown.enter)="isPublicUrl ? tableSearchDashboardPublic(item,searchInput.value) : tableSearchDashboard(item,searchInput.value)" class="form-control border-end-0 ">
+                        <button type="button" id="button-addon2" class="btn btn-primary border me-2 search-icon-border-radius" (click)="isPublicUrl ? tableSearchDashboardPublic(item,searchInput.value) : tableSearchDashboard(item,searchInput.value)">
                         <i class="fe fe-search"></i></button>
                     </div>
                    </div>
+                   @for (filter of sheetFilters; track filter.sheet_id) {
+                    @if((filter?.is_filter_applied) && item['sheetId'] == filter.sheet_id){
+                      <i class="fa fa-filter filter-icon-count" ngbTooltip="{{filter?.filter_count}} Filters Applied"></i>
+                    }
+                  }
                     <div *ngIf="!isPublicUrl" class="dashboard-option">
                         <div class=" p-1" ngbDropdown>
                             <a href="javascript:void(0);" data-bs-toggle="dropdown" role="button" ngbDropdownToggle
                                 aria-haspopup="true" aria-expanded="false" class=""><i
                                     class="fe fe-more-vertical fs-18 text-body-secondary"></i>
                             </a>
-                            <div class="dropdown-menu" ngbDropdownMenu>
+                            <div class="dropdown-menu DropdownObOverflow" ngbDropdownMenu>
                               <app-insights-button *ngIf="item['type'] !== 'image'" [classesList]="'dropdown-item'"
                                                               [buttonName]="'Goto Sheet'"
                                                               [previledgeIdsList]="[20,18]" [isBtn]="false"
@@ -1133,17 +1180,32 @@
                                                               [previledgeId]="37" [isBtn]="false"
                                                               (btnClickEvent)="removeItem($event, item, false)" 
                                                               [isIcon]="false"></app-insights-button>
-                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && !item['kpiData'].kpiImage" [classesList]="'dropdown-item'"
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && !item['kpiImage']" [classesList]="'dropdown-item'"
                                                               [buttonName]="'Upload Background Image'"
                                                               [previledgeId]="37" [isBtn]="false"
                                                               (btnClickEvent)="uploadKpiImage(item)" 
                                                               [isIcon]="false"></app-insights-button>
-                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && item['kpiData'].kpiImage" [classesList]="'dropdown-item'"
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && !item['kpiIconsArray']?.kpiIcon" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Add Icon'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="addIcon(iconModal,item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25  && item['kpiIconsArray']?.kpiIcon" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Edit Icon'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="editKpiIcon(iconModal,item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25  && item['kpiIconsArray']?.kpiIcon" [classesList]="'dropdown-item'"
+                                                              [buttonName]="'Remove Icon'"
+                                                              [previledgeId]="37" [isBtn]="false"
+                                                              (btnClickEvent)="removeKpiIcon(item)" 
+                                                              [isIcon]="false"></app-insights-button>
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && item['kpiImage']" [classesList]="'dropdown-item'"
                                                               [buttonName]="'Change Image'"
                                                               [previledgeId]="37" [isBtn]="false"
                                                               (btnClickEvent)="uploadKpiImage(item)" 
                                                               [isIcon]="false"></app-insights-button>
-                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && item['kpiData'].kpiImage" [classesList]="'dropdown-item'"
+                                                              <app-insights-button *ngIf="!isPublicUrl && item['chartId'] === 25 && item['kpiImage']" [classesList]="'dropdown-item'"
                                                               [buttonName]="'Remove Image'"
                                                               [previledgeId]="37" [isBtn]="false"
                                                               (btnClickEvent)="removeKpiImage(item)" 
@@ -1154,7 +1216,6 @@
                                                               (change)="imageFileSelectEvent($event)" 
                                                               accept="image/*" 
                                                               style="display: none;" />
-
                             </div>
                         </div>
                       </div>
@@ -1162,19 +1223,30 @@
                 @if(item['type'] === 'image'){
                   <img [src]="item['imageData']" />
                 }
-                @if(item['isEChart'] && !(item['chartId']=== 29 || item['chartId']=== 25 || item['chartId']=== 1) ){
-                  <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }" [ngStyle]="item['chartId'] === 11 ? {'height': '80vh', 'overflow-y': 'auto'} : {}">
-                    <div id="echartsBar{{item['sheetId']}}" echarts [options]="item['echartOptions']" (chartClick)="onEChartClick($event,item)" class="echart-charts" [ngStyle]="item['chartId'] === 11 ? {'height': '100%'} : {}"></div>
+                @if(item['isEChart'] && !(item['chartId']=== 29 || item['chartId']=== 25 || item['chartId']=== 1 || item['chartId']=== 9) ){
+                  <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }" [ngStyle]="item['chartId'] === 11 ? {'height': calendarTotalHeight, 'overflow-y': 'auto'} : {}">
+                    <div id="echartsBar{{item['sheetId']}}" echarts [options]="item['echartOptions']" (chartClick)="onEChartClick($event,item)" class="echart-charts" [ngStyle]="item['chartId'] === 11 ? {'height': calendarTotalHeight} : {}"></div>
                     </div>
                 
               } @else if(item['isEChart'] && item['chartId']=== 29){
                 <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'scroll-overflow': !isOverflowHidden }">
                   @if(chartType == 'map') {
-                    <app-insight-echart [isZoom]="item['customizeOptions']?.isZoom" [chartType]="chartType" [drillDownIndex]="item['drillDownIndex']"
+                    <!-- <app-insight-echart [isZoom]="item['customizeOptions']?.isZoom" [chartType]="chartType" [drillDownIndex]="item['drillDownIndex']"
                       [draggedDrillDownColumns]="item['drillDownHierarchy']" [drillDownObject]="item['drillDownObject']" (setDrilldowns)="mapchartDrillDown($event, item)"
                       [chartsColumnData]="chartsColumnData" [chartsRowData]="chartsRowData" [dualAxisRowData]="dualAxisRowData"
-                      [dualAxisColumnData]="dualAxisColumnData"></app-insight-echart>
-                  } @else if(chartType == 'bar') {
+                      [dualAxisColumnData]="dualAxisColumnData"></app-insight-echart> -->
+
+                      <app-insight-echart  [isZoom]="item['customizeOptions']?.isZoom" [isBold]="item['customizeOptions']?.isBold"  [chartType]="chartType" [chartsColumnData]="chartsColumnData" [chartsRowData]="chartsRowData" [dualAxisRowData]="dualAxisRowData" [dualAxisColumnData]="dualAxisColumnData"
+                        [dataLabelsFontPosition]="item['customizeOptions']?.dataLabelsFontPosition" [dimensionAlignment] = "item['customizeOptions']?.dimensionAlignment" [backgroundColor]="item['customizeOptions']?.backgroundColor" [xlabelAlignment]="item['customizeOptions']?.xlabelAlignment"
+                        [xGridColor]="item['customizeOptions']?.xGridColor" [xGridSwitch]="item['customizeOptions']?.xGridSwitch" [xLabelColor]="item['customizeOptions']?.xLabelColor" [xLabelSwitch]="item['customizeOptions']?.xLabelSwitch" [xLabelFontFamily]="item['customizeOptions']?.xLabelFontFamily"
+                        [xLabelFontSize]="item['customizeOptions']?.xLabelFontSize" [xlabelFontWeight]="item['customizeOptions']?.xlabelFontWeight" [yLabelColor]="item['customizeOptions']?.yLabelColor" [yGridSwitch]="item['customizeOptions']?.yGridSwitch" [yLabelSwitch]="item['customizeOptions']?.yLabelSwitch"
+                        [yLabelFontFamily]="item['customizeOptions']?.yLabelFontFamily" [yLabelFontSize]="item['customizeOptions']?.yLabelFontSize" [ylabelFontWeight]="item['customizeOptions']?.ylabelFontWeight" [yGridColor]="item['customizeOptions']?.yGridColor" [yGridSwitch]="item['customizeOptions']?.yGridSwitch"
+                        [color]="item['customizeOptions']?.color" [measureColor]="item['customizeOptions']?.measureColor" [dimensionColor]="item['customizeOptions']?.dimensionColor" [dataLabelsFontSize]="item['customizeOptions']?.dataLabelsFontSize" [dataLabelsFontFamily]="item['customizeOptions']?.dataLabelsFontFamily"
+                        [dataLabelsColor]="item['customizeOptions']?.dataLabelsColor" [displayUnits]="item['customizeOptions']?.displayUnits" [decimalPlaces]="item['customizeOptions']?.decimalPlaces" [prefix]="item['customizeOptions']?.prefix" [suffix]="item['customizeOptions']?.suffix" [sortType]="item['customizeOptions']?.sortType"
+                        [drillDownIndex]="item['drillDownIndex']" [draggedDrillDownColumns]="item['drillDownHierarchy']" [drillDownObject]="item['drillDownObject']"
+                        (setDrilldowns)="mapchartDrillDown($event, item)"></app-insight-echart>
+                  } 
+                  <!-- @else if(chartType == 'bar') {
                     <app-insight-echart [isZoom]="item['customizeOptions']?.isZoom" [isBold]="item['customizeOptions']?.isBold" [chartType]="chartType" [chartsRowData]="chartsRowData"
                     [chartsColumnData]="chartsColumnData" [backgroundColor]="item['customizeOptions']?.backgroundColor" [xlabelAlignment]="item['customizeOptions']?.xlabelAlignment"
                     [xGridColor]="item['customizeOptions']?.xGridColor" [xGridSwitch]="item['customizeOptions']?.xGridSwitch" [xLabelColor]="item['customizeOptions']?.xLabelColor" [xLabelSwitch]="item['customizeOptions']?.xLabelSwitch"
@@ -1187,9 +1259,9 @@
                     [decimalPlaces]="item['customizeOptions']?.decimalPlaces" [prefix]="item['customizeOptions']?.prefix" [suffix]="item['customizeOptions']?.suffix" [sortType]="item['customizeOptions']?.sortType"
                     [drillDownIndex]="item['drillDownIndex']" [draggedDrillDownColumns]="item['drillDownHierarchy']" [drillDownObject]="item['drillDownObject']"
                     (setDrilldowns)="mapchartDrillDown($event, item)"></app-insight-echart>
-                  }
+                  } -->
                 </div>
-              } @else if(!item['isEChart'] && !(item['chartId']=== 25 || item['chartId']=== 1)){
+              } @else if(!item['isEChart'] && !(item['chartId']=== 25 || item['chartId']=== 1 || item['chartId']=== 9)){
                 <div class="card-body p-1" [ngClass]="{ 'hidden-overflow': isOverflowHidden, 'overflow-auto': !isOverflowHidden }">
     
                   <div *ngIf="item['chartType'] === 'Tags'" id="test567" style="height: 100%;" >
@@ -1498,16 +1570,15 @@
                   </div>
                 </div>
               }
-              <div *ngIf="['Table', 'KPI'].includes(item['chartType'])" class="card-body p-1">
+              <div *ngIf="['Table', 'KPI', 'PIVOT'].includes(item['chartType'])" class="card-body p-1 overflow-auto">
               @if(item['chartType'] === 'KPI' && item['chartId']=== 25){
                 <div class="big-number-container" >
                     @for(row of item['kpiData'].rows;track row){
                       <h1 *ngIf="row?.result_data" class="big-number" [style.font-size]="item['kpiData']?.fontSize+'rem'" [style.color]="item['kpiData']?.color">{{ item['kpiData']?.kpiNumber }}</h1>
                       }
-                      <i 
-                      class="fa fa-line-chart" 
-                      style="position: absolute; bottom: 0; right: 0; font-size: 1.5rem; color: #888;">
-                    </i>
+                      <i [class]="item['kpiIconsArray']?.kpiIcon" [style.font-size]="item['kpiIconsArray']?.kpiIconSize + 'px'"
+                      [style.color]="item['kpiIconsArray']?.kpiIconColor"
+                      [ngStyle]="getIconPositionStyles(item['kpiIconsArray']?.kpiIconPosition)" style="position: absolute;"></i>
                 </div>
               }
               <div *ngIf="item['chartType'] === 'Table'">
@@ -1543,15 +1614,15 @@
                       } -->
                       <td *ngFor="let column of item.tableData?.headers" [ngStyle]="{ 'font-family': item['customizeOptions']?.tableDataFontFamily, 'font-size': item['customizeOptions']?.tableDataFontSize,'font-style': item['customizeOptions']?.tableDataFontStyle,
                       'text-decoration': item['customizeOptions']?.tableDataFontDecoration, 'text-align': item['customizeOptions']?.tableDataFontAlignment, 'color': item['customizeOptions']?.tableDataFontColor, 'font-weight': item['customizeOptions']?.tableDataFontWeight }">
-                        {{ row[column] }}
+                        {{ row[column] | formatMeasure : item?.numberFormat?.decimalPlaces : item?.numberFormat?.prefix : item?.numberFormat?.suffix : item?.numberFormat?.displayUnits }}
                       </td>
                     </tr>
                   
                       </tbody>
                   </table>
-                  <pagination-controls previousLabel="Prev" nextLabel="Next" [id]="item.sheetId + 'page'" (pageChange)="isPublicUrl ? pageChangeTableDisplayPublic(item,($event)) : pageChangeTableDisplay(item,($event))"></pagination-controls>
-                  <div  style="float: right;font-size: 15px; margin-top: -41px;">
-                    <select  [(ngModel)]="tableItemsPerPage" (ngModelChange)="isPublicUrl ? pageChangeTableDisplayPublic(item,item?.tableData?.tablePage) : pageChangeTableDisplay(item,item?.tableData?.tablePage)" (mousedown)="stopDragging($event)"class="form-control cursor">
+                  <pagination-controls previousLabel="Prev" nextLabel="Next" [id]="item.sheetId + 'page'" (pageChange)="isPublicUrl ? pageChangeTableDisplayPublic(item,($event)) : pageChangeTableDisplay(item,($event),false,0)"></pagination-controls>
+                  <div class="pagination-count">
+                    <select *ngIf="item?.tableData" [(ngModel)]="item.tableData!.tableItemsPerPage" (ngModelChange)="tableItemsPerPage = item.tableData!.tableItemsPerPage; item.tableData!.tablePage = 1; isPublicUrl ? pageChangeTableDisplayPublic(item,item?.tableData?.tablePage) : pageChangeTableDisplay(item,item?.tableData?.tablePage,false,0)" (mousedown)="stopDragging($event)"class="form-control cursor form-control-pad">
                           <option  value="10"> 10</option>
                           <option  value="50"> 50</option>
                           <option  value="100"> 100</option>
@@ -1563,7 +1634,15 @@
               </div>
               <!-- <app-charts-store [chartData]="item.chartOptions"></app-charts-store> -->
               </div>
+              @if(item['chartType'] === 'PIVOT' && item['chartId'] === 9){
+                <div id="pivotTableContainer" #pivotTableContainer></div>
+
+              }
               </div>
+              <!-- <div *ngIf="item['chartType'] === PIVOT">
+                  <div id="pivotTableContainer" #pivotTableContainer></div>
+              </div> -->
+
 
                 <!-- <div class="card-footer p-1"> -->
                     <!-- <button mat-mini-fab (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">
@@ -1583,6 +1662,119 @@
 </div>
 </div>
   }
+
+
+
+
+  <ng-template #iconModal let-modal>
+    <div class="modal-header">
+      <h6 class="modal-title">Select Icon</h6>
+      <button type="button"class="btn-close"aria-label="Close"(click)="modal.dismiss('Cross click');deselectIconChanges()">
+      </button>
+    </div>
+    <div class="card mb-0">
+      <div class="input-group mb-2">
+        <input type="text" placeholder="Search Icon..."   [(ngModel)]="searchText" (ngModelChange)="updateFilteredIcons()" class="form-control border ng-pristine ng-valid ng-touched">
+        <button type="button" aria-label="button" (click)="updateFilteredIcons()" class="btn input-group-text btn-primary tx-fixed-white border-start-0">
+            <i aria-hidden="true" class="fe fe-search"></i>
+        </button>
+      </div>
+      <div class="view-more-less">
+        <div class="text-end " *ngIf="!showAll && searchText === ''">
+          <a class="border-bottom cursor-pointer" (click)="toggleShowAll()">View More <i class="fa fa-angle-double-down"></i></a>
+        </div>
+        <!-- Show "View Less" button if showing all icons -->
+        <div class="text-end " *ngIf="showAll && searchText === ''">
+          <a class=" border-bottom cursor-pointer" (click)="toggleShowAll()">View Less  <i class="fa fa-angle-double-up"></i></a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal-body icons-view-less-h">
+      <div class="text-wrap">
+        <div class="row">
+          <div class="col-3" *ngFor="let icon of filteredIcons" (click)="selectIcon(icon)" 
+          ngbTooltip="{{ icon.label }}" placement="top" container="body">
+            <div class="icon-container text-center p-2 mb-1 rounded-3" [ngClass]="{'selected-icon': selectedIcon === (icon.styles[0] + ' fa-' + icon.name)}" style="cursor: pointer; border: 1px solid #ddd; border-radius: 5px;">
+              <i [class]="icon.styles[0] + ' fa-' + icon.name" style="font-size: 18px;"></i>
+              <!-- <p class="mt-2">{{ icon.label }}</p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-0 border px-4 cursor-pointer bg-light Customize-btn-w" (click)="toggleCustomize()">
+        <p class="mb-0 border-bottom">Customize <i class="fa" [class.fa-angle-double-down]="!isCustomizeVisible" [class.fa-angle-double-up]="isCustomizeVisible"></i>
+        </p>
+      </div>
+    <div *ngIf="!isCustomizeVisible" class="position-card p-4 border bg-light">
+      
+      <div  class="row">
+        <div class="col-5">
+          <p class="mb-0">Position </p>
+          <!-- <div class="form-group mb-1">
+            <select class="form-select form-select select2" [(ngModel)]="selectedIconPosition" (change)="changePosition($event)">
+              <option value="top-left">Top Left</option>
+              <option value="top-middle">Top Middle</option>
+              <option value="top-right">Top Right</option>
+              <option value="left-middle">Left Middle</option>
+              <option value="center">Center</option>
+              <option value="right-middle">Right Middle</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-middle">Bottom Middle</option>
+              <option value="bottom-right">Bottom Right</option>
+            </select>
+         </div> -->
+         <div class="card mb-0 b-0 p-0 shadow-none">
+          <div class="dropdown" ngbDropdown>
+            <a href="javascript:void(0);" ngbDropdownToggle data-bs-toggle="dropdown" role="button" 
+               aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"> 
+              <button class="btn btn-outline-default w-100">
+                {{ selectedIconPosition ? selectedIconPosition.replace('-', ' ') : 'Select' }}
+              </button>
+            </a>
+            <div class="dropdown-menu size-dropdown dollar-card-w" ngbDropdownMenu>
+              <div class="row">
+                <div class="col-4 mb-1 text-center p-1" *ngFor="let pos of positions">
+                  <button type="button" 
+                          class="btn btn-icon btn-outline-primary" 
+                          [ngClass]="{'selected-icon': selectedIconPosition === pos.value}" 
+                          (click)="selectPosition(pos.value)">
+                    <i class="fa fa-dollar" [ngClass]="pos.iconClass"></i>
+                  </button>
+                </div>
+              </div>               
+            </div>
+          </div>
+        </div>
+        
+        
+        </div>
+        <div class="col-4">
+          <p class="mb-0">Size </p>
+          <div class="form-group mb-1">
+            <select class="form-select" [(ngModel)]="selectedIconFontSize" (change)="changeSize($event)">
+              <option *ngFor="let size of [14, 16, 18, 22, 24, 28, 30, 32, 36]" [value]="size">{{ size }}</option>
+            </select>
+         </div>
+        </div>
+        <div class="col-3">
+          <p class="mb-0">Color picker </p>
+          <div class="form-group mb-1">
+            <input type="color"  [(ngModel)]="selectedIconColor"
+            (change)="changeColor($event)" id="favcolor" name="favcolor" class="mt-1">
+           </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal-footer p-2">
+      <button type="button" (click)="modal.dismiss('Cross click');deselectIconChanges()" class="btn ripple btn-secondary"> Cancel </button>
+      <button (click)="applyIconInKpi()" [disabled]="!selectedIcon" class="btn btn-primary">Apply</button>
+    </div>
+    
+  </ng-template>
 
 
 

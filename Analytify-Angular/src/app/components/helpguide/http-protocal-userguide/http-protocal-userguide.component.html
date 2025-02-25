@@ -1,7 +1,7 @@
 <p>http-protocal-userguide works!</p>
 <div class="main-container card mt-5">
     <div class="container">
-        <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3" style="padding: 0px; margin-top: 15px;">
+        <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3 p-0 mt-4">
             <div class="card-body">
                 <div class="heading">
                     <h4 class="text-center">Converting HTTP to HTTPS for Apache Web Server</h4>
@@ -106,7 +106,7 @@
                         <h6>Output:</h6>
                         <h6>Status: active</h6>
                     </div>
-                    <div class="table-responsive ms-3" style=" width: fit-content;">
+                    <div class="table-responsive ms-3 protocal-table-width">
                         <table class="table border text-nowrap text-md-nowrap table-bordered mb-0">
                             <thead>
                                 <tr>
@@ -164,13 +164,13 @@
                     <h5>Step 1: Update Application Settings</h5>
                     <p class="mb-0">1. Update your domain name or public IP in the backend settings to allow HTTPS connections.</p>
                     <p> - In Backend application, modify `ALLOWED_HOSTS` in `settings.py`:</p>
-                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                    <div class="card card-left bg-light ms-5 para-box">
                         <div class="card-body p-2">
                             <p>ALLOWED_HOSTS = ['yourdomain.com']</p>
                         </div>
                     </div>
                     <p>  - Add the following for secure cookies:</p>
-                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                    <div class="card card-left bg-light ms-5 para-box">
                         <div class="card-body p-2">
                             <p>SECURE_SSL_REDIRECT = True</p>
                             <p>CSRF_COOKIE_SECURE = True</p>
@@ -178,7 +178,7 @@
                         </div>
                     </div>
                     <p>2. Update the environments.ts file in the frontend project</p>
-                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                    <div class="card card-left bg-light ms-5 para-box">
                         <div class="card-body p-2">
                             <p>apiUrl:'https://backend_domain _name/v1',</p>
                         </div>
@@ -227,7 +227,7 @@
                     <p>2. Edit Virtual Host Configuration:</p>
                     <p>  - Open the Apache configuration file for your Application (e.g., `/etc/apache2/sites-available/example.com.conf`).</p>
                     <p> - Update or create a VirtualHost for port 443:</p>
-                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                    <div class="card card-left bg-light ms-5 para-box">
                         <div class="card-body p-2">
                             <p>< VirtualHost *:443></p>
                             <p>ServerName example.com</p>
@@ -241,7 +241,7 @@
                     </div>
                     <p>3.Redirect HTTP to HTTPS:</p>
                     <p>- Add a VirtualHost for port 80 to redirect traffic:</p>
-                    <div class="card card-left bg-light ms-5" style="width: fit-content; border-right: 2px solid !important;">
+                    <div class="card card-left bg-light ms-5 para-box">
                         <div class="card-body p-2">
                             <p>< VirtualHost *:80></p>
                             <p>ServerName example.com</p>

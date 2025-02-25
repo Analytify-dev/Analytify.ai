@@ -15,6 +15,7 @@ from collections import defaultdict
 import pandas as pd
 from rest_framework import status
 import pdfplumber
+from django.db.models import Q
 import plotly.graph_objects as go
 from sqlalchemy.orm import sessionmaker
 from .serializers import *
@@ -45,7 +46,6 @@ import os ,io
 from django.core.files.uploadedfile import InMemoryUploadedFile
 import threading
 # from .authentication import signup_thread
-from dashboard import models
 
 created_at=datetime.datetime.now(utc)
 updated_at=datetime.datetime.now(utc)
@@ -213,6 +213,8 @@ def connection_error_messages(dply_name,hostname,username,db_name,port,u_id,data
                 return Response({'message':"Port Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
             elif ServerDetails.objects.filter(user_id=u_id,display_name=dply_name).exclude(id=database_id).exists():
                 return Response({'message':"Display Name Already Exists"},status=status.HTTP_406_NOT_ACCEPTABLE)
+            elif db_name=='' or db_name==None or db_name ==' ' or db_name=="":
+                return Response({'message':"Database name Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
             else:
                 return 200
         else:
@@ -228,8 +230,23 @@ def connection_error_messages(dply_name,hostname,username,db_name,port,u_id,data
                 return Response({'message':"Display Name Already Exists"},status=status.HTTP_406_NOT_ACCEPTABLE)
             elif password==None or password=='' or password=="" or password==' ': 
                 return Response({'message':'empty password field is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+            elif db_name=='' or db_name==None or db_name ==' ' or db_name=="":
+                return Response({'message':"Database name Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
             else:
                 return 200
+    elif server_tp.server_type.upper() == 'MONGODB':
+        if dply_name=='' or dply_name==None or dply_name ==' ' or dply_name=="":
+            return Response({'message':"Display name Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif hostname=='' or hostname==None or hostname ==' ' or hostname == "":
+            return Response({'message':"Host Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif port=='' or port==None or port ==' 'or port=="":
+            return Response({'message':"Port Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif ServerDetails.objects.filter(user_id=u_id,display_name=dply_name).exclude(id=database_id).exists():
+            return Response({'message':"Display Name Already Exists"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        elif db_name=='' or db_name==None or db_name ==' ' or db_name=="":
+            return Response({'message':"Database name Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            return 200
     else:
         if dply_name=='' or dply_name==None or dply_name ==' ' or dply_name=="":
             return Response({'message':"Display name Can't be Empty"},status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -359,7 +376,16 @@ class DBConnectionAPI(CreateAPIView):
                         click = Clickhouse()
                         click.cursor.execute(text(f'Create  Database if Not EXISTS \"{dply_name}\"'))
                         # data = click.migrate_database_to_clickhouse(server_conn['cursor'],db_type.lower(),dply_name)
-                        data = click.migrate_database_to_clickhouse(server_conn['cursor'],db_type.lower(),dply_name,username, password, db_name, hostname,port,service_name,ser_data.server_type.upper(),server_path)
+                        if db_type.upper()=='MONGODB':
+                            collections = server_conn['engine'].list_collection_names()
+                            tables=[]
+                            for collection_name in collections:
+                                tables.append(collection_name)
+                            click = clickhouse.Clickhouse()
+                            click.client.query(f'Create Database if Not Exists \"{dply_name}\"')
+                            data = click.json_to_table(tables,tok1,server_conn['engine'],dply_name,'mongodb')
+                        else:
+                            data = click.migrate_database_to_clickhouse(server_conn['cursor'],db_type.lower(),dply_name,username, password, db_name, hostname,port,service_name,ser_data.server_type.upper(),server_path)
                         if data['status'] == 200:
                             engine=click.engine
                             cursor=click.cursor
@@ -370,16 +396,6 @@ class DBConnectionAPI(CreateAPIView):
                             return Response({'message':data['message']},status=status.HTTP_400_BAD_REQUEST)
                     else:
                         return Response({'message':server_conn['message']},status=server_conn['status'])
- 
-                    # if server_conn['status']==200:
-                    #     engine=server_conn['engine']
-                    #     cursor=server_conn['cursor']
-                        
-                    #     postgres=database_connection(parameter,engine,dply_name,db_type,hostname,username,encoded_passw,db_name,port,tok1['user_id'],service_name,server_path,cursor)
-                    #     return postgres
-                    # else:
-                    #     # return Response(server_conn['message'],status=server_conn['status'])
-                    #     return Response({'message':server_conn['message']},status=server_conn['status'])
                 else:
                     return Response({'message':"Invalid Server/file Type"},status=status.HTTP_404_NOT_FOUND)
             else:
@@ -429,7 +445,16 @@ class DBConnectionAPI(CreateAPIView):
                         pass
                     click.cursor.execute(text(f'Create  Database if Not EXISTS \"{dply_name}\"'))
                     # data = click.migrate_database_to_clickhouse(server_conn['cursor'],db_type.lower(),dply_name)
-                    data = click.migrate_database_to_clickhouse(server_conn['cursor'],db_type.lower(),dply_name,username, password, db_name, hostname,port,service_name,st.server_type.upper(),server_path)
+                    if db_type.upper()=='MONGODB':
+                        collections = server_conn['engine'].list_collection_names()
+                        tables=[]
+                        for collection_name in collections:
+                            tables.append(collection_name)
+                        click = clickhouse.Clickhouse()
+                        click.client.query(f'Create Database if Not Exists \"{dply_name}\"')
+                        data = click.json_to_table(tables,tok1,server_conn['engine'],dply_name,'mongodb')
+                    else:
+                        data = click.migrate_database_to_clickhouse(server_conn['cursor'],db_type.lower(),dply_name,username, password, db_name, hostname,port,service_name,st.server_type.upper(),server_path)
                     if data['status'] == 200:
                         engine=click.engine
                         cursor=click.cursor
@@ -437,14 +462,7 @@ class DBConnectionAPI(CreateAPIView):
                         return postgres
                     else:
                         return Response({'message':data['message']},status=status.HTTP_400_BAD_REQUEST)
-                    # engine=server_conn['engine']
-                    # cursor=server_conn['cursor']
-                    # db_conn_up=database_connection_update(dply_name,hostname,username,encoded_passw,db_name,port,tok1['user_id'],service_name,qb_id_1,st.id,sd.id,server_path)
-                    # cursor.close()
-                    # # engine.dispose()
-                    # return db_conn_up
                 else:
-                    # return Response(server_conn['message'],status=server_conn['status'])
                     return Response({'message':server_conn['message']},status=server_conn['status'])
             else:
                 return Response({'message':"Unsupported File Format"},status=status.HTTP_406_NOT_ACCEPTABLE)
@@ -825,20 +843,29 @@ class ListofActiveServerConnections(CreateAPIView):
                 page_no = serializer.validated_data['page_no']
                 page_count = serializer.validated_data['page_count']
                 
-                if ServerDetails.objects.filter(user_id=tok1['user_id'],is_connected=True).exists() or FileDetails.objects.filter(user_id=tok1['user_id']).exists() or qb_models.TokenStoring.objects.filter(user=tok1['user_id']).exists() or qb_models.connectwise.objects.filter(user_id=tok1['user_id']).exists() or qb_models.HaloPs.objects.filter(user_id=tok1['user_id']).exists():
-                
+                user_id = tok1['user_id']
+                if (
+                    ServerDetails.objects.filter(Q(user_id=user_id, is_connected=True)).exists() or
+                    FileDetails.objects.filter(user_id=user_id).exists() or
+                    qb_models.TokenStoring.objects.filter(user=user_id).exists() or
+                    qb_models.connectwise.objects.filter(user_id=user_id).exists() or
+                    qb_models.HaloPs.objects.filter(user_id=user_id).exists() or
+                    qb_models.Shopify.objects.filter(user_id=user_id).exists()
+                ):
                     if search =='':
                         details = ServerDetails.objects.filter(user_id=tok1['user_id'],is_connected=True).values().order_by('-updated_at')
                         filedetai = FileDetails.objects.filter(user_id=tok1['user_id'],quickbooks_user_id=None).values().order_by('-updated_at')
-                        quickdetai = qb_models.TokenStoring.objects.filter(user=tok1['user_id']).values().order_by('-updated_at')
+                        quickdetai = qb_models.TokenStoring.objects.filter(user=tok1['user_id']).exclude(display_name__isnull=True).values().order_by('-updated_at')
                         connectdata = qb_models.connectwise.objects.filter(user_id=tok1['user_id']).values().order_by('-updated_at')
                         halopsdata = qb_models.HaloPs.objects.filter(user_id=tok1['user_id']).values().order_by('-updated_at')
+                        shopifydata = qb_models.Shopify.objects.filter(user_id=tok1['user_id']).values().order_by('-updated_at')
                     else:
                         details = ServerDetails.objects.filter(user_id=tok1['user_id'],is_connected=True,display_name__icontains=search).values().order_by('-updated_at')
                         filedetai = FileDetails.objects.filter(user_id=tok1['user_id'],display_name__icontains=search,quickbooks_user_id=None).values().order_by('-updated_at')
-                        quickdetai = qb_models.TokenStoring.objects.filter(user=tok1['user_id'],display_name__icontains=search).values().order_by('-updated_at')
+                        quickdetai = qb_models.TokenStoring.objects.filter(user=tok1['user_id'],display_name__icontains=search).exclude(display_name__isnull=True).values().order_by('-updated_at')
                         connectdata = qb_models.connectwise.objects.filter(user_id=tok1['user_id'],display_name__icontains=search).values().order_by('-updated_at')
                         halopsdata = qb_models.HaloPs.objects.filter(user_id=tok1['user_id'],display_name__icontains=search).values().order_by('-updated_at')
+                        shopifydata = qb_models.Shopify.objects.filter(user_id=tok1['user_id'],display_name__icontains=search).values().order_by('-updated_at')
                     l =[]
                     for i in details:
                         try:
@@ -849,8 +876,6 @@ class ListofActiveServerConnections(CreateAPIView):
                         created_by = "Example" if i['is_sample'] else tok1['username']  # Update created_by based on is_sample
                         st = ServerType.objects.get(id=i['server_type'])
                         data = {
-                            # "file_id":None,
-                            # "file_type":None,
                             "hierarchy_id":pr_id,
                             "server_type":st.server_type,
                             "is_sample":i['is_sample'],
@@ -870,24 +895,16 @@ class ListofActiveServerConnections(CreateAPIView):
                     for q in quickdetai:
                         try:
                             pr_ids = parent_ids.objects.get(
-                                Q(table_id=q['id']) & (Q(parameter='quickbooks') | Q(parameter='salesforce'))
+                                Q(table_id=q['id']) & (Q(parameter='quickbooks') | Q(parameter='salesforce') | Q(parameter='google_sheets'))
                             )
                             pr_id=pr_ids.id
                         except:
                             pr_id=None
                         data1 = {
-                            # "file_id":None,
-                            # "file_type":None,
                             "hierarchy_id":pr_id,
                             "server_type":str(q['parameter']).upper(),
                             "database_type":str(q['parameter']).lower(),
-                            # "hostname":None,
-                            # "database":None,
-                            # "port" :None,
-                            # "username":None,
-                            # "service_name":None,
                             "display_name":q['display_name'],
-                            # "is_connected":None,
                             "created_by":tok1['username'],
                             "created_at" : q['created_at'].date(),
                             "updated_at" : q['updated_at'].date()
@@ -900,22 +917,15 @@ class ListofActiveServerConnections(CreateAPIView):
                         except:
                             pr_id=None
                         data1 = {
-                            # "file_type":None,
                             "hierarchy_id":pr_id,
                             "server_type":pr_ids.parameter.upper(),
                             "database_type":pr_ids.parameter.lower(),
-                            # "hostname":None,
-                            # "database":None,
-                            # "port" :None,
-                            # "username":None,
-                            # "service_name":None,
                             "display_name":cn['display_name'],
                             "company_id":cn['company_id'],
                             "site_url":cn['site_url'],
                             "public_key":cn['public_key'],
-                            "private_key":cn['private_key'],
+                            # "private_key":cn['private_key'],
                             "client_id":cn['client_id'],
-                            # "is_connected":None,
                             "created_by":tok1['username'],
                             "created_at" : cn['created_at'].date(),
                             "updated_at" : cn['updated_at'].date()
@@ -928,23 +938,34 @@ class ListofActiveServerConnections(CreateAPIView):
                         except:
                             pr_id=None
                         data1 = {
-                            # "file_type":None,
                             "hierarchy_id":pr_id,
                             "server_type":pr_ids.parameter.upper(),
                             "database_type":pr_ids.parameter.lower(),
-                            # "hostname":None,
-                            # "database":None,
-                            # "port" :None,
-                            # "username":None,
-                            # "service_name":None,
                             "display_name":hl['display_name'],
                             "site_url":hl['site_url'],
                             "client_id":hl['client_id'],
-                            "client_secret":hl['client_secret'],
-                            # "is_connected":None,
+                            # "client_secret":hl['client_secret'],
                             "created_by":tok1['username'],
                             "created_at" : hl['created_at'].date(),
                             "updated_at" : hl['updated_at'].date()
+                        }
+                        l.append(data1)
+                    for sl in shopifydata:
+                        try:
+                            pr_ids = parent_ids.objects.get(table_id=sl['id'],parameter='shopify')
+                            pr_id=pr_ids.id
+                        except:
+                            pr_id=None
+                        data1 = {
+                            "hierarchy_id":pr_id,
+                            "server_type":pr_ids.parameter.upper(),
+                            "database_type":pr_ids.parameter.lower(),
+                            "display_name":sl['display_name'],
+                            # "api_token":sl['api_token'],
+                            "shop_name":sl['shop_name'],
+                            "created_by":tok1['username'],
+                            "created_at" : sl['created_at'].date(),
+                            "updated_at" : sl['updated_at'].date()
                         }
                         l.append(data1)
                     for h in filedetai:
@@ -955,25 +976,19 @@ class ListofActiveServerConnections(CreateAPIView):
                             pr_id=None
                         st = FileType.objects.get(id=h['file_type'])
                         data1 = {
-                            # "file_id":h['id'],
                             "file_type":st.file_type,
                             "hierarchy_id":pr_id,
                             "server_type":st.file_type,
                             "database_type":st.file_type.lower(),
-                            # "hostname":None,
-                            # "database":None,
-                            # "port" :None,
-                            # "username":None,
-                            # "service_name":None,
                             "display_name":h['display_name'],
-                            # "is_connected":None,
                             "created_by":tok1['username'],
                             "created_at" : h['uploaded_at'].date(),
                             "updated_at" : h['updated_at'].date()
                         }
                         l.append(data1)
+                    sorted_list = sorted(l, key=lambda x: x['updated_at'], reverse=True)
                     try:
-                        paginator = Paginator(l,page_count)
+                        paginator = Paginator(sorted_list,page_count)
                         page = request.GET.get("page",page_no)
                         object_list = paginator.page(page)
                         re_data = list(object_list)
@@ -1004,62 +1019,56 @@ def default_query_name(queryset_id,query_name):
     return query_name
     
 
-# (pr_id,row_limit,server_id,custom_query,user_id,datasorce_queryset_id,server_type,query_name,para,queryset_id=queryset_id)
-def custom_query_data(paramet,parent_id,row_limit,server_id,custom_query,query_to_execute,u_id,datasorce_queryset_id,server_type,query_name,parameter,queryset_id):
-    if paramet=="server":
-        filedata=ServerDetails.objects.get(id=server_id)
-    elif paramet=='quickbooks':
-        filedata=qb_models.TokenStoring.objects.get(qbuserid=server_id)
-    elif paramet=='salesforce':
-        filedata=qb_models.TokenStoring.objects.get(salesuserid=server_id)
-    elif paramet=='files':
-        filedata=FileDetails.objects.get(id=server_id)
-    elif paramet=='halops':
-        filedata=qb_models.HaloPs.objects.get(id=server_id)
-    elif paramet=='connectwise':
-        filedata=qb_models.connectwise.objects.get(id=server_id)
+def query_execute(query,connection,server_type):
+    if server_type.lower() in columns_extract.ser_list:
+        server_type=None
     else:
-        print("No")
-        
+        server_type=server_type.lower()
+    query=columns_extract.query_parsing(str(query),server_type,'clickhouse')
     try:
-        clickhouse_class = clickhouse.Clickhouse(filedata.display_name)
-        engine=clickhouse_class.engine
-        connection=clickhouse_class.cursor
+        result = connection.execute(query)
     except:
-        return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
-    
-    # files_data=columns_extract.file_details(file_type,filedata)
-    # if files_data['status']==200:
-    #     engine=files_data['engine']
-    #     connection=files_data['cursor']
-    #     tables=files_data['tables_names']
-    # else:
-    #     return Response({'message':files_data['message']},status=files_data['status'])
+        query=str(query).replace('"',"'")
+        try:
+            result = connection.execute(text(query))
+        except:
+            query=str(query).replace("'",'').replace("'",'')
+            result = connection.execute(text(query))
+    try:
+        return result
+    except Exception as e:
+        return str(e)
 
+    
+def custom_query_data(display_name,parent_id,row_limit,custom_query,query_to_execute,u_id,datasorce_queryset_id,server_type,query_name,parameter,queryset_id):
+    clickhouse_cur=columns_extract.clickhouse_cursor(server_type.lower(),display_name)
+    if clickhouse_cur['status']==200:
+        engine=clickhouse_cur['engine']
+        connection=clickhouse_cur['connection']
+    else:
+        return Response(clickhouse_cur,status=clickhouse_cur['status'])
+    
     start_time=datetime.datetime.now(utc)
     try: 
-        # forbidden_operations = re.compile(r'\b(UPDATE|DELETE|TRUNCATE|INSERT|CREATE)\b', re.IGNORECASE)
-        # if forbidden_operations.search(query_to_execute):
-        #     return Response({'message':"Query Not Allowed"},status=status.HTTP_406_NOT_ACCEPTABLE)
         dql_operations = re.compile(r'^\s*SELECT\b', re.IGNORECASE)
         if not dql_operations.search(query_to_execute):
             return Response({'message':"DQL operations are only allowed"},status=status.HTTP_406_NOT_ACCEPTABLE)
         if server_type=="MICROSOFTSQLSERVER":
             clean_query_string = re.sub('[;\[\]]', '', query_to_execute)
             query_to_save = re.sub('[;\[\]]', '', custom_query)
-            query1 = text(clean_query_string)
-            if 'limit' in str(query1).lower():
-                query=query1
+            if 'limit' in str(clean_query_string).lower():
+                query=clean_query_string
             else:
-                query = "{} limit {}".format(query1,row_limit)
-            result = connection.execute(query)
+                query = "{} limit {}".format(clean_query_string,row_limit)
+            result=query_execute(query,connection,server_type)
             columns_info = connection.description
             column_list = [column[0] for column in columns_info]
             data_type_list = [data_type[1].__name__ for data_type in columns_info]
             rows = result.fetchall()
 
-            query12 = "{}".format(query1)
-            result12 = connection.execute(query12)
+            query12 = "{}".format(clean_query_string)
+            query12 = "{} limit 1000000000".format(clean_query_string)
+            result12=query_execute(query12,connection,server_type)
             columns_info12 = connection.description
             column_list12 = [column[0] for column in columns_info12]
             data_type_list12 = [data_type[1].__name__ for data_type in columns_info12]
@@ -1071,36 +1080,19 @@ def custom_query_data(paramet,parent_id,row_limit,server_id,custom_query,query_t
                 query11=clean_query_string
             else:
                 query11 = "{} limit {}".format(clean_query_string,row_limit)
-            query = text(query11)
-            result = connection.execute(query)
+            result=query_execute(query11,connection,server_type)
             column_names = result.keys()
             column_list = [column for column in column_names]
             rows = result.fetchall()
 
-            query12 = text(clean_query_string)
-            result12 = connection.execute(query12)
+            clean_query_string = "{} limit 1000000000".format(clean_query_string)
+            result12=query_execute(clean_query_string,connection,server_type)
             column_names12 = result12.keys()
             column_list12 = [column for column in column_names12]
             rows12 = result12.fetchall()
     except Exception as e:
         return Response({'message':f'{str(e)}'},status=status.HTTP_400_BAD_REQUEST)
-    
-    # column_counts = {}  #### ambigious error for repeated column names in query.
-    # colum_ambi_list=[]
-    # for column in column_list:
-    #     if column in column_counts:
-    #         column_counts[column] += 1
-    #     else:
-    #         column_counts[column] = 1
-    # repeated_columns = {column: count for column, count in column_counts.items() if count > 1}
-    # for column, count in repeated_columns.items():
-    #     colum_ambi_list.append(column)
-    #     # print(f"{column}: {count} times")
-    # if colum_ambi_list==[]:
-    #     pass
-    # else:
-    #     return Response({'message':'column reference {} is ambiguous'.format(colum_ambi_list[0])},status=status.HTTP_406_NOT_ACCEPTABLE)
- 
+
     data =[]
     for i in rows:
         a = list(i)
@@ -1111,15 +1103,6 @@ def custom_query_data(paramet,parent_id,row_limit,server_id,custom_query,query_t
         a12 = list(m)
         row_count.append(a12)
 
-    ## Give the auto name if name not given
-    # if query_name==[] or query_name=='' or query_name=="":
-    #     pattern = r"^.{0,20}"
-    #     match = re.search(pattern, str(custom_query))
-    #     m1=str(match.group()).replace('*','').replace(' ','')
-    #     query_name=m1
-    # else:
-    #     query_name=query_name
-        
     if parameter=="SAVE":
         if queryset_id=='' or queryset_id==None:
             qs1=QuerySets.objects.create(
@@ -1158,8 +1141,6 @@ def custom_query_data(paramet,parent_id,row_limit,server_id,custom_query,query_t
 
     end_time=datetime.datetime.now(utc)
     data={
-        # "database_id":server_id1,
-        # "file_id":file_id,
         "hierarchy_id":parent_id,
         "query_name":qs.query_name,
         "datasorce_queryset_id":datasorce_queryset_id,
@@ -1177,12 +1158,7 @@ def custom_query_data(paramet,parent_id,row_limit,server_id,custom_query,query_t
         "query_exection_st":start_time.time(),
         "query_exection_et":end_time.time()
         }
-    # if paramet!="server":
-    #     columns_extract.delete_tables_sqlite(connection,engine,files_data['tables_names'])
-    # else:
-    #     pass
     connection.close()
-    # engine.dispose()
     return Response(data,status=status.HTTP_200_OK)
 
 
@@ -1192,14 +1168,17 @@ def custom_query_main(serializer,user_id,para,custom_query_tb):
     server_id1 = serializer.validated_data['database_id']
     query_name = serializer.validated_data['query_name']
     queryset_id = serializer.validated_data['queryset_id']
-    # file_id = serializer.validated_data['file_id']
     row_limit = serializer.validated_data['row_limit']
     
-    # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(server_id1)
-    status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(server_id1)
-    if status1 != 200:
-        return Response({'message':'Invalid Id'},status=status1)
-    
+    try:
+        ser_dt,parameter=Connections.display_name(server_id1)
+    except:
+        return Response({'message':'Invalid Hierarchy Id'},status=status.HTTP_401_UNAUTHORIZED)
+    try:
+        display_name=ser_dt.display_name
+    except:
+        display_name=None
+
     if para=="UPDATE" or para=="SAVE":
         custom_query=custom_query
     elif para=="GET":
@@ -1210,60 +1189,13 @@ def custom_query_main(serializer,user_id,para,custom_query_tb):
         query_to_execute=custom_query
     else:
         if DataSource_querysets.objects.filter(queryset_id=queryset_id).exists():
-            quer_tb=DataSource_querysets.objects.get(queryset_id=queryset_id,hierarchy_id=pr_id,user_id=user_id)
+            quer_tb=DataSource_querysets.objects.get(queryset_id=queryset_id,hierarchy_id=server_id1,user_id=user_id)
             datasorce_queryset_id=quer_tb.datasource_querysetid
             query_to_execute=quer_tb.custom_query
         else:
             datasorce_queryset_id=None
             query_to_execute=custom_query
-
-    if (server_id is not None or server_id!='') and parameter=='server':
-        if ServerDetails.objects.filter(id=server_id).exists():
-            srtb=ServerDetails.objects.get(id=server_id)
-            srtyp=ServerType.objects.get(id=srtb.server_type)
-            server_type=srtyp.server_type.upper()
-            tb_prim_id=srtb.id
-        else:
-            return Response({'message':'Server id not exists'},status=status.HTTP_404_NOT_FOUND)
-    elif (file_id is not None or file_id!='') and parameter=='files':
-        if FileDetails.objects.filter(id=file_id).exists():
-            srtb=FileDetails.objects.get(id=file_id)
-            srtyp=FileType.objects.get(id=srtb.file_type)
-            server_type=srtyp.file_type.upper()
-            tb_prim_id=srtb.id
-        else:
-            return Response({'message':'file_details_id/file_type not exists'},status=status.HTTP_404_NOT_FOUND)
-    elif (quickbooks_id is not None or quickbooks_id!='') and parameter=='quickbooks':
-        if qb_models.TokenStoring.objects.filter(qbuserid=quickbooks_id).exists():
-            srtb=qb_models.TokenStoring.objects.get(qbuserid=quickbooks_id)
-            tb_prim_id=srtb.qbuserid
-            server_type='QUICKBOOKS'
-        else:
-            return Response({'message':'Quickbooks id not exists'},status=status.HTTP_404_NOT_FOUND)
-    elif (salesforce_id is not None or salesforce_id!='') and parameter=='salesforce':
-        if qb_models.TokenStoring.objects.filter(salesuserid=salesforce_id).exists():
-            srtb=qb_models.TokenStoring.objects.get(salesuserid=salesforce_id)
-            tb_prim_id=srtb.salesuserid
-            server_type='SALESFORCE'
-        else:
-            return Response({'message':'Salesforce id not exists'},status=status.HTTP_404_NOT_FOUND)
-    elif (halops_id is not None or halops_id!='') and parameter=='halops':
-        if qb_models.HaloPs.objects.filter(id=halops_id).exists():
-            srtb=qb_models.HaloPs.objects.get(id=halops_id)
-            tb_prim_id=srtb.id
-            server_type='HALOPS'
-        else:
-            return Response({'message':'Salesforce id not exists'},status=status.HTTP_404_NOT_FOUND)
-    elif (connectwise_id is not None or connectwise_id!='') and parameter=='connectwise':
-        if qb_models.connectwise.objects.filter(id=connectwise_id).exists():
-            srtb=qb_models.connectwise.objects.get(id=connectwise_id)
-            tb_prim_id=srtb.id
-            server_type='CONNECTWISE'
-        else:
-            return Response({'message':'Salesforce id not exists'},status=status.HTTP_404_NOT_FOUND)
-    else:
-        print("NO")
-    final_data=custom_query_data(parameter,pr_id,row_limit,tb_prim_id,custom_query,query_to_execute,user_id,datasorce_queryset_id,server_type,query_name,para,queryset_id=queryset_id)
+    final_data=custom_query_data(display_name,server_id1,row_limit,custom_query,query_to_execute,user_id,datasorce_queryset_id,parameter.upper(),query_name,para,queryset_id=queryset_id)
     return final_data
 
 
@@ -1390,8 +1322,6 @@ class query_Name_save(CreateAPIView):
 
     @transaction.atomic
     def put(self,request,token):
-        # role_list=roles.get_previlage_id(previlage=[previlages.edit_custom_sql,previlages.create_custom_sql,previlages.view_custom_sql])
-        # tok1 = roles.role_status(token,role_list)
         tok1 = test_token(token)
         if tok1['status']==200:
             serializer = self.serializer_class(data=request.data)
@@ -1400,11 +1330,8 @@ class query_Name_save(CreateAPIView):
                 query_set_id= serializer.validated_data['query_set_id']
                 query_name= serializer.validated_data['query_name']
                 delete_query_id= serializer.validated_data['delete_query_id']
-                # custom_query= serializer.validated_data['custom_query']
-                # file_id= serializer.validated_data['file_id']
-                # clean_query_string = re.sub(';', '', custom_query)
-                # status1,parameter,database_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(database_id1)
-                status1,parameter,database_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(database_id1)
+                status1,tb_id,parameter=columns_extract.parent_id(database_id1)
+                pr_id=database_id1
                 if status1 != 200:
                     return Response({'message':'Invalid Id'},status=status1)
 
@@ -1438,8 +1365,7 @@ def DBDisconnectAPI(request,token,database_id):
         role_list=roles.get_previlage_id(previlage=[previlages.delete_database,previlages.delete_csv_files,previlages.delete_excel_files])
         tok1 = roles.role_status(token,role_list)
         if tok1['status']==200:
-            # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(database_id)
-            status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(database_id)
+            status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,shopify_id,google_sheet_id,pr_id=columns_extract.ids_final_status(database_id)
             if status1 != 200:
                 return Response({'message':'Invalid Id'},status=status1)
             if parameter=='server':
@@ -1460,6 +1386,12 @@ def DBDisconnectAPI(request,token,database_id):
             elif parameter=='halops':
                 sdt= qb_models.HaloPs.objects.get(id=halops_id)
                 qb_models.HaloPs.objects.filter(id=halops_id).delete()
+            elif parameter=='shopify':
+                sdt= qb_models.Shopify.objects.get(id=shopify_id)
+                qb_models.Shopify.objects.filter(id=shopify_id).delete()
+            elif parameter=='google_sheets':
+                sdt=qb_models.TokenStoring.objects.get(id=google_sheet_id)
+                qb_models.TokenStoring.objects.filter(id=google_sheet_id).delete()
             elif parameter=='files':
                 sdt=FileDetails.objects.get(id=file_id,user_id=tok1['user_id'])
                 file_delete=files.file_data_delete(file_id,tok1['user_id'],pr_id)
@@ -1492,7 +1424,6 @@ class GetServerTablesList(CreateAPIView):
     def post(self, request,token,database_id):
         serializer = self.serializer_class(data = request.data)
         if serializer.is_valid(raise_exception=True):
-            
             # Search Filter Only works on Display Name Column in Server Details
             search_table_name = serializer.validated_data['search']
             querySetId = serializer.validated_data['querySetId']
@@ -1507,344 +1438,103 @@ class GetServerTablesList(CreateAPIView):
                         queryset_name=qrtb.query_name
                     else:
                         return Response({'message':'queryset not exists'},status=status.HTTP_404_NOT_FOUND)
+                    
                 try:
-                    pr_id=parent_ids.objects.get(id=database_id)
-                    qb_id_1=columns_extract.parent_child_ids(pr_id.id,parameter=pr_id.parameter)
+                    ser_dt,parameter=Connections.display_name(database_id)
                 except:
-                    return Response({'message':'Invalid ID'},status=status.HTTP_404_NOT_FOUND)
-                if pr_id.parameter=="files":
-                    fn_data=files.files_data(qb_id_1,tok1['user_id'],database_id)
-                    return fn_data
-                elif pr_id.parameter=="server" or pr_id.parameter=="quickbooks" or pr_id.parameter=="salesforce" or pr_id.parameter=="halops" or pr_id.parameter=="connectwise":
-                    database_id=qb_id_1
-
-                    if pr_id.parameter=="server":
-                        if ServerDetails.objects.filter(id=database_id).exists():
-                            sd = ServerDetails.objects.get(id=database_id)
-                            st = ServerType.objects.get(id=sd.server_type)
-                            server_type = st.server_type.upper()
+                    return Response({'message':'Invalid Hierarchy Id'},status=status.HTTP_401_UNAUTHORIZED)
+                server_type=parameter.upper()
+                try:
+                    clickhouse_class = clickhouse.Clickhouse(ser_dt.display_name)
+                    engine=clickhouse_class.engine
+                    cursor=clickhouse_class.cursor
+                except:
+                    return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
+                
+                if (server_type in columns_extract.servers_list) or (server_type=='FILES'):
+                    inspector = inspect(engine)
+                    i = ser_dt.display_name
+                    result = {"schemas": []}
+                    if i != 'information_schema':
+                        ll = []
+                        table_names = inspector.get_table_names(schema=i)
+                        table_names_sorted = sorted(table_names)
+                        
+                        if search_table_name == '' or search_table_name == ' ' or search_table_name == None :
+                            for table_name in table_names_sorted:
+                                columns = inspector.get_columns(table_name, schema=i)
+                                cols = [{"column": column['name'], "datatype": str(column['type']).lower()} for column in columns] #.lower()
+                                ll.append({"schema":i,"table":table_name,"columns":cols})
                         else:
-                            return Response({'message':"server not exists"},status=status.HTTP_404_NOT_FOUND) 
-                    elif pr_id.parameter=="halops":
-                        sd = qb_models.HaloPs.objects.get(id=pr_id.table_id)
-                        server_type = pr_id.parameter.upper()
-                    elif pr_id.parameter=="connectwise":
-                        sd = qb_models.connectwise.objects.get(id=pr_id.table_id)
-                        server_type = pr_id.parameter.upper()
+                            filter_table_names = [table_name for table_name in table_names_sorted if '{}'.format(search_table_name) in table_name.lower()]
+                            for table in filter_table_names:
+                                columns = inspector.get_columns(table, schema=i)
+                                cols = [{"column": column['name'], "datatype": str(column['type']).lower()} for column in columns] #.lower()
+                                ll.append({"schema":i,"table":table,"columns":cols})
+                        if ll ==[] :
+                            pass
+                        else:
+                            result["schemas"].append({"schema": i, "tables": ll})
+                    cursor.close()
+                    if server_type=='FILES':
+                        database = None
                     else:
-                        sd = qb_models.TokenStoring.objects.get(id=pr_id.table_id)
-                        server_type = pr_id.parameter.upper()
-                    try:
-                        clickhouse_class = clickhouse.Clickhouse(sd.display_name)
-                        engine=clickhouse_class.engine
-                        cursor=clickhouse_class.cursor
-                    except:
-                        return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
-
-                    if server_type=="POSTGRESQL" or server_type =='MYSQL' or server_type=="SQLITE":
-                        inspector = inspect(engine)
-                        # schemas = inspector.get_schema_names()
-                        i = sd.display_name
-                        # print(schemas)
-                        # result = {"schemas": []}
-                        # for i in schemas:
-                        # schemas = inspector.get_schema_names()
-                        result = {"schemas": []}
-                        # for i in schemas:
-                        if i != 'information_schema':
-                            ll = []
-                            table_names = inspector.get_table_names(schema=i)
-                            table_names_sorted = sorted(table_names)
-                            
-                            if search_table_name == '' or search_table_name == ' ' or search_table_name == None :
-                                for table_name in table_names_sorted:
-                                    columns = inspector.get_columns(table_name, schema=i)
-                                    cols = [{"column": column['name'], "datatype": str(column['type']).lower()} for column in columns] #.lower()
-                                    ll.append({"schema":i,"table":table_name,"columns":cols})
-                            else:
-                                filter_table_names = [table_name for table_name in table_names_sorted if '{}'.format(search_table_name) in table_name.lower()]
-                                for table in filter_table_names:
-                                    columns = inspector.get_columns(table, schema=i)
-                                    cols = [{"column": column['name'], "datatype": str(column['type']).lower()} for column in columns] #.lower()
-                                    ll.append({"schema":i,"table":table,"columns":cols})
-                            if ll ==[] :
-                                pass
-                            else:
-                                result["schemas"].append({"schema": i, "tables": ll})
-                        cursor.close()
-                        # engine.dispose()
-                        return Response(
-                            {
-                                "message": "Successfully Connected to DB",
-                                "queryset_name":queryset_name,
-                                "data": result,
-                                'display_name': sd.display_name,
-                                "database": {
-                                    "hierarchy_id": pr_id.id,
-                                    "server_type": server_type,
-                                    "hostname": sd.hostname,
-                                    "database": sd.database,
-                                    "port": sd.port,
-                                    "username": sd.username,
-                                    "service_name": sd.service_name,
-                                    "display_name": sd.display_name,
-                                }
-                            }, status=status.HTTP_200_OK)
-                    elif server_type=="QUICKBOOKS" or server_type=="SALESFORCE" or server_type=="HALOPS" or server_type=="CONNECTWISE":
-                        inspector = inspect(engine)
-                        i = sd.display_name
-                        result = {"schemas": []}
-                        if i != 'information_schema':
-                            ll = []
-                            table_names = inspector.get_table_names(schema=i)
-                            table_names_sorted = sorted(table_names)
-                            
-                            if search_table_name == '' or search_table_name == ' ' or search_table_name == None :
-                                for table_name in table_names_sorted:
-                                    columns = inspector.get_columns(table_name, schema=i)
-                                    cols = [{"column": column['name'], 
-                                            "datatype": str(column['type']).lower() if column['type'] is not None else 'unknown'} 
-                                            for column in columns]
-                                    ll.append({"schema": i, "table": table_name, "columns": cols})
-                            else:
-                                filter_table_names = [table_name for table_name in table_names_sorted if '{}'.format(search_table_name) in table_name.lower()]
-                                for table in filter_table_names:
-                                    columns = inspector.get_columns(table, schema=i)
-                                    cols = [{"column": column['name'], "datatype": str(column['type']).lower()} for column in columns] #.lower()
-                                    ll.append({"schema":i,"table":table,"columns":cols})
-                            if ll ==[] :
-                                pass
-                            else:
-                                result["schemas"].append({"schema": i, "tables": ll})
-                        cursor.close()
-                        return Response(
-                            {
-                                "message": "Successfully Connected",
-                                "queryset_name":queryset_name,
-                                "data": result,
-                                'display_name': sd.display_name,
-                            }, status=status.HTTP_200_OK)
-                    elif server_type.upper()=="ORACLE":
-                        # Combine tables and columns query into a single efficient query using JOIN
-                        combined_query = """
-                            SELECT u.USERNAME AS schema_name, t.TABLE_NAME, c.COLUMN_NAME, c.DATA_TYPE
-                            FROM ALL_USERS u
-                            LEFT JOIN ALL_TABLES t ON u.USERNAME = t.OWNER
-                            LEFT JOIN ALL_TAB_COLUMNS c ON t.OWNER = c.OWNER AND t.TABLE_NAME = c.TABLE_NAME
-                            ORDER BY u.USERNAME, t.TABLE_NAME, c.COLUMN_ID
-                        """
-                        # Fetch all data in one query execution
-                        result = cursor.execute(text(combined_query)).fetchall()
-                        # Organize data into a schema-table-columns structure
-                        data_structure = {"schemas": []}
-                        schema_dict = {}
-                        # Process the result set
-                        for row in result:
-                            schema = row[0]
-                            table = row[1]
-                            column = row[2]
-                            data_type = row[3]
-                            if search_table_name==None or search_table_name=='' or search_table_name=="":
-                                pass
-                            else:
-                                try:
-                                    if search_table_name and search_table_name not in column:
-                                        continue
-                                except:
-                                    pass
-                            if schema not in schema_dict:
-                                schema_dict[schema] = {}
-                            if table:
-                                if table not in schema_dict[schema]:
-                                    schema_dict[schema][table] = {"schema": schema, "table": table, "columns": []}
-                                if column:
-                                    schema_dict[schema][table]["columns"].append({"column": column, "datatype": data_type})
-                        for schema_name in sorted(schema_dict.keys()):
-                            tables = [table for table in schema_dict[schema_name].values()]
-                            data_structure["schemas"].append({"schema": schema_name, "tables": tables})
-                        filtered_schemas = []
-                        for schema in data_structure['schemas']:
-                            # Filter tables where columns are not empty
-                            filtered_tables = [table for table in schema['tables'] if table['columns']]
-                            # Only add schema if it has non-empty tables
-                            if filtered_tables:
-                                filtered_schemas.append({
-                                    "schema": schema['schema'],
-                                    "tables": filtered_tables
-                                })
-                        cleaned_data_dict = {'schemas': filtered_schemas}
-                        cursor.close()
-                        # # engine.dispose()
-                        return Response(
-                            {
-                                "message": "Successfully Connected to DB",
-                                "queryset_name":queryset_name,
-                                "data": cleaned_data_dict,
-                                'display_name': sd.display_name,
-                                "database": {
-                                    "hierarchy_id": pr_id.id,
-                                    "server_type":server_type,
-                                    "hostname":sd.hostname,
-                                    "database":sd.database,
-                                    "port" :sd.port,
-                                    "username":sd.username,
-                                    "service_name":sd.service_name,
-                                    "display_name":sd.display_name,
-                                }
-                            }, status=status.HTTP_200_OK)
-                    elif server_type.upper()=="MONGODB":
-                        db=engine
-                        final_list={}
-                        colms=[]
-                        final_ls=[]
-                        collections = db.list_collection_names()
-                        for collection_name in collections:
-                            final_list['schema']=None
-                            final_list['table']=collection_name
-                            collection = db[collection_name]
-                            documents = collection.find()
-                            for field in documents:
-                                cllist=[]
-                                colms.append({'columns':cllist.append(field),'datatypes':None})
-                            final_list['columns']=colms
-                        final_ls.append(final_list)
-                        result = {"schemas": [{"schema": None, "tables": final_ls}]}
-                        # cursor.close()
-                        # engine.dispose()
-                        return Response(
-                            {
-                                "message": "Successfully Connected to DB",
-                                "queryset_name":queryset_name,
-                                "data": result,
-                                'display_name': sd.display_name,
-                                "database": {
-                                    "hierarchy_id": pr_id.id,
-                                    "server_type":server_type,
-                                    "hostname":sd.hostname,
-                                    "database":sd.database,
-                                    "port" :sd.port,
-                                    "username":sd.username,
-                                    "service_name":sd.service_name,
-                                    "display_name":sd.display_name,
-                                }
-                            }, status=status.HTTP_200_OK)
-                    elif server_type.upper()=="MICROSOFTSQLSERVER":
-                        tables_query = """
-                        SELECT 
-                            TABLE_SCHEMA,
-                            TABLE_NAME
-                        FROM 
-                            INFORMATION_SCHEMA.TABLES
-                        WHERE 
-                            TABLE_TYPE = 'BASE TABLE'
-                        ORDER BY 
-                            TABLE_SCHEMA, TABLE_NAME
-                        """
-                        cursor.execute(tables_query)
-                        tables = cursor.fetchall()
-                        schema_info = {}
-                        for table in tables:
-                            schema = table.TABLE_SCHEMA
-                            table_name = table.TABLE_NAME
-                            if schema not in schema_info:
-                                schema_info[schema] = {}
-                            columns_query = f"""
-                            SELECT 
-                                COLUMN_NAME,
-                                DATA_TYPE
-                            FROM 
-                                INFORMATION_SCHEMA.COLUMNS
-                            WHERE 
-                                TABLE_SCHEMA = '{schema}' AND TABLE_NAME = '{table_name}'
-                            ORDER BY 
-                                ORDINAL_POSITION
-                            """
-                            cursor.execute(columns_query)
-                            columns = cursor.fetchall()
-                            schema_info[schema][table_name] = [(column.COLUMN_NAME, column.DATA_TYPE) for column in columns]
-
-                        formatted_data = []
-                        for schema_name, tables in schema_info.items():
-                            schema_entry = {"schema": schema_name, "tables": []} 
-                            for table_name, columns in tables.items():
-                                # If search_field is None or empty, include all tables
-                                if search_table_name is None or search_table_name == "" or search_table_name in table_name:
-                                    table_entry = {"schema": schema_name, "table": table_name, "columns": []}
-                                    for column_name, data_type in columns:
-                                        column_entry = {"column": column_name, "datatype": data_type}
-                                        table_entry["columns"].append(column_entry)
-                                    schema_entry["tables"].append(table_entry)
-                            # Only add the schema entry if it contains tables
-                            if schema_entry["tables"]:
-                                formatted_data.append(schema_entry)
-                        result12 = {"schemas": formatted_data}
-
-                        # formatted_data = []
-                        # for schema_name, tables in schema_info.items():
-                        #     schema_entry = {"schema": schema_name, "tables": []} 
-                        #     for table_name, columns in tables.items():
-                        #         table_entry = {"schema": schema_name, "table": table_name, "columns": []}
-                        #         for column_name, data_type in columns:
-                        #             column_entry = {"column": column_name, "datatype": data_type}
-                        #             table_entry["columns"].append(column_entry)
-                        #         schema_entry["tables"].append(table_entry)
-                        #     formatted_data.append(schema_entry)
-                        # result12 = {"schemas":formatted_data}
-    
-                        cursor.close()
-                        # engine.dispose()
-                        return Response(
-                            {
-                                "message":"Successfully Connected to DB",
-                                "queryset_name":queryset_name,
-                                "data":result12,
-                                'display_name':sd.display_name,
-                                "database":
-                                    {
-                                        "hierarchy_id": pr_id.id,
-                                        "database_name":sd.database
-                                    }
-                                }
-                            ,status=status.HTTP_200_OK)
-                    elif server_type.upper()=="SNOWFLAKE":
-                        inspector = inspect(engine)
-                        schemas = inspector.get_schema_names()
-                        schema_info = []
-                        for schema in schemas:
-                            tables = inspector.get_table_names(schema=schema)
-                            tables_info = []
-                            table_names_sorted = sorted(tables)
-                            for table in table_names_sorted:
-                                columns = inspector.get_columns(table, schema=schema)
-                                columns_info = [{'column': col['name'], 'datatype': str(col['type'])} for col in columns]
-                                tables_info.append({
-                                    "schema": schema,
-                                    "table": table,
-                                    "columns": columns_info
-                                })
-                            schema_info.append({
-                                "schema": schema,
-                                "tables": tables_info
-                            })
-                        cursor.close()
-                        # engine.dispose()
-                        return Response(
-                            {
-                                "message":"Successfully Connected to DB",
-                                "queryset_name":queryset_name,
-                                "data":{'schemas':schema_info},
-                                'display_name':sd.display_name,
-                                "database":
-                                    {
-                                        "hierarchy_id": pr_id.id,
-                                        "database_name":sd.database
-                                    }
-                                }
-                            ,status=status.HTTP_200_OK) 
-                    else:
-                        return Response({'message':"server not exists"},status=status.HTTP_404_NOT_FOUND)
+                        database = {
+                                "hierarchy_id": database_id,
+                                "server_type": server_type,
+                                "hostname": ser_dt.hostname,
+                                "database": ser_dt.database,
+                                "port": ser_dt.port,
+                                "username": ser_dt.username,
+                                "service_name": ser_dt.service_name,
+                                "display_name": ser_dt.display_name,
+                            }
+                    return Response(
+                        {
+                            "message": "Successfully Connected to DB",
+                            "queryset_name":queryset_name,
+                            "data": result,
+                            'display_name': ser_dt.display_name,
+                            'database':database
+                        }, status=status.HTTP_200_OK)
+                elif server_type.lower() in columns_extract.ser_list:
+                    inspector = inspect(engine)
+                    i = ser_dt.display_name
+                    result = {"schemas": []}
+                    if i != 'information_schema':
+                        ll = []
+                        table_names = inspector.get_table_names(schema=i)
+                        table_names_sorted = sorted(table_names)
+                        print(table_names)
+                        if search_table_name == '' or search_table_name == ' ' or search_table_name == None :
+                            for table_name in table_names_sorted:
+                                columns = inspector.get_columns(table_name, schema=i)
+                                cols = [{"column": column['name'], 
+                                        "datatype": str(column['type']).lower() if column['type'] is not None else 'unknown'} 
+                                        for column in columns]
+                                ll.append({"schema": i, "table": table_name, "columns": cols})
+                        else:
+                            filter_table_names = [table_name for table_name in table_names_sorted if '{}'.format(search_table_name) in table_name.lower()]
+                            for table in filter_table_names:
+                                columns = inspector.get_columns(table, schema=i)
+                                cols = [{"column": column['name'], "datatype": str(column['type']).lower()} for column in columns] #.lower()
+                                ll.append({"schema":i,"table":table,"columns":cols})
+                        if ll ==[] :
+                            pass
+                        else:
+                            result["schemas"].append({"schema": i, "tables": ll})
+                    cursor.close()
+                    return Response(
+                        {
+                            "message": "Successfully Connected",
+                            "queryset_name":queryset_name,
+                            "data": result,
+                            'display_name': ser_dt.display_name,
+                            "hierarchy_id": database_id,
+                            "server_type": server_type,
+                        }, status=status.HTTP_200_OK)
                 else:
-                    return Response({'message':"Invalid Data Base ID"},status=status.HTTP_404_NOT_FOUND)                           
+                    return Response({'message':"server not exists"},status=status.HTTP_404_NOT_FOUND)                       
             else:
                 return Response(tok1,status=tok1['status'])
 
@@ -1873,66 +1563,59 @@ def reassign_user_sample_dashboard(user):
     else:
         pass
     
-
 def new_dashboard_reassign(request, parameter):
-    time_str = parameter
-
-    # Validate the time parameter
-    if time_str is None:
-        return HttpResponse("Failed", status=status.HTTP_400_BAD_REQUEST)
-
-    # Split the time string into hours and minutes
-    time_parts = time_str.split(':')
-    
-    # Check if the time string is in the correct format
-    if len(time_parts) != 2 or not time_parts[0].isdigit() or not time_parts[1].isdigit():
-        return HttpResponse('Invalid Parameter Format', status=status.HTTP_400_BAD_REQUEST)
-    
-    # Parse the hours and minutes
     try:
-        hours = int(time_parts[0])
-        minutes = int(time_parts[1])
+        time_str = parameter
+
+        # Validate the time parameter
+        if time_str is None:
+            return HttpResponse("Failed", status=status.HTTP_400_BAD_REQUEST)
+
+        # Split the time string into hours and minutes
+        time_parts = time_str.split(':')
         
-        if minutes >= 60 or hours >= 24:
-            return HttpResponse('Invalid time', status=status.HTTP_400_BAD_REQUEST)
+        # Check if the time string is in the correct format
+        if len(time_parts) != 2 or not time_parts[0].isdigit() or not time_parts[1].isdigit():
+            return HttpResponse('Invalid Parameter Format', status=status.HTTP_400_BAD_REQUEST)
         
-        # Convert the time to a datetime object
-        provided_time = datetime.datetime.strptime(f'{hours}:{minutes}', '%H:%M').time()
-    except ValueError:
-        return HttpResponse('Invalid Parameter Format', status=status.HTTP_400_BAD_REQUEST)
+        # Parse the hours and minutes
+        try:
+            hours = int(time_parts[0])
+            minutes = int(time_parts[1])
+            
+            if minutes >= 60 or hours >= 24:
+                return HttpResponse('Invalid time', status=status.HTTP_400_BAD_REQUEST)
+            
+            # Convert the time to a datetime object
+            provided_time = datetime.datetime.strptime(f'{hours}:{minutes}', '%H:%M').time()
+        except ValueError:
+            return HttpResponse('Invalid Parameter Format', status=status.HTTP_400_BAD_REQUEST)
 
-    # Get the current system time
-    current_time = datetime.datetime.now().time()
+        # Get the current system time
+        current_time = datetime.datetime.now().time()
 
-    # Compare only the hour and minute parts of the time
-    if (current_time.hour, current_time.minute) != (provided_time.hour, provided_time.minute):
-        return HttpResponse('Bad Request of Parameter', status=status.HTTP_400_BAD_REQUEST)
-
-    try:
-        # Get all user IDs once to avoid multiple queries
-        user_ids = UserProfile.objects.values_list('id', flat=True)
-
-        # Filter sample querysets based on user IDs
-        sample_querysets = QuerySets.objects.filter(user_id__in=user_ids, is_sample=True)
-
-        # Store threads for later joining
-        threads = []
-        success = True
-
-        for user_id in user_ids:
-            # Delete records related to the user based on sample querysets
-            QuerySets.objects.filter(user_id=user_id, is_sample=True).delete()
-            sheet_data.objects.filter(user_id=user_id, is_sample=True).delete()
-            dashboard_data.objects.filter(user_id=user_id, is_sample=True).delete()
-
-            if sample_querysets.exists():
-                # Delete related records based on the columns and datatypes in related tables
-                DataSource_querysets.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
-                ChartFilters.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
-                DataSourceFilter.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
-                SheetFilter_querysets.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
+        # Compare only the hour and minute parts of the time
+        if (current_time.hour, current_time.minute) != (provided_time.hour, provided_time.minute):
+            return HttpResponse('Bad Request of Parameter', status=status.HTTP_400_BAD_REQUEST)
+        
+        user_ids = list(UserProfile.objects.values_list('id', flat=True))
+        
+        for i, user_id in enumerate(user_ids):
+            with transaction.atomic():
+                # Delete sample data for the current user
+                QuerySets.objects.filter(user_id=user_id, is_sample=True).delete()
+                sheet_data.objects.filter(user_id=user_id, is_sample=True).delete()
+                dashboard_data.objects.filter(user_id=user_id, is_sample=True).delete()
                 
-            # Start a new thread for the signup task
+                # Delete related records in other tables
+                sample_querysets = QuerySets.objects.filter(user_id=user_id, is_sample=True)
+                if sample_querysets.exists():
+                    DataSource_querysets.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
+                    ChartFilters.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
+                    DataSourceFilter.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
+                    SheetFilter_querysets.objects.filter(user_id=user_id, queryset_id__in=sample_querysets).delete()
+                
+            # Run signup_thread for the current user
             def target_function(user_id):
                 try:
                     authentication.signup_thread(user_id)
@@ -1940,19 +1623,19 @@ def new_dashboard_reassign(request, parameter):
                 except Exception as e:
                     print(f"Error during signup for user {user_id}: {e}")
                     return False
-            thread = threading.Thread(target=lambda uid=user_id: target_function(uid))
+            
+            thread = threading.Thread(target=target_function, args=(user_id,))
             thread.start()
-            threads.append(thread)
-
-        # Wait for all threads to complete and check for any errors
-        for thread in threads:
-            thread.join()  # Wait for the thread to finish
-            if thread.is_alive():  # If the thread is still alive, it means it did not complete successfully
-                success = False
-
-        return HttpResponse("Success" if success else "Failure")
+            thread.join()  # Ensure completion before proceeding to the next user
+            
+            if not thread.is_alive():
+                if i == len(user_ids) - 1:
+                    return HttpResponse("Success")
+            else:
+                return HttpResponse(f"Signup failed for user {user_id}", status=400)
+    
     except Exception as e:
-        return HttpResponse(f"Error: {e}")
+        return HttpResponse(f"Error: {e}", status=500)
 
 class SignupWithoutOTP(CreateAPIView):
     serializer_class= register_serializer
@@ -1981,47 +1664,47 @@ class SignupWithoutOTP(CreateAPIView):
             if pwd!=cnfpwd:
                 return Response({"message":"Password did not matched"},status=status.HTTP_406_NOT_ACCEPTABLE)
 
-            # try:
-            unique_id = get_random_string(length=64)
-            
-            adtb=UserProfile.objects.create_user(
-                username=u,
-                name=u,
-                password=pwd,
-                email=email,
-                is_active=True,
-                created_at=datetime.datetime.now(),
-                updated_at=datetime.datetime.now(),
-                demo_account = True
-                )
             try:
-                rlmd=Role.objects.get(role='Admin')
-            except:
-                prev=models.previlages.objects.all().values()
-                print(prev)
-                pr_ids=[i1['id'] for i1 in prev]
-                rlmd=Role.objects.create(role='Admin',role_desc="All previlages",previlage_id=pr_ids)
-            UserRole.objects.create(role_id=rlmd.role_id,user_id=adtb.id)
-            user_id=adtb.id
-            # Call the import_data command with the user_id
-            thread = threading.Thread(target=authentication.signup_thread, args=(user_id,))
-            thread.start()
-            # try:
-            #     call_command('sample_dashboard', adtb.id)
-            #     # call_command('sample_dashboard2', adtb.id)
-            #     call_command('sample_dashboard3', i, server.id)
-            #     call_command('sample_dashboard4', i, server.id)
-            #     call_command('sample_dashboard5', i, server.id)
-            # except Exception as e:
-            #     return Response({"message":str(e)},status=status.HTTP_406_NOT_ACCEPTABLE)
-            
-            data = {
-                "message" : "Registration successful! Please log in.",
-                # "email" : email.lower(),
-                # "emailActivationToken"  : unique_id
-            }
-            return Response(data, status=status.HTTP_201_CREATED)
-            # except:
-            #     return Response({"message":f"SMTP Error"},status=status.HTTP_503_SERVICE_UNAVAILABLE)
+                unique_id = get_random_string(length=64)
+                
+                adtb=UserProfile.objects.create_user(
+                    username=u,
+                    name=u,
+                    password=pwd,
+                    email=email,
+                    is_active=True,
+                    created_at=datetime.datetime.now(),
+                    updated_at=datetime.datetime.now(),
+                    demo_account = True
+                    )
+                try:
+                    rlmd=Role.objects.get(role='Admin')
+                except:
+                    prev=previlages.objects.all().values()
+                    pr_ids=[i1['id'] for i1 in prev]
+                    rlmd=Role.objects.create(role='Admin',role_desc="All previlages",previlage_id=pr_ids)
+                UserRole.objects.create(role_id=rlmd.role_id,user_id=adtb.id)
+                user_id=adtb.id
+                # Call the import_data command with the user_id
+                thread = threading.Thread(target=authentication.signup_thread, args=(user_id,))
+                thread.start()
+                # try:
+                #     call_command('sample_dashboard', adtb.id)
+                #     # call_command('sample_dashboard2', adtb.id)
+                #     call_command('sample_dashboard3', i, server.id)
+                #     call_command('sample_dashboard4', i, server.id)
+                #     call_command('sample_dashboard5', i, server.id)
+                # except Exception as e:
+                #     return Response({"message":str(e)},status=status.HTTP_406_NOT_ACCEPTABLE)
+                
+                data = {
+                    "message" : "Registration successful! Please log in.",
+                    # "email" : email.lower(),
+                    # "emailActivationToken"  : unique_id
+                }
+                return Response(data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response({"message":str(e)},status=status.HTTP_406_NOT_ACCEPTABLE)
+                # return Response({"message":f"SMTP Error"},status=status.HTTP_503_SERVICE_UNAVAILABLE)
         else:
             return Response({"message":"Serializer Value Error"},status=status.HTTP_400_BAD_REQUEST)  

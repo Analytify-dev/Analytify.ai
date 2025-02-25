@@ -33,7 +33,7 @@ from django.views.decorators.csrf import csrf_exempt
 import io
 from dashboard.columns_extract import server_connection
 from .Connections import file_save_1
-from dashboard import roles,previlages,columns_extract
+from dashboard import roles,previlages,columns_extract,Connections
 from quickbooks import models as qb_models
 import sqlglot
 from urllib.parse import quote
@@ -80,7 +80,7 @@ char_list=['varchar','bp char','text','varchar2','NVchar2','long','char','Nchar'
     'nullable(long)', 'nullable(char)', 'nullable(Nchar)', 
     'nullable(character varying)', 'nullable(string)','string','nullable(string)','array(string)','nullable(array(string))']
 bool_list=['bool','boolean','nullable(bool)', 'nullable(boolean)','uint8']
-date_list=['date','time','datetime','timestamp','timestamp with time zone','timestamp without time zone','timezone','time zone','timestamptz','nullable(date)', 'nullable(time)', 'nullable(datetime)', 
+date_list=['date','time','datetime','datetime64(6)','timestamp','timestamp with time zone','timestamp without time zone','timezone','time zone','timestamptz','nullable(date)', 'nullable(time)', 'nullable(datetime)', 
     'nullable(timestamp)', 
     'nullable(timestamp with time zone)', 
     'nullable(timestamp without time zone)', 
@@ -90,20 +90,11 @@ date_list=['date','time','datetime','timestamp','timestamp with time zone','time
 
 date_list11=['date','timestamp without time zone'] 
 timestamp_list = ['time','datetime','timestamp','timestamp with time zone','timezone','time zone','timestamptz']
-# def date_format(date_format1,data_type):
-#     date_list=['date','timestamp without time zone'] 
-#     timestamp_list = ['time','datetime','timestamp','timestamp with time zone','timezone','time zone','timestamptz']
-#     if data_type in date_list:
-#         defualt = '%m/%d/%Y'
-#     else:
-#         defualt = '%Y-%m-%d %H:%M:%S'
-#     date_func = {'year':'%Y','month':'%m','day':'%d','hour':'%H','minute':'%M','second':'%S','week numbers':'%W','weekdays':'%w','month/year':'%m/%Y','month/day/year':'%m/%d/%Y','year/month/day':'%Y/%m/%d','count_distinct':'count_distinct','quarter':'quarter','year/month/day hour:minute:seconds':'%Y-%m-%d %H:%M:%S'}
-#     return date_func.get(date_format1.lower(),defualt)
 
 def date_format(date_format_str, data_type):
     return {
         'year': '%Y', 'month': '%m', 'day': '%d', 'hour': '%H', 
-        'minute': '%M', 'second': '%S', 'week numbers': '%V', 
+        'minute': '%i', 'second': '%S', 'week numbers': '%V', 
         'weekdays': '%w', 'month/year': '%m/%Y', 
         'month/day/year': '%m/%d/%Y', 'year/month/day': '%Y/%m/%d',
         'quarter': 'quarter'
@@ -161,21 +152,6 @@ def query_parsing(read_query,use_l,con_l):
     except Exception as e:
         print(e)
 
-# def map_dtype(dtype):
-#     if pd.api.types.is_integer_dtype(dtype):
-#         return 'Int64'
-#     elif pd.api.types.is_float_dtype(dtype):
-#         return 'Float64'
-#     elif pd.api.types.is_bool_dtype(dtype):
-#         return 'boolean'
-#     elif pd.api.types.is_datetime64_any_dtype(dtype):
-#         return 'datetime64[ns]'
-#     elif isinstance(dtype, np.dtype) and dtype.type == np.datetime64:  # Specific datetime64 handling
-#         return 'datetime64[ns]'
-#     elif isinstance(dtype, type(pd.Timestamp(0).date())):  # Handling datetime.date
-#         return 'date'
-#     else:
-#         return 'string'
 
 def map_dtype(dtype):
     dtype_mapping = {
@@ -190,8 +166,6 @@ def map_dtype(dtype):
     return 'string'
     
 def read_excel_file_data(file_path,filename,joining_tables,check):
-    # engine = None
-    # cursor = None
     try:
         encoded_url = quote(file_path, safe=':/')
         xls = pd.ExcelFile(encoded_url)
@@ -200,7 +174,6 @@ def read_excel_file_data(file_path,filename,joining_tables,check):
         BASE_DIR = Path(__file__).resolve().parent.parent  # Adjust BASE_DIR as needed
         db_file_path = os.path.join(BASE_DIR, 'local.db')
         url = f'sqlite:///{db_file_path}'
-        # url =f'sqlite:///local.db'
         engine = create_engine(url)
         tables = tables_get(joining_tables)
         if check==False:
@@ -246,15 +219,9 @@ def read_excel_file_data(file_path,filename,joining_tables,check):
             "message":e
         }
         return f_dt
-    # finally:
-    #     # Close the connection if it was established
-    #     if engine:
-    #         engine.dispose()  # Dispose of the engine to close connections
 
 
 def read_csv_file_data(file_path,filename,check):
-    # engine = None
-    # cursor = None
     try:
         data_csv = pd.read_csv(file_path,low_memory=False)
         data_csv = data_csv.fillna(value='NA')
@@ -268,7 +235,6 @@ def read_csv_file_data(file_path,filename,check):
         BASE_DIR = Path(__file__).resolve().parent.parent  # Adjust BASE_DIR as needed
         db_file_path = os.path.join(BASE_DIR, 'local.db')
         url = f'sqlite:///{db_file_path}'
-        # url =f'sqlite:///local.db'
         engine = create_engine(url)
         data_csv.to_sql(filename, engine, index=False, if_exists='replace')
         f_dt = {
@@ -284,11 +250,7 @@ def read_csv_file_data(file_path,filename,check):
             "message":e
         }
         return f_dt
-    # finally:
-    #     # Close the connection if it was established
-    #     if engine:
-    #         engine.dispose()  # Dispose of the engine to close connections
-
+    
 def server_details_check(ServerType1,server_details,file_type,file_data,check):
     if file_type is None or  file_data =='' or file_data is  None or file_data =='':
         server_conn=server_connection(server_details.username,server_details.password,server_details.database,server_details.hostname,server_details.port,server_details.service_name,ServerType1.server_type.upper(),server_details.database_path)
@@ -307,31 +269,6 @@ def server_details_check(ServerType1,server_details,file_type,file_data,check):
                 'message':server_conn
             }
     elif file_type is not None or  file_data !='' or file_data is not  None or file_data !='':
-        # pattern = r'/insightapps/(.*)'
-        # match = re.search(pattern, str(file_data.source))
-
-        # filename = match.group(1)
-        # file12,fileext = os.path.splitext(os.path.basename(filename))
-        # # file12,fileext = filename.split('.')
-        # file = re.sub(r'^\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}', '', str(file12))
-        # file_url = file_data.source
-        
-        # if (file_type.upper()=='EXCEL' and fileext == '.xlsx') or (file_type.upper()=='EXCEL' and fileext == '.xls'):
-        #     read_data = read_excel_file_data(file_url,file,joining_tables,check)
-        # elif  file_type.upper()=='CSV' and fileext == '.csv':
-        #     read_data = read_csv_file_data(file_url,file,check)
-        # else:
-        #     return 'Nodata'
-
-        # if read_data['status'] ==200:
-        #         data = {
-        #                 'status':200,
-        #                 'engine':read_data['engine'],
-        #                 'cursor':read_data['cursor'],
-        #                 'tables':read_data['tables_names']
-        #             } 
-        # else:
-        #     data =read_data
         clickhouse_class = Clickhouse(file_data.display_name)
         data = {
                 'status':200,
@@ -432,10 +369,6 @@ def building_query(self,tables,join_conditions,join_types,engine,dbtype):
                     WHERE TABLE_NAME = '{table_name}'
                     AND TABLE_SCHEMA = '{schema}'
                 """
-                # pyodbc cursor get column names
-                # columns = cursor.columns(table=table_name)
-
-                # columns = [{'name':column.COLUMN_NAME,'col':str(column.DATA_TYPE)} for column in columns]
                 cursor = engine.cursor()
                 cursor_query_data = execution_query(qu,cursor,dbtype.lower()) 
                 if cursor_query_data['status'] == 200:
@@ -633,18 +566,12 @@ def connection_data_retrieve(hierarchy_id,user_id):
                 
                 
                 click = Clickhouse(conn_data.display_name)
-                # data = click.migrate_database_to_clickhouse(serdt['cursor'],conn_type.lower())
-                # if data['status'] == 200:
                 result = {
                     "status":200,
                     "engine":click.engine,
                     "cursor":click.cursor,
                     "conn":'clickhouse'
                 }
-                # else:
-                #     return  {
-                #     "status":400,
-                #     "message":data['message'] }
             else:
                 return  {
                     "status":400,
@@ -726,6 +653,36 @@ def connection_data_retrieve(hierarchy_id,user_id):
                         "status":400,
                         'message':'DATA NOT FOUND'
                     }
+        case 'shopify':
+            if models.Shopify.objects.filter(id=parent_id.table_id).exists:
+                conn_data =models.Shopify.objects.get(id=parent_id.table_id)
+                click = Clickhouse(conn_data.display_name)
+                result = {
+                        "status":200,
+                        "engine":click.engine,
+                        "cursor":click.cursor,
+                        "conn":'clickhouse'
+                    }
+            else:
+                result = {
+                        "status":400,
+                        'message':'DATA NOT FOUND'
+                    }
+        case 'google_sheets':
+            if models.TokenStoring.objects.filter(id=parent_id.table_id).exists:
+                conn_data =models.TokenStoring.objects.get(id=parent_id.table_id)
+                click = Clickhouse(conn_data.display_name)
+                result = {
+                        "status":200,
+                        "engine":click.engine,
+                        "cursor":click.cursor,
+                        "conn":'clickhouse'
+                    }
+            else:
+                result = {
+                        "status":400,
+                        'message':'DATA NOT FOUND'
+                    }
     return result
 
 
@@ -784,7 +741,6 @@ class rdbmsjoins(CreateAPIView):
                 dragged_array = serializer.validated_data['dragged_array']
             else:
                 return Response({'message':'serializer error'},status=status.HTTP_204_NO_CONTENT) 
-            # conn_setup = connection_setup(mapping_id)
             con_data =connection_data_retrieve(hierarchy_id,user_id)
             if con_data['status'] ==200:                
                 engine=con_data['engine']
@@ -803,6 +759,7 @@ class rdbmsjoins(CreateAPIView):
                         "join_types": [],
                         "joining_condition_list" : []
                                 }
+                Connections.delete_data(query_set_id,query_set_id,tok1['user_id'])
                 QuerySets.objects.filter(queryset_id = query_set_id).delete()
                 return JsonResponse({"message":"Joining tables successfully","table_columns_and_rows":Response_data},status=status.HTTP_200_OK,safe=False)
             else:
@@ -893,11 +850,6 @@ class rdbmsjoins(CreateAPIView):
                                 }
                 except Exception as e:
                     return Response({"message":f'{e}'},status=status.HTTP_400_BAD_REQUEST)
-            # if file_id is not None and file_id !='':
-            #     # delete_tables_sqlite(cur,engine,serdt['tables'])   
-            #     cur.close()
-            #     engine.dispose()
-            # else:
             cur.close()
             return JsonResponse({"message":"Joining tables successfully","table_columns_and_rows":Response_data},status=status.HTTP_200_OK,safe=False)
         else:
@@ -921,7 +873,6 @@ def replace_nan_with_none(value):
 
 
 def get_clean_data(data):
-    # Replace NaN and inf values with None
     clean_data = [
         [None if (isinstance(value, float) and (math.isnan(value) or math.isinf(value))) else value for value in row]
         for row in data
@@ -983,38 +934,13 @@ class joining_query_data(CreateAPIView):
                 else:
                     query = query_data.custom_query + f' limit {row_limit} '
                 query = query_parsing(query,conn_type,conn_type)
-                # if file_id is not None and file_id !='':
-                    
-                #     cursor_query_data = execution_query(query,cur,dbtype.lower()) 
-                #     if cursor_query_data['status'] == 200:
-                #         result_proxy = cursor_query_data['results_data']
-                #     else:
-                #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-                #     result_column_values = result_proxy.cursor.description               
-                #     results = result_proxy.fetchall()
-                #     temp_class = Sqlite3_temp_table(query,dbtype)
-                #     table_created = temp_class.create(result_column_values,results,f'join_query{user_id}')
-                #     query_string = f'select * from join_query{user_id} limit {row_limit}'
-                #     query_a1 = temp_class.query(query_string) 
-                #     if query_a1['status'] ==200:
-                #         query_result = query_a1['results_data']
-                #         column_names = query_a1['columns']
-                #     else:
-                #         return Response({"message":query_a1['message']},status=status.HTTP_404_NOT_FOUND)
-                # else:
                 cursor_query_data = execution_query(query,cur,conn_type.lower()) 
                 if cursor_query_data['status'] == 200:
                     result_proxy = cursor_query_data['results_data']
                 else:
                     return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
                 query_result = result_proxy.fetchall()
-                
-                # processed_results = [
-                #         {k: replace_nan_with_none(v) for k, v in row._mapping.items()}
-                #         for row in query_result
-                #     ]
                 column_names = cursor_query_data['columns']
-                    # column_names = result_proxy.cursor.description
                 pattern = r'(?i)(select\s+)(.*?)(\s+from\s+)'
                 modified_query = re.sub(pattern, r'\1COUNT(*)\3', query_count, count=1)
                 count_result = execution_query(modified_query,cur,conn_type.lower()) 
@@ -1023,13 +949,7 @@ class joining_query_data(CreateAPIView):
                 else:
                     return Response({"message":count_result['message']},status=status.HTTP_404_NOT_FOUND) 
                 rl_count =qr_rest.fetchall()  
-                # if query_result['status'] ==200:
-                #     result = query_result['result_data']
-                # else:
-                #     return Response({'message':query_result['message']},status = status.HTTP_400_BAD_REQUEST)
                 et=datetime.datetime.now(utc)
-                # column_names = [description[0] for description in results.description]
-                # column_list = [column for column in column_names]
                 
                 response_data =get_clean_data(query_result)
                 if query_name is None or query_name =="":
@@ -1053,15 +973,6 @@ class joining_query_data(CreateAPIView):
                     "query_exection_st":st.time(),
                     "query_exection_et":et.time()
                 }
-                # if file_id is not None and file_id !='':
-                #     temp_class.delete(f'join_query{user_id}')
-                # else:
-                #     pass
-                # if file_id is not None and file_id !='':
-                #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-                #     cur.close()
-                #     engine.dispose()
-                # else:
                 cur.close()
             return Response(data,status=status.HTTP_200_OK)
         else:
@@ -1263,24 +1174,7 @@ class Chart_filter(CreateAPIView):
             except Exception as e:
                 return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)
             if query_data:
-                # if file_id is not None and file_id!='':
-                #     cursor_query_data = execution_query(query_data.custom_query,cur,dbtype.lower()) 
-                #     if cursor_query_data['status'] == 200:
-                #         result_proxy = cursor_query_data['results_data']
-                #     else:
-                #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-                #     result_column_values = result_proxy.cursor.description
-                #     results = result_proxy.fetchall()
-                #     temp_class = Sqlite3_temp_table(query_data.custom_query,dbtype)
-                
-                #     table_created = temp_class.create(result_column_values,results,table_name_for_temp)
-                #     if table_created['status'] ==200:
-                #         data_sourse_string = f'select * from {table_name_for_temp}'
-                #     else:
-                #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)
-                # else:
-                #     temp_class=None
-                    data_sourse_string = f'select * from ({query_data.custom_query})temp'
+                data_sourse_string = f'select * from ({query_data.custom_query})temp'
             else:
                 return Response({'message':'Query Set ID is not Present'},status = status.HTTP_400_BAD_REQUEST)
                 
@@ -1292,8 +1186,6 @@ class Chart_filter(CreateAPIView):
                 return Response({'message':response['message']},status = status.HTTP_400_BAD_REQUEST)
             if search !='' or search != None:
                 result_data = [row for row in result_data if str(search).lower() in str(row).lower()]
-            # else:
-            #     result_data = [row for row in result_data]
             Response_data = {
                     "hierarchy_id":hierarchy_id,
                     "query_set_id":query_set_id,
@@ -1302,17 +1194,6 @@ class Chart_filter(CreateAPIView):
                     "col_name":col_name,
                     "col_data" : literal_eval(result_data) if result_data != [""] else []
                 }
-            
-            # if file_id is not None and file_id !='':
-                # delete_query = temp_class.delete(table_name_for_temp)
-                # if delete_query['status'] ==200:
-                #     delete_message= delete_query['message']
-                # else:
-                #     return Response({'message':delete_query['message']},status = status.HTTP_400_BAD_REQUEST)
-                # delete_tables_sqlite(cur,engine,serdt['tables'])   
-            #     cur.close()
-            #     engine.dispose()
-            # else:
             cur.close()
            
             
@@ -1332,8 +1213,6 @@ class Chart_filter(CreateAPIView):
                 
                 type_of_filter = serializer.validated_data['type_of_filter']
                 filter_id = serializer.validated_data['filter_id']
-                # database_id = serializer.validated_data['database_id']
-                # file_id = serializer.validated_data['file_id']
                 hierarchy_id = serializer.validated_data['hierarchy_id']
                 queryset_id = serializer.validated_data['queryset_id']
                 datasource_querysetid = serializer.validated_data['datasource_querysetid']
@@ -1346,6 +1225,7 @@ class Chart_filter(CreateAPIView):
                 is_exclude = serializer.validated_data['is_exclude']
                 field_logic = serializer.validated_data['field_logic']
                 is_calculated =serializer.validated_data['is_calculated']
+                top_bottom = serializer.validated_data['top_bottom']
 
             else:
                 return Response({'message':'serializer error'},status=status.HTTP_204_NO_CONTENT)
@@ -1361,137 +1241,135 @@ class Chart_filter(CreateAPIView):
             else:
                 return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
             query_data1 = QuerySets.objects.get(queryset_id = queryset_id,user_id = user_id)
-            
             try:
-                if type_of_filter.lower() == 'datasource' :
-                    table_name_for_temp = f"data_source_table{user_id}"
-                    query_data = QuerySets.objects.get(queryset_id = queryset_id,user_id = user_id)
-                    
-                elif(type_of_filter.lower() == 'sheet'and datasource_querysetid is not None):
-                    table_name_for_temp = f'sheet_table{user_id}'
-                    query_data = DataSource_querysets.objects.get( datasource_querysetid= datasource_querysetid,user_id = user_id)                    
-                else:
-                    table_name_for_temp = f"data_source_table{user_id}"
-                    query_data = QuerySets.objects.get(queryset_id = queryset_id,user_id = user_id)
-                
-            except Exception as e:
-                return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST) 
-            if query_data:
-                # if file_id is not None and file_id!='':
-                #     cursor_query_data = execution_query(query_data.custom_query,cur,dbtype.lower()) 
-                #     if cursor_query_data['status'] == 200:
-                #         result_proxy = cursor_query_data['results_data']
-                #     else:
-                #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-                #     result_column_values = result_proxy.cursor.description
-                #     results = result_proxy.fetchall()
-                #     temp_class = Sqlite3_temp_table(query_data.custom_query,dbtype)
-                
-                #     table_created = temp_class.create(result_column_values,results,table_name_for_temp)
-                #     if table_created['status'] ==200:
-                #         data_sourse_string = f'select * from {table_name_for_temp}'
-                #     else:
-                #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)
-                # else:
-                #     temp_class=None
-                data_sourse_string = f'select * from ({query_data.custom_query})temp'
-            else:
-                return Response({'message':'Query Set ID is not Present'},status = status.HTTP_400_BAD_REQUEST)
-                
-                   
-            response = get_filter_column_data(data_sourse_string,col_name,format_date,data_type,cur,conn_type,field_logic)
-            if response['status'] ==200:
-                result_data = response['results_data']
-            else:
-                return Response({'message':response['message']},status = status.HTTP_400_BAD_REQUEST)
-            if filter_id is not None:
-                if type_of_filter.lower() != 'datasource':
-                    aaa = ChartFilters.objects.get(filter_id =filter_id)
-                    if range_values:
-                        aa = ChartFilters.objects.filter(filter_id =filter_id,user_id =user_id).update(filter_data = range_values,row_data = tuple(result_data),updated_at = datetime.datetime.now(),is_exclude = is_exclude)
+                if  top_bottom is  None:
+                    try:
+                        if type_of_filter.lower() == 'datasource' :
+                            table_name_for_temp = f"data_source_table{user_id}"
+                            query_data = QuerySets.objects.get(queryset_id = queryset_id,user_id = user_id)
+                            
+                        elif(type_of_filter.lower() == 'sheet'and datasource_querysetid is not None):
+                            table_name_for_temp = f'sheet_table{user_id}'
+                            query_data = DataSource_querysets.objects.get( datasource_querysetid= datasource_querysetid,user_id = user_id)                    
+                        else:
+                            table_name_for_temp = f"data_source_table{user_id}"
+                            query_data = QuerySets.objects.get(queryset_id = queryset_id,user_id = user_id)
+                        
+                    except Exception as e:
+                        return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST) 
+                    if query_data:
+                        data_sourse_string = f'select * from ({query_data.custom_query})temp'
                     else:
-                        aa = ChartFilters.objects.filter(filter_id =filter_id,user_id =user_id  ).update(filter_data = tuple(select_values),row_data = tuple(result_data),updated_at = datetime.datetime.now(),is_exclude = is_exclude)
-                else:
-                    aaa = DataSourceFilter.objects.get(filter_id =filter_id)
-                    if range_values:
-                        aa = DataSourceFilter.objects.filter(filter_id =filter_id,user_id =user_id ).update(filter_data = range_values,row_data = tuple(result_data),updated_at = datetime.datetime.now())
+                        return Response({'message':'Query Set ID is not Present'},status = status.HTTP_400_BAD_REQUEST)
+                        
+                        
+                    response = get_filter_column_data(data_sourse_string,col_name,format_date,data_type,cur,conn_type,field_logic)
+                    if response['status'] ==200:
+                        result_data = response['results_data']
                     else:
-                        aa = DataSourceFilter.objects.filter(filter_id =filter_id,user_id =user_id  ).update(filter_data = tuple(select_values),row_data = tuple(result_data),updated_at = datetime.datetime.now())
-                Response_data = {
-                    "filter_id" : filter_id              
-                }
-            else:
-                if type_of_filter.lower() == 'datasource':
-                    if range_values:
-                        aa = DataSourceFilter.objects.create(
+                        return Response({'message':response['message']},status = status.HTTP_400_BAD_REQUEST)
+                else:
+                    result_data=None
+                if filter_id is not None:
+                    if type_of_filter.lower() != 'datasource':
+                        aaa = ChartFilters.objects.get(filter_id =filter_id)
+                        if range_values:
+                            aa = ChartFilters.objects.filter(filter_id =filter_id,user_id =user_id).update(filter_data = range_values,row_data = tuple(result_data),updated_at = datetime.datetime.now(),is_exclude = is_exclude,format_type = format_date)
+                        elif top_bottom:
+                            aa = ChartFilters.objects.filter(filter_id =filter_id,user_id =user_id).update(top_bottom = top_bottom,updated_at = datetime.datetime.now(),is_exclude = is_exclude,format_type=format_date)
+                        else:
+                            aa = ChartFilters.objects.filter(filter_id =filter_id,user_id =user_id  ).update(filter_data = tuple(select_values),row_data = tuple(result_data),updated_at = datetime.datetime.now(),is_exclude = is_exclude,format_type=format_date)
+                    else:
+                        aaa = DataSourceFilter.objects.get(filter_id =filter_id)
+                        if range_values:
+                            aa = DataSourceFilter.objects.filter(filter_id =filter_id,user_id =user_id ).update(filter_data = range_values,row_data = tuple(result_data),is_exclude = is_exclude,updated_at = datetime.datetime.now())
+                        else:
+                            aa = DataSourceFilter.objects.filter(filter_id =filter_id,user_id =user_id  ).update(filter_data = tuple(select_values),row_data = tuple(result_data),is_exclude = is_exclude,updated_at = datetime.datetime.now())
+                    Response_data = {
+                        "filter_id" : filter_id              
+                    }
+                else:
+                    if type_of_filter.lower() == 'datasource':
+                        if range_values:
+                            aa = DataSourceFilter.objects.create(
+                                    hierarchy_id = hierarchy_id,
+                                    user_id=user_id,
+                                    queryset_id =queryset_id,
+                                    col_name = col_name,    
+                                    data_type = data_type,
+                                    filter_data = range_values,
+                                    row_data = tuple(result_data),
+                                    format_type = format_date,
+                                    # is_exclude = is_exclude
+                                )
+                        else:
+                            aa = DataSourceFilter.objects.create(
                                 hierarchy_id = hierarchy_id,
                                 user_id=user_id,
                                 queryset_id =queryset_id,
                                 col_name = col_name,    
                                 data_type = data_type,
-                                filter_data = range_values,
-                                row_data = tuple(result_data),
-                                format_type = format_date
-                            )
-                    else:
-                        aa = DataSourceFilter.objects.create(
-                            hierarchy_id = hierarchy_id,
-                            user_id=user_id,
-                            queryset_id =queryset_id,
-                            col_name = col_name,    
-                            data_type = data_type,
-                            filter_data = tuple(select_values),
-                            row_data = tuple(result_data),
-                            format_type = format_date
-                        )
-                else:
-                    if range_values:
-
-                        aa = ChartFilters.objects.create(
-                                hierarchy_id=hierarchy_id,
-                                user_id=user_id,
-                                datasource_querysetid = datasource_querysetid,
-                                queryset_id  = queryset_id,
-                                col_name = col_name,    
-                                data_type = data_type,
-                                filter_data = range_values,
-                                row_data = tuple(result_data),
-                                format_type = format_date,
-                                is_exclude = is_exclude,
-                                field_logic = field_logic,
-                                is_calculated = is_calculated
-                            )
-                    else:
-                        aa = ChartFilters.objects.create(
-                                hierarchy_id=hierarchy_id,
-                                user_id=user_id,
-                                datasource_querysetid = datasource_querysetid,
-                                queryset_id  = queryset_id,
-                                col_name = col_name,    
-                                data_type = data_type,
                                 filter_data = tuple(select_values),
                                 row_data = tuple(result_data),
                                 format_type = format_date,
-                                is_exclude = is_exclude,
-                                field_logic = field_logic,
-                                is_calculated = is_calculated
-
+                                is_exclude = is_exclude
                             )
+                    else:
+                        if range_values:
+                            aa = ChartFilters.objects.create(
+                                    hierarchy_id=hierarchy_id,
+                                    user_id=user_id,
+                                    datasource_querysetid = datasource_querysetid,
+                                    queryset_id  = queryset_id,
+                                    col_name = col_name,    
+                                    data_type = data_type,
+                                    filter_data = range_values,
+                                    row_data = tuple(result_data),
+                                    format_type = format_date,
+                                    is_exclude = is_exclude,
+                                    field_logic = field_logic,
+                                    is_calculated = is_calculated
+                                )
+                        elif top_bottom is not None:
+                            aa = ChartFilters.objects.create(
+                                    hierarchy_id=hierarchy_id,
+                                    user_id=user_id,
+                                    datasource_querysetid = datasource_querysetid,
+                                    queryset_id  = queryset_id,
+                                    col_name = col_name,    
+                                    data_type = data_type,
+                                    filter_data = None,
+                                    row_data = None,
+                                    format_type = format_date,
+                                    is_exclude = is_exclude,
+                                    field_logic = field_logic,
+                                    is_calculated = is_calculated,
+                                    top_bottom=top_bottom
 
-                Response_data = {
-                        "filter_id" : aa.filter_id              
-                    }
-                
-            # if file_id is not None and file_id !='':
-            #     delete_query = temp_class.delete(table_name_for_temp)
-            #     if delete_query['status'] ==200:
-            #         delete_message= delete_query['message']
-            #     else:
-            #         return Response({'message':delete_query['message']},status = status.HTTP_400_BAD_REQUEST)
-            #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-            #     cur.close()
-            #     engine.dispose()
-            # else:
+                                )
+                        else:
+                            aa = ChartFilters.objects.create(
+                                    hierarchy_id=hierarchy_id,
+                                    user_id=user_id,
+                                    datasource_querysetid = datasource_querysetid,
+                                    queryset_id  = queryset_id,
+                                    col_name = col_name,    
+                                    data_type = data_type,
+                                    filter_data = tuple(select_values),
+                                    row_data = tuple(result_data),
+                                    format_type = format_date,
+                                    is_exclude = is_exclude,
+                                    field_logic = field_logic,
+                                    is_calculated = is_calculated
+
+                                )
+
+                    Response_data = {
+                            "filter_id" : aa.filter_id              
+                        }
+
+            except Exception as e:
+                print(str(e))
             cur.close()
             
             return Response(Response_data,status=status.HTTP_200_OK)
@@ -1546,9 +1424,6 @@ def get_filter_column_data(data_sourse_string,col_name,format_date,data_type,cur
             query_string = data_sourse_string.replace('*',f" count(distinct \"{col_name}\")",1 )+ ' order by 1'
         else:
             query_string = data_sourse_string.replace('*',f" distinct({format_date}(\"{col_name}\"))",1 )+ ' order by 1'
-        # if file_id is not None and file_id !='':
-        #     query_result = temp_class.query(query_string) 
-        # else:
         query_string = query_parsing(query_string,'sqlite',dbtype)
         query_result = execution_query(query_string,cur,dbtype.lower())
         if query_result['status'] ==200:
@@ -1564,7 +1439,8 @@ def get_filter_column_data(data_sourse_string,col_name,format_date,data_type,cur
             result_data.append(i[0])
         
     elif data_type.lower() in date_list :
-        query_string = data_sourse_string.replace('*',f" distinct({get_formatted_date_query('sqlite',col_name,format_date)})",1) + ' order by 1'
+        query_string = data_sourse_string.replace('*',f" distinct({get_formatted_date_query('clickhouse',col_name,format_date)})",1) + ' order by 1'
+        query_string = custom_date_transformation(query_string,dtype_fun(dbtype))
         query_string = query_parsing(query_string,'sqlite',dbtype)
         query_result = execution_query(query_string,cur,dbtype.lower())
 
@@ -1600,7 +1476,6 @@ def get_filter_column_data(data_sourse_string,col_name,format_date,data_type,cur
             d1 = i[0]
             row_data.append(d1)
         result_data = row_data
-        # result_data =list(col_data[0]) 
        
     else:
         result_data = {
@@ -1619,24 +1494,25 @@ def get_filter_column_data(data_sourse_string,col_name,format_date,data_type,cur
 
 def get_formatted_date_query(db_type,date_column,f1):
     f1 = date_format(f1,db_type)
-    if f1 =='%m' and db_type=='sqlite':
-        query = f""" CASE STRFTIME('{f1}', \"{date_column}\")
-                WHEN '01' THEN 'January'
-            WHEN '02' THEN 'February'
-            WHEN '03' THEN 'March'
-            WHEN '04' THEN 'April'
-            WHEN '05' THEN 'May'
-            WHEN '06' THEN 'June'
-            WHEN '07' THEN 'July'
-            WHEN '08' THEN 'August'
-            WHEN '09' THEN 'September'
-            WHEN '10' THEN 'October'
-            WHEN '11' THEN 'November'
-            WHEN '12' THEN 'December'
-            END  """
+    if f1 =='%m' and db_type=='clickhouse':
+        query = f""" CASE 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '01' THEN 'January' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '02' THEN 'February' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '03' THEN 'March' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '04' THEN 'April' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '05' THEN 'May' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '06' THEN 'June' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '07' THEN 'July' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '08' THEN 'August' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '09' THEN 'September' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '10' THEN 'October' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '11' THEN 'November' 
+    WHEN DATE_FORMAT(\"{date_column}\", '%m') = '12' THEN 'December' 
+    ELSE NULL 
+  END """
     elif f1 =='%w':
-        query= f""" CASE STRFTIME('%w', \"{date_column}\")
-                WHEN '0' THEN 'Sunday'
+        query= f""" CASE STRFTIME('%w',\"{date_column}\" )
+                WHEN '7' THEN 'Sunday'
                 WHEN '1' THEN 'Monday'
                 WHEN '2' THEN 'Tuesday'
                 WHEN '3' THEN 'Wednesday'
@@ -1647,6 +1523,8 @@ def get_formatted_date_query(db_type,date_column,f1):
     elif f1 =='count_distinct':
         if db_type == 'sqlite':
             query = f" count(Distinct STRFTIME('{f1}', \"{date_column}\"))"
+        elif db_type =='clickhouse':
+            query = f" count(Distinct DATE_FORMAT(\"{date_column}\",'{f1}'))"
         elif db_type == 'mysql':
             query = f" count(Distinct DATE_FORMAT(\"{date_column}\", '%Y-%m-%d')) "
         elif db_type == 'postgres':
@@ -1659,14 +1537,17 @@ def get_formatted_date_query(db_type,date_column,f1):
             raise ValueError("Unsupported database type")
     elif f1.lower()=='quarter':
         query = f"""CASE 
-        WHEN strftime('%m',\"{date_column}\" ) IN ('01', '02', '03') THEN 'Q1'
-        WHEN strftime('%m',\"{date_column}\" ) IN ('04', '05', '06') THEN 'Q2'
-        WHEN strftime('%m',\"{date_column}\" ) IN ('07', '08', '09') THEN 'Q3'
-        WHEN strftime('%m',\"{date_column}\" ) IN ('10', '11', '12') THEN 'Q4'
-        END"""
+            WHEN date_format(\"{date_column}\", '%m') IN ('01', '02', '03') THEN 'Q1'
+            WHEN date_format(\"{date_column}\", '%m') IN ('04', '05', '06') THEN 'Q2'
+            WHEN date_format(\"{date_column}\", '%m') IN ('07', '08', '09') THEN 'Q3'
+            WHEN date_format(\"{date_column}\", '%m') IN ('10', '11', '12') THEN 'Q4'
+        END
+            """
     else:
         if db_type == 'sqlite':
             query = f" STRFTIME('{f1}', \"{date_column}\")"
+        elif db_type =='clickhouse':
+            query = f" DATE_FORMAT(\"{date_column}\",'{f1}')"
         elif db_type == 'mysql':
             query = f" DATE_FORMAT(\"{date_column}\", '%Y-%m-%d') "
         elif db_type == 'postgres':
@@ -1684,15 +1565,41 @@ def get_formatted_date_query(db_type,date_column,f1):
 
 def Custom_joining_filter(condition,chart_filter_data,type_of_db):
     p = literal_eval(chart_filter_data.filter_data)
+    is_exclude = chart_filter_data.is_exclude
+    # exclude_cond = 'IN'
     for_range = str(p).replace(',)',')')
     d111 =date_data_change(chart_filter_data.format_type,p,0)
     range_k = literal_eval(for_range) 
     table_name =re.search(r'\((.*?)\)', chart_filter_data.col_name)
     chart_filter_data.data_type = chart_filter_data.data_type.lower().replace('nullable(','').split('(')[0].replace(')','')
+    input1 = chart_filter_data.filter_data
+    formatted_input,contains_none_or_empty,none_check,is_empty_tuple = is_tuple_format(input1)
+    col_name= chart_filter_data.col_name
+    if is_exclude:
+        # exclude_cond = ' NOT IN '
+        if none_check or contains_none_or_empty:
+            exclude_cond = f'not in {formatted_input} or "{col_name}" IS NOT NULL'
+        elif is_empty_tuple:
+            exclude_cond = 'IS NOT NULL'
+        elif input1 == '()':
+            exclude_cond = 'IS NOT NULL'
+        else:
+            exclude_cond = 'NOT IN'
+    else:
+        # exclude_cond = ' IN '
+        if none_check or contains_none_or_empty:
+            exclude_cond = f'in {formatted_input} or "{col_name}"is NULL' 
+        elif is_empty_tuple:
+            exclude_cond = 'IS NULL'
+        elif input1 == '()':
+            exclude_cond = 'IS  NULL'
+        else:
+            exclude_cond = 'IN '
+
     if  chart_filter_data.data_type.lower() in date_list :
         quarters = {"q1":('01','02','03'),"q2":('04','05','06'),"q3":('07','08','09'),"q4":('10','11','12')}
         if isinstance(range_k,list):
-            string1 =   f" {condition} {get_formatted_date_query('sqlite',chart_filter_data.col_name,chart_filter_data.format_type)}  between '{range_k[0]}' and '{range_k[1]}'  " 
+            string1 =   f" {condition} {get_formatted_date_query('clickhouse',chart_filter_data.col_name,chart_filter_data.format_type)}  between '{range_k[0]}' and '{range_k[1]}'  " 
             string2 = ''
             string3 = ''
         elif chart_filter_data.format_type.lower()=='quarter':
@@ -1700,11 +1607,14 @@ def Custom_joining_filter(condition,chart_filter_data,type_of_db):
             for quarter in literal_eval(d111):
                 months.extend(quarters.get(quarter.lower(), ()))
             d111 = tuple(months)
-            string1 =   f" {condition} STRFTIME('%m', \"{chart_filter_data.col_name}\") in {d111} " 
+            if none_check or is_empty_tuple or contains_none_or_empty or input1 == '()':
+                string1 =   f" {condition} STRFTIME('%m', \"{chart_filter_data.col_name}\") {exclude_cond}"
+            else:
+                string1 =   f" {condition} STRFTIME('%m', \"{chart_filter_data.col_name}\") {exclude_cond} {d111} " 
             string2 = ''
             string3 = ''
         else:
-            string1 =   f" {condition} {get_formatted_date_query('sqlite',chart_filter_data.col_name,chart_filter_data.format_type)} in {d111} " 
+            string1 =   f" {condition} {get_formatted_date_query('clickhouse',chart_filter_data.col_name,chart_filter_data.format_type)} in {d111} " 
             string2 = ''
             string3 = ''
 
@@ -1719,7 +1629,10 @@ def Custom_joining_filter(condition,chart_filter_data,type_of_db):
         string3 =  ''
         
     elif  chart_filter_data.data_type.lower() in  integer_list  or chart_filter_data.data_type.lower() in char_list or  chart_filter_data.data_type.lower() in bool_list :
-        string1 = f" {condition} \"{chart_filter_data.col_name}\" in {d111}"
+        if none_check or is_empty_tuple or contains_none_or_empty or input1 == '()':
+            string1 = f" {condition} \"{chart_filter_data.col_name}\" {exclude_cond}"
+        else:
+            string1 = f" {condition} \"{chart_filter_data.col_name}\" {exclude_cond} {d111}"
         string2 =  ''
         string3 =  ''
         
@@ -1738,8 +1651,6 @@ def Custom_joining_filter(condition,chart_filter_data,type_of_db):
 
 
 def date_data_change(format,data,value):
-    # 0 -decode
-    # 1 -encode
     data = literal_eval(data)
     month_map = {
                     '01': 'January',
@@ -1769,12 +1680,12 @@ def date_data_change(format,data,value):
             result_data = [month_map[month] if month in month_map else None for month in data] 
         else:
             result_data = data
-    return str(result_data).replace(',)',')')
+    return str(result_data)
 
 
 def drill_filteration(condition,col_name,data,is_date,date_col):
     if is_date:
-        string1 =   f" {condition} {get_formatted_date_query('sqlite',date_col,col_name)} in ('{data}') " 
+        string1 =   f" {condition} {get_formatted_date_query('clickhouse',date_col,col_name)} in ('{data}') " 
         string2 = ''
         string3 = '' 
     else:
@@ -1795,23 +1706,45 @@ def drill_filteration(condition,col_name,data,is_date,date_col):
 
 
 
-def Custom_joining_filter1(condition,chart_filter_data,type_of_db,drill_downs,dash_input_data):
-    exclude_cond = ' IN '
+def Custom_joining_filter1(condition,chart_filter_data,type_of_db,drill_downs,dash_input_data,drill_is_exclude = False):
+    if drill_is_exclude:
+        exclude_cond = 'NOT IN'
+    else:
+        exclude_cond = ' IN '
     try:
-        is_exclude = chart_filter_data.is_exclude
         if chart_filter_data.format_type: 
             format_type = chart_filter_data.format_type
         else:
             format_type=''
-        
         data_type = chart_filter_data.data_type.lower().replace('nullable(','').split('(')[0].replace(')','')
+        input1 = chart_filter_data.filter_data
+        formatted_input,contains_none_or_empty,none_check,is_empty_tuple = is_tuple_format(input1)
         col_name= chart_filter_data.col_name
-        if is_exclude == True:
-            exclude_cond = ' NOT IN '
+        if chart_filter_data.is_exclude:
+            if none_check or contains_none_or_empty:
+                exclude_cond = f'in {formatted_input} or "{col_name}" IS NOT NULL'
+            elif is_empty_tuple:
+                exclude_cond = 'IS NOT NULL'
+            elif input1 == '()':
+                exclude_cond = 'IS NOT NULL'
+            else:
+                exclude_cond = f'NOT IN '
         else:
-            exclude_cond = ' IN '
+            if none_check or contains_none_or_empty:
+                exclude_cond = f'in {formatted_input} or "{col_name}"is NULL' 
+            elif is_empty_tuple:
+                exclude_cond = 'IS NULL'
+            elif input1 == '()':
+                exclude_cond = 'IS  NULL'
+            else:
+                exclude_cond = 'IN '
 
     except:
+        none_check = False  # Ensure it's always defined
+        is_empty_tuple = False
+        contains_none_or_empty = False
+        input1 = ''
+        
         if chart_filter_data.column_datatype.lower() in date_list11 :
             format_type = 'year/month/day hour:minute:seconds'
         elif chart_filter_data.column_datatype.lower() in timestamp_list:
@@ -1822,7 +1755,9 @@ def Custom_joining_filter1(condition,chart_filter_data,type_of_db,drill_downs,da
         col_name = chart_filter_data.column_name
     if dash_input_data:
         p = dash_input_data
+        top_bottom=False
     elif drill_downs:
+        top_bottom = False
         col = col_name
         for item in drill_downs:
             if col in item.keys():
@@ -1830,86 +1765,173 @@ def Custom_joining_filter1(condition,chart_filter_data,type_of_db,drill_downs,da
                 p = chart_filter_data.filter_data.replace(')',f"'{keys}')")
             else:
                 p= chart_filter_data.filter_data
+                
     else:
-        p = chart_filter_data.filter_data
-    for_range = str(p).replace(',)',')')
-    
-    range_k = literal_eval(for_range)
-    
-    d111=date_data_change(format_type,p,0)       
+        try:
+            if chart_filter_data.top_bottom:
+                p=''
+                top_bottom = True
+                top_data = literal_eval(chart_filter_data.top_bottom)
+            else:
+                p = chart_filter_data.filter_data
+                top_bottom=False
+        except:
+            p = chart_filter_data.filter_data
+            top_bottom=False
+    range_k = p
+    d111=date_data_change(format_type,p,0)
     if  data_type in date_list :
         quarters = {"q1":('01','02','03'),"q2":('04','05','06'),"q3":('07','08','09'),"q4":('10','11','12')}
-
-        if isinstance(range_k,list):
-            string1 =   f" {condition} {get_formatted_date_query('sqlite',col_name,format_type)}  between '{range_k[0]}' and '{range_k[1]}'  " 
+        if isinstance(range_k,list) and chart_filter_data.relative_date is not None:  #relative dates
+            string1 =   f" {condition} ((\"{col_name}\" >= (datetime {range[0]})) AND (\"{col_name}\" < (datetime {range_k[1]})))" 
             string2 = ''
             string3 = ''
+            string4= ''
+            string5 = ''
+        elif isinstance(range_k,list):
+            string1 =   f" {condition} {get_formatted_date_query('clickhouse',col_name,format_type)}  between '{range_k[0]}' and '{range_k[1]}'  " 
+            string2 = ''
+            string3 = ''
+            string4= ''
+            string5 = ''
+        elif top_bottom:
+            string1 = '' 
+            string2 = ''
+            string3 = ''
+            string4 = f' {top_data[1]}(\"{top_data[0]}\") {top_data[3]} ,'
+            string5 = f' Limit {top_data[2]}  '
         elif format_type.lower()=='quarter':
             months = []
             for quarter in literal_eval(d111):
                 months.extend(quarters.get(quarter.lower(), ()))
             d111 = tuple(months)
-            string1 =   f" {condition} STRFTIME('%m', \"{col_name}\") {exclude_cond} {d111} " 
+            if none_check or is_empty_tuple or contains_none_or_empty or input1 == '()':
+                string1 = f" {condition} STRFTIME('%m', \"{col_name}\") {exclude_cond}" 
+            else:
+                string1 =   f" {condition} STRFTIME('%m', \"{col_name}\") {exclude_cond} {d111} " 
             string2 = ''
             string3 = ''
+            string4= ''
+            string5 = ''
         else:
-            string1 =   f" {condition} {get_formatted_date_query('sqlite',col_name,format_type)} {exclude_cond} {d111} " 
+            if none_check or is_empty_tuple or contains_none_or_empty or input1 == '()':
+                string1 = f" {condition} {get_formatted_date_query('clickhouse',col_name,format_type)} {exclude_cond}"
+            else:
+                string1 =   f" {condition} {get_formatted_date_query('clickhouse',col_name,format_type)} {exclude_cond} {d111} " 
             string2 = ''
             string3 = ''
+            string4= ''
+            string5 = ''
 
 
     elif  data_type == 'startswith':
         string1 =f" {condition} lower(\"{col_name}\") like lower('{range_k[0]}%')"
         string2 =  ''
         string3 =  ''
+        string4= ''
+        string5 = ''
         
     elif data_type == 'endswith':
         string1 = f" {condition} lower(\"{col_name}\") like lower('%{range_k[0]}')"
         string2 = ''
         string3 =  ''
+        string4= ''
+        string5 = ''
         
     elif  data_type in  integer_list  or data_type in char_list or  data_type in bool_list :
-        string1 = f" {condition} \"{col_name}\" {exclude_cond} {d111}"
-        string2 =  ''
-        string3 =  ''
+        if top_bottom:
+            string1 = f""
+            string2 =  ''
+            string3 =  ''
+            string4 = f' {top_data[1]}(\"{top_data[0]}\") {top_data[3]} ,'
+            string5 = f' Limit {top_data[2]}  '
+        else:
+            try:
+                input1 = chart_filter_data.filter_data
+                if none_check or is_empty_tuple or contains_none_or_empty or input1 == '()':
+                    string1 = f" {condition} \"{col_name}\" {exclude_cond}"
+                else:
+                    string1 = f" {condition} \"{col_name}\" {exclude_cond} {d111}"
+            except:
+                string1 = f" {condition} \"{col_name}\" {exclude_cond} {d111}"
+                
+            string2 =  ''
+            string3 =  ''
+            string4= ''
+            string5 = ''
         
     elif data_type == 'aggregate' :
        
         string1 =   ''
-        string2 = " "
-        string3 = f" having {format_type}(\"{col_name}\") between {range_k[0]} and {range_k[1]}"
+        string2 = ""
+        string3 = f"  {format_type}(\"{col_name}\") between {range_k[0]} and {range_k[1]} ,"
+        string4= ''
+        string5 = ''
+
     elif data_type == 'calculated':
         pattern = r'\b(avg|min|max|sum|count)\b'
 
-        # Search for the pattern
         matches = re.findall(pattern, str(chart_filter_data.field_logic).lower(), re.IGNORECASE)
         if  matches:
-            string1 =   ''
-            string2 = " "
-            string3 = f" having {format_type}({chart_filter_data.field_logic}) between {range_k[0]} and {range_k[1]}"
+            string1 =  ''
+            string2 = ""
+            string3 = f"  {format_type}({chart_filter_data.field_logic}) between {range_k[0]} and {range_k[1]} "
+            string4= ''
+            string5 = ''
         else:
-            string1 = f" {condition} {chart_filter_data.field_logic} {exclude_cond} {d111}"
+            if none_check or is_empty_tuple or contains_none_or_empty or input1 == '()':
+                string1 = f" {condition} {chart_filter_data.field_logic} {exclude_cond}"
+            else:
+                string1 = f" {condition} {chart_filter_data.field_logic} {exclude_cond} {d111}"
             string2 =  ''
             string3 =  ''
-            # query_string.append(f'{f1}({c1}) as {alias}')
-            # response_col.append(f" \"{alias}\"" )
+            string4= ''
+            string5 = ''
+
 
     else:
         pass
-        
     response_data = {
         "string1":string1,
         "string2":string2,
-        "string3":string3
+        "string3":string3,
+        "string4":string4,
+        "string5":string5
     }
     return response_data
 
 
+
+def is_tuple_format(variable):
+    try:
+        parsed_var = ast.literal_eval(variable)  # Convert string to Python object
+
+        if not isinstance(parsed_var, tuple):
+            return False, False, False, False  # Not a tuple, return all False
+
+        # Check if the tuple contains None or is empty
+        contains_none_or_empty = any(item is None or item == "" for item in parsed_var)
+        if contains_none_or_empty:
+            input = tuple(item for item in parsed_var if item is not None and item != '')
+            # contains_none_or_empty = True
+        else:
+            input = tuple(parsed_var)
+        input = str(input).replace(',)', ')')
+        none_check = any(item is None for item in input)
+        is_empty_tuple = input == '()'
+        if is_empty_tuple:
+            contains_none_or_empty = False
+        else:
+            pass
+        
+        return input, contains_none_or_empty, none_check, is_empty_tuple
+
+    except (SyntaxError, ValueError):
+        return False, False, False, False 
+
 def custom_date_transformation(sql_query, target_dialect):
-    # Transpile to the target dialect (PostgreSQL, MySQL, etc.)
     transpiled = transpile(sql_query, write=target_dialect)[0]
 
-    # Custom transformation for week number and weekday based on target dialect
     if target_dialect == 'postgres':
         transpiled = transpiled.replace("STRFTIME('%W',", "EXTRACT(WEEK FROM")
         transpiled = transpiled.replace("STRFTIME('%w',", "EXTRACT(DOW FROM")
@@ -1934,7 +1956,6 @@ def custom_date_transformation(sql_query, target_dialect):
         transpiled = transpiled.replace("STRFTIME('%w',", "toDayOfWeek(")
 
     elif target_dialect == 'sqlite':
-        # SQLite is the default format, no changes required
         pass
 
     else:
@@ -1942,19 +1963,21 @@ def custom_date_transformation(sql_query, target_dialect):
 
     return transpiled
 
-def data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,type_of_db):
+def data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,pivot_measure,type_of_db):
     try:
-        column_string1 = {"col":[],"row":[]}
-        response_col1 = {"col":[],"row":[]}
+        column_string1 = {"col":[],"row":[],"pivot_measure":[]}
+        response_col1 = {"col":[],"row":[],"pivot_measure":[]}
         groupby_string1 = ' group by '
         groupby_string = ''
-        abc= [col,row]
+        abc= [col,row,pivot_measure]
         check = True if len(abc[0])>0 else False
         for index,col_values in enumerate(abc):
             if index == 0:
                 current_value = "col"
             elif index == 1:
                 current_value = "row"
+            else:
+                current_value = 'pivot_measure'
             query_string= []
             response_col = []
             group_string = ''
@@ -1988,13 +2011,17 @@ def data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,type
             groupby_string1 += groupby_string
             if index==0:
                 column_string1['col'] = query_string
-            else:
+            elif index==1:
                 column_string1['row'] = query_string
+            else:
+                column_string1['pivot_measure'] = query_string
             if index==0:
                 response_col1['col'] = response_col
-            else:
+            elif index==1:
                 response_col1['row'] = response_col
-        combined_values = column_string1['col'] + column_string1["row"]
+            else:
+                response_col1['pivot_measure'] = response_col
+        combined_values = column_string1['col'] + column_string1["row"] + column_string1['pivot_measure']
         a1_combined = ','.join(combined_values)
         if groupby_string1.lower()==' group by ':
             groupby_string1=''
@@ -2011,7 +2038,6 @@ def data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,type
                 query_string1 = data_sourse_string.replace('*',a1_combined)+ string1 + groupby_string1.strip(',') + string3
             else:
                 query_string1 = data_sourse_string+ string1 + groupby_string1.strip(',') + string3
-        # query_user = query_parsing(query_string1,'sqlite',type_of_db)
         query_string1 = custom_date_transformation(query_string1,dtype_fun(type_of_db))
         query_user = query_parsing(query_string1,'sqlite',type_of_db)
         temp1 = {
@@ -2019,6 +2045,7 @@ def data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,type
             "column_string" :response_col1,
             "columns" : column_string1['col'],
             "rows" : column_string1['row'],
+            "pivot_measures":column_string1['pivot_measure'],
             "query" : query_string1,
             "group_string" : groupby_string1.strip(','),
             "user_col":a1_combined,
@@ -2066,6 +2093,7 @@ class Multicolumndata_with_filter(CreateAPIView):
                 parent_user = serializer.validated_data['parent_user']
                 page_count = serializer.validated_data['page_count']
                 order_column = serializer.validated_data['order_column']
+                pivot_measure = serializer.validated_data['pivot_measure']
                 
                 
             else:
@@ -2093,6 +2121,7 @@ class Multicolumndata_with_filter(CreateAPIView):
             
             copy_col= copy.deepcopy(col)
             copy_row=copy.deepcopy(row)
+            copy_pivot_measure = copy.deepcopy(pivot_measure)
             con_data =connection_data_retrieve(hierarchy_id,user_id)
             if con_data['status'] ==200:                
                 engine=con_data['engine']
@@ -2110,30 +2139,15 @@ class Multicolumndata_with_filter(CreateAPIView):
                 return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)
 
             if query_data:
-                
-                # if file_id is not None and file_id!='':
-                    
-                #     cursor_query_data = execution_query(query_data.custom_query,cur,dbtype.lower()) 
-                #     if cursor_query_data['status'] == 200:
-                #         result_proxy = cursor_query_data['results_data']
-                #     else:
-                #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-                #     result_column_values = result_proxy.cursor.description
-                #     results = result_proxy.fetchall()
-                #     temp_sqlite3 = Sqlite3_temp_table(query_data.custom_query,dbtype)
-                #     table_created = temp_sqlite3.create(result_column_values,results,f'multi_table{user_id}')
-                #     if table_created['status'] ==200:
-                #         data_sourse_string = f'select * from multi_table{user_id}'
-                #     else:
-                #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)  
-                # else:
                 data_sourse_string = f'select * from multi_table{user_id}' 
             else:
                 return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)    
             
-            string1 = ''
-            string2 = ''
-            string3 = ''
+            string1=' where '
+            string2=''
+            string3=' having '
+            string4 = ' order by '
+            string5= ''
             group = []
             if drill_downs !=[]:
                 if filter_id:
@@ -2143,16 +2157,28 @@ class Multicolumndata_with_filter(CreateAPIView):
                         except:
                             return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
                         if chart_filter_data:
-                            if index==0:
-                                custom_one = Custom_joining_filter1('where',chart_filter_data,conn_type,drill_downs,False)
-                                string1 += custom_one['string1']
-                                string2 += custom_one['string2']
-                                string3 += custom_one['string3']
+                            
+                            if string1.lower() == ' where ':
+                                condition = ''
                             else:
-                                custom_one = Custom_joining_filter1('and',chart_filter_data,conn_type,drill_downs,False)
-                                string1 += custom_one['string1']
-                                string2 += custom_one['string2']
-                                string3 += custom_one['string3']
+                                condition = 'and'
+
+                            if chart_filter_data.top_bottom is not None:
+                                condition=''
+                            # if index==0:
+                            custom_one = Custom_joining_filter1(condition,chart_filter_data,conn_type,drill_downs,False)
+                            string1 += custom_one['string1']
+                            string2 += custom_one['string2']
+                            string3 += custom_one['string3']
+                            string4 += custom_one['string4']
+                            string5 += custom_one['string5']
+                            # else:
+                            #     custom_one = Custom_joining_filter1(condition,chart_filter_data,conn_type,drill_downs,False)
+                            #     string1 += custom_one['string1']
+                            #     string2 += custom_one['string2']
+                            #     string3 += custom_one['string3']
+                            #     string4 += custom_one['string4']
+                            #     string5 += custom_one['string5']
                         
                         else:
                             pass
@@ -2163,9 +2189,12 @@ class Multicolumndata_with_filter(CreateAPIView):
                     for key,value in drill.items():
                         group.append(f' \"{key}\",')
                         if len(filter_id)>0:
-                            custom_cond = 'and'
+                            if string1.lower() == ' where ':
+                                custom_cond = ''
+                            else:
+                                custom_cond=' and '
                         else:
-                            custom_cond = 'where'
+                            custom_cond = ''
                         if is_date:
                             date_col = col[0][0]
                             col[0][2] = next_drill_down
@@ -2185,31 +2214,43 @@ class Multicolumndata_with_filter(CreateAPIView):
                 
             else:
                 if filter_id:
-
                     for index,filter in enumerate(filter_id):
                         try:
                             chart_filter_data = ChartFilters.objects.get(filter_id = filter)
                         except:
                             return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
                         if chart_filter_data:
-                            if index==0:
-                                custom_one = Custom_joining_filter1('where',chart_filter_data,conn_type,drill_downs,False)
-                                string1 += custom_one['string1']
-                                string2 += custom_one['string2']
-                                string3 += custom_one['string3'] 
+                            
+                            if string1.lower() == ' where ':
+                                condition = ''
                             else:
-                                custom_one = Custom_joining_filter1('and',chart_filter_data,conn_type,drill_downs,False)
-                                string1 += custom_one['string1']
-                                string2 += custom_one['string2']
-                                string3 += custom_one['string3']
+                                condition = 'and'
+                            if chart_filter_data.top_bottom is not None :
+                                condition=''
+                            # if index==0:
+                            custom_one = Custom_joining_filter1(condition,chart_filter_data,conn_type,drill_downs,False)
+                            string1 += custom_one['string1']
+                            string2 += custom_one['string2']
+                            string3 += custom_one['string3'] 
+                            string4 += custom_one['string4']
+                            string5 += custom_one['string5']
+                            # else:
+                                # custom_one = Custom_joining_filter1(condition,chart_filter_data,conn_type,drill_downs,False)
+                                # string1 += custom_one['string1']
+                                # string2 += custom_one['string2']
+                                # string3 += custom_one['string3']
+                                # string4 += custom_one['string4']
+                                # string5 += custom_one['string5']
                         else:
                             pass
                 else:
                     pass
             if hierarchy !=[]:
-                stringa =''
+                stringa =' where '
                 stringb=''
-                stringc=''
+                stringc=' having '
+                stringd = ' order by '
+                stringe= ''
                 if filter_id:
                         drill_downs=[]
                         
@@ -2219,69 +2260,105 @@ class Multicolumndata_with_filter(CreateAPIView):
                             except:
                                 return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
                             if chart_filter_data:
-                                if index==0:
-                                    custom_one = Custom_joining_filter1('where',chart_filter_data,conn_type,drill_downs,False)
-                                    stringa += custom_one['string1']
-                                    stringb += custom_one['string2']
-                                    stringc += custom_one['string3'] 
+                                
+                                if stringa.lower() == ' where ':
+                                    condition = ''
                                 else:
-                                    custom_one = Custom_joining_filter1('and',chart_filter_data,conn_type,drill_downs,False)
-                                    stringa += custom_one['string1']
-                                    stringb += custom_one['string2']
-                                    stringc += custom_one['string3']
+                                    condition = 'and'
+
+                                if chart_filter_data.top_bottom is not None  :
+                                    condition=''
+                                # if index==0:
+                                custom_one = Custom_joining_filter1(condition,chart_filter_data,conn_type,drill_downs,False)
+                                stringa += custom_one['string1']
+                                stringb += custom_one['string2']
+                                stringc += custom_one['string3'] 
+                                stringd += custom_one['string4']
+                                stringe += custom_one['string5']
+                                # else:
+                                #     custom_one = Custom_joining_filter1(condition,chart_filter_data,conn_type,drill_downs,False)
+                                #     stringa += custom_one['string1']
+                                #     stringb += custom_one['string2']
+                                #     stringc += custom_one['string3'] 
+                                #     stringd += custom_one['string4']
+                                #     stringe += custom_one['string5']
                             else:
                                 pass
                 else:
                     pass
-                saved_query = data_retrieve_filter(stringa,stringb,stringc,data_sourse_string,copy_col,copy_row,conn_type)
+                if stringd.lower() == ' order by ':
+                    stringd=''
+
+                if stringa.lower() == ' where ':
+                    stringa=''
+            
+                if stringc.lower() == ' having ':
+                    stringc=''
+                stringd=stringd.rstrip(',')
+                stringc = stringc.rstrip(',')
+                stringe = stringe.rstrip(',')
+                saved_query = data_retrieve_filter(stringa,stringb,stringc,data_sourse_string,copy_col,copy_row,copy_pivot_measure,conn_type)
                 if order_column is None and col== []:
                     order_column = row[0]
                     order_query_string = order_column_func(order_column,conn_type)
+                    if string4.lower() != '':
+                        order_query_string +=f""" , {stringd.replace(' order by ','')}"""
                 elif order_column is   None and col!=[]:
                     order_column = col[0]
                     order_query_string = order_column_func(order_column,conn_type)
+                    if string4.lower() != '':
+                        order_query_string +=f""" , {stringd.replace(' order by ','')}"""
                 else:
                     order_query_string = order_column_func(order_column,conn_type)
+                    if string4.lower() != '':
+                        order_query_string +=f""" , {stringd.replace(' order by ','')}"""
 
                 if saved_query['status'] ==200:
                     db_query_store  = saved_query['user_query'].replace(f'multi_table{user_id}',f'({query_data.custom_query}) temp_table')
                     db_query_store+=order_query_string
                 else:
                     return Response({'message':saved_query['message']},status = status.HTTP_400_BAD_REQUEST)
+                db_query_store+= stringe #Drill Down LImit added
             else:
                 pass
-            build_query = data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,conn_type)
-            if order_column is None and col== []:
+              
+            if string4.lower() == ' order by ':
+                string4=''
+            if string1.lower() == ' where ':
+                string1=''
+            
+            if string3.lower() == ' having ':
+                string3=''
+            else:
+                pass
+            string4=string4.rstrip(',')
+            string3 = string3.rstrip(',')
+            string5 = string5.rstrip(',')
+            build_query = data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,pivot_measure,conn_type)
+            if  string4 != '' and order_column is None:
+                order_query_string = string4
+            elif (order_column is None and col== []):
                 order_column = row[0]
                 order_query_string = order_column_func(order_column,conn_type)
-            elif order_column is   None and col!=[]:
+                if string4.lower() != '':
+                    order_query_string +=f""" , {string4.replace(' order by ','')}"""
+                    
+            elif order_column is  None and col!=[] and string4 == '':
                 order_column = col[0]
                 order_query_string = order_column_func(order_column,conn_type)
+                if string4.lower() != '':
+                    order_query_string +=f""" , {string4.replace(' order by ','')}"""
             else:
                 order_query_string = order_column_func(order_column,conn_type)
+                if string4.lower() != '':
+                    order_query_string +=f""" , {string4.replace(' order by ','')}"""
             if build_query['status'] ==200:  
                 db_query_store1  = build_query['user_query'].replace(f'multi_table{user_id}',f'({query_data.custom_query}) temp_table')
                 db_query_store1+=order_query_string
             else:
                 return Response({'message':build_query['message']},status = status.HTTP_400_BAD_REQUEST)
-           
-            # if build_query["status"] ==200:
-            #     final_query = build_query['query']
-            # else:
-            #      return Response({'message':build_query["message"]},status = status.HTTP_400_BAD_REQUEST)
-            # if file_id is not None and file_id !='':
-            #     query_result = temp_sqlite3.query(final_query)
-            #     if query_result['status'] ==200:
-            #         row_data = query_result['results_data']
-            #     else:
-            #         return Response({'message':query_result['message']},status = status.HTTP_400_BAD_REQUEST)
-            #     delete_query = temp_sqlite3.delete(f'multi_table{user_id}')
-            #     if delete_query['status'] ==200:
-            #             delete_message= delete_query['message']
-            #     else:
-            #         return Response({'message':delete_query['message']},status = status.HTTP_400_BAD_REQUEST)
-                
-            # else:
+            db_query_store1+=string5
+            db_query_store1 = query_parsing(db_query_store1,'sqlite',conn_type.lower())
             execute_data = execution_query(db_query_store1,cur,conn_type.lower()) 
             if execute_data['status']==200:
                 row_data = execute_data['results_data']
@@ -2289,24 +2366,10 @@ class Multicolumndata_with_filter(CreateAPIView):
                 return Response({"message":execute_data['message']},status=status.HTTP_404_NOT_FOUND)
             data = [list(row) for row in row_data]
             
-            # db_query_store  = build_query['user_query'].replace(f'multi_table{user_id}',f'({query_data.custom_query}) temp_table')
             
                         
             result = format_sheet_data(build_query,data)
-            result_data = pagination(request,data,1,page_count)
-            if result_data['status'] ==200:
-                data = result_data['data']
-                total_pages = result_data['total_pages']
-                items_per_page = result_data['items_per_page']
-                total_items = result_data['total_items']
-            else:
-                return Response({'message':result_data['message']},status = status.HTTP_404_NOT_FOUND)
             table_result = format_sheet_data(build_query,data)
-            # if file_id is not None and file_id !='':
-            #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-            #     cur.close()
-            #     engine.dispose()
-            # else:
             cur.close()
             
             if hierarchy !=[]:
@@ -2329,7 +2392,8 @@ class Multicolumndata_with_filter(CreateAPIView):
                 "filter_id_list" : filter_id,
                 "custom_query" : custome_query,
                 "columns"  : saved_query['column_string']['col'] if hierarchy !=[] else build_query['column_string']['col'] ,
-                "rows" : saved_query['column_string']['row'] if hierarchy !=[] else build_query['column_string']['row'] 
+                "rows" : saved_query['column_string']['row'] if hierarchy !=[] else build_query['column_string']['row'] ,
+                "pivot_measure" :saved_query['column_string']['pivot_measure'] if hierarchy !=[] else build_query['column_string']['pivot_measure']
                 }
             return Response(result_response,status = status.HTTP_200_OK)
         else:
@@ -2352,7 +2416,23 @@ def order_column_func(order_column,database):
     format_convert = date_format(format_type,data_type)
     if alias =="":
         if data_type.lower() in date_list  and format_type.lower() == 'month':
-            order_by_string = f""" ORDER BY STRFTIME('{format_convert}', "{column}") {order} """
+            order_by_string = f""" ORDER BY CASE 
+                WHEN \"{format_type}({column})\" = 'January' THEN 1
+                WHEN \"{format_type}({column})\" = 'February' THEN 2
+                WHEN \"{format_type}({column})\" = 'March' THEN 3
+                WHEN \"{format_type}({column})\" = 'April' THEN 4
+                WHEN \"{format_type}({column})\" = 'May' THEN 5
+                WHEN \"{format_type}({column})\" = 'June' THEN 6
+                WHEN \"{format_type}({column})\" = 'July' THEN 7
+                WHEN \"{format_type}({column})\" = 'August' THEN 8
+                WHEN \"{format_type}({column})\" = 'September' THEN 9
+                WHEN \"{format_type}({column})\" = 'October' THEN 10
+                WHEN \"{format_type}({column})\" = 'November' THEN 11
+                WHEN \"{format_type}({column})\" = 'December' THEN 12
+
+                ELSE 13
+                END {order} """
+
         elif data_type.lower() in date_list and format_type.lower() =='weekdays':
             order_by_string = f""" ORDER BY STRFTIME('{format_convert}', "{column}") {order} """
         elif format_type.lower() == 'count_distinct':
@@ -2365,15 +2445,29 @@ def order_column_func(order_column,database):
             order_by_string = f' Order by \"{column}\" {order}'
     else:
         if data_type.lower() in date_list  and format_type.lower() == 'month':
+            # order_by_string = f""" ORDER BY toMonth(\"{column}\") {order} """
+            order_by_string = f""" ORDER BY CASE 
+                WHEN \"{alias}\" = 'January' THEN 1
+                WHEN \"{alias}\" = 'February' THEN 2
+                WHEN \"{alias}\" = 'March' THEN 3
+                WHEN \"{alias}\" = 'April' THEN 4
+                WHEN \"{alias}\" = 'May' THEN 5
+                WHEN \"{alias}\" = 'June' THEN 6
+                WHEN \"{alias}\" = 'July' THEN 7
+                WHEN \"{alias}\" = 'August' THEN 8
+                WHEN \"{alias}\" = 'September' THEN 9
+                WHEN \"{alias}\" = 'October' THEN 10
+                WHEN \"{alias}\" = 'November' THEN 11
+                WHEN \"{alias}\" = 'December' THEN 12
+
+                ELSE 13
+                END {order} """
+
+        elif data_type.lower() in date_list and format_type.lower() =='weekdays':
             order_by_string = f""" ORDER BY STRFTIME('{format_convert}', "{column}") {order} """
-        # elif format_type.lower() == 'count_distinct':
-        #     order_by_string = f"""Order by \"{alias}\" """
-        # elif data_type.lower() == 'aggregate':
-        #     order_by_string  = f""" order by \"{format_type}({column})\" """
         else:
             order_by_string = f'Order by \"{alias}\" {order}'
     order_by_string = f'SELECT 1 {order_by_string} '
-    # converted_order_by = sqlglot.translate(f'SELECT 1 {order_by_string}', to=database)
 
 # Extract just the ORDER BY part
     query_string1 = custom_date_transformation(order_by_string,dtype_fun(database))
@@ -2396,10 +2490,12 @@ def format_sheet_data(build_query,result_data):
         if len(build_query['column_string']['col'])>0 or len(build_query['column_string']['row'])>0:
             columns = [col.strip() for col in data["col_data"]["col"]]
             row_labels = [row.strip() for row in data["col_data"]["row"]]
+            pivot_measure = [pivot.strip() for pivot in data["col_data"]["pivot_measure"]]
 
             result = {
                 "col": [],
-                "row": []
+                "row": [],
+                "pivot_measure":[]
             }
 
             for index,col in enumerate(columns):
@@ -2417,11 +2513,18 @@ def format_sheet_data(build_query,result_data):
                     "col": row_label.replace('"',''),
                     "result_data":  [ row[row_index] for row in data["row_data"] ]
                 })
+            for index,pivot in enumerate(pivot_measure):
+                row_index = pivot_measure[index:].index(pivot)+index + len(columns) +len(row_labels)
+                result["pivot_measure"].append({
+                    "col": pivot.replace('"',''),
+                    "result_data":  [ row[row_index] for row in data["row_data"] ]
+                })
         else:
             result = {
                 
                 "col": [],
-                "row": []
+                "row": [],
+                "pivot_measure":[]
             }
         return result
     except Exception as e:
@@ -2440,8 +2543,6 @@ class DataSource_Data_with_Filter(CreateAPIView):
                 datasource_queryset_id = serializer.validated_data['datasource_queryset_id']
                 query_set_id  = serializer.validated_data['queryset_id']
                 filter_id = serializer.validated_data["filter_id"]
-                # database_id = serializer.validated_data['database_id']
-                # file_id = serializer.validated_data['file_id']
                 hierarchy_id = serializer.validated_data['hierarchy_id']
             else:
                 return Response({'message':'serializer error'},status=status.HTTP_204_NO_CONTENT)
@@ -2455,23 +2556,6 @@ class DataSource_Data_with_Filter(CreateAPIView):
                 return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
             query_data = QuerySets.objects.get(queryset_id = query_set_id,user_id =user_id)
             if query_data:
-                
-                # if file_id is not None and file_id!='':
-                    
-                #     cursor_query_data = execution_query(query_data.custom_query,cur,dbtype.lower()) 
-                #     if cursor_query_data['status'] == 200:
-                #         result_proxy = cursor_query_data['results_data']
-                #     else:
-                #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-                #     result_column_values = result_proxy.cursor.description
-                #     results = result_proxy.fetchall()
-                #     temp_sqlite3 = Sqlite3_temp_table(query_data.custom_query,dbtype)
-                #     table_created = temp_sqlite3.create(result_column_values,results,f'data_source_table{user_id}')
-                #     if table_created['status'] ==200:
-                #         data_sourse_string = f'select * from data_source_table{user_id}'
-                #     else:
-                #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)  
-                # else:
                 data_sourse_string = f'select * from data_source_table{user_id}' 
             else:
                 return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)    
@@ -2518,7 +2602,7 @@ class DataSource_Data_with_Filter(CreateAPIView):
                         string1 += custom_one['string1']
                         string2 += custom_one['string2']
                         string3 += custom_one['string3'] 
-                    else:
+                    else:                        
                         custom_one = Custom_joining_filter('and',chart_filter_data,conn_type)
                         string1 += custom_one['string1']
                         string2 += custom_one['string2']
@@ -2526,14 +2610,6 @@ class DataSource_Data_with_Filter(CreateAPIView):
             Final_string = data_sourse_string + string1 +string2 + string3
             db_string =query_parsing(Final_string,'sqlite',conn_type)
             user_string = db_string.replace(f'data_source_table{user_id}',f'({query_data.custom_query}) temp1')
-            # if file_id is not None and file_id !='':
-
-            #     execute_data = temp_sqlite3.query(Final_string)
-            #     if execute_data['status'] ==200:
-            #         rows = execute_data['results_data']
-            #     else:
-            #         return Response({'message':execute_data['message']},status =status.HTTP_404_NOT_FOUND)
-            # else:
             execute_data = execution_query(user_string,cur,conn_type)
             if execute_data['status'] ==200:
                 rows = execute_data['results_data']
@@ -2574,18 +2650,6 @@ class DataSource_Data_with_Filter(CreateAPIView):
                 "query" : user_string
                 
             }
-
-           
-            # if file_id is not None and file_id !='':
-            #     delete_query = temp_sqlite3.delete(f'data_source_table{user_id}')
-            #     if delete_query['status'] ==200:
-            #         delete_message= delete_query['message']
-            #     else:
-            #         return Response({'message':delete_query['message']},status = status.HTTP_400_BAD_REQUEST)
-            #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-            #     cur.close()
-            #     engine.dispose()
-            # else:
             cur.close()
             
             return Response({'message':'sucess',"data" :final_result},status = status.HTTP_200_OK)
@@ -2628,9 +2692,6 @@ def alias_to_joins(tables_list,dbtype):
         result_list = []
         for i in tables_list:
             table, j = i.split('".')
-            # table = i.split('".')[0]
-            # print(table,'2')
-            # j = i.split('".')[1]
             j=j.strip('"')
             table = table.strip('"')
             if j.lower() in count_item:
@@ -2704,11 +2765,6 @@ class get_list_filters(CreateAPIView):
                                 DataSourceFilter.objects.filter(filter_id = filter_item.filter_id).delete()
                             else:
                                 ChartFilters.objects.filter(filter_id = filter_item.filter_id).delete()
-                    # if file_id is not None and file_id !='':
-                    #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-                    #     cur.close()
-                    #     engine.dispose()
-                    # else:
                     cur.close()
                     return Response({"filters_data":filters_data},status=status.HTTP_200_OK)
                 else:
@@ -2718,31 +2774,6 @@ class get_list_filters(CreateAPIView):
                 return Response({'message':'serializer error'},status=status.HTTP_204_NO_CONTENT)
         else:
             return Response({'message':tok1['message']},status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
-
-# class Clear_Filters(CreateAPIView):
-#     serializer_class = list_filters
-#     @transaction.atomic
-#     def post(self,request,token):
-#         tok1 = test_token(token)
-#         if tok1['status']==200:
-#             serializer = self.serializer_class(data=request.data)
-#             if serializer.is_valid(raise_exception=True):
-#                 type_of_filter = serializer.validated_data['type_of_filter']
-#                 # database_id = serializer.validated_data['database_id']
-#                 # file_id = serializer.validated_data['file_id']
-#                 hierarchy_id = serializer.validated_data['hierarchy_id']
-#                 query_set_id =serializer.validated_data['query_set_id']
-#                 list_filters = DataSourceFilter.objects.filter(queryset_id = query_set_id,user_id = tok1['user_id'])
-
-#                 if list_filters:
-#                     if type_of_filter.lower() == 'datasource':
-#                         DataSource_querysets.objects.filter(queryset_id = query_set_id,user_id= tok1['user_id']).delete()
-#                         DataSourceFilter.objects.filter(queryset_id = query_set_id).delete()
-                    
 
 
 
@@ -2773,10 +2804,8 @@ class get_table_namesAPI(CreateAPIView):
         if tok1['status']==200:
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid(raise_exception=True):
-                # database_id = serializer.validated_data['database_id']
                 query_set_id =serializer.validated_data['query_set_id']
                 hierarchy_id = serializer.validated_data['hierarchy_id']
-                # file_id = serializer.validated_data['file_id']
                 search = serializer.validated_data['search']
                 user_id = tok1['user_id']
                 con_data =connection_data_retrieve(hierarchy_id,user_id)
@@ -2824,11 +2853,6 @@ class get_table_namesAPI(CreateAPIView):
                         for i in list_filters:
                             filter_names.append(i.col_name)
                     filtered_data = [item for item in columns if item['column'] not in filter_names and search.lower() in item['column'].lower()]
-                # if file_id is not None :
-                #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-                #     cur.close()
-                #     engine.dispose()
-                # else:
                 cur.close()
                 return Response(filtered_data,status=status.HTTP_200_OK) 
             else:
@@ -3066,8 +3090,6 @@ class delete_database_stmt(CreateAPIView):
         if tok1['status']==200:
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():
-                # database_id = serializer.validated_data['database_id']
-                # file_id = serializer.validated_data['file_id']
                 hierarchy_id = serializer.validated_data['hierarchy_id']
                 parent_data = parent_ids.objects.get(id=hierarchy_id)
                 user_id = tok1['user_id']
@@ -3081,7 +3103,7 @@ class delete_database_stmt(CreateAPIView):
                             name = ServerDetails.objects.get(id = parent_data.table_id,user_id = user_id).display_name
                             query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
                             sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
-                            dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f',{hierarchy_id},') | Q(hierarchy_id__endswith=f',{hierarchy_id}]')).count()
+                            dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
                             
                         case 'files':
                             if FileDetails.objects.filter(id = parent_data.table_id,user_id=user_id).exists():
@@ -3090,7 +3112,7 @@ class delete_database_stmt(CreateAPIView):
                                 name = FileDetails.objects.get(id = parent_data.table_id,user_id=user_id).display_name
                                 query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
                                 sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
-                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f',{hierarchy_id},') | Q(hierarchy_id__endswith=f',{hierarchy_id}]')).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
                             else:
                                 return Response({'message':"Files Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
                         case 'quickbooks':
@@ -3099,7 +3121,7 @@ class delete_database_stmt(CreateAPIView):
                                 name = models.TokenStoring.objects.get(id = parent_data.table_id).display_name
                                 query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
                                 sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
-                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f',{hierarchy_id},') | Q(hierarchy_id__endswith=f',{hierarchy_id}]')).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
                             else:
                                 return Response({'message':"Quickbooks Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
                         case 'salesforce':
@@ -3108,7 +3130,7 @@ class delete_database_stmt(CreateAPIView):
                                 name = models.TokenStoring.objects.get(id = parent_data.table_id).display_name
                                 query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
                                 sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
-                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f',{hierarchy_id},') | Q(hierarchy_id__endswith=f',{hierarchy_id}]')).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
                             else:
                                 return Response({'message':"Salesforce Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
                         case 'halops':
@@ -3117,7 +3139,7 @@ class delete_database_stmt(CreateAPIView):
                                 name = models.HaloPs.objects.get(id = parent_data.table_id).display_name
                                 query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
                                 sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
-                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f',{hierarchy_id},') | Q(hierarchy_id__endswith=f',{hierarchy_id}]')).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
                             else:
                                 return Response({'message':"Halops Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
                         case 'connectwise':
@@ -3126,9 +3148,27 @@ class delete_database_stmt(CreateAPIView):
                                 name = models.connectwise.objects.get(id = parent_data.table_id).display_name
                                 query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
                                 sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
-                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f',{hierarchy_id},') | Q(hierarchy_id__endswith=f',{hierarchy_id}]')).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
                             else:
                                 return Response({'message':"ConnectWise Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
+                        case 'shopify':
+                            if models.Shopify.objects.filter(id = parent_data.table_id,user_id=user_id).exists():
+                                statement_name = 'Shopify'
+                                name = models.Shopify.objects.get(id = parent_data.table_id).display_name
+                                query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
+                                sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
+                            else:
+                                return Response({'message':"Shopify Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
+                        case 'google_sheets':
+                            if models.TokenStoring.objects.filter(id = parent_data.table_id,user=user_id).exists():
+                                statement_name = 'Google Sheets'
+                                name = models.TokenStoring.objects.get(id = parent_data.table_id).display_name
+                                query_sets_count = QuerySets.objects.filter(hierarchy_id = hierarchy_id,user_id =user_id).count()
+                                sheets_count = sheet_data.objects.filter(hierarchy_id = hierarchy_id,user_id=user_id).count()
+                                dashboard_count = dashboard_data.objects.filter(Q(hierarchy_id__contains=f'[{hierarchy_id}') | Q(hierarchy_id__contains=f', {hierarchy_id},') | Q(hierarchy_id__endswith=f', {hierarchy_id}]')).count()
+                            else:
+                                return Response({'message':"GoogleSheets Data Not Exists"},status=status.HTTP_403_FORBIDDEN)
                 except:
                     return Response({'message':'Data not Found'},status = status.HTTP_400_BAD_REQUEST)
                 
@@ -3164,7 +3204,7 @@ class sheet_delete_stmt(CreateAPIView):
                 
                 sheet_name = sheet.sheet_name
                 dashboard_count = dashboard_data.objects.filter(
-                    Q(sheet_ids__contains=f'[{sheet_id}') | Q(sheet_ids__contains=f',{sheet_id},') | Q(sheet_ids__endswith=f',{sheet_id}]')
+                    Q(sheet_ids__contains=f'[{sheet_id}') | Q(sheet_ids__contains=f', {sheet_id},') | Q(sheet_ids__endswith=f', {sheet_id}]')
                 ).count()                
                 if dashboard_count ==0:
                     statement = f' No Dashboards are Created, Are you sure to continue?'
@@ -3182,8 +3222,6 @@ class query_delete_stmt(CreateAPIView):
     serializer_class = query_ntfy_stmt
     @transaction.atomic
     def post(self,request,token):
-        # role_list=roles.get_previlage_id(previlage=[previlages.delete_custom_sql])
-        # tok1 = roles.role_status(token,role_list)
         tok1 = test_token(token)
         if tok1['status']==200:
             serializer = self.serializer_class(data=request.data)
@@ -3198,9 +3236,9 @@ class query_delete_stmt(CreateAPIView):
                 if queryset.is_sample == True:
                     return Response({'message':"Cannot Deleted Queryset Related to Sample Dashboard"},status=status.HTTP_403_FORBIDDEN)
 
-                queryset_name = queryset.query_name
+
                 sheets_count = sheet_data.objects.filter(queryset_id = queryset_id,user_id=user_id).count()
-                dashboard_count = dashboard_data.objects.filter(Q(queryset_id__contains=f'[{queryset_id}') | Q(queryset_id__contains=f',{queryset_id},') | Q(queryset_id__endswith=f',{queryset_id}]')).count()
+                dashboard_count = dashboard_data.objects.filter(Q(queryset_id__contains=f'[{queryset_id}') | Q(queryset_id__contains=f', {queryset_id},') | Q(queryset_id__endswith=f', {queryset_id}]')).count()
                 if sheets_count ==0 and dashboard_count ==0:
                     statement = f'No Dependencies on this Query, Are you sure to Continue?'
                 else:
@@ -3211,6 +3249,7 @@ class query_delete_stmt(CreateAPIView):
                 return Response({'message':"serializer Error"},status = status.HTTP_400_BAD_REQUEST)
         else:
             return Response({'message':tok1['message']},status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class get_datasource(CreateAPIView):
@@ -3257,56 +3296,66 @@ class get_datasource(CreateAPIView):
             else:
                 return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
             try:
-                if type_of_filter.lower() == 'datasource' :
-                    table_name_for_temp = f"data_source_table{user_id}"
-                    query_data = QuerySets.objects.get(queryset_id = aaa.queryset_id,user_id = user_id)
-                    
-                elif(type_of_filter.lower() == 'chartfilter'and aaa.datasource_querysetid is not None):
-                    table_name_for_temp = f'sheet_table{user_id}'
-                    query_data = DataSource_querysets.objects.get( datasource_querysetid= aaa.datasource_querysetid,user_id = user_id)                    
+                if aaa.top_bottom is None:
+                    top_bottom_check = True
                 else:
-                    table_name_for_temp = f'sheet_table{user_id}'
-                    query_data = QuerySets.objects.get(queryset_id = aaa.queryset_id,user_id = user_id)
-                
-            except Exception as e:
-                return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)
-            if query_data:
-                # if aaa.file_id is not None and aaa.file_id!='':
-                #     cursor_query_data = execution_query(query_data.custom_query,cur,dbtype.lower()) 
-                #     if cursor_query_data['status'] == 200:
-                #         result_proxy = cursor_query_data['results_data']
-                #     else:
-                #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-                #     result_column_values = result_proxy.cursor.description
-                #     results = result_proxy.fetchall()
-                #     temp_class = Sqlite3_temp_table(query_data.custom_query,dbtype)
-                
-                #     table_created = temp_class.create(result_column_values,results,table_name_for_temp)
-                #     if table_created['status'] ==200:
-                #         data_sourse_string = f'select * from {table_name_for_temp}'
-                #     else:
-                #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)
-                # else:
-                #     temp_class=None
-                data_sourse_string = f'select * from ({query_data.custom_query})temp'
+                    top_bottom_check=False
+            except:
+                top_bottom_check=True
+            if top_bottom_check:
+                try:
+                    if type_of_filter.lower() == 'datasource' :
+                        table_name_for_temp = f"data_source_table{user_id}"
+                        query_data = QuerySets.objects.get(queryset_id = aaa.queryset_id,user_id = user_id)
+                        
+                    elif(type_of_filter.lower() == 'chartfilter'and aaa.datasource_querysetid is not None):
+                        table_name_for_temp = f'sheet_table{user_id}'
+                        query_data = DataSource_querysets.objects.get( datasource_querysetid= aaa.datasource_querysetid,user_id = user_id)                    
+                    else:
+                        table_name_for_temp = f'sheet_table{user_id}'
+                        query_data = QuerySets.objects.get(queryset_id = aaa.queryset_id,user_id = user_id)
+                    
+                except Exception as e:
+                    return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)
+                if query_data:
+                    # if aaa.file_id is not None and aaa.file_id!='':
+                    #     cursor_query_data = execution_query(query_data.custom_query,cur,dbtype.lower()) 
+                    #     if cursor_query_data['status'] == 200:
+                    #         result_proxy = cursor_query_data['results_data']
+                    #     else:
+                    #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
+                    #     result_column_values = result_proxy.cursor.description
+                    #     results = result_proxy.fetchall()
+                    #     temp_class = Sqlite3_temp_table(query_data.custom_query,dbtype)
+                    
+                    #     table_created = temp_class.create(result_column_values,results,table_name_for_temp)
+                    #     if table_created['status'] ==200:
+                    #         data_sourse_string = f'select * from {table_name_for_temp}'
+                    #     else:
+                    #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)
+                    # else:
+                    #     temp_class=None
+                    data_sourse_string = f'select * from ({query_data.custom_query})temp'
+                else:
+                    return Response({'message':'Query Set ID is not Present'},status = status.HTTP_400_BAD_REQUEST)
+                if type_of_filter.lower() == 'datasource':
+                    field_logic = ''
+                else:
+                    field_logic = aaa.field_logic    
+                        
+                response = get_filter_column_data(data_sourse_string,aaa.col_name,aaa.format_type,aaa.data_type,cur,conn_type,field_logic)
+                if response['status'] ==200:
+                    result_data = response['results_data']
+                else:
+                    return Response({'message':response['message']},status = status.HTTP_400_BAD_REQUEST)
+                row_d = literal_eval(result_data)
             else:
-                return Response({'message':'Query Set ID is not Present'},status = status.HTTP_400_BAD_REQUEST)
-            if type_of_filter.lower() == 'datasource':
-                field_logic = ''
-            else:
-                field_logic = aaa.field_logic    
-                       
-            response = get_filter_column_data(data_sourse_string,aaa.col_name,aaa.format_type,aaa.data_type,cur,conn_type,field_logic)
-            if response['status'] ==200:
-                result_data = response['results_data']
-            else:
-                return Response({'message':response['message']},status = status.HTTP_400_BAD_REQUEST)
-            row_d = literal_eval(result_data)
+                row_d=None
 
             fil_d = literal_eval(aaa.filter_data)
             if search:
                 result = [{'label': item, 'selected': item in fil_d} for item in row_d if str(search).lower() in item.lower()]    
-            elif row_d:
+            elif row_d is not None:
                 result = [{'label': item, 'selected': item in fil_d} for item in row_d if not (isinstance(fil_d,list) and (item is None or item =='' ))]
             else:
                 result= []
@@ -3316,10 +3365,11 @@ class get_datasource(CreateAPIView):
                 'format_type':aaa.format_type,
                 "column_name": aaa.col_name,
                 "data_type":aaa.data_type,
-                "is_exclude":aaa.is_exclude if type_of_filter.lower()=='chartfilter' else None,
+                "is_exclude":aaa.is_exclude ,
                 "result":literal_eval(result),
                 "field_logic":field_logic,
-                "range_values":fil_d if isinstance(fil_d,list) else None
+                "range_values":fil_d if isinstance(fil_d,list) else None,
+                "top_bottom":literal_eval(aaa.top_bottom)  if type_of_filter.lower() != 'datasource' else None
 
             }
             return Response(return_data, status=status.HTTP_200_OK)
@@ -3338,7 +3388,6 @@ def update_query(sheet_queryse_id):
     
     cleaned_query = re.sub(r'\(\s*SELECT[\s\S]+?\)\s*temp_table', '() temp_table', sheet_qry.custom_query, flags=re.IGNORECASE)
     final_query = re.sub(r'\(\s*\)\s*temp_table', f"(\n{query}\n) temp_table", cleaned_query)
-    # final_query = sheet_qry(final_query, dtype.lower())
     return final_query
 
          
@@ -3362,9 +3411,8 @@ class dashboard_drill_down(CreateAPIView):
             dashboard_id = serializer.validated_data['dashboard_id']
             id = serializer.validated_data['id']
             input_list = serializer.validated_data['input_list']
+            is_exclude = serializer.validated_data['is_exclude']
             sheet_id = serializer.validated_data['sheet_id']
-            # database_id = serializer.validated_data['database_id']
-            # file_id = serializer.validated_data['file_id']
             hierarchy_id = serializer.validated_data['hierarchy_id']
             drill_down = serializer.validated_data['drill_down']
             next_drill_down = serializer.validated_data['next_drill_down']
@@ -3411,56 +3459,15 @@ class dashboard_drill_down(CreateAPIView):
         except Exception as e:
             return Response({"messgae" : "Query ID is not Present"},status=status.HTTP_400_BAD_REQUEST)
         if main_query:
-            # if file_id is not None and file_id!='':
-                
-            #     cursor_query_data = execution_query(main_query,cur,dbtype.lower()) 
-            #     if cursor_query_data['status'] == 200:
-            #         result_proxy = cursor_query_data['results_data']
-            #     else:
-            #         return Response({"message":cursor_query_data['message']},status=status.HTTP_404_NOT_FOUND)
-            #     result_column_values = result_proxy.cursor.description
-            #     results = result_proxy.fetchall()
-            #     temp_sqlite3 = Sqlite3_temp_table(main_query,dbtype)
-            #     table_created = temp_sqlite3.create(result_column_values,results,f'multi_table{user_id}')
-            #     if table_created['status'] ==200:
-            #         data_sourse_string = f'select * from multi_table{user_id}'
-            #     else:
-            #         return Response({'message':table_created['message']},status=status.HTTP_400_BAD_REQUEST)
-            # else:
             data_sourse_string = f'select * from multi_table{user_id}'
         string1 = ''
         string2 = ''
         string3 = ''
+        # string4= ''
+        # string5 = ''
         save_string = ''
         group = []
         filter_id = []
-        
-        # try:
-        #     sheet_filter_data = sheet_data.objects.get(id = sheet_id ).filter_ids
-        # except:
-        #     return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
-        # if sheet_filter_data:
-        #     for index,filter in enumerate(literal_eval(sheet_filter_data)):
-        #         try:
-        #             chart_filter_data = ChartFilters.objects.get(filter_id = filter)
-        #         except:
-        #             return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
-        #         if chart_filter_data:
-        #             if index==0:
-        #                 custom_one = Custom_joining_filter1('where',chart_filter_data,dbtype,drill_down,False)
-        #                 string1 += custom_one['string1']
-        #                 string2 += custom_one['string2']
-        #                 string3 += custom_one['string3']
-        #             else:
-        #                 custom_one = Custom_joining_filter1('and',chart_filter_data,dbtype,drill_down,False)
-        #                 string1 += custom_one['string1']
-        #                 string2 += custom_one['string2']
-        #                 string3 += custom_one['string3']
-                
-        #         else:
-        #             pass
-        # else:
-        #     pass
         if dashboard_filters:
             for filter in dashboard_filters:
                 try:
@@ -3469,44 +3476,69 @@ class dashboard_drill_down(CreateAPIView):
                         filter_id.append(dash_filter_data.id)
                 except Exception as e:
                     return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
-            for index,filter in enumerate(filter_id):
+            index=-1
+            for filter in filter_id: #dashboard_filter_ids
+                index+=1
+                if filter in is_exclude:
+                    drill_is_exclude = True
+                else:
+                    drill_is_exclude = False
                 try:
                     dash_filter_data = DashboardFilters.objects.get(id = filter)
                     sheet_filter_data = sheet_data.objects.get(id = sheet_id ).filter_ids
+                    sheet_count =0
+                    top_bottom=False
+                    for i in literal_eval(sheet_filter_data):
+                        chart_data = ChartFilters.objects.get(filter_id = i)
+                        if chart_data.top_bottom:
+                            top_bottom =True
+                        else:
+                            sheet_count+=1
+
                 except:
                     return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
                 
 
                 if dash_filter_data:
                     input_data = input_list[id.index(str(dash_filter_data.id))]
-                    if len(literal_eval(sheet_filter_data))>0:
-                        custom_cond = 'and'
+                    if input_data==[]:
+                        pass
                     else:
-                        custom_cond = 'where'
-                    if index==0:
-                        custom_one = Custom_joining_filter1(custom_cond,dash_filter_data,conn_type,drill_down,tuple(input_data))
-                        string1 += custom_one['string1']
-                        string2 += custom_one['string2']
-                        string3 += custom_one['string3']
-                    else:
-                        custom_one = Custom_joining_filter1('and',dash_filter_data,conn_type,drill_down,tuple(input_data))
-                        string1 += custom_one['string1']
-                        string2 += custom_one['string2']
-                        string3 += custom_one['string3']
-                
+                        if top_bottom and sheet_count==0:
+                            index= 0 if index==0 else index-1
+                            custom_cond = 'where'
+                        elif sheet_count>0:
+                            custom_cond='and'
+                        elif sheet_count>0 and top_bottom:
+                            custom_cond = 'and'
+                        else:
+                            custom_cond = 'where'
+                        if index<=0:
+                            custom_one = Custom_joining_filter1(custom_cond,dash_filter_data,conn_type,drill_down,tuple(input_data),drill_is_exclude)
+                            string1 += custom_one['string1']
+                            string2 += custom_one['string2']
+                            string3 += custom_one['string3']
+                        else:
+                            custom_one = Custom_joining_filter1('and',dash_filter_data,conn_type,drill_down,tuple(input_data),drill_is_exclude)
+                            string1 += custom_one['string1']
+                            string2 += custom_one['string2']
+                            string3 += custom_one['string3']
                 else:
                     pass
-        else:
-            pass
+            else:
+                pass
         
         for index,drill in enumerate(drill_down):
             
             for key,value in drill.items():
                 group.append(f' \"{key}\",')
-                if len(filter_id)>0 :
-                    custom_cond = 'and'
+                if len(filter_id)>0:
+                    if string1.lower() == '':
+                        custom_cond = ' where '
+                    else:
+                        custom_cond=' and '
                 else:
-                    custom_cond = 'where'
+                    custom_cond = ' where '
                 if is_date:
                     date_col = col[0][0]
                     col[0][2] = next_drill_down
@@ -3524,25 +3556,13 @@ class dashboard_drill_down(CreateAPIView):
                     string2 += custom_one['string2']
                     string3 += custom_one['string3']   
          
-        build_query = data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,conn_type)
+        build_query = data_retrieve_filter(string1,string2,string3,data_sourse_string,col,row,[],conn_type)
         if build_query["status"] ==200:
             final_query = build_query['query']
 
         else:
                 return Response({'message':build_query["message"]},status = status.HTTP_400_BAD_REQUEST)
         db_query_store  = build_query['user_query'].replace(f'multi_table{user_id}',f'({query_data.custom_query}) temp_table')            
-        # if file_id is not None and file_id !='':
-        #     query_result = temp_sqlite3.query(final_query)
-        #     if query_result['status'] ==200:
-        #         row_data = query_result['results_data']
-        #     else:
-        #         return Response({'message':query_result['message']},status = status.HTTP_400_BAD_REQUEST)
-        #     delete_query = temp_sqlite3.delete(f'multi_table{user_id}')
-        #     if delete_query['status'] ==200:
-        #             delete_message= delete_query['message']
-        #     else:
-        #         return Response({'message':delete_query['message']},status = status.HTTP_400_BAD_REQUEST)
-        # else:
         query_result = execution_query(db_query_store,cur,conn_type.lower())
         if query_result['status'] ==200:
             row_data = query_result['results_data']
@@ -3550,13 +3570,6 @@ class dashboard_drill_down(CreateAPIView):
             return Response({'message':query_result['message']},status = status.HTTP_400_BAD_REQUEST)
         
         data = [list(row) for row in row_data]
-        
-        
-        # if file_id is not None and file_id !='':
-        #     delete_tables_sqlite(cur,engine,serdt['tables'])   
-        #     cur.close()
-        #     engine.dispose()
-        # else:
         cur.close()
         result = format_sheet_data(build_query,data)
 
@@ -3571,49 +3584,35 @@ def user_alias_for_multi_col(c1,f1,d1,alias,index1,current_value,col_values):
     groupby_string=''
     if d1.lower() in integer_list   or d1.lower() in char_list :
         if index1 == 0 and current_value =='col':
-            # groupby_string += ' group by '
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(Distinct \"{c1}\") AS \"{alias}\"")
                 response_col.append(f" \"{alias}\"")
-                # groupby_string += f" \"{alias}\","
             else:
                 query_string.append(f" \"{c1}\" AS \"{alias}\" ")
                 response_col.append(f" \"{alias}\"")
                 groupby_string += f" \"{alias}\","
         else:
-            # if 'group by' in groupby_string:
-            #     pass
-            # else:
-            #     groupby_string += ' group by '
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(Distinct \"{c1}\") AS \"{alias}\" ")
                 response_col.append(f" \"{alias}\"")
-                # groupby_string += f" \"{alias}\","
             else:
                 query_string.append(f" \"{c1}\" AS  \"{alias}\"")
                 response_col.append(f" \"{alias}\"")
                 groupby_string += f" \"{alias}\","
     elif  d1.lower() in bool_list:
         if index1 == 0 and current_value =='col':
-            # groupby_string += ' group by ' 
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(distinct CASE when \"{c1}\" THEN 'True' ELSE 'False' END) AS \"{alias}\" ")
                 response_col.append(f" \"{alias}\"")
-                # groupby_string += f" \"{alias}\","
             else:
                 query_string.append(f" CASE when \"{c1}\" THEN 'True' ELSE 'False' END AS \"{alias}\" ")
                 response_col.append(f" \"{alias}\"")
                 groupby_string += f" \"{alias}\","
                 
         else:
-            # if 'group by' in groupby_string:
-            #     pass
-            # else:
-            #     groupby_string += ' group by '
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(distinct CASE when \"{c1}\" THEN 'True' ELSE 'False' END) AS \"{alias}\" ")
                 response_col.append(f" \"{alias}\"")
-                # groupby_string += f" \"{alias}\","
             else:
                 query_string.append(f" CASE when \"{c1}\" THEN 'True' ELSE 'False' END AS \"{alias}\" ")
                 response_col.append(f" \"{alias}\"")
@@ -3622,32 +3621,27 @@ def user_alias_for_multi_col(c1,f1,d1,alias,index1,current_value,col_values):
         date_group= date_format(f1,'sqlite')
 
         if index1 == 0 and current_value =='col':
-            # groupby_string = ' group by '
             if f1.lower() == 'count_distinct':
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"{alias}\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"{alias}\"" )
                 response_col.append(f" \"{alias}\"" )
-                # groupby_string += f"\"{alias}\","
             else:
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"{alias}\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"{alias}\"" )
                 response_col.append(f"\"{alias}\"" )
-                if date_group =='%m' or date_group == '%w':
-                    groupby_string+=f""" STRFTIME('{date_group}', \"{c1}\"),"""
+                if date_group =='%w':
+                    groupby_string+=f""" STRFTIME('%w',\"{c1}\"),"""
                 else:
                     groupby_string += f"\"{alias}\","
         else:
-            # if 'group by' in groupby_string:
-            #     pass
-            # else:
-            #     groupby_string = ' group by '
+
             if f1.lower() == 'count_distinct':
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"{alias}\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"{alias}\"" )
                 response_col.append(f" \"{alias}\"" )
-                # groupby_string += f" \"{alias}\","
             else:
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"{alias}\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"{alias}\"" )
                 response_col.append(f"\"{alias}\"" )
-                if date_group =='%m' or date_group =='%w':
-                    groupby_string+=f""" STRFTIME('{date_group}', \"{c1}\"),"""
+ 
+                if date_group =='%w':
+                    groupby_string+=f""" STRFTIME('%w',\"{c1}\"),"""
                 else:
                     groupby_string += f"\"{alias}\","  
 
@@ -3660,8 +3654,6 @@ def user_alias_for_multi_col(c1,f1,d1,alias,index1,current_value,col_values):
             response_col.append(f"\"{alias}\"" )
     elif 'calculated' == d1.lower():
         pattern = r'\b(avg|min|max|sum|count)\b'
-
-# Search for the pattern
         matches = re.findall(pattern, str(c1).lower(), re.IGNORECASE)
         if  matches:
             query_string.append(f'{f1}({c1}) as \"{alias}\"')
@@ -3684,48 +3676,34 @@ def dev_alias_for_mult_col(c1,f1,d1,alias,index1,current_value,col_values):
     groupby_string=''
     if d1.lower() in integer_list   or d1.lower() in char_list :
         if index1 == 0 and current_value =='col':
-            # groupby_string += ' group by '
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(Distinct \"{c1}\") AS \"CNTD({c1})\"")
                 response_col.append(f" \"CNTD({c1})\"")
-                # groupby_string += f" \"CNTD({c1})\","
             else:
                 query_string.append(f" \"{c1}\" AS \"{c1}\" ")
                 response_col.append(f" \"{c1}\"")
                 groupby_string += f" \"{c1}\","
         else:
-            # if 'group by' in groupby_string:
-            #     pass
-            # else:
-            #     groupby_string += ' group by '
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(Distinct \"{c1}\") AS \"CNTD({c1})\" ")
                 response_col.append(f" \"CNTD({c1})\"")
-                # groupby_string += f" \"CNTD({c1})\","
             else:
                 query_string.append(f" \"{c1}\" AS  \"{c1}\"")
                 response_col.append(f" \"{c1}\"")
                 groupby_string += f" \"{c1}\","
     elif  d1.lower() in bool_list:
         if index1 == 0 and current_value =='col':
-            # groupby_string += ' group by ' 
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(distinct CASE when \"{c1}\" THEN 'True' ELSE 'False' END) AS \"CNTD({c1}:OK)\" ")
                 response_col.append(f" \"CNTD({c1})\"")
-                # groupby_string += f" \"CNTD({c1}):OK\","
             else:
                 query_string.append(f" CASE when \"{c1}\" THEN 'True' ELSE 'False' END AS \"{c1}\" ")
                 response_col.append(f" \"{c1}\"")
                 groupby_string += f" \"{c1}\","
         else:
-            # if 'group by' in groupby_string:
-            #     pass
-            # else:
-            #     groupby_string += ' group by '
             if f1.lower()=='count_distinct':
                 query_string.append(f" count(distinct CASE when \"{c1}\" THEN 'True' ELSE 'False' END) AS \"CNTD({c1})\" ")
                 response_col.append(f" \"CNTD({c1})\"")
-                # groupby_string += f" \"CNTD({c1}):OK\","
             else:
                 query_string.append(f" CASE when \"{c1}\" THEN 'True' ELSE 'False' END AS \"{c1}\" ")
                 response_col.append(f" \"{c1}\"")
@@ -3733,34 +3711,28 @@ def dev_alias_for_mult_col(c1,f1,d1,alias,index1,current_value,col_values):
     elif d1.lower() in date_list and len(col_values)!=0:
         date_group= date_format(f1,'sqlite')
         if index1 == 0 and current_value =='col':
-            # groupby_string = ' group by '
             if f1.lower() == 'count_distinct':
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"CNTD({c1}:OK)\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"CNTD({c1}:OK)\"" )
                 response_col.append(f" \"CNTD({c1})\"" )
-                # groupby_string += f"\"CNTD({c1}:OK)\","
             else:
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"{f1}({c1})\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"{f1}({c1})\"" )
                 response_col.append(f"\"{f1}({c1})\"" )
-                if date_group =='%m' or date_group =='%w':
-                    groupby_string+=f""" STRFTIME('{date_group}', \"{c1}\"),"""
+                if date_group =='%w':
+                    groupby_string+=f""" STRFTIME('%w',\"{c1}\"),"""
                 else:
-                    groupby_string += f"\"{f1}({c1})\"," 
+                    groupby_string += f"\"{f1}({c1})\","
         else:
-            # if 'group by' in groupby_string:
-            #     pass
-            # else:
-            #     groupby_string = ' group by '
             if f1.lower() == 'count_distinct':
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"CNTD({c1})\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"CNTD({c1})\"" )
                 response_col.append(f" \"CNTD({c1})\"" )
                 groupby_string += f" \"CNTD({c1})\","
             else:
-                query_string.append(f"{get_formatted_date_query('sqlite',c1,f1)} AS \"{f1}({c1})\"" )
+                query_string.append(f"{get_formatted_date_query('clickhouse',c1,f1)} AS \"{f1}({c1})\"" )
                 response_col.append(f"\"{f1}({c1})\"" )
-                if date_group =='%m' or date_group == '%w':
-                    groupby_string+=f""" STRFTIME('{date_group}', \"{c1}\"),"""
+                if date_group =='%w':
+                    groupby_string+=f""" STRFTIME('%w',\"{c1}\"),"""
                 else:
-                    groupby_string += f"\"{f1}({c1})\"," 
+                    groupby_string += f"\"{f1}({c1})\","
 
     elif 'aggregate' == d1.lower():
         if f1.lower()=='count_distinct':
@@ -3772,7 +3744,6 @@ def dev_alias_for_mult_col(c1,f1,d1,alias,index1,current_value,col_values):
     elif 'calculated' == d1.lower():
         pattern = r'\b(avg|min|max|sum)\b'
 
-# Search for the pattern
         matches = re.findall(pattern, str(c1).lower(), re.IGNORECASE)
         if  matches:
             query_string.append(f'{f1}({c1}) as \"{alias}\"')
@@ -3800,8 +3771,6 @@ class data_table_chart(CreateAPIView):
         if tok1['status']==200:
             serializer = self.serializer_class(data = request.data)
             if serializer.is_valid(raise_exception=True):
-                # database_id = serializer.validated_data['database_id']
-                # file_id = serializer.validated_data['file_id']
                 hierarchy_id = serializer.validated_data['hierarchy_id']
                 parent_user = serializer.validated_data['parent_user']
                 page_no = serializer.validated_data['page_no']
@@ -3818,15 +3787,6 @@ class data_table_chart(CreateAPIView):
                 user_id = tok1['user_id']
             else:
                 user_id=parent_user
-            # if sheetqueryset_id is not None and sheetqueryset_id !='':
-            #     sheetquery_data = SheetFilter_querysets.objects.get(Sheetqueryset_id=sheetqueryset_id)
-            #     # columns = literal_eval(sheetquery_data.columns)
-            #     # rows = literal_eval(sheetquery_data.rows)
-            #     if len(columns)>0 or len(rows)>0:
-            #         custom_query = sheetquery_data.custom_query
-                
-            # else:
-            #     pass
             con_data =connection_data_retrieve(hierarchy_id,user_id)
             if con_data['status'] ==200:                
                 engine=con_data['engine']
@@ -3867,7 +3827,7 @@ class data_table_chart(CreateAPIView):
                     total_items = result_data['total_items']
                 else:
                     return Response({'message':result_data['message']},status = status.HTTP_404_NOT_FOUND) 
-                response_col1 = {"col":columns,"row":rows}
+                response_col1 = {"col":columns,"row":rows,"pivot_measure":[]}
                 build_query = {
                     "column_string" :response_col1
                 }    
@@ -3920,9 +3880,7 @@ class dashboard_table_chart(CreateAPIView):
                 dashboard_id = serializer.validated_data['dashboard_id']
                 id = serializer.validated_data['id']
                 input_list = serializer.validated_data['input_list']
-                # sheetqueryset_id  = serializer.validated_data['sheetqueryset_id']
-                # queryset_id = serializer.validated_data['queryset_id']
-                # custom_query = serializer.validated_data['custom_query']
+                is_exclude = serializer.validated_data['is_exclude']
             else:
                 return Response({'message':'serializer error'},status=status.HTTP_204_NO_CONTENT)
             if token==None:
@@ -3966,51 +3924,68 @@ class dashboard_table_chart(CreateAPIView):
                     try:
                         dash_filter_data = DashboardFilters.objects.get(id = filter['id'])
                         if dash_filter_data and sheet_id in literal_eval(dash_filter_data.sheet_id_list) and str(dash_filter_data.id) in id:
-                            if input_list[id.index(str(dash_filter_data.id))] !=[]:
-                                filter_id.append(dash_filter_data.id)
+                            filter_id.append(dash_filter_data.id)
                     except Exception as e:
                         return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
-                for index,filter in enumerate(filter_id):
+                index=-1
+                for filter in filter_id: #dashboard_filter_ids\
+                    if filter in is_exclude:
+                        is_table_exclude = True
+                    else:
+                        is_table_exclude = False
+                    index+=1
                     try:
                         dash_filter_data = DashboardFilters.objects.get(id = filter)
                         sheet_filter_data = sheet_data.objects.get(id = sheet_id ).filter_ids
+                        sheet_count =0
+                        top_bottom=False
+                        for i in literal_eval(sheet_filter_data):
+                            chart_data = ChartFilters.objects.get(filter_id = i)
+                            if chart_data.top_bottom:
+                                top_bottom =True
+                            else:
+                                sheet_count+=1
+
                     except:
                         return Response({'message':'chart filter id not present in database'},status=status.HTTP_404_NOT_FOUND)
+                    
+
                     if dash_filter_data:
                         input_data = input_list[id.index(str(dash_filter_data.id))]
-                        if input_data!=[]:
-                            if len(literal_eval(sheet_filter_data))>0:
-                                custom_cond = ' and'
-                            else:
-                                custom_cond = ' where'
-                            if index==0:
-                                custom_one = Custom_joining_filter1(custom_cond,dash_filter_data,conn_type,drill_down,tuple(input_data))
-                                string1 += custom_one['string1']
-                                string2 += custom_one['string2']
-                                string3 += custom_one['string3']
-                            else:
-                                custom_one = Custom_joining_filter1('and',dash_filter_data,conn_type,drill_down,tuple(input_data))
-                                string1 += custom_one['string1']
-                                string2 += custom_one['string2']
-                                string3 += custom_one['string3']
-                        else:
+                        if input_data==[]:
                             pass
+                        else:
+                            if top_bottom and sheet_count==0:
+                                index= 0 if index==0 else index-1
+                                custom_cond = 'where'
+                            elif sheet_count>0:
+                                custom_cond='and'
+                            elif sheet_count>0 and top_bottom:
+                                custom_cond = 'and'
+                            else:
+                                custom_cond = 'where'
+                            if index<=0:
+                                custom_one = Custom_joining_filter1(custom_cond,dash_filter_data,conn_type,drill_down,tuple(input_data),is_table_exclude)
+                                string1 += custom_one['string1']
+                                string2 += custom_one['string2']
+                                string3 += custom_one['string3']
+                            else:
+                                custom_one = Custom_joining_filter1('and',dash_filter_data,conn_type,drill_down,tuple(input_data),is_table_exclude)
+                                string1 += custom_one['string1']
+                                string2 += custom_one['string2']
+                                string3 += custom_one['string3']
                     else:
                         pass
+                else:
+                    pass
                 if "group by" in custom_query.lower():
-                    # Split the query by 'GROUP BY' and insert the WHERE clause before it
                     parts = re.split(r'(?i)group by', custom_query)
-                    # Reconstruct the query with the WHERE clause before GROUP BY
                     custom_query = parts[0]+string1+string2+string3+ 'group by ' + parts[1]
                 else:
-                    # If no GROUP BY exists, just append the WHERE clause at the end
                     custom_query = custom_query +string1+string2+string3
-    
-                # custom_query = custom_query+ string1 +string2 + string3
                 custom_query = query_parsing(custom_query,'sqlite',conn_type.lower())
             else:
                 pass   
-            
             if custom_query:
                 if conn_type.lower()=="microsoftsqlserver":
                     query="{}".format(custom_query)

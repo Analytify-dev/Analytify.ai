@@ -437,7 +437,8 @@ class Command(BaseCommand):
         except Exception as e:
             pass
 
-        sheet_filter_querysets = models.SheetFilter_querysets.objects.filter(user_id=user_id, queryset_id=querysetid.queryset_id).values_list('Sheetqueryset_id', flat=True)
+        sheet_filter_querysets = models.SheetFilter_querysets.objects.filter(
+            user_id=user_id, queryset_id=querysetid.queryset_id).values_list('Sheetqueryset_id', flat=True).order_by('Sheetqueryset_id')
         sheetData = [
             {
                 "user_id": user_id,
@@ -523,7 +524,7 @@ class Command(BaseCommand):
                 "filter_ids": [],
                 "sheet_name": "Total Cost by Order date drill down",
                 "sheetfilter_querysets_id": sheet_filter_querysets[5],
-                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.6-Total Cost by Order Date Drill Down.txt'),
+                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.6-Total Cost by Order date drill down.txt'),
                 "datasrc": "",
                 "sheet_tag_name": """<p style="text-align:center;"><span style="font-size:14px;"><strong>Total Cost by Order date drill down</strong></span></p>""",
                 "created_at": datetime.datetime.now(),
@@ -538,7 +539,7 @@ class Command(BaseCommand):
                 "filter_ids": [],
                 "sheet_name": "Region wise quantity ordered and received",
                 "sheetfilter_querysets_id": sheet_filter_querysets[6],
-                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.7-Region Wise Quantity Ordered and Received.txt'),
+                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.7-Region wise quantity ordered and received.txt'),
                 "datasrc": "",
                 "sheet_tag_name": """<p style="text-align:center;"><span style="font-size:14px;"><strong>Region wise quantity ordered and received</strong></span></p>""",
                 "created_at": datetime.datetime.now(),
@@ -568,7 +569,7 @@ class Command(BaseCommand):
                 "filter_ids": [],
                 "sheet_name": "Supplier wise rating",
                 "sheetfilter_querysets_id": sheet_filter_querysets[8],
-                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.9-Supplier Wise Rating.txt'),
+                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.9-Supplier wise rating.txt'),
                 "datasrc": "",
                 "sheet_tag_name": """<p style="text-align:center;"><span style="font-size:14px;"><strong>Supplier wise rating</strong></span></p>""",
                 "created_at": datetime.datetime.now(),
@@ -583,7 +584,7 @@ class Command(BaseCommand):
                 "filter_ids": [],
                 "sheet_name": "Supply chain overview",
                 "sheetfilter_querysets_id": sheet_filter_querysets[9],
-                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.10-Supply Chain Overview.txt'),
+                "datapath": os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'sheetdata', '5.10-Supply chain overview.txt'),
                 "datasrc": "",
                 "sheet_tag_name": """<p style="text-align:center;"><span style="font-size:14px;"><strong>Supply chain overview</strong></span></p>""",
                 "created_at": datetime.datetime.now(),
@@ -627,14 +628,13 @@ class Command(BaseCommand):
                     created_at=data['created_at'],
                     updated_at=data['updated_at'],
                 )
-                
+
                 sheet_data_instance.save()
             self.stdout.write(self.style.SUCCESS('Successfully imported data into Sheet Data'))
         except Exception as e:
             pass
         
         sheet_ids_list = list(models.sheet_data.objects.filter(user_id=user_id, queryset_id=querysetid.queryset_id).values_list('id', flat=True).order_by('id'))
-        
         try:
             input_file_name = 'Dashboard-SupplyChain.txt'
             input_file_path = os.path.join(BASE_DIR, 'dashboard', 'management', 'commands', 'dashboard', input_file_name)

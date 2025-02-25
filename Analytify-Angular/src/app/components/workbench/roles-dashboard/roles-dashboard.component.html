@@ -2,8 +2,8 @@
 
 <div *ngIf="!addRoleDiv" class="main-container container-fluid">
 
-    <div class="row" class="card" style="padding-top: 15px;">
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+    <div class="row" class="card card-padding-top">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0">
       <div class="d-flex justify-content-between px-5">
         <div class="connect-txt">
           <h4 class="card-title mt-2">Roles</h4>
@@ -18,7 +18,7 @@
 
           <div class="input-group">
             <input type="text" class="form-control border-end-0 " placeholder="Search" [(ngModel)]="roleName" (keyup.enter)="searchRoleList()" aria-describedby="button-addon2" >
-            <button class="btn btn-primary border me-2" (click)="searchRoleList()" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
+            <button class="btn btn-primary border me-2 search-icon-border-radius" (click)="searchRoleList()" type="button" id="button-addon2"><i class="fe fe-search "></i></button>
             <app-insights-button [classesList]="'btn btn-primary'" [buttonName]="' Add Role'" [previledgeId]="56" [isBtn]="true"
               (btnClickEvent)="addRolesDivOpen();" [faIconList]="'fa fa-plus'" [isIcon]="true">
             </app-insights-button>
@@ -30,9 +30,9 @@
     </div> -->
         <div class="card-body">
           @if(!gridView){
-            <div class="table-responsive" style="height: 26rem;">
+            <div class="table-responsive table-responsive-height">
                 <table class="table border text-nowrap text-md-nowrap mb-0">
-                    <thead class="table-primary bg-primary" style="position: sticky;top: -1px;">
+                    <thead class="table-primary bg-primary table-primary-position">
                         <tr>
                             <th>Name</th>
                             <th>Created</th>
@@ -51,7 +51,7 @@
                            
                               <div class="content">
                                 <span>Sheet Name : </span>
-                                <a  style="color: #05aff8;cursor: pointer;" ngbTooltip="{{sheets.sheet_name}}" (click)="viewSheet(sheets.server_id,sheets.queryset_id,sheets.sheet_id,sheets.sheet_name)" > {{sheets.sheet_name | slice:0:15}}</a>
+                                <a  ngbTooltip="{{sheets.sheet_name}}" (click)="viewSheet(sheets.server_id,sheets.queryset_id,sheets.sheet_id,sheets.sheet_name)" > {{sheets.sheet_name | slice:0:15}}</a>
                                 <p class="mb-0">Created by : {{sheets.created_by}}</p>
                               </div>
                           </div>                                  
@@ -155,8 +155,8 @@
           </div>
         }
             <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetRolesList((page = $event))"></pagination-controls>
-            <div  style="float: right;font-size: 15px; margin-top: -41px;">
-              <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getSavedRolesList()" class="form-control" style="cursor: pointer;">
+            <div class="pagination-count">
+              <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getSavedRolesList()" class="form-control cursor-pointer">
                     <option  value="10"> 10</option>
                     <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
                     <option [disabled]="!(totalItems > 20)" value="30"> 30</option>
@@ -170,15 +170,15 @@
 
   <div *ngIf="addRoleDiv" class="main-container container-fluid">
   
-    <div class="row" class="card" style="padding: 20px;">
-      <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
-          <div class="modal-header justify-conent-between rounded-0 p-2">
-            <h1 *ngIf="!updateRole" class="modal-title fs-5" id="inputModalLabel">Add Role</h1>
-            <h1 *ngIf="updateRole" class="modal-title fs-5" id="inputModalLabel">Update Role</h1>
+    <div class="row" class="card p-4" >
+      <div class="col-sm-12 col-lg-12 col-xl-12 p-0" >
+          <div class="modal-header justify-conent-between align-items-center rounded-0 p-2">
+            <h6 *ngIf="!updateRole" class="modal-title ms-1" id="inputModalLabel">Add Role</h6>
+            <h6 *ngIf="updateRole" class="modal-title ms-1" id="inputModalLabel">Update Role</h6>
 
             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modal.close('cross click')"></button> -->
             <div class="add-role-save-btn">
-              <button type="button" class="btn btn-primary" (click)="viewSavedRoles()" style="border-radius: 4px 4px 4px 4px;">
+              <button type="button" class="btn btn-primary border" (click)="viewSavedRoles()">
                 View Saved Roles
               </button>
             </div>
@@ -201,7 +201,7 @@
                     <input  type="text" [(ngModel)]="roleTitle"  placeholder="Title" aria-label="Sheet" class="form-control">
                 </div>
                 <div class="row m-1">
-                <div class="col-md-6 p-0 border" style="max-width: 48%;">
+                <div class="col-md-6 p-0 border Available-Permission-card">
                   <div class="permission-text bg-light p-3 ">
                     <h6 class="mb-0">Available Permission <i class="fa fa-question-circle" aria-hidden="true"></i></h6>
                   </div>
@@ -220,17 +220,17 @@
                         </option>
                       </select>
                   <!-- </div> -->
-                  <div (click)="selectAllAndMove()" class="choose-all text-center border " style="cursor: pointer;">
+                  <div (click)="selectAllAndMove()" class="choose-all text-center border cursor-pointer">
                     <h6>Choose All <i class="fa fa-chevron-circle-right mt-2" aria-hidden="true"></i></h6>
                   </div>
                 </div>
-                <div class="col-md-1 add-icons" style="max-width: 49px;">
+                <div class="col-md-1 add-icons arrows-card">
                  <div class="p-2 bg-light rounded-5">
                     <a (click)=moveSelectedItems()><i  class="fa fa-arrow-circle-right"></i></a> <br>
                     <a (click)="moveBackSelectedItems()"><i  class="fa fa-arrow-circle-left"></i></a>
                   </div>
                 </div>
-                <div class="col-md-5 border p-0 " style="flex: 0 0 46.666667%;  max-width: 58.666667%;">
+                <div class="col-md-5 border p-0 Chosen-Permission-card">
                   <div class="permission-text bg-light p-3">
                     <h6 class="mb-0">Chosen Permission <i class="fa fa-question-circle" aria-hidden="true"></i></h6>
                   </div>
@@ -249,8 +249,8 @@
                         </option>
                       </select>
                   <!-- </div> -->
-                  <div (click)="removeAllSelected()" class="choose-all text-center border " style="cursor: pointer;">
-                    <h6> <i class="fa fa-chevron-circle-left mt-2" aria-hidden="true"> Remove All</i></h6>
+                  <div (click)="removeAllSelected()" class="choose-all text-center border cursor-pointer">
+                    <h6> <i class="fa fa-chevron-circle-left mt-2 me-1" aria-hidden="true"></i>Remove All</h6>
                   </div>
                 </div>
               </div>
@@ -260,7 +260,7 @@
                 <div class="col-md-2 border p-0">
                   <div class=" p-1 ">
                     <div class="card-body p-1">
-                      <h6>User Assaigned:</h6>
+                      <h6>User Assigned:</h6>
                     </div>
                   </div>
                 </div>
@@ -274,11 +274,11 @@
                 </div>
               </div>
           </div>
-          <div class="modal-footer">
-              <button *ngIf="!updateRole" type="button" class="btn btn-primary" (click)="addRoles()" style="border-radius: 4px 4px 4px 4px;">
+          <div class="modal-footer border">
+              <button *ngIf="!updateRole" type="button" class="btn btn-primary" (click)="addRoles()" >
                 Save <i class="fa fa-file-text-o"></i> 
               </button>
-              <button *ngIf="updateRole" type="button" class="btn btn-primary" (click)="editRoles()" style="border-radius: 4px 4px 4px 4px;">
+              <button *ngIf="updateRole" type="button" class="btn btn-primary" (click)="editRoles()" >
                 Update <i class="fa fa-file-text-o"></i> 
               </button>
           </div>

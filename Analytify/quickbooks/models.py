@@ -23,6 +23,7 @@ class TokenStoring(dash_models.TimeStampedModel):
     display_name = models.CharField(max_length=1000,db_column='display_name',null=True,blank=True)
     token_code = models.TextField(null=True,blank=True)
     domain_url = models.TextField(null=True,blank=True)
+    google_spreadsheet_id = models.CharField(max_length=100,null=True,blank=True)
     # created_at = models.DateTimeField(default=datetime.datetime.now())
     # updated_at = models.DateTimeField(default=datetime.datetime.now())
     expiry_date = models.DateTimeField(default=get_expiry_date)
@@ -55,3 +56,13 @@ class HaloPs(dash_models.TimeStampedModel):
 
     class Meta:
         db_table = 'HaloPs'
+
+
+class Shopify(dash_models.TimeStampedModel):
+    user_id = models.IntegerField()
+    display_name = models.CharField(max_length=1000,null=True,blank=True)
+    api_token = models.TextField(null=True,blank=True)
+    shop_name = models.TextField(null=True,blank=True)
+    api_version = models.TextField(null=True,blank=True)
+    class Meta:
+        db_table = 'Shopify'

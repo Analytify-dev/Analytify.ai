@@ -66,6 +66,7 @@ class sheet_save_serializer(serializers.Serializer):
     # database_id = serializers.IntegerField(allow_null=True,default=None)
     # file_id = serializers.IntegerField(allow_null=True,default=None)
     custom_query = serializers.CharField(allow_blank=True,allow_null=True,default='')
+    pivot_measure = serializers.ListField(default='',allow_null=True,required=False)
     
 
 
@@ -336,8 +337,8 @@ class chartfilter_update_serializer(serializers.Serializer):
     hierarchy_id = serializers.IntegerField()
     queryset_id = serializers.IntegerField()
     datasource_querysetid = serializers.IntegerField(allow_null = True,default = None)
-    range_values = serializers.ListField(allow_null = True,default =[0,0])
-    select_values = serializers.ListField()
+    range_values = serializers.ListField(allow_null = True,default =None)
+    select_values = serializers.ListField(allow_null = True,default =None)
     col_name = serializers.CharField() 
     data_type = serializers.CharField()
     format_date = serializers.CharField(allow_blank=True,default= '')
@@ -345,6 +346,7 @@ class chartfilter_update_serializer(serializers.Serializer):
     is_exclude = serializers.BooleanField(default = False)
     is_calculated = serializers.BooleanField(allow_null=True,default=False)
     field_logic = serializers.CharField(allow_null=True,default=None)
+    top_bottom = serializers.ListField(allow_null = True,default =None)
 
     def validate(self, data):
         date_list=['date','timestamp without time zone'] 
@@ -384,6 +386,7 @@ class GetTableInputSerializer11(serializers.Serializer):
     page_count = serializers.IntegerField(default=10)
     calculated_field_ids = serializers.ListField(allow_null=True,default=[])
     order_column = serializers.ListField(allow_null=True,default=None)
+    pivot_measure = serializers.ListField(allow_null=True,default=[])
    
 
 
@@ -466,6 +469,7 @@ class SearchFilterSerializer(serializers.Serializer):
     search = serializers.CharField(default='',allow_blank=True,allow_null=True)
     page_no = serializers.CharField(default=1)
     page_count = serializers.CharField(default=perpage)
+    # hierarchy_ids=serializers.ListField(default = [],allow_empty = True)
 
 class list_filters(serializers.Serializer):
     type_of_filter = serializers.CharField(max_length = 200)
@@ -656,7 +660,9 @@ class user_custom_theme_serializer(serializers.Serializer):
 
 
 class test_data(serializers.Serializer):
-    search = serializers.CharField(allow_blank=True,allow_null=True)
+    search = serializers.CharField(default='',allow_blank=True,allow_null=True)
+    page_no = serializers.IntegerField(default =1)
+    page_count = serializers.IntegerField(default =10)
 
 
 class dashboard_drill_down(serializers.Serializer):
@@ -664,6 +670,7 @@ class dashboard_drill_down(serializers.Serializer):
     row = serializers.ListField()
     id = serializers.ListField(allow_null=True,default=[])
     input_list = serializers.ListField(allow_null=True,default=[])
+    is_exclude = serializers.ListField(allow_null = True,default = [])
     dashboard_id = serializers.IntegerField(default=None)
     sheet_id = serializers.IntegerField()
     # database_id = serializers.IntegerField(allow_null=True,default=None)
@@ -701,3 +708,11 @@ class dashboard_table_serializer(serializers.Serializer):
     dashboard_id = serializers.IntegerField(default=None)
     id = serializers.ListField(allow_null=True,default=[])
     input_list = serializers.ListField(allow_null=True,default=[])
+    is_exclude = serializers.ListField(allow_null = True,default = [])
+
+
+
+class file_replace_serializer(serializers.Serializer):
+    file_type = serializers.CharField()
+    file_path = serializers.FileField()
+    hierarchy_id = serializers.IntegerField()

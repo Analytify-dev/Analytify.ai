@@ -88,21 +88,6 @@ def flatten_json_to_dataframe_qs(data):
             """
             if current_row is None:
                 current_row = {}
-
-            # for key, value in d.items():
-            #     if isinstance(value, dict):
-            #         # Recursively process nested dictionaries
-            #         process_dict(value, current_row)
-            #     elif isinstance(value, list):
-            #         # Process each item in the list
-            #         for item in value:
-            #             process_dict(item, current_row.copy())
-            #     else:
-            #         # Add key-value pair to the current row
-            #         current_row[key] = value
-            
-            # # Append the fully processed row to rows
-            # rows.append(current_row)
             if isinstance(d, dict):
                 for key, value in d.items():
                     if isinstance(value, dict):
@@ -110,8 +95,11 @@ def flatten_json_to_dataframe_qs(data):
                         process_dict(value, current_row)
                     elif isinstance(value, list):
                         # Process each item in the list
-                        for item in value:
-                            process_dict(item, current_row.copy())
+                        if value!=[]:
+                            for item in value:
+                                process_dict(item, current_row.copy())
+                        else:
+                           current_row[key] = None
                     else:
                         # Add key-value pair to the current row
                         current_row[key] = value
@@ -125,9 +113,12 @@ def flatten_json_to_dataframe_qs(data):
                 rows.append(current_row)
 
         def process(data):
-            if isinstance(data, list):  # If the root data is a list
-                for item in data:
-                    process_dict(item)
+            if isinstance(data, list): 
+                if data!=[]: # If the root data is a list
+                    for item in data:
+                        process_dict(item)
+                else:
+                    process_dict(data)
             elif isinstance(data, dict):  # If the root data is a dictionary
                 process_dict(data)
             else:
@@ -135,7 +126,6 @@ def flatten_json_to_dataframe_qs(data):
 
         # Start processing the data
         process(data)
-
         # Create a DataFrame from the processed rows
         df = pd.DataFrame(rows)
         df =df.drop_duplicates()
@@ -177,9 +167,11 @@ def flatten_json_to_dataframe(data):
         if isinstance(data, dict):
             for key, value in data.items():
                 if isinstance(value, list):
+                    
                     flat_data =[flatten_dict(item) for item in value]
                 else:
-                    print(data)
+                    # print(data)
+                    pass
                     # Flatten each list found in the dictionary
                     # for item in value:
                     #     flat_data = [flatten_dict(item)]
@@ -423,49 +415,6 @@ def insert_batch(rows,table_name,database,columns):
         try:
             clickhouse_1 = Clickhouse(database)
             client = clickhouse_1.client
-            # cursor_data1 = source_cursor.execute(text(f"PRAGMA table_info({table_name});"))
-            # columns1 = cursor_data1.fetchall()
-            # column_data =[]
-            # for col in columns1:
-            #     column_data.append(convert_to_clickhouse_type('sqlite',col[2])) 
-            # cleaned_data = [list(row) if isinstance(row, (tuple, list)) else [row] for row in rows]
-            # df = pd.DataFrame(cleaned_data)
-
-
-            # dataframe = dataframe.replace([np.nan,pd.NaT ,np.inf, -np.inf,pd.NA], None)
-            # print(df.dtypes)
-            # data_str = ",".join(str(tuple(row)) for row in rows)
-            # clickhouse_1.cursor.execute('INSERT INTO your_table VALUES', data_str)
-            # formatted_batch = [[row] if isinstance(row, (int, float, str)) else list(row) for row in rows]
-            # row_data = [[row] for row in rows]
-            # data = [('a', 'd', 'a'), ('fa', 'fa', 'faf')]  # Example data
-            # converted_data = [list(item) for item in rows]
-            # dataframe.fillna("", inplace=True)
-            # dataframe.to_csv(table_name) # Replace NaN with empty string
-            # rows = dataframe.to_numpy().tolist()
-            # cleaned_rows = [clean_data(row, column_data) for row in rows]
-            # values = ", ".join(str(tuple(row)) for row in rows)  # Convert rows to string format
-            # insert_query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES {values};"
-            # processed_rows = process_values_for_insertion(rows)
-
-            # Create the SQL query
-            # columns = ['role', 'number', 'marital_status', 'salary'cmd, 'bonus', 'experience', 'active', 'status', 'age', 'shift']
-            # values_str = ", ".join(str(row) for row in processed_rows)  # Convert rows to a string for insertion
-            # insert_query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES {values_str};"
-            # try:
-            #     # client.insert_arrow(table=table_name,rows)
-            #     clickhouse_1.cursor.execute(text(insert_query))
-            # except Exception as e:
-            #     # client.insert(table_name,rows)
-            #     print(f"Error during insertion: {str(e).splitlines()[0]}")
-
-
-            # values_str = ", ".join(str(row) for row in rows)
-            # insert_query = f"INSERT INTO {table_name} ({', '.join(columns)}) VALUES {values_str};"
-            # try:
-            #     clickhouse_1.cursor.execute(text(insert_query))
-            # except Exception as e:
-            #     print(f"Error during insertion: {str(e).splitlines()[0]}")
             df = pd.DataFrame(rows)
             for index, col in enumerate(df.columns):
                 if any(isinstance(x, memoryview) for x in df[col]):
@@ -514,19 +463,12 @@ def insert_batch(rows,table_name,database,columns):
 import json
 class Clickhouse():
     def __init__(self,database='default'):
-        print(settings.clickhouse_host)
-        print(settings.clickhouse_port)
-        print(settings.clickhouse_username)
-        print(settings.clickhouse_password)
-        print(database)
         # try:
         self.client = clickhouse_connect.get_client(host = settings.clickhouse_host,port=settings.clickhouse_port,username = settings.clickhouse_username,password = settings.clickhouse_password,database=database,
-        settings={'date_time_input_format':'best_effort',
-                'input_format_null_as_default': 1,
-                'async_insert': 1,
+        settings={'date_time_input_format':'best_effort','input_format_null_as_default': 1,'async_insert': 1,
              'wait_for_async_insert':1,'input_format_try_infer_dates': 1,
             'input_format_try_infer_datetimes': 1,
-             'input_format_try_infer_datetimes_only_datetime64':0,
+             'input_format_try_infer_datetimes_only_datetime64':1,
              'input_format_csv_use_best_effort_in_schema_inference': 1,
             'enable_extended_results_for_datetime_functions': 1,
             'receive_timeout': 600,  # in seconds
@@ -534,38 +476,13 @@ class Clickhouse():
             'receive_data_timeout_ms': 3000,  # in milliseconds
             'async_insert_busy_timeout_ms': 2000,
              'insert_null_as_default':1 })
-        # settings = {
-        #     'date_time_input_format': 'best_effort',
-        #     'input_format_null_as_default': 1,
-        #     'async_insert': 1,
-        #     'wait_for_async_insert': 1,
-        #     'input_format_try_infer_dates': 1,
-        #     'input_format_try_infer_datetimes': 1,
-        #     'input_format_csv_use_best_effort_in_schema_inference': 1,
-        #     'receive_timeout': 600,  # in seconds
-        #     'http_receive_timeout': 60,  # in seconds
-        #     'receive_data_timeout_ms': 3000,  # in milliseconds
-        #     'async_insert_busy_timeout_ms': 2000,
-        #     'insert_null_as_default': 1,
-        # }
-        # )
-
-        # settings={'date_time_input_format': 'best_effort'})
-
-        
-        print(self.client)
         # clickhouse_client = clickhouse_connect.get_client(host='your_clickhouse_host', username='your_username', password='your_password', )
         # self.clickhouse_url = "clickhouse+http://default:@localhost:8123/default"
         # registry.register("clickhouse", "clickhouse_sqlalchemy.dialect", "ClickHouseDialect")
-        print(settings.DATABASES['default']['NAME'])
-        print("Here")
-        if settings.DATABASES['default']['NAME']=='insightapps':
-            print("Yes")
+        if settings.DATABASES['default']['NAME']=='insightapps_dev':
             self.clickhouse_url = f'clickhouse+http://{settings.clickhouse_username}:{settings.clickhouse_password}@{settings.clickhouse_host}:{settings.clickhouse_port}/{database}?protocol=https'
         else:
-            print("No")
             self.clickhouse_url = f'clickhouse+http://{settings.clickhouse_username}:{settings.clickhouse_password}@{settings.clickhouse_host}:{settings.clickhouse_port}/{database}'
-            print(self.clickhouse_url)
         self.engine = create_engine(self.clickhouse_url,connect_args={
           'verify': False,
          'settings': {'date_time_input_format':'best_effort','input_format_null_as_default': 1,'async_insert': 1,
@@ -577,10 +494,7 @@ class Clickhouse():
             'http_receive_timeout': 60,  # in seconds
             'receive_data_timeout_ms': 3000,  # in milliseconds
             'async_insert_busy_timeout_ms': 2000,'insert_null_as_default':1 }})
-        print(self.engine)
-        print(self.engine.connect())
         self.cursor = self.engine.connect()
-        # print(self.cursor.execute('SELECT 1'))
         # except Exception as e:
         #     return {"status":400,"message":"Connection Error"}
 
@@ -608,7 +522,7 @@ class Clickhouse():
 
             click = Clickhouse()
             client = click.client
-            create_query = f"""CREATE TABLE \"{database}\".\"{table}\"
+            create_query = f"""CREATE OR REPLACE TABLE  \"{database}\".\"{table}\"
             ENGINE = MergeTree
             ORDER BY () EMPTY AS
             SELECT * FROM postgresql('{hostname}:{port}', '{source_database}', '{table}', '{username}', '{password}')"""
@@ -709,8 +623,12 @@ class Clickhouse():
             # table_name = f"""\"{file_name}\".\"{file_name}\""""
             # result  =insert_df_into_clickhouse(table_name,dataframe)
 
+            try:
+                file_used_data.seek(0)
+            except:
+                pass
             binary_buffer = io.BytesIO(file_used_data.read())
-            dataframe = pd.read_csv(binary_buffer)
+            dataframe = pd.read_csv(binary_buffer,keep_default_na=False)
             table,table_ext = os.path.splitext(os.path.basename(file_name))
             table_name = f"""\"{file_name}\".\"{table}\""""
             result  =insert_df_into_clickhouse(table_name,dataframe)
@@ -728,7 +646,7 @@ class Clickhouse():
             xls = pd.ExcelFile(file_data)
             
             # Prepare a list of tasks for parallel processing
-            tasks = [(file_name,sheet, xls.parse(sheet).fillna(value='NA'))  for sheet in xls.sheet_names ]
+            tasks = [(file_name,sheet, xls.parse(sheet,keep_default_na=False).fillna(value='NA'))  for sheet in xls.sheet_names ]
             
             with concurrent.futures.ProcessPoolExecutor() as executor:
                 results = list(executor.map(_process_sheet, tasks))
@@ -825,44 +743,57 @@ class Clickhouse():
     def json_to_table(self,tables_list,user_token,id,database,parameter):
         from quickbooks.views import quickbooks_query_data
         from quickbooks.salesforce_endpoints import salesforce_query_data
-        from quickbooks import connectwise,halops
+        from quickbooks import connectwise,halops,shopify,models
+        from dashboard import columns_extract,models as dsh_models
         try:
             for table in tables_list:
                 if parameter.lower() == 'quickbooks':
                     data  = quickbooks_query_data(id,user_token,table)
-                    dataframe = flatten_json_to_dataframe_qs(data)
-                    # if isinstance(data,dict):
-                    #     pass
-                    # else:
-                    #     return {"status":400,"message":"Wrong Data"}
+                    print(data)
+                    if data['status']==200:
+                        dataframe = flatten_json_to_dataframe_qs(data['data'])
+                    else:
+                        continue
                 elif parameter.lower() == 'salesforce':
+                    print("salesforce")
                     data = salesforce_query_data(id,user_token,table)
-                    dataframe = flatten_json_to_dataframe_qs(data)
-                    # if isinstance(data,dict):
-                    #     pass
-                    # else:
-                    #     return {"status":400,"message":"Wrong Data"}
+                    print(data)
+                    if data['status']==200:
+                        dataframe = flatten_json_to_dataframe_qs(data['data'])
+                    else:
+                        continue
                 elif parameter.lower() =='connectwise':
-                    try:
-                        data = connectwise.connectwise_data(table,id)
-                        dataframe = flatten_json_to_dataframe(data)
-                    except:
-                        return {"status":400,"message":"Wrong Data"}
-                    # if isinstance(data,dict):
-                    #     pass
-                    # else:
-                    #     return {"status":400,"message":"Wrong Data"}
+                    data = connectwise.connectwise_data(table,id)
+                    print(data)
+                    if data['status']==200:
+                        dataframe = flatten_json_to_dataframe(data['data'])
+                    else:
+                        continue
                 elif parameter.lower() =='halops':
-                    try:
-                        data = halops.halops_data(table,id)
-                        dataframe = flatten_json_to_dataframe(data)
-                    except:
-                        return {"status":400,"message":"Wrong Data"}
-                    # if isinstance(data,dict):
-                    #     pass
-                    # else:
-                    #     
-                # dataframe = flatten_json_to_dataframe(json.loads(data))
+                    data = halops.halops_data(table,id)
+                    print(data)
+                    if data['status']==200:
+                        dataframe = flatten_json_to_dataframe(data['data'])
+                    else:
+                        continue
+                elif parameter=='mongodb':
+                    data = columns_extract.mongo_connection_data(id,table)
+                    print(data)
+                    if data['status']==200:
+                        dataframe = flatten_json_to_dataframe(data['data'])
+                    else:
+                        continue
+                elif parameter=='shopify':
+                    data = shopify.shopify_data(id,table)
+                    print(data)
+                    # a = json.dumps(data, indent=4)
+                    # with open(table+'.json','w') as outfile:
+                    #     outfile.write(a)
+                    
+                    if data['status']==200:
+                        dataframe = flatten_json_to_dataframe_qs(data['data'])
+                    else:
+                        continue
                 columns_data = []
                 for i in dataframe.columns:
                     if i.lower() in columns_data:
@@ -896,6 +827,7 @@ class Clickhouse():
             return {'status': 200, 'message': 'Quickboooks Table inserted'}
 
         except Exception as e:
+            print('e')
             return {'status': 400, 'message': str(e).splitlines()[0]}
 
             # creation = self.insert_df_into_clickhouse(table,dataframe)
@@ -993,26 +925,57 @@ def convert_datetime_columns(df):
     return df
 
 
+# def map_dtypes_to_clickhouse(df):
+#     try:
+#         type_mapping = {
+#             'object': 'String',
+#             'int64': 'Int64',
+#             'float64': 'Float64',
+#             'bool': 'Bool',
+#             'datetime64[ns]': "DateTime64",  # Handle datetime
+#         }
+#         clickhouse_schema = []
+        
+#         for column in df.columns:
+#             dtype = str(df[column].dtype)
+#             if dtype in type_mapping:
+#                 if df[column].isnull().any():
+#                     clickhouse_schema.append(f"`{column}` Nullable({type_mapping[dtype]}) DEFAULT '1970-01-01 00:00:00'" if dtype =='datetime64[ns]' else f"`{column}` Nullable({type_mapping[dtype]})")
+#                 else:
+#                     clickhouse_schema.append(f"`{column}` {type_mapping[dtype]}")
+#             else:
+#                 raise ValueError(f"Unsupported dtypes: {dtype} for column: {column}")
+
+#         return ", ".join(clickhouse_schema)
+#     except Exception as e:
+#         print(e)
+
+
+
+
 def map_dtypes_to_clickhouse(df):
     try:
         type_mapping = {
+
+            'String':'String',
             'object': 'String',
             'int64': 'Int64',
+            'UInt64':'Int64',
             'float64': 'Float64',
             'bool': 'Bool',
-            'datetime64[ns]': "DateTime64",  # Handle datetime
+            'datetime64[ns]': "DateTime64",
+            'datetime64[ns, tzoffset(None, -28800)]':"DateTime64"  # Handle datetime
         }
         clickhouse_schema = []
-        
         for column in df.columns:
             dtype = str(df[column].dtype)
-            if dtype in type_mapping:
-                if df[column].isnull().any():
-                    clickhouse_schema.append(f"`{column}` Nullable({type_mapping[dtype]}) DEFAULT '1970-01-01 00:00:00'" if dtype =='datetime64[ns]' else f"`{column}` Nullable({type_mapping[dtype]})")
-                else:
-                    clickhouse_schema.append(f"`{column}` {type_mapping[dtype]}")
+
+            if df[column].isnull().any():
+                clickhouse_schema.append(f"`{column}` Nullable(DateTime64) DEFAULT '1970-01-01 00:00:00'" if 'datetime' in  str(dtype.lower()) else f"`{column}` Nullable({type_mapping[dtype]})")
             else:
-                raise ValueError(f"Unsupported dtypes: {dtype} for column: {column}")
+                clickhouse_schema.append(f"`{column}` DateTime64 DEFAULT '1970-01-01 00:00:00'" if 'datetime' in  str(dtype.lower()) else f"`{column}` {type_mapping[dtype]}")
+            # else:
+            #     raise ValueError(f"Unsupported dtypes: {dtype} for column: {column}")
 
         return ", ".join(clickhouse_schema)
     except Exception as e:
@@ -1208,7 +1171,7 @@ def insert_df_into_clickhouse(table_name,dataframe):
         ) ENGINE = MergeTree()
         ORDER BY tuple()
             """
-        
+        # print(create_table_query)
         
         
         click = Clickhouse()

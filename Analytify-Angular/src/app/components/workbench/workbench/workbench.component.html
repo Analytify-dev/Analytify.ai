@@ -34,8 +34,10 @@
               </div>
               <div class="mb-2">
                 <label class="col-form-label">PASSWORD <span class="text-danger ms-1" >*</span></label>
+                <div class="d-flex">
                 <input type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
-                <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                          
+                <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                          
+              </div>
               </div>
             </form>
           </div>
@@ -81,8 +83,10 @@
               </div>
               <div class="mb-2">
                 <label class="col-form-label">Password:</label>
-                <input type="text" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}"[type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
-                <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                          
+                <div class="d-flex">
+                  <input type="text" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}"[type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
+                <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>
+                </div>                          
             </div>
             </form>
           </div>
@@ -129,8 +133,10 @@
               </div>
               <div class="mb-2">
                 <label class="col-form-label">Password:</label>
-                <input type="text" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}"[type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
-                <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                          
+                <div class="d-flex">
+                  <input type="text" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}"[type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
+                <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>
+                </div>                          
             </div>
             </form>
           </div>
@@ -209,6 +215,29 @@
                     (input)="siteUrlPSAError()">
                    </div>
               </form>
+            }
+            @else if(databaseType == 'shopify') {
+              <form>
+                <div class="mb-2">
+                  <label [ngClass]="{'error-label': shopifyApiTokenError}" class="col-form-label">API Token <span
+                    class="text-danger ms-1">*</span></label>
+                <input [ngClass]="{'error-input': shopifyApiTokenError}" type="text" class="form-control"
+                  [(ngModel)]="shopifyToken" [ngModelOptions]="{standalone: true}" autocomplete="new-myname"
+                  placeholder="e.g. 004d3e9d-25rr-461b-913c-1b6901bssa1" (input)="shopifyapiTokenError()">
+              </div>
+                <div class="mb-2">
+                  <label [ngClass]="{'error-label': shopifyNameError}" for="recipient-name" class="col-form-label">Shop Name<span class="text-danger ms-1">*</span></label>
+                  <input [ngClass]="{'error-input': shopifyNameError}" type="text" class="form-control"
+                    [(ngModel)]="shopifyName" [ngModelOptions]="{standalone: true}"
+                    placeholder="shop name"
+                    (input)="shopfyNameError()"> 
+                  </div>
+
+                    <div class="mb-2">
+                      <label [ngClass]="{'error-label': displayNameError}" class="col-form-label">Display Name <span class="text-danger ms-1" >*</span></label>
+                            <input [ngClass]="{'error-input': displayNameError}" type="text" class="form-control" [(ngModel)]="displayName" [ngModelOptions]="{standalone: true}" autocomplete="new-myname" placeholder="e.g. InsignApps" (input)="displayNameIntegrationConditionError()">
+                        </div>
+              </form>
             } @else {
             <form>
               <div class="mb-2">
@@ -237,8 +266,10 @@
               </div>
               <div class="mb-2">
                 <label (input)="passwordConditionError()" class="col-form-label">PASSWORD <span class="text-danger ms-1" >*</span></label>
-                <input (input)="passwordConditionError()" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
-                <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                          
+                <div class="d-flex">
+                  <input (input)="passwordConditionError()" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
+                <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button> 
+                </div>                         
               </div>
             </form>
           }
@@ -252,6 +283,9 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close('cross click')">Close</button>
               <button type="button" class="btn btn-primary" (click)="haloPSAUpdate()" [disabled]="(clientIDPSAError || siteURLErrorPSA || displayNameError || clientSecretError) || !(clientSecret && clientIdPSA && siteURLPSA && displayName )">Update</button>
       
+            } @else if(databaseType == 'shopify') {
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close('cross click')">Close</button>
+              <button type="button" class="btn btn-primary" (click)="shopifyConnectionUpdate()" [disabled]="(shopifyApiTokenError || shopifyNameError || displayNameError) || !(shopifyToken && shopifyName && displayName)">Update</button>
             } @else {
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modal.close('cross click')">Close</button>
             <button type="button" class="btn btn-primary" (click)="DatabaseUpdate()" [disabled]="disableConnectBtn">Update</button>
@@ -264,8 +298,8 @@
 <!-- screen2 -->
 @if(databaseconnectionsList){
   <div class="main-container container-fluid">
-    <div class="row" class="card" style="padding-top: 15px;">
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+    <div class="row" class="card card-padding-top">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0" >
       <div class="header-title-search">
         <div class="connect-txt">
           <h4 class="card-title mt-2">Connected Database</h4>
@@ -278,11 +312,11 @@
           <button *ngIf="!gridView" type="button" class="btn btn-icon btn-outline-primary me-3" ><i class="fa fa-th-list"></i></button>
           <div class="input-group">
             <input type="text" class="form-control border-end-0 " placeholder="Search Database Server" [(ngModel)]="searchDbName" aria-describedby="button-addon2" (keyup.enter)="searchDbConnectionList()">
-            <button class="btn btn-primary border me-2" type="button" (click)="searchDbConnectionList()" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
+            <button class="btn btn-primary border me-2 search-icon-border-radius" type="button" (click)="searchDbConnectionList()" id="button-addon2"><i class="fe fe-search "></i></button>
             
             <app-insights-button [buttonName]="' New Database'" [classesList]="'btn btn-primary'" [isIcon]="true" [previledgeId]="1" [faIconList]="'fa fa-plus'" [isBtn]="true"
             (btnClickEvent)="routeNewDatabase()"></app-insights-button>
-            <!-- <button type="button" class="btn btn-primary" (click)="databaseconnectionsList=false;viewNewDbs=true;" style="border-radius: 4px 4px 4px 4px;"><i class="fa fa-plus"></i> New Database</button> -->
+            <!-- <button type="button" class="btn btn-primary" (click)="databaseconnectionsList=false;viewNewDbs=true;" ><i class="fa fa-plus"></i> New Database</button> -->
           </div>
         </div>
     </div>
@@ -295,9 +329,9 @@
 
         <div *ngIf="viewDatasourceList" class="card-body card-p">
           @if(!gridView){
-            <div class="table-responsive border" style="height: 26rem;">
+            <div class="table-responsive border table-responsive-height">
                 <table class="table border text-nowrap text-md-nowrap mb-0">
-                    <thead class="table-primary bg-primary" style="position: sticky;top: -1px;">
+                    <thead class="table-primary bg-primary table-primary-position">
                         <tr>
                             <th>Database</th>
                             <th>Server</th>
@@ -355,17 +389,39 @@
                       <td *ngIf="database.server_type === 'HALOPS'">
                         <img alt="product" src="./assets/images/icons/Halopsa-icon.png" class="w-5 h-5 border me-2">{{database.server_type}}
                       </td>
-
+                      <td *ngIf="database.server_type === 'SHOPIFY'">
+                        <img alt="product" src="./assets/images/icons/shopify-large-1.jpg" class="w-5 h-5 border me-2">{{database.server_type}}
+                      </td>
+                      <td *ngIf="database.server_type === 'GOOGLE_SHEETS'">
+                        <img alt="product" src="./assets/images/icons/google-sheets.jpg" class="w-5 h-5 border me-2">{{database.server_type}}
+                      </td>
                             <td>{{database.created_at}}</td>
                             <td>{{database.created_by}}</td>
                             <td>{{database.updated_at}}</td>
                             <td>
                               <div class="hstack gap-2 fs-1">
-                                <button
-                                  [disabled]="(database.server_type === 'CSV' || database.server_type ==='EXCEL' || database.server_type ==='SQLITE' || database.server_type ==='QUICKBOOKS' || database.server_type ==='SALESFORCE')"
-                                  aria-label="anchor" (click)="editDbDetails(database.database_id);editDbConnectionModal(EditDbCon);"
+                                <button *ngIf="!(database.server_type === 'CSV' || database.server_type ==='EXCEL')"
+                                  [disabled]="(database.server_type ==='SQLITE' || database.server_type ==='QUICKBOOKS' || database.server_type ==='SALESFORCE')"
+                                  aria-label="anchor" (click)="editDbDetails(database.hierarchy_id);editDbConnectionModal(EditDbCon);"
                                   class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light">
                                   <i class="ri-edit-line" ngbTooltip="Edit database"></i></button>
+                                <div *ngIf="(database.server_type === 'CSV' || database.server_type ==='EXCEL')" class="d-flex justify-content-end" ngbDropdown>
+                                  <button aria-label="anchor" class="btn btn-icon btn-sm btn-info-light btn-wave waves-effect waves-light" ngbDropdownToggle data-bs-toggle="dropdown">
+                                    <i class="ri-edit-line" ngbTooltip="Edit database"></i>
+                                  </button>
+                                  <div class="dropdown-menu" ngbDropdownMenu>
+                                    <a *ngIf="(database.server_type === 'CSV' || database.server_type ==='EXCEL')" class="dropdown-item"
+                                      (click)="fileInput.click()"><input type="file"
+                                        (change)="database.server_type === 'CSV' ? uploadfileCsv($event,'replace',database) : uploadfileExcel($event,'replace',database)"
+                                        [attr.accept]="database.server_type === 'CSV' ? '.csv' : '.xlsx, .xls'" #fileInput style="display: none;" /><i
+                                        class="fe fe-repeat"></i> Replace</a>
+                                    <a *ngIf="(database.server_type === 'CSV' || database.server_type ==='EXCEL')" class="dropdown-item"
+                                      (click)="fileInput.click()"><input type="file"
+                                        (change)="database.server_type === 'CSV' ? uploadfileCsv($event, 'upsert',database) : uploadfileExcel($event, 'upsert',database)"
+                                        [attr.accept]="database.server_type === 'CSV' ? '.csv' : '.xlsx, .xls'" #fileInput style="display: none;" /><i
+                                        class="fe fe-upload"></i> Upsert</a>
+                                  </div>
+                                </div>
                                 <a aria-label="anchor" (click)="deleteDbConnection(database.hierarchy_id)"
                                   class="btn btn-icon btn-sm btn-danger-light btn-wave waves-effect waves-light">
                                   <i class="ri-delete-bin-7-line" ngbTooltip="Delete database"></i>
@@ -414,6 +470,10 @@
                                               <img src="./assets/images/icons/connectwise-icon.png" alt="" class="rounded-circle"></span>
                                               <span *ngIf="database.server_type === 'HALOPS'" class="avatar avatar rounded-circle">
                                                 <img src="./assets/images/icons/Halopsa-icon.png" alt="" class="rounded-circle"></span>
+                                                <span *ngIf="database.server_type === 'SHOPIFY'" class="avatar avatar rounded-circle">
+                                                  <img src="./assets/images/icons/shopify-large-1.jpg" alt="" class="rounded-circle"></span>
+                                                  <span *ngIf="database.server_type === 'GOOGLE_SHEETS'" class="avatar avatar rounded-circle">
+                                                    <img src="./assets/images/icons/google-sheets.jpg" alt="" class="rounded-circle"></span>
                           <div class="ms-2 mt-sm-0 mt-2">
                             <!-- <span class="text-muted  pe-2 fs-12 float-start">Server</span> -->
                               <h6 class="mb-1">
@@ -433,7 +493,8 @@
                             <app-insights-button *ngIf="!(database.server_type === 'CSV' || database.server_type ==='EXCEL' || database.server_type ==='SQLITE' || database.server_type ==='QUICKBOOKS' || database.server_type ==='SALESFORCE')" [buttonName]="' Edit'" [classesList]="'dropdown-item'" [previledgeId]="2" [isBtn]="false"
                               [tabIndex]="0" (btnClickEvent)="editDbDetails(database.hierarchy_id);editDbConnectionModal(EditDbCon);"
                               [faIconList]="'fe fe-edit me-2 d-inline-flex'" [isIcon]="true"></app-insights-button>
-                            
+                            <a *ngIf="(database.server_type === 'CSV' || database.server_type ==='EXCEL')" class="dropdown-item" (click)="fileInput.click()" ><input type="file" (change)="database.server_type === 'CSV' ? uploadfileCsv($event,'replace',database) : uploadfileExcel($event,'replace',database)" [attr.accept]="database.server_type === 'CSV' ? '.csv' : '.xlsx, .xls'" #fileInput style="display: none;" /><i class="fe fe-repeat"></i> Replace</a>
+                            <a *ngIf="(database.server_type === 'CSV' || database.server_type ==='EXCEL')" class="dropdown-item" (click)="fileInput.click()"><input type="file" (change)="database.server_type === 'CSV' ? uploadfileCsv($event, 'upsert',database) : uploadfileExcel($event, 'upsert',database)" [attr.accept]="database.server_type === 'CSV' ? '.csv' : '.xlsx, .xls'" #fileInput style="display: none;" /><i class="fe fe-upload"></i> Upsert</a>
                             <app-insights-button [buttonName]="' Delete'" [classesList]="'dropdown-item  btn btn-secondary-light'" [previledgeId]="3"
                               [isBtn]="false" [tabIndex]="0" (btnClickEvent)="deleteDbConnection(database.hierarchy_id)"
                               [faIconList]="'fe fe-trash me-2 d-inline-flex'" [isIcon]="true"></app-insights-button>
@@ -481,7 +542,7 @@
             </div>
           }
           <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetconnectionList((page = $event))"></pagination-controls>
-          <div  style="float: right;font-size: 15px; margin-top: -30px;">
+          <div class="pagination-count">
             <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getDbConnectionList()" class="form-control cursor">
                   <option  value="10"> 10</option>
                   <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
@@ -494,21 +555,74 @@
     </div>
 
   </div>
-  
-
-
-
 }
+@if(isGoogleSheetsPage){
+  <div class="main-container container-fluid">
+    <div class="row" class="card card-padding-top">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0" >
+      <div class="d-flex flex-nowrap align-items-center gap-2 px-5 py-2">
+        <h4 class="card-title mt-2 mb-0 me-3">Connected to Google Sheets:</h4>
+        <span *ngIf="gsheetprofile?.email" class="border rounded-2 px-3 py-2 d-inline-flex align-items-center">
+          <i class="fas fa-user-circle me-2"></i> {{ gsheetprofile.email }}
+        </span>
+      </div>
+        <div class="card-body card-p">
+            <div class="table-responsive border table-responsive-height">
+                <table class="table border text-nowrap text-md-nowrap mb-0">
+                    <thead class="table-primary bg-primary table-primary-position">
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Created on</th>
+                            <th>Last Modified</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngIf="googleSheetsData.length === 0">
+                        <td colspan="4" class="text-center">No sheets to display!</td>
+                      </tr>
+                      <tr *ngFor="let gsheets of googleSheetsData"  title="Select Sheet" (click)="getHierachyIdFromGsheets(gsheets.id)">
+                        <td>
+                          {{gsheets.name | slice:0:15}}
+                        </td>
+                        <td>
+                          {{gsheets.mimeType}}
+                        </td>
+                        <td>
+                          {{gsheets.createdTime | date}}
+                        </td>
+                        <td>
+                          {{gsheets.modifiedTime | date}}
+                        </td>
+                       
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+          <!-- <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetconnectionList((page = $event))"></pagination-controls>
+          <div class="pagination-count">
+            <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getDbConnectionList()" class="form-control cursor">
+                  <option  value="10"> 10</option>
+                  <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
+                  <option [disabled]="!(totalItems > 20)" value="30"> 30</option>
+               
+            </select>
+         </div> -->
+        </div>
+    </div>
+    </div>
 
+  </div>
+}
 
 
 
   <!-- screen3 -->
   @if(openPostgreSqlForm){
-    <div class="row main-container" >
+    <div class="main-container container-fluid px-4" >
       <div class="row">
           <div class="col-md-12 col-xl-6 p-1 mb-0">
-              <div class="card">
+              <div class="card Relational-database-height">
                   <div class="card-header">
                       <h4 class="card-title">Connect To PostgreSQL</h4>
                   </div>
@@ -536,8 +650,10 @@
                               </div>
                               <div class="form-group">
                                   <label [ngClass]="{'error-label': passwordError}" class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                  <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
-                                  <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                  <div class="d-flex">
+                                    <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
+                                  <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button> 
+                                  </div>                  
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" (click)="gotoNewConnections()" >Close</button>
@@ -548,13 +664,13 @@
               </div>
           </div>
           <div class="col-md-12 col-xl-6 p-1 mb-0">
-            <div class="card user-card border">
-              <div class="user-image" style="height: 150px;">
-                  <span class="avatar w-20 h-20 rounded-circle mb-2" style="outline: none;">
-                    <img src="./assets/images/Tiled view sheet icons/postgresql.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+            <div class="card user-card border Relational-database-height">
+              <div class="user-image" >
+                  <span class="avatar w-20 h-20 rounded-circle mb-2 user-image-outline" >
+                    <img src="./assets/images/Tiled view sheet icons/postgresql.jpg" alt="" class="rounded-circle bg-white user-image-border-color" >
                   </span>
               </div>
-              <div class="card-body" style="padding-top: 70px; height: auto;">
+              <div class="card-body server-content-card">
                 <ul class="">
                   <li> <span class="mt-1">PostgreSQL is an advanced, enterprise-class open-source relational database
                     that supports both SQL (relational) and JSON (non-relational) querying. </span></li>
@@ -579,10 +695,10 @@
   </div>
     }
     @if(openMySqlForm){
-      <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;" >
+      <div class="main-container container-fluid px-4" >
         <div class="row">
             <div class="col-md-12 col-xl-6 p-1 mb-0">
-                <div class="card">
+                <div class="card Relational-database-height">
                     <div class="card-header">
                         <h4 class="card-title">Connect To MYSQL</h4>
                     </div>
@@ -610,8 +726,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label [ngClass]="{'error-label': passwordError}" class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                    <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
-                                    <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                    <div class="d-flex">
+                                      <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
+                                       <button class="btn btn-light"  (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button> 
+                                    </div>                  
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" (click)="gotoNewConnections()" >Close</button>
@@ -622,13 +740,13 @@
                 </div>
             </div>
             <div class="col-md-12 col-xl-6 p-1 mb-0">
-              <div class="card user-card border">
-                <div class="user-image" style="height: 150px;">
-                    <span class="avatar w-20 h-20 rounded-circle mb-2" style="outline: none;">
-                      <img src="./assets/images/icons/MySql-icon1.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+              <div class="card user-card border Relational-database-height">
+                <div class="user-image">
+                    <span class="avatar w-20 h-20 rounded-circle mb-2 user-image-outline">
+                      <img src="./assets/images/icons/MySql-icon1.jpg" alt="" class="rounded-circle bg-white user-image-border-color">
                     </span>
                 </div>
-                <div class="card-body" style="padding-top: 70px; height: auto;">
+                <div class="card-body server-content-card" >
                   <ul class="">
                     <li> <span class="mt-1">MySQL is a popular open-source Relational Database Management System (RDBMS)  that uses SQL (Structured Query Language) for database operations. </span></li>
                     <li><h6 class=" mt-3"><strong>Features</strong></h6></li>
@@ -647,10 +765,10 @@
     </div>
       }
       @if(openConnectWiseForm){
-        <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;" >
+        <div class="main-container container-fluid px-4">
           <div class="row">
               <div class="col-md-12 col-xl-6 p-1 mb-0">
-                  <div class="card">
+                  <div class="card Relational-database-height">
                       <div class="card-header">
                           <h4 class="card-title">Connect To Connectwise</h4>
                       </div>
@@ -689,13 +807,13 @@
                   </div>
               </div>
               <div class="col-md-12 col-xl-6 p-1 mb-0">
-                <div class="card user-card border">
-                  <div class="user-image" style="height: 150px;">
-                      <span class="avatar w-20 h-20 rounded-circle mb-2" style="outline: none;">
-                        <img src="./assets/images/Db_server_images/connectwise-logo.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+                <div class="card user-card border Relational-database-height">
+                  <div class="user-image">
+                      <span class="avatar w-20 h-20 rounded-circle mb-2 user-image-outline">
+                        <img src="./assets/images/Db_server_images/connectwise-logo.jpg" alt="" class="rounded-circle bg-white user-image-border-color">
                       </span>
                   </div>
-                  <div class="card-body" style="padding-top: 70px; height: 60vh;">
+                  <div class="card-body server-content-card">
                     <ul class="">
                       <li> <span class="mt-1">ConnectWise provides a seamless combination of Remote Monitoring and Management (RMM) tools with Professional Services Automation (PSA), enabling IT service providers to manage their operations effectively.
                       </span></li>                    
@@ -715,10 +833,10 @@
       </div>
         }
         @if(openHaloPSAForm){
-          <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;">
+          <div class="main-container container-fluid px-4" >
             <div class="row">
               <div class="col-md-12 col-xl-6 p-1 mb-0">
-                <div class="card">
+                <div class="card Relational-database-height">
                   <div class="card-header">
                     <h4 class="card-title">Connect To HaloPSA</h4>
                   </div>
@@ -760,14 +878,13 @@
                 </div>
               </div>
               <div class="col-md-12 col-xl-6 p-1 mb-0">
-                <div class="card user-card border">
-                  <div class="user-image" style="height: 150px;">
-                    <span class="avatar w-20 h-20 rounded-circle mb-2" style="outline: none;">
-                      <img src="./assets/images/Db_server_images/Halopsa-big.png" alt="" class="rounded-circle bg-white"
-                        style="border: 3px solid #078f8c;">
+                <div class="card user-card border Relational-database-height">
+                  <div class="user-image">
+                    <span class="avatar w-20 h-20 rounded-circle mb-2 user-image-outline">
+                      <img src="./assets/images/Db_server_images/Halopsa-big.png" alt="" class="rounded-circle bg-white user-image-border-color">
                     </span>
                   </div>
-                  <div class="card-body" style="padding-top: 70px; height: 50vh;">
+                  <div class="card-body server-content-card">
                     <ul class="">
                       <li> <span class="mt-1">HaloPSA is a cloud-based Professional Services Automation (PSA) platform designed to
                           help IT service providers and managed service providers (MSPs) manage their operations efficiently. It
@@ -794,11 +911,87 @@
             </div>
           </div>
           }
+            @if(openShopifyForm){
+          <div class="main-container container-fluid px-4">
+            <div class="row">
+              <div class="col-md-12 col-xl-6 p-1 mb-0">
+                <div class="card Relational-database-height">
+                  <div class="card-header">
+                    <h4 class="card-title">Connect To Shopify</h4>
+                  </div>
+                  <div class="card-body">
+                    <form>
+                      <div class="form-group">
+                        <label [ngClass]="{'error-label': shopifyApiTokenError}" class="col-form-label">API Token <span
+                            class="text-danger ms-1">*</span></label>
+                        <input [ngClass]="{'error-input': shopifyApiTokenError}" type="text" class="form-control"
+                          [(ngModel)]="shopifyToken" [ngModelOptions]="{standalone: true}" autocomplete="new-myname"
+                          placeholder="e.g. 004d3e9d-25rr-461b-913c-1b6901bssa1" (input)="shopifyapiTokenError()">
+                      </div>
+                      <div class="form-group">
+                        <label [ngClass]="{'error-label': shopifyNameError}" for="recipient-name" class="col-form-label">Shop Name<span class="text-danger ms-1">*</span></label>
+                        <input [ngClass]="{'error-input': shopifyNameError}" type="text" class="form-control"
+                          [(ngModel)]="shopifyName" [ngModelOptions]="{standalone: true}"
+                          placeholder="shop name"
+                          (input)="shopfyNameError()">
+                      </div>
+                      <div class="form-group">
+                        <label [ngClass]="{'error-label': displayNameError}" class="col-form-label">Display Name <span class="text-danger ms-1" >*</span></label>
+                        <input [ngClass]="{'error-input': displayNameError}" type="text" class="form-control" [(ngModel)]="displayName" [ngModelOptions]="{standalone: true}" autocomplete="new-myname" placeholder="e.g. Analytify" (input)="displayNameIntegrationConditionError()">
+                      </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="gotoNewConnections()">Close</button>
+                        <button type="button" class="btn btn-primary" (click)="shopifySignIn()"
+                          [disabled]="(shopifyApiTokenError || shopifyNameError || displayNameError) || !(shopifyToken && shopifyName && displayName ) ">Connect</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-xl-6 p-1 mb-0">
+                <div class="card user-card border Relational-database-height">
+                  <div class="user-image">
+                    <span class="avatar w-20 h-20 rounded-circle mb-2 user-image-outline">
+                      <img src="./assets/images/Db_server_images/shopify.png" alt="" class="rounded-circle bg-white user-image-border-color">
+                    </span>
+                  </div>
+                  <div class="card-body server-content-card">
+                    <ul class="">
+                      <li> <span class="mt-1">Shopify is a leading e-commerce platform that empowers businesses to create, manage, and scale online stores with ease.
+                         It offers a wide range of tools to customize your store, manage products and inventory, process orders, and connect with customers.
+                        </span></li>
+                        <li><h6 class=" mt-3"><strong>Features</strong></h6></li>
+                        <li><span class="mb-0"><strong>Easy Setup & Customizable Themes:</strong> Build and personalize your online store effortlessly.</span></li>
+                        <li><span class="mb-0"><strong>Product & Order Management:</strong> Sync and track products, inventory, and orders in real-time.</span></li>
+                        <li><span class="mb-0"><strong>Mobile-Optimized & Multi-Channel Selling:</strong> Reach customers across devices and marketplaces.</span></li>
+                        <li><span class="mb-0"><strong>Built-In Analytics & Marketing Tools:</strong> Access performance insights and boost sales with SEO, discounts, and social media integration.</span></li>
+
+                      <li>
+                        <h6 class=" mt-3"><strong>Inputs to connect</strong></h6>
+                      </li>
+                      <li><span class="mb-0"><strong>API token:</strong> This unique identifier is used to represent your
+                          application during authentication and API interactions.
+                        </span></li>
+          
+                      <li><span class="mb-0"><strong>Client Secret:</strong>This token is a unique identifier for authenticating your Shopify store with our application.
+                         You can generate the API token from your Shopify Admin panel.</span></li>
+                      <li><span class="mb-0"><strong>Shop Name:</strong>
+                        Your Shop Name is the unique identifier for your Shopify store.</span></li>
+                        <li><span class="mb-0"><strong>Display Name:</strong>
+                          The Display Name is a user-friendly name for your store that will be shown on our platform.</span></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
       @if(openOracleForm){
-        <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;">
+        <div class="main-container container-fluid px-4">
           <div class="row">
               <div class="col-md-12 col-xl-6 p-1 mb-0">
-                  <div class="card">
+                  <div class="card Relational-database-height">
                       <div class="card-header">
                           <h4 class="card-title">Connect To Oracle Server</h4>
                       </div>
@@ -826,8 +1019,10 @@
                                   </div>
                                   <div class="form-group">
                                       <label [ngClass]="{'error-label': passwordError}" class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                      <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
-                                      <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                      <div class="d-flex">
+                                        <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
+                                      <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button> 
+                                      </div>                  
                               </div>
                               <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" (click)="gotoNewConnections()" >Close</button>
@@ -838,13 +1033,13 @@
                   </div>
               </div>
               <div class="col-md-12 col-xl-6 p-1 mb-0">
-                <div class="card user-card border">
-                  <div class="user-image" style="height: 150px;">
-                      <span class="avatar w-20 h-20 rounded-circle" style="outline: none;">
-                        <img src="./assets/images/Tiled view sheet icons/Oracle.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+                <div class="card user-card border Relational-database-height">
+                  <div class="user-image">
+                      <span class="avatar w-20 h-20 rounded-circle user-image-outline">
+                        <img src="./assets/images/Tiled view sheet icons/Oracle.jpg" alt="" class="rounded-circle bg-white user-image-border-color">
                       </span>
                   </div>
-                  <div class="card-body" style="padding-top: 70px; height: auto;">
+                  <div class="card-body server-content-card">
                     <ul class="">
                       <li><span>Oracle Database is a relational database management system (RDBMS) that stores and manages data in an organized way. </span></li>
                       <li><h6 class=" mt-3"><strong>Features</strong></h6></li>
@@ -869,10 +1064,10 @@
       
         } 
         @if(openMicrosoftSqlServerForm){
-          <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;" >
+          <div class="main-container container-fluid px-4">
             <div class="row">
                 <div class="col-md-12 col-xl-6 p-1 mb-0">
-                    <div class="card">
+                    <div class="card Relational-database-height">
                         <div class="card-header">
                             <h4 class="card-title">Connect to MICROSOFT SQL Server</h4>
                         </div>
@@ -917,8 +1112,10 @@
                                     </div>
                                     <div *ngIf="selectedMicroSoftAuthType === 'SQL Server Authentication'" class="form-group">
                                         <label [ngClass]="{'error-label': passwordError}" class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                        <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
-                                        <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                        <div class="d-flex">
+                                          <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
+                                        <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button> 
+                                        </div>                  
                                 </div>
                               </div>
                                 <div class="modal-footer">
@@ -930,13 +1127,13 @@
                     </div>
                 </div>
                 <div class="col-md-12 col-xl-6 p-1 mb-0">
-                  <div class="card user-card border">
-                    <div class="user-image" style="height: 150px;">
-                        <span class="avatar w-20 h-20 rounded-circle" style="outline: none;">
-                          <img src="./assets/images/Tiled view sheet icons/MS-SQL-Server.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+                  <div class="card user-card border Relational-database-height">
+                    <div class="user-image" >
+                        <span class="avatar w-20 h-20 rounded-circle user-image-outline">
+                          <img src="./assets/images/Tiled view sheet icons/MS-SQL-Server.jpg" alt="" class="rounded-circle bg-white user-image-border-color" >
                         </span>
                     </div>
-                    <div class="card-body" style="padding-top: 70px; height: auto;">
+                    <div class="card-body server-content-card">
                       <ul class="">
                         <li><span>Microsoft SQL Server is a relational database management system (RDBMS) that supports a wide variety of transaction processing,  business intelligence (BI) and data analytics applications in corporate IT environments. </span></li>
                         <li><h6 class=" mt-3"><strong>Features</strong></h6></li>
@@ -961,10 +1158,10 @@
         
           } 
           @if(openSnowflakeServerForm){
-            <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;" >
+            <div class="main-container container-fluid px-4">
               <div class="row">
                   <div class="col-md-12 col-xl-6 p-1 mb-0">
-                      <div class="card">
+                      <div class="card Relational-database-height">
                           <div class="card-header">
                               <h4 class="card-title">Connect to Snow Flake Server</h4>
                           </div>
@@ -992,8 +1189,10 @@
                                       </div>
                                       <div class="form-group">
                                           <label [ngClass]="{'error-label': passwordError}" class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                          <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
-                                          <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                          <div class="d-flex">
+                                            <input [ngClass]="{'error-input': passwordError}" type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******" (input)="passwordConditionError()">
+                                          <button class="btn btn-light"  (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>  
+                                          </div>                 
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" (click)="gotoNewConnections()" >Close</button>
@@ -1004,13 +1203,13 @@
                       </div>
                   </div>
                   <div class="col-md-12 col-xl-6 p-1 mb-0">
-                    <div class="card user-card border">
-                      <div class="user-image" style="height: 150px;">
-                          <span class="avatar w-20 h-20 rounded-circle" style="outline: none;">
-                            <img src="./assets/images/Tiled view sheet icons/snowflake-db.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+                    <div class="card user-card border Relational-database-height">
+                      <div class="user-image" >
+                          <span class="avatar w-20 h-20 rounded-circle user-image-outline">
+                            <img src="./assets/images/Tiled view sheet icons/snowflake-db.jpg" alt="" class="rounded-circle bg-white user-image-border-color">
                           </span>
                       </div>
-                      <div class="card-body" style="padding-top: 70px; height: auto;">
+                      <div class="card-body server-content-card">
                         <ul class="">
                           <li><span>Snowflake is a cloud-based data warehouse platform that provides a single platform for data storage, integration, and analytics.
                             It's designed to scale independently for storage and computing, and can be built on Amazon Web Services or Microsoft Azure cloud infrastructure. </span></li>
@@ -1036,10 +1235,10 @@
           
             } 
           @if(ibmDb2Form){
-            <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;">
+            <div class="main-container container-fluid px-4" >
               <div class="row">
                 <div class="col-md-12 col-xl-6 p-1 mb-0">
-                  <div class="card">
+                  <div class="card Relational-database-height">
                       <div class="card-header">
                           <h4 class="card-title">connect to IBM DB2</h4>
                       </div>
@@ -1067,8 +1266,10 @@
                                   </div>
                                   <div class="form-group">
                                       <label class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                      <input type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
-                                      <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                      <div class="d-flex">
+                                        <input type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
+                                      <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>  
+                                      </div>                 
                               </div>
                               <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" (click)="ibmDb2SignIn()" >Close</button>
@@ -1079,7 +1280,7 @@
                   </div>
               </div>
                   <div class="col-md-12 col-xl-6 p-1 mb-0">
-                     <div class="card">
+                     <div class="card Relational-database-height">
                        <div class="card-header">
                          <div class="card-body d-flex align-items-center justify-content-center">
                             <img src="./assets/images/Db_server_images/Relational Database/ibmdb2.png" alt="Image" class="w-200"/>
@@ -1105,10 +1306,10 @@
           
             } 
           @if(openMongoDbForm){
-            <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;">
+            <div class="main-container container-fluid px-4">
               <div class="row">
                   <div class="col-md-12 col-xl-6 p-1 mb-0">
-                      <div class="card">
+                      <div class="card Relational-database-height">
                           <div class="card-header">
                               <h4 class="card-title">Connect to Mongodb </h4>
                           </div>
@@ -1136,8 +1337,10 @@
                                       </div>
                                       <div class="form-group">
                                           <label class="col-form-label">Password <span class="text-danger ms-1" >*</span></label>
-                                          <input type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
-                                          <button class="btn btn-light" style="float: right;margin-top: -35px;" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>                   
+                                          <div class="d-flex">
+                                            <input type="password" class="form-control" [(ngModel)]="PostGrePassword" [ngModelOptions]="{standalone: true}" autocomplete="new-mypswd" [type]="showPassword1 ? 'text' : 'password'" placeholder="e.g. ******">
+                                          <button class="btn btn-light" (click)="toggleVisibility1()" type="button" id="button-addon21"><i class="ri-eye-{{toggleClass1}} align-middle"></i></button>  
+                                          </div>                 
                                   </div>
                                   <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" (click)="gotoNewConnections()" >Close</button>
@@ -1170,13 +1373,13 @@
                          </div>
                       </div>
                     </div> -->
-                    <div class="card user-card border">
-                      <div class="user-image" style="height: 150px;">
-                          <span class="avatar w-20 h-20 rounded-circle" style="outline: none;">
-                            <img src="./assets/images/Tiled view sheet icons/snowflake-db.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+                    <div class="card user-card border Relational-database-height">
+                      <div class="user-image">
+                          <span class="avatar w-20 h-20 rounded-circle user-image-outline" >
+                            <img src="./assets/images/Tiled view sheet icons/snowflake-db.jpg" alt="" class="rounded-circle bg-white user-image-border-color">
                           </span>
                       </div>
-                      <div class="card-body" style="padding-top: 70px; height: auto;">
+                      <div class="card-body server-content-card">
                         <ul class="">
                           <li><span>MongoDB is a powerful and flexible solution for handling modern data needs. 
                             As a leading NoSQL database, MongoDB offers a dynamic schema design, 
@@ -1200,10 +1403,10 @@
           
             } 
             @if(sqlLiteForm){
-              <div class="main-container container-fluid" style="padding-left: 15px; padding-right: 15px;">
+              <div class="main-container container-fluid px-4">
                 <div class="row">
                     <div class="col-md-12 col-xl-6 p-1 mb-0">
-                        <div class="card">
+                        <div class="card Relational-database-height">
                             <div class="card-header">
                                 <h4 class="card-title">Connect to SQLite </h4>
                             </div>
@@ -1230,13 +1433,13 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-xl-6 p-1 mb-0">
-                      <div class="card user-card border">
-                        <div class="user-image" style="height: 150px;">
-                            <span class="avatar w-20 h-20 rounded-circle" style="outline: none;">
-                              <img src="./assets/images/Tiled view sheet icons/sqlite-db.jpg" alt="" class="rounded-circle bg-white" style="border: 3px solid #078f8c;">
+                      <div class="card user-card border Relational-database-height">
+                        <div class="user-image">
+                            <span class="avatar w-20 h-20 rounded-circle user-image-outline">
+                              <img src="./assets/images/Tiled view sheet icons/sqlite-db.jpg" alt="" class="rounded-circle bg-white user-image-border-color">
                             </span>
                         </div>
-                        <div class="card-body" style="padding-top: 70px; height: auto;">
+                        <div class="card-body server-content-card">
                           <ul class="">
                             <li><span>SQLite is an open-source relational database management system (RDBMS) that stores data in a single file on a device </span></li>
                             <li><h6 class=" mt-3"><strong>Features</strong></h6></li>
@@ -1261,12 +1464,12 @@
 
     @if(viewNewDbs){
       <div class="main-container container-fluid">
-        <div class="row" style="padding: 15px;">
-        <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
-            <div class="card-header mb-3" style="border: none !important;">
+        <div class="row p-4">
+        <div class="col-sm-12 col-lg-12 col-xl-12 p-0">
+            <div class="card-header mb-3 border-0">
                 <h4 class="card-title">Connect to Database</h4>
                 <div>
-                    <div class="input-group" style="position: absolute;top: 0;right: 215px;width: 30%!important;">
+                    <div class="input-group Search-Database-Server">
                         <input type="text" class="form-control border-end-0" placeholder="Search Database Server" aria-describedby="button-addon2">
                         <button class="btn btn-primary" type="button" id="button-addon2"><i class="bi bi-search"></i></button>
                         
@@ -1281,86 +1484,86 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                   <div class="card card-body border Connect-Database-card" >
-                    <h6 style="display: flex;margin-bottom: 17px;">Relational Database</h6>
+                    <h6 class="mb-3" >Relational Database</h6>
                       <div class="image-card-container">
                           <!-- <div class="database-logo">
                             <div class="imgcard op-4 p-4">
                                 <img src="./assets/images/Db_server_images/Relational Database/IBM-Informix.png" alt="Image" class="card-img">
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                                <span style=" width: 8rem;">dsdsfdsfadsfdfdffffffffffff</span>
+                            <div class="logo-txt mt-2 text-center fw-600">
+                                <span >dsdsfdsfadsfdfdffffffffffff</span>
                             </div>
                           </div> -->
                           <!-- <div class="database-logo">
                             <div class="imgcard op-4" (click)="openIbmDb2()">
                                 <img src="./assets/images/Db_server_images/Relational Database/ibmdb2.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">IBM DB2</span>
+                            <div class="logo-txt mt-2 text-center fw-600" >
+                              <span >IBM DB2</span>
                             </div>
                           </div> -->
                           <!-- <div class="database-logo">
                             <div class="imgcard op-4 p-4">
                                 <img src="./assets/images/Db_server_images/Relational Database/IBM-Informix.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">dsdsfdsfadsfdfdffffffffffff</span>
+                            <div class="logo-txt mt-2 text-center fw-600">
+                              <span >dsdsfdsfadsfdfdffffffffffff</span>
                             </div>
                           </div> -->
                           <div class="database-logo">
                             <div class="imgcard p-4 "  (click)="openMySql(); errorCheck()">
                                 <img src="./assets/images/Db_server_images/Relational Database/mysql.png" alt="Image" class="card-img"/>                   
                               </div>
-                              <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                                <span style=" width: 8rem;">MySQL</span>
+                              <div class="logo-txt mt-2 text-center fw-600" >
+                                <span >MySQL</span>
                             </div>
                           </div>
                           <div class="database-logo">
                             <div class="imgcard p-4" (click)="openOracle(); errorCheck()">
                                 <img src="./assets/images/Db_server_images/Relational Database/Oracle_logo.png"  alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">ORACLE</span>
+                            <div class="logo-txt mt-2 text-center fw-600">
+                              <span >ORACLE</span>
                             </div>
                           </div>
                           <div class="database-logo">
                             <div class="imgcard p-4" (click)="openPostgreSql(); errorCheck()">
                                 <img src="./assets/images/Db_server_images/Relational Database/postgresql.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">PostgreSQL</span>
+                            <div class="logo-txt mt-2 text-center fw-600">
+                              <span >PostgreSQL</span>
                           </div>
                           </div>
                           <div class="database-logo">
                             <div class="imgcard p-4" (click)="openMicrosoftSqlServer(); errorCheck()">
                                 <img src="./assets/images/Db_server_images/Relational Database/sql server.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">Microsoft SQL SERVER</span>
+                            <div class="logo-txt mt-2 text-center fw-600">
+                              <span >Microsoft SQL SERVER</span>
                             </div>
                           </div>
                           <div class="database-logo">
                             <div class="imgcard p-4" (click)="openSnowflakeServer(); errorCheck()">
                                 <img src="./assets/images/Db_server_images/Relational Database/snowflake-icon.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">Snow Flake</span>
+                            <div class="logo-txt mt-2 text-center fw-600" >
+                              <span>Snow Flake</span>
                             </div>
                           </div>
                           <!-- <div class="database-logo">
                             <div class="imgcard op-4 p-4">
                                 <img src="./assets/images/Db_server_images/Relational Database/microsoft-access.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">Microsoft Access</span>
+                            <div class="logo-txt mt-2 text-center fw-600" >
+                              <span >Microsoft Access</span>
                           </div>
                           </div> -->
                           <!-- <div class="database-logo">
                             <div class="imgcard op-4 p-4">
                                 <img src="./assets/images/Db_server_images/Relational Database/SyBase-logo.png" alt="Image" class="card-img"/>
                             </div>
-                            <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                              <span style=" width: 8rem;">SYBASE</span>
+                            <div class="logo-txt mt-2 text-center fw-600" >
+                              <span >SYBASE</span>
                           </div>
                           </div> -->
                       </div>
@@ -1368,15 +1571,15 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                   <div class="card card-body border Connect-Database-card">
-                    <h6 style="display: flex;margin-bottom: 17px;" >Big Data Platform</h6>
+                    <h6 class="mb-3">Big Data Platform</h6>
                     <div class="image-card-container">
                       <div class="database-logo">
                         <div class="imgcard op-4 p-4">
                           <img src="./assets/images/Db_server_images/Big Data Platform/Apache_Kylin_logo.png" alt="Image"
                             class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Apache Kylin</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>Apache Kylin</span>
                         </div>
                       </div>
                       <div class="database-logo">
@@ -1384,16 +1587,16 @@
                           <img src="./assets/images/Db_server_images/Big Data Platform/greenplum_logo_icon_171038.png" alt="Image"
                             class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">GREENPLUM DATABASE</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>GREENPLUM DATABASE</span>
                         </div>
                       </div>
                       <div class="database-logo">
                         <div class="imgcard op-4 p-4">
                           <img src="./assets/images/Db_server_images/Big Data Platform/Hadoop.png" alt="Image" class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Hadoop</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>Hadoop</span>
                         </div>
                       </div>
                     </div>
@@ -1403,14 +1606,14 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                   <div class="card card-body border Connect-Database-card" >
-                    <h6 style="display: flex;margin-bottom: 17px;" >No Sql Database</h6>
+                    <h6 class="mb-3">No Sql Database</h6>
                     <div class="image-card-container">
                       <div class="database-logo">
                         <div class="imgcard op-4 p-4">
                           <img src="./assets/images/Db_server_images/No Sql Database/cassandra-logo.png" alt="Image" class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Cassandra</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>Cassandra</span>
                         </div>
                       </div>
                       <div class="database-logo">
@@ -1418,8 +1621,8 @@
                         <div class="imgcard p-4" (click)="opensqlLite(); pathConditionError(); displayNameConditionError()">
                           <img src="./assets/images/Db_server_images/No Sql Database/sqlite.png" alt="Image" class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">SQLite</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>SQLite</span>
                         </div>
                       </div>
                       <div class="database-logo">
@@ -1427,8 +1630,8 @@
                           <div class="imgcard p-4 op-4">
                           <img src="./assets/images/Db_server_images/No Sql Database/MongoDB_Logo.png" alt="Image" class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Mongo Db</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>Mongo Db</span>
                         </div>
                       </div>                
                     </div>
@@ -1436,15 +1639,15 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                   <div class="card card-body border Connect-Database-card">
-                    <h6 style="display: flex;margin-bottom: 17px;" >Multi dimensional  Database</h6>
+                    <h6 class="mb-3">Multi dimensional  Database</h6>
                     <div class="image-card-container">
                       <div class="database-logo">
                         <div class="imgcard op-4 p-4">
                           <img src="./assets/images/Db_server_images/Multi dimensional  Database/sap-bw.png" alt="Image"
                             class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">SAP</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>SAP</span>
                         </div>
                       </div>
                       <div class="database-logo">
@@ -1452,8 +1655,8 @@
                           <img src="./assets/images/Db_server_images/Multi dimensional  Database/SAP-HANA.png" alt="Image"
                             class="card-img" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">SAP HANA</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>SAP HANA</span>
                         </div>
                       </div>
                     </div>
@@ -1463,24 +1666,24 @@
               <div class="row ">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                   <div class="card card-body border Connect-Database-card">
-                    <h6 style="display: flex;margin-bottom: 17px;" >File Source</h6>
+                    <h6 class="mb-3">File Source</h6>
                     <div class="image-card-container">
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="triggerFileUpload('csv')">
                           <img src="./assets/images/Db_server_images/File Source/csv.png" alt="Image" class="card-img" />
-                          <input type="file" (change)="uploadfileCsv($event)" accept=".csv" #fileInput style="display: none;" />
+                          <input type="file" (change)="uploadfileCsv($event,'upload',{})" accept=".csv" #fileInput style="display: none;" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">CSV File</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span >CSV File</span>
                         </div>
                       </div>
                       <div class="database-logo">
                         <div class="imgcard  p-4" (click)="triggerFileUpload('excel')">
                           <img src="./assets/images/Db_server_images/File Source/excel-logo.png" alt="Image" class="card-img" />
-                          <input type="file" (change)="uploadfileExcel($event)" #fileInput1 style="display: none;" accept=".xlsx, .xls" />
+                          <input type="file" (change)="uploadfileExcel($event,'upload',{})" #fileInput1 style="display: none;" accept=".xlsx, .xls" />
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Excel File</span>
+                        <div class="logo-txt mt-2 text-center fw-600" >
+                          <span >Excel File</span>
                         </div>
                       </div>
                       <!-- <div class="imgcard op-4 p-4">
@@ -1495,54 +1698,70 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
                   <div class="card card-body border Connect-Database-card">
-                    <h6 style="display: flex;margin-bottom: 17px;" >Integrations</h6>
+                    <h6 class="mb-3">Integrations</h6>
                     <div class="image-card-container">
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="connectxAmplify()">
                           <img src="https://media.licdn.com/dms/image/v2/C510BAQF5JiTv2uiWsQ/company-logo_200_200/company-logo_200_200/0/1630585990556/xamplify_logo?e=2147483647&v=beta&t=lvDimx47zMGKu8vT4wXji2MpjoXmnaLJFaUX12bd_8U"alt="Image" class="card-img">
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">xAmplify</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span >xAmplify</span>
                         </div>
                       </div>
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="connectQuickBooks()">
                           <img src="https://cdn.worldvectorlogo.com/logos/quickbooks-2.svg"alt="Image" class="card-img">
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">QuickBooks</span>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span >QuickBooks</span>
                         </div>
                       </div>
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="connectSalesforce()">
                           <img src="./assets/images/Db_server_images/salesforce-icon.png"alt="Image" class="card-img">
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Salesforce</span>
+                        <div class="logo-txt mt-2 text-center fw-600" >
+                          <span >Salesforce</span>
                         </div>
                       </div>  
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="connectWise()">
                           <img src="./assets/images/Db_server_images/connectwise-logo.jpg"alt="Image" class="card-img">
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Connectwise</span>
+                        <div class="logo-txt mt-2 text-center fw-600" >
+                          <span >Connectwise</span>
                         </div>
                       </div>   
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="connectHaloPSA()">
                           <img src="./assets/images/Db_server_images/Halopsa-big.png"alt="Image" class="card-img">
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">HaloPSA</span>
+                        <div class="logo-txt mt-2 text-center fw-600" >
+                          <span >HaloPSA</span>
                         </div>
                       </div>
                       <div class="database-logo">
                         <div class="imgcard p-4" (click)="connectJira()">
                           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Jira_Logo.svg/120px-Jira_Logo.svg.png?20230123125334"alt="Image" class="card-img">
                         </div>
-                        <div class="logo-txt mt-2 text-center fw-600" style=" width: 6rem;">
-                          <span style=" width: 8rem;">Jira</span>
+                        <div class="logo-txt mt-2 text-center fw-600" >
+                          <span >Jira</span>
+                        </div>
+                      </div>
+                      <div class="database-logo">
+                        <div class="imgcard p-4" (click)="connectShopify()">
+                          <img src="/assets/images/Db_server_images/shopify-small-1.jpg"alt="Image" class="card-img">
+                        </div>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>Shopify</span>
+                        </div>
+                      </div>
+                      <div class="database-logo">
+                        <div class="imgcard p-4" (click)="connectGoogleSheets()">
+                          <img src="/assets/images/Db_server_images/google-sheets.jpg"alt="Image" class="card-img">
+                        </div>
+                        <div class="logo-txt mt-2 text-center fw-600">
+                          <span>Google Sheets</span>
                         </div>
                       </div>        
                     </div>

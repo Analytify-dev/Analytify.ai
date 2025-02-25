@@ -10,13 +10,7 @@ RUN apt-get update && apt-get install -y \
     unixodbc \
     unixodbc-dev \
     libsqliteodbc \
-    # clickhouse-server \
-    clickhouse-client \
     && rm -rf /var/lib/apt/lists/*
-
-# Install ClickHouse Python drivers
-RUN pip install clickhouse-driver clickhouse-connect
-
 
 COPY requirements.txt /app/
 
@@ -31,92 +25,10 @@ ENV DJANGO_SUPERUSER_PASSWORD=$ADMIN_PASSWORD
 
 COPY . /app/
 
-# RUN mkdir -p /etc/clickhouse-server \
-#     && mkdir -p /var/lib/clickhouse \
-#     && mkdir -p /var/log/clickhouse-server
-
-# # Expose ClickHouse default ports
-# EXPOSE 8123 9000
-
-# # Expose Django default port
-# EXPOSE 8000
-
-# # Initialize ClickHouse server and create a default database
-# RUN clickhouse-server --config-file=/etc/clickhouse-server/config.xml & \
-#     sleep 5 && \
-#     clickhouse-client --query="CREATE DATABASE analytify;" && \
-#     clickhouse-client --query="SHOW DATABASES;"
-
 # Create a non-interactive superuser during build
 RUN python manage.py createsuperuser --email $DJANGO_SUPERUSER_EMAIL --noinput || true
 
 # Apply migrations and start the server at runtime
+# CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
+
 CMD ["sh", "-c", "service clickhouse-server start && sleep 5 && python manage.py migrate && sleep 15 && python manage.py import_data && sleep 5 && python manage.py runserver 0.0.0.0:8000"]
-
-
-
-
-################# With clickhouse #####################
-
-# # Base image with Python 3.10
-# FROM python:3.10
-
-# # Disable Python bytecode and enable unbuffered output
-# ENV PYTHONDONTWRITEBYTECODE 1
-# ENV PYTHONUNBUFFERED 1
-
-# # Working directory in the container
-# WORKDIR /app
-
-# # Install system dependencies, including ODBC and ClickHouse
-# RUN apt-get update && apt-get install -y \
-#     unixodbc \
-#     unixodbc-dev \
-#     libsqliteodbc \
-#     clickhouse-server \
-#     clickhouse-client \
-#     && rm -rf /var/lib/apt/lists/*
-
-# # Copy Python dependencies
-# COPY requirements.txt /app/
-
-# # Install Python dependencies
-# RUN pip install --no-cache-dir -r requirements.txt
-
-# # Prompt for email and password during build
-# ARG ADMIN_EMAIL
-# ARG ADMIN_PASSWORD
-
-# # Set environment variables for superuser creation
-# ENV DJANGO_SUPERUSER_EMAIL=$ADMIN_EMAIL
-# ENV DJANGO_SUPERUSER_PASSWORD=$ADMIN_PASSWORD
-
-# # Copy application code
-# COPY . /app/
-
-# # Set up ClickHouse data directories
-# RUN mkdir -p /etc/clickhouse-server \
-#     && mkdir -p /var/lib/clickhouse \
-#     && mkdir -p /var/log/clickhouse-server
-
-# # Expose ClickHouse default ports
-# EXPOSE 8123 9000
-
-# # Expose Django default port
-# EXPOSE 8000
-
-# # Initialize ClickHouse server and create a default database
-# RUN clickhouse-server --config-file=/etc/clickhouse-server/config.xml & \
-#     sleep 5 && \
-#     clickhouse-client --query="CREATE DATABASE analytify;" && \
-#     clickhouse-client --query="SHOW DATABASES;"
-
-# # Create a Django superuser during build
-# RUN python manage.py createsuperuser --email $DJANGO_SUPERUSER_EMAIL --noinput || true
-
-# # Apply migrations and start both ClickHouse and Django servers at runtime
-# CMD ["sh", "-c", "service clickhouse-server start && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]
-
-
-
-##########################

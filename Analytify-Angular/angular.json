@@ -35,22 +35,27 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/ckeditor5/dist/ckeditor5.css"
+              "node_modules/ckeditor5/dist/ckeditor5.css",
+                "node_modules/pivottable/dist/pivot.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",      
+              "node_modules/jquery-ui-dist/jquery-ui.min.js", 
+              "node_modules/pivottable/dist/pivot.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "7mb",
-                  "maximumError": "7mb"
+                  "maximumWarning": "12mb",
+                  "maximumError": "12mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "7mb",
-                  "maximumError": "7mb"
+                  "maximumWarning": "12mb",
+                  "maximumError": "12mb"
                 }
               ],
               "outputHashing": "all"
@@ -96,9 +101,14 @@
               "src/.htaccess"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+                "node_modules/pivottable/dist/pivot.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",      
+              "node_modules/jquery-ui-dist/jquery-ui.min.js",
+              "node_modules/pivottable/dist/pivot.min.js"
+            ]
           }
         }
       }

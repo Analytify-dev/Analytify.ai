@@ -123,6 +123,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'main.sqlite3',
+        'OPTIONS': {
+            'timeout': 20,  # Increase timeout to avoid locking
+        },
     },
    'example': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -245,11 +248,17 @@ ENVIRONMENT = 'sandbox'
 if DATABASES['default']['ENGINE'] == 'django.db.backends.sqlite3':
     link_url = 'http://localhost:80/' # example frontend URL for local 
     TOKEN_URL = 'http://localhost:8000/v1/oauth2/token/' # example backend URL for local
-    clickhouse_host='clickhouse'
-    clickhouse_port=8123
-    clickhouse_username='default'
-    clickhouse_password=''
-    clickhouse_database = 'default'
+    # clickhouse_host='clickhouse'
+    # clickhouse_port=8123
+    # clickhouse_username='default'
+    # clickhouse_password=''
+    # clickhouse_database = 'Analytify_db'
+    # clickhouse_database = 'default'
+    clickhouse_host = os.getenv("CLICKHOUSE_HOST", "clickhouse")
+    clickhouse_port = os.getenv("CLICKHOUSE_PORT", "8123")
+    clickhouse_username = os.getenv("CLICKHOUSE_USER", "default")
+    clickhouse_password = os.getenv("CLICKHOUSE_PASSWORD", "Analytify123")
+    clickhouse_database = os.getenv("CLICKHOUSE_DB", "Analytify_db")
 
 
 token_url='https://www.google.com/'

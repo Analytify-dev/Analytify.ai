@@ -3,8 +3,8 @@
 
 <div *ngIf="!addUserDivForm" class="main-container container-fluid">
 
-    <div class="row" class="card" style="padding-top: 15px;">
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+    <div class="row" class="card card-padding-top" >
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0">
       <div class="d-flex justify-content-between px-5">
         <div class="connect-txt">
           <h4 class="card-title mt-2">Users</h4>
@@ -19,8 +19,8 @@
 
           <div class="input-group">
             <input type="text" class="form-control border-end-0 " placeholder="Search" [(ngModel)]="userName" (keyup.enter)="searchUserList()" aria-describedby="button-addon2" >
-            <button class="btn btn-primary border me-2" (click)="searchUserList()" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
-            <button type="button" class="btn btn-primary" (click)="addUserRoute()" style="border-radius: 4px 4px 4px 4px;"><i class="fa fa-plus"></i> Add User</button>
+            <button class="btn btn-primary border me-2 search-icon-border-radius" (click)="searchUserList()" type="button" id="button-addon2"><i class="fe fe-search "></i></button>
+            <button type="button" class="btn btn-primary rounded-1" (click)="addUserRoute()"><i class="fa fa-plus"></i> Add User</button>
           </div>
         </div>
     </div>
@@ -29,9 +29,9 @@
     </div> -->
         <div class="card-body">
           @if(!gridView){
-            <div class="table-responsive" style="height: 26rem;">
+            <div class="table-responsive table-responsive-height">
                 <table class="table border text-nowrap text-md-nowrap mb-0">
-                    <thead class="table-primary bg-primary" style="position: sticky;top: -1px;">
+                    <thead class="table-primary bg-primary table-primary-position">
                         <tr>
                             <th>Name</th>
                             <th>User Name</th>
@@ -55,7 +55,7 @@
                            
                               <div class="content">
                                 <span>User: </span>
-                                <a  style="color: #05aff8;cursor: pointer;" ngbTooltip="{{sheets.sheet_name}}" (click)="viewSheet(sheets.server_id,sheets.queryset_id,sheets.sheet_id,sheets.sheet_name)" > {{sheets.sheet_name | slice:0:15}}</a>
+                                <a  ngbTooltip="{{sheets.sheet_name}}" (click)="viewSheet(sheets.server_id,sheets.queryset_id,sheets.sheet_id,sheets.sheet_name)" > {{sheets.sheet_name | slice:0:15}}</a>
                                 <p class="mb-0">Created by : {{sheets.created_by}}</p>
                               </div>
                           </div>                                  
@@ -162,8 +162,8 @@
           </div>
         }
             <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetUserList((page = $event))"></pagination-controls>
-            <div  style="float: right;font-size: 15px; margin-top: -41px;">
-              <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getUserList()" class="form-control" style="cursor: pointer;">
+            <div class="pagination-count" >
+              <select  [(ngModel)]="itemsPerPage" (ngModelChange)="getUserList()" class="form-control cursor-pointer">
                     <option  value="10"> 10</option>
                     <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
                     <option [disabled]="!(totalItems > 20)" value="30"> 30</option>
@@ -177,13 +177,13 @@
 
 <div *ngIf="addUserDivForm" class="main-container container-fluid">
 
-  <div class="row" class="card" style="padding: 20px;">
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+  <div class="row" class="card p-4">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0">
         <form [formGroup]="addUserForm">
-            <div class="modal-header justify-conent-between rounded-0 p-2">
-              <h1 *ngIf="!userEditHidePassword" class="modal-title fs-5 d-flex justify-conent-between" id="inputModalLabel">Add User</h1>
-              <h1 *ngIf="userEditHidePassword" class="modal-title fs-5 d-flex justify-conent-between" id="inputModalLabel">Edit User</h1>        
-              <button  type="button" class="btn btn-primary" (click)="viewUsers()" style="border-radius: 4px 4px 4px 4px;"> View Users</button>    
+            <div class="modal-header justify-conent-between align-items-center rounded-0 p-2">
+              <h6 *ngIf="!userEditHidePassword" class="modal-title  d-flex justify-conent-between ms-1" id="inputModalLabel">Add User</h6>
+              <h6 *ngIf="userEditHidePassword" class="modal-title d-flex justify-conent-between ms-1" id="inputModalLabel">Edit User</h6>        
+              <button  type="button" class="btn btn-primary border rounded-1" (click)="viewUsers()"> View Users</button>    
             </div>
             
             <div class="modal-body p-0">
@@ -319,7 +319,7 @@
                       </div>
                     </div>
                     <div *ngIf="!userAddedRolesList.length">
-                      No Roles Available To Assaign Please<a style="cursor: pointer;color: #05aff8;" (click)="gotoAddRole()"> Add One</a>
+                      No roles are available to assign. Please <a style="cursor: pointer;color: #05aff8;" (click)="gotoAddRole()"> Add One</a>
                     </div>
 
                     <div class="col-sm-12 col-lg-12 col-xl-12">

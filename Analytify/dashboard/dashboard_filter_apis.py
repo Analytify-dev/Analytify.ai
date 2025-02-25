@@ -105,12 +105,14 @@ class DashboardQuerySetList(CreateAPIView):
                     db_name = ServerDetails.objects.get(id=ser_id).display_name
                 elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'files':
                     db_name = FileDetails.objects.get(id = ser_id).display_name
-                elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'quickbooks':
+                elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter.lower() in ('quickbooks','salesforce','google_sheets'):
                     db_name = TokenStoring.objects.get(id = ser_id).display_name
                 elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'halops':
                     db_name = HaloPs.objects.get(id = ser_id).display_name
                 elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'connectwise':
                     db_name = connectwise.objects.get(id = ser_id).display_name
+                elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'shopify':
+                    db_name = Shopify.objects.get(id = ser_id).display_name
                     
                     
                 queryset_names.append(m)
@@ -184,7 +186,6 @@ class DashboardQSColumnAndSheetsPreview(CreateAPIView):
         if not dashboard_data.objects.filter(id=dashboard_id).exists():
             return Response({'message': "Invalid Dashboard ID"}, status=status.HTTP_404_NOT_FOUND)
         hierarchy_id,c= get_server_id(query_ids)
-        
     
         sheet_names = []
         f = get_dashboard_sheets(dashboard_id, query_ids)
@@ -242,31 +243,25 @@ class DashboardQSColumnAndSheetsPreview(CreateAPIView):
                 data_types = None
                 g = None
                 if parameter == 'files':
-                    column_wise_first_record = columns_first_data(type_codes, data)
+                    # column_wise_first_record = columns_first_data(type_codes, data)
+                    column_wise_first_record = None
                     if joining.is_custom_sql == True:
                         # custom_sql(search,column_wise_first_record,type_codes,column_list,ser_db_data,queryset_id,data_types,user_id,pr_id,quer_tb):
                         g=custom_sql(search,column_wise_first_record,type_codes,column_list,file_data,query_id,data_types,user_id,hierarchy_id,joining)
                     else:
                         # joining_sql(column_wise_first_record,search,type_codes,quer_tb,queryset_id,ser_db_data,server_type,data_types,user_id,pr_id):
-                        custom1=joining.is_custom_sql
                         g = joining_sql(column_wise_first_record, search1,type_codes, joining, query_id,file_data, file_type.upper(), data_types,user_id,hierarchy_id)
 
                 else:
-                    column_wise_first_record = columns_first_data(type_codes, data)
+                    # column_wise_first_record = columns_first_data(type_codes, data)
+                    column_wise_first_record = None
                     if joining.is_custom_sql == True:
                         # custom_sql(search,column_wise_first_record,type_codes,column_list,ser_db_data,queryset_id,data_types,user_id,pr_id,quer_tb):
                         g=custom_sql(search,column_wise_first_record,type_codes,column_list,server_details,query_id,data_types,user_id,hierarchy_id,joining)
                     else:
-                        custom1=joining.is_custom_sql
                         # joining_sql(column_wise_first_record,search,type_codes,quer_tb,queryset_id,ser_db_data,server_type,data_types,user_id,pr_id):
                         g = joining_sql(column_wise_first_record, search1,type_codes, joining, joining.queryset_id,server_details, ServerType1, data_types,user_id,hierarchy_id)
-
-
                 g = g.data
-                # print(g)
-                
-                
-
                 for table_data in g:
                     table_name = table_data.get('table_name')
                     if not table_name:  # Check if table_name exists
@@ -275,7 +270,6 @@ class DashboardQSColumnAndSheetsPreview(CreateAPIView):
                         continue
                     if table_name not in table_wise_columns:
                         table_wise_columns[table_name] = []
-
                     # Process dimensions
                     for dim in table_data.get('dimensions', []):  # Use get to avoid KeyError
                         column_name = dim['column']
@@ -286,8 +280,6 @@ class DashboardQSColumnAndSheetsPreview(CreateAPIView):
                             "query_id": query_id,
                             "queryset_name": queryset_name
                         })
-
-
                     # Process measures
                     for meas in table_data.get('measures', []):  # Use get to avoid KeyError
                         column_name = meas['column']
@@ -298,9 +290,6 @@ class DashboardQSColumnAndSheetsPreview(CreateAPIView):
                             "query_id": query_id,
                             "queryset_name": queryset_name
                         })
-
-                
-
             
             except Exception as e:
                 return Response({"message": str(e)}, status=status.HTTP_404_NOT_FOUND)
@@ -376,7 +365,7 @@ def filter_similar_column_names(response):
     column_name_map = {}
     for table_key, table_data in tables.items():
         for column in table_data:
-            cleaned_name = clean_column_name(column["column_name"])
+            cleaned_name = column["column_name"]
             if cleaned_name not in column_name_map:
                 column_name_map[cleaned_name] = []
             column_name_map[cleaned_name].append({
@@ -399,6 +388,7 @@ def filter_similar_column_names(response):
             result[queryset_name].append(column_data)
     
     return result
+
 def normalize_column_name(column_name):
     # Remove text in parentheses and strip spaces
     return re.sub(r"\(.*?\)", "", column_name).strip().lower()
@@ -420,30 +410,8 @@ def search_columns(data, search_query):
     return result
 
 
-
-        
-# def get_dashboard_sheets(dashboard_id, query_id):
-#     try:
-#         dd = dashboard_data.objects.get(id=dashboard_id)
-
-#         sheet_ids = []
-
-#         s = eval(dd.sheet_ids) if isinstance(dd.sheet_ids, str) else dd.sheet_ids
-        
-#         for i in s:
-#             try:
-#                 m = sheet_data.objects.get(id=i, queryset_id=query_id)
-#                 sheet_ids.append(m.id)
-#             except sheet_data.DoesNotExist:
-#                 continue
-#         return sheet_ids
-    
-#     except dashboard_data.DoesNotExist:
-#         return Response({"message": "Invalid Dashboard ID"}, status=status.HTTP_404_NOT_FOUND)
-
 def get_dashboard_sheets(dashboard_id, query_ids):
     try:
-        # Fetch the dashboard data
         dd = dashboard_data.objects.get(id=dashboard_id)
 
         # Initialize sheet_ids list
@@ -598,16 +566,13 @@ class DashboardFilterSave(CreateAPIView):
         if not DashboardFilters.objects.filter(id = dashboard_filter_id).exists():
             return Response({"message":"dashboard filter id not found"},status=status.HTTP_404_NOT_FOUND)
         dashboard_filter = DashboardFilters.objects.get(id=dashboard_filter_id)
-        # Check if the filter_name is being changed
         if dashboard_filter.filter_name != filter_name:
-            # If filter_name is being changed, check if the new filter_name already exists
             if DashboardFilters.objects.filter(dashboard_id=dashboard_id, filter_name=filter_name).exists():
                 return Response(
                     {"message": f"A filter with the name '{filter_name}' already exists for this dashboard."},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
         
-        # Check if the selected_column is being changed
         if dashboard_filter.column_name != selected_column:
             # If column_name is being changed, check if the new column_name already exists
             if DashboardFilters.objects.filter(dashboard_id=dashboard_id, column_name=selected_column, queryset_id=queryset_id).exists():
@@ -677,11 +642,7 @@ class DashboardFilterColumnDataPreview(CreateAPIView):
         column = DashboardFilters.objects.get(id = filter_id).column_name
         datatype = DashboardFilters.objects.get(id = filter_id).column_datatype
         hierarchy_id, custom = get_server_id(query_id)
-        # if joining_tables == "" or joining_tables == None:
-        #         joining_tables = []
-        # else:
-        #     pass
-    
+       
 
         dashboarddata=dashboard_data.objects.get(id=dashboard_id)
 
@@ -750,302 +711,58 @@ class DashboardFilterColumnDataPreview(CreateAPIView):
         except Exception as e:
             return Response({"message": str(e)}, status=status.HTTP_404_NOT_FOUND) 
 
-        
 
 
-# class FinalDashboardFilterData(CreateAPIView):
-#     serializer_class = serializers.SheetDataSerializer
 
-#     def post(self, request, token=None):
-#         if token==None:
-#             tok_status=200
-#         else:
-#             tok1 = test_token(token)
-#             tok_status=tok1['status']
-#         if tok_status != 200:
-#             return Response({"message": tok1['message']}, status=status.HTTP_404_NOT_FOUND)
+def filter_sheet_count(filter_details):
+    result = []
+    og = []
 
-#         serializer = self.serializer_class(data=request.data)
-#         if not serializer.is_valid():
-#             return Response({'message': 'serializer error'}, status=status.HTTP_204_NO_CONTENT)
+    for i, filter_detail in enumerate(filter_details):
+        filter_id = filter_detail["filter_id"]
+        sheet_list = filter_detail["sheet_list"]
+        input_list = filter_detail["input_list"]
 
-#         filter_ids = serializer.validated_data["id"]
-#         input_lists = serializer.validated_data["input_list"]
-#         exclude_ids = serializer.validated_data["exclude_ids"]
-         
-
-#         if len(filter_ids) != len(input_lists):
-#             return Response({'message': 'Filter IDs and input lists count mismatch'}, status=status.HTTP_400_BAD_REQUEST)
-        
-
-#         # filter_ids = [fid for fid, il in zip(filter_ids, input_lists) if il]
-#         # input_lists = [il for il in input_lists if il]
-
-#         if not filter_ids or not input_lists:
-#             return Response({'message': 'No valid filters provided'}, status=status.HTTP_400_BAD_REQUEST)
-
-#         try:
-#             # query_id = DashboardFilters.objects.get(id = filter_ids[0]).queryset_id
-#             dashboard_id = DashboardFilters.objects.get(id=filter_ids[0]).dashboard_id
-        
-#         except DashboardFilters.DoesNotExist:
-#             return Response({'message': 'Invalid filter ID'}, status=status.HTTP_404_NOT_FOUND)
-#         except dashboard_data.DoesNotExist:
-#             return Response({'message': 'Invalid dashboard ID'}, status=status.HTTP_404_NOT_FOUND)
-#         dashboarddata=dashboard_data.objects.get(id=dashboard_id)
-#         if dashboarddata.is_public==True and token==None:
-#             user_id=dashboarddata.user_id
-#         elif dashboarddata.is_public==False and token==None:
-#             return Response({'message':'access token in needed'},status=status.HTTP_406_NOT_ACCEPTABLE)
-#         elif dashboarddata.is_public==False and token!=None:
-#             user_id=dashboarddata.user_id
-#         elif dashboarddata.is_public==True and token!=None:
-#             user_id=dashboarddata.user_id
-#         else:
-#             user_id=tok1['user_id']    
-
-        
-
-#         try:
-#             filter_details = []
-#             for filter_id in filter_ids:
-#                 dash_filter = DashboardFilters.objects.get(id=filter_id,user_id=user_id)
-#                 filter_details.append({
-#                     "filter_id": filter_id,
-#                     "dashboard_id": dash_filter.dashboard_id,
-#                     "sheet_list": eval(dash_filter.sheet_id_list),
-#                     "column_name": dash_filter.column_name,
-#                     "datatype": dash_filter.column_datatype,
-#                     "input_list": input_lists
-#                 })
-#             for detail in filter_details:
-#                 column_name = detail["column_name"]
-#             sheet_ids = set()
-#             for filter_detail in filter_details:
-#                 sheet_ids.update(filter_detail['sheet_list'])
-#             sheet_ids = list(sheet_ids)
-
-#             sheet_details = get_sheet_details(sheet_ids, user_id)
-#             sheet_mapping = {item["sheetfilter_queryset_id"]: item["sheet_id"] for item in sheet_details}
-#             sheetfilter_queryset_ids = [item["sheetfilter_queryset_id"] for item in sheet_details]
-
-#             details = []
-#             for sfid in sheetfilter_queryset_ids:
-#                 try:
-#                     queryset_obj = SheetFilter_querysets.objects.get(Sheetqueryset_id=sfid,user_id = user_id)
-#                     sheet_id = sheet_mapping.get(sfid)
-#                     details.append({
-#                         "sheet_id": sheet_id,
-#                         "Sheetqueryset_id": queryset_obj.Sheetqueryset_id,
-#                         "query_id":queryset_obj.queryset_id,
-#                         "custom_query": queryset_obj.custom_query,
-#                         "columns": queryset_obj.columns,
-#                         "rows": queryset_obj.rows
-#                     })
-#                 except Exception as e:
-#                     return Response(f'{e}', status=status.HTTP_404_NOT_FOUND)
-#             sql_queries = []
-#             for detail in details:
-#                 custom_query = detail.get("custom_query", "")
-#                 q_id = detail["query_id"]
-#                 sheetq_id = detail["Sheetqueryset_id"]
-#                 sheet1_id = detail["sheet_id"]
+        if all(not sublist for sublist in input_list):
+            for s in sheet_list:
+                result.append({
+                    "sheet_id": s,
+                    "is_filter_applied": False,
+                    "filter_count": 0,
+                })
+        else:
+            for s in sheet_list:
+                existing_entry = next((item for item in result if item["sheet_id"] == s), None)
                 
-#                 where_clauses = []
-#                 for i, filter_detail in enumerate(filter_details):
-#                     hierarchy_id, custom = get_server_id(q_id)
-#                     # if joining_tables == "" or joining_tables == None:
-#                     #     joining_tables = []
-#                     # else:
-#                     #     pass
-#                     try:
-#                         con_data =connection_data_retrieve(hierarchy_id,user_id)
-#                         if con_data['status'] ==200:  
-#                             engine=con_data['engine']
-#                             cursor=con_data['cursor']
-#                             dtype = con_data['conn']
-#                         else:
-#                             return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
-#                     except Exception as e:
-#                         return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-#                     input_list = input_lists[i]
-#                     qry = QuerySets.objects.get(queryset_id = q_id).custom_query
-#                     col_ = check_column(cursor,dtype,qry)
-#                     # if filter_details["column_name"]
-#                     if column_name in col_:
-#                         if input_list == []:  # Handle empty input_list case
-#                             # If input_list is empty, execute the original custom query without adding any conditions
-#                             final_query = custom_query.strip()
-
-                            
-#                         if input_list != [] and sheet1_id in filter_detail["sheet_list"]:
-#                             column = filter_detail["column_name"]
-#                             # input_list = input_lists[i]
-#                             if isinstance(input_list, list) and all(isinstance(i, bool) for i in input_list):
-#                                 if len(input_list) == 1:
-#                                     input_list = f"({str(input_list[0]).lower()})"
-#                                     where_clauses.append(f'"{column}" IN {input_list}')
-#                                 elif set(input_list) == {False, True}:
-#                                     input_list = "(true,false)"
-#                                     where_clauses.append(f'"{column}" IN {input_list}')
-#                                 else:
-#                                     input_list = f"({','.join(str(x).lower() for x in input_list)})"
-#                                     where_clauses.append(f'"{column}" IN {input_list}')
-
-#                             elif isinstance(input_list, bool):
-#                                 input_list = f"({str(input_list).lower()})"
-                        
-#                             elif filter_detail["datatype"] == "TIMESTAMPTZ" or filter_detail["datatype"] == 'TIMESTAMP'or filter_detail["datatype"] == 'DATE' :
-#                                 f = transform_list(input_list)
-#                                 formatted_list = tuple(f)
-#                                 input1 = str(formatted_list).replace(',)', ')')
-#                                 where_clauses.append(f"TO_CHAR(\"{column}\", 'YYYY-MM-DD') IN {input1}")
-#                             else:
-#                                 try:
-                                
-#                                     formatted_list = tuple(item for item in input_list)
-#                                 except ValueError:
-#                                     f = transform_list(input_list)
-#                                     formatted_list = tuple(f)
-#                                 input1 = str(formatted_list).replace(',)', ')')
-#                                 if int(filter_detail["filter_id"]) in exclude_ids:
-#                                     where_clauses.append(f'"{column}" NOT IN {input1}')
-#                                 else:
-#                                     where_clauses.append(f'"{column}" IN {input1}')
-#                     else:
-#                         sheet_id11 = sheet_data.objects.get(id=sheet1_id, sheet_filt_id=sheetq_id)
-#                         sql_queries.append({
-#                             "sheet_id": sheet1_id,
-#                             "Sheetqueryset_id": sheetq_id,
-#                             "final_query": None,
-#                             "columns": [],
-#                             "rows": [],
-#                             "queryset_id": q_id,
-#                             "chart_id": sheet_id11.chart_id
-#                         })    
-#                         where_clauses = []
-#                         final_query = ''
-#                 if where_clauses:
-#                     final_query = custom_query.strip()
+                if existing_entry:
+                    if input_list[i]:
+                        existing_entry["filter_count"] += 1
+                        existing_entry["is_filter_applied"] = True
+                    else:
+                        if existing_entry["filter_count"] > 0:
+                            existing_entry["filter_count"] = existing_entry["filter_count"]
+                            existing_entry["is_filter_applied"] = existing_entry["is_filter_applied"]
+                        else:
+                            existing_entry["is_filter_applied"] = False
+                            existing_entry["filter_count"] = 0
+                else:
+                    # is_filter_applied = bool(input_list)
+                    filter_count = 1 if input_list[i] else 0
+                    if filter_count == 0:
+                        is_filter_applied = False
+                    else:
+                        is_filter_applied = True
                     
-#                     if 'GROUP BY' in final_query.upper():
-#                         parts = re.split(r'(\sGROUP\sBY\s)', final_query, flags=re.IGNORECASE)
-#                         main_query = parts[0]
-#                         group_by_clause = parts[1] + parts[2]
-#                     else:
-#                         main_query = final_query
-#                         group_by_clause = ''
-                    
-#                     # Check if "temp1" is present in the query
-#                     if 'temp1' in main_query:
-#                         # Locate "temp_table" to apply the WHERE conditions after it
-#                         temp_table_end = main_query.rfind(') temp_table')
-                        
-#                         if temp_table_end != -1:
-#                             before_temp_table = main_query[:temp_table_end + len(') temp_table')]
-#                             after_temp_table = main_query[temp_table_end + len(') temp_table'):]
-                            
-#                             # Check if a WHERE clause is already present after temp_table
-#                             if 'WHERE' in after_temp_table.upper():
-#                                 after_temp_table = re.sub(r'\sWHERE\s', ' WHERE ' + " AND ".join(where_clauses) + ' AND ', after_temp_table, flags=re.IGNORECASE)
-#                             else:
-#                                 after_temp_table = " WHERE " + " AND ".join(where_clauses) + after_temp_table
-                            
-#                             # Combine the parts
-#                             main_query = before_temp_table + after_temp_table
-#                         else:
-#                             # If temp_table is not found, keep original behavior
-#                             if 'WHERE' in main_query.upper():
-#                                 main_query += " AND " + " AND ".join(where_clauses)
-#                             else:
-#                                 main_query += " WHERE " + " AND ".join(where_clauses)
-#                     else:
-#                         # Original behavior for when "temp1" is not present
-#                         if 'WHERE' in main_query.upper():
-#                             main_query += " AND " + " AND ".join(where_clauses)
-#                         else:
-#                             main_query += " WHERE " + " AND ".join(where_clauses)
-                    
-#                     # Combine the modified main query and the group by clause
-#                     final_query = main_query + " " + group_by_clause
-                
+                    result.append({
+                        "sheet_id": s,
+                        "is_filter_applied": is_filter_applied,
+                        "filter_count": filter_count,
+                    })
 
-#                 try:
-#                     dd = QuerySets.objects.get(queryset_id = detail["query_id"],user_id=user_id).custom_query
-#                     if DataSource_querysets.objects.filter(queryset_id = detail["query_id"],user_id=user_id).exists():
-#                         dd = DataSource_querysets.objects.get(queryset_id = detail["query_id"],user_id=user_id).custom_query
-#                     else:
-#                         pass
-#                     if final_query != '':
-#                         cleaned_query = re.sub(r'\(\s*SELECT[\s\S]+?\)\s*temp_table', '() temp_table', final_query, flags=re.IGNORECASE)
-#                         final_query = re.sub(r'\(\s*\)\s*temp_table', f"(\n{dd}\n) temp_table", cleaned_query)
-                        
-#                         final_query = convert_query(final_query, dtype.lower())
-                        
-#                         colu = cursor.execute(text(final_query))
-#                         if dtype.lower() == "microsoftsqlserver":
-#                             colu = cursor.execute(str(final_query))
-#                             col_list = [column[0].replace(":OK",'') for column in cursor.description]
-#                         elif dtype.lower() == "snowflake":
-#                             colu = cursor.execute(text(final_query))
-#                             col_list = [column.replace(":OK",'') for column in colu.keys()]
-#                         else:
-#                             colu = cursor.execute(text(final_query))
-                
-#                             col_list = [column.replace(":OK",'') for column in colu.keys()]
-#                         col_data = []
-                        
-#                         for row in colu.fetchall():
-#                             col_data.append(list(row))
-                        
-#                         a11 = []
-#                         rows11=[]
-#                         kk=ast.literal_eval(detail['columns'])
-                        
-#                         for i in kk:
-#                             result = {}
-                            
-#                             a = i.strip(' ')
-#                             a = a.replace('"',"")
-                            
-#                             if a in col_list:
-#                                 ind = col_list.index(a)
+                og.append(s)
 
-#                                 result['column'] = col_list[ind]
-#                                 result['result'] = [item[ind] for item in col_data] 
-#                             a11.append(result)
+    return result
 
-                        
-#                         for i in ast.literal_eval(detail['rows']):
-#                             result1={}
-#                             a = i.strip(' ')
-#                             a =a.replace('"',"") 
-#                             if a in col_list:
-#                                 ind = col_list.index(a)
-#                                 result1['column'] = col_list[ind]
-#                                 result1['result'] = [item[ind] for item in col_data]
-#                             rows11.append(result1)
-                        
-#                         sheet_id11 = sheet_data.objects.get(id = sheet1_id,sheet_filt_id = sheetq_id)
-#                         sql_queries.append({
-#                             "sheet_id": sheet1_id,
-#                             "Sheetqueryset_id": sheetq_id,
-#                             "final_query": final_query,
-#                             "columns": a11,
-#                             "rows": rows11,
-#                             "queryset_id": sheet_id11.queryset_id,
-#                             "chart_id":sheet_id11.chart_id
-#                         })
-#                     else:
-#                         pass
-
-#                 except Exception as e:
-#                     return Response({'message': "Invalid Input Data for Column"}, status=status.HTTP_406_NOT_ACCEPTABLE)
-
-#             return Response(sql_queries, status=status.HTTP_200_OK)
-#         except Exception as e:
-#             return Response({"message": str(e)}, status=status.HTTP_404_NOT_FOUND)
-        
 
 class FinalDashboardFilterData(CreateAPIView):
     serializer_class = serializers.SheetDataSerializer
@@ -1066,14 +783,9 @@ class FinalDashboardFilterData(CreateAPIView):
         filter_ids = serializer.validated_data["id"]
         input_lists = serializer.validated_data["input_list"]
         exclude_ids = serializer.validated_data["exclude_ids"]
-         
 
         if len(filter_ids) != len(input_lists):
-            return Response({'message': 'Filter IDs and input lists count mismatch'}, status=status.HTTP_400_BAD_REQUEST)
-        
-
-        # filter_ids = [fid for fid, il in zip(filter_ids, input_lists) if il]
-        # input_lists = [il for il in input_lists if il]
+            return Response({'message': 'Filter IDs and input lists count mismatch'}, status=status.HTTP_400_BAD_REQUEST)   
 
         if not filter_ids or not input_lists:
             return Response({'message': 'No valid filters provided'}, status=status.HTTP_400_BAD_REQUEST)
@@ -1098,8 +810,6 @@ class FinalDashboardFilterData(CreateAPIView):
         else:
             user_id=tok1['user_id']    
 
-        
-
         try:
             filter_details = []
             for filter_id in filter_ids:
@@ -1112,7 +822,7 @@ class FinalDashboardFilterData(CreateAPIView):
                     "datatype": dash_filter.column_datatype,
                     "input_list": input_lists
                 })
-                
+            filter_info = filter_sheet_count(filter_details)            
             sheet_ids = set()
             for filter_detail in filter_details:
                 sheet_ids.update(filter_detail['sheet_list'])
@@ -1121,7 +831,6 @@ class FinalDashboardFilterData(CreateAPIView):
             sheet_details = get_sheet_details(sheet_ids, user_id)
             sheet_mapping = {item["sheetfilter_queryset_id"]: item["sheet_id"] for item in sheet_details}
             sheetfilter_queryset_ids = [item["sheetfilter_queryset_id"] for item in sheet_details]
-
             details = []
             for sfid in sheetfilter_queryset_ids:
                 try:
@@ -1133,7 +842,8 @@ class FinalDashboardFilterData(CreateAPIView):
                         "query_id":queryset_obj.queryset_id,
                         "custom_query": queryset_obj.custom_query,
                         "columns": queryset_obj.columns,
-                        "rows": queryset_obj.rows
+                        "rows": queryset_obj.rows,
+                        "pivot":queryset_obj.pivot_measure
                     })
                 except Exception as e:
                     return Response(f'{e}', status=status.HTTP_404_NOT_FOUND)
@@ -1144,14 +854,11 @@ class FinalDashboardFilterData(CreateAPIView):
                 q_id = detail["query_id"]
                 sheetq_id = detail["Sheetqueryset_id"]
                 sheet1_id = detail["sheet_id"]
-                
+                is_custome = QuerySets.objects.get(queryset_id = q_id).is_custom_sql
                 where_clauses = []
                 for i, filter_detail in enumerate(filter_details):
+                    input_list = input_lists[i]
                     hierarchy_id, custom = get_server_id(q_id)
-                    # if joining_tables == "" or joining_tables == None:
-                    #     joining_tables = []
-                    # else:
-                    #     pass
                     try:
                         con_data =connection_data_retrieve(hierarchy_id,user_id)
                         if con_data['status'] ==200:                
@@ -1162,18 +869,13 @@ class FinalDashboardFilterData(CreateAPIView):
                             return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
                     except Exception as e:
                         return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+                    
                     column = filter_detail["column_name"]
-                    exe,column= check_column(cursor,dtype,custom_query,column)
-
-                    input_list = input_lists[i]
-                    if input_list == []:  # Handle empty input_list case
-                        # If input_list is empty, execute the original custom query without adding any conditions
+                    column= check_column(custom_query,column)
+                    if input_list == []:  
                         final_query = custom_query.strip()
-
                         
                     if input_list != [] and sheet1_id in filter_detail["sheet_list"]:
-                        
-                        # input_list = input_lists[i]
                         if isinstance(input_list, list) and all(isinstance(i, bool) for i in input_list):
                             if len(input_list) == 1:
                                 input_list = f"({str(input_list[0]).lower()})"
@@ -1200,17 +902,43 @@ class FinalDashboardFilterData(CreateAPIView):
                             except ValueError:
                                 f = transform_list(input_list)
                                 formatted_list = tuple(f)
-                            input1 = str(formatted_list).replace(',)', ')')
-                            if int(filter_detail["filter_id"]) in exclude_ids:
-                                where_clauses.append(f'"{column}" NOT IN {input1}')
+                            contains_none_or_empty = any(item is None  for item in formatted_list)
+                            if contains_none_or_empty:
+                                formatted_list = tuple(item for item in formatted_list if item is not None and item != '')
                             else:
-                                where_clauses.append(f'"{column}" IN {input1}')
+                                pass    
+                            input1 = str(formatted_list).replace(',)', ')')
+                            none_check = any(item is None for item in input1)
+                            is_empty_tuple = input1 == "('null')"
+
+                            if int(filter_detail["filter_id"]) in exclude_ids:
+                                
+                                if none_check or contains_none_or_empty:
+                                    where_clauses.append(f'("{column}" in {input1} or  "{column}" IS NOT NULL)')
+                                elif is_empty_tuple:
+                                    where_clauses.append(f'("{column}" IS NOT NULL)')
+                                elif input1 == '()':
+                                    where_clauses.append(f'("{column}" IS NOT NULL)')
+                                else:
+                                    where_clauses.append(f'"{column}" NOT IN {input1}')
+                                    # 
+                            else:
+                                if none_check or contains_none_or_empty:
+                                    where_clauses.append(f'("{column}" in {input1} or  "{column}" IS NULL)')    
+                                elif is_empty_tuple:
+                                    where_clauses.append(f'("{column}" IS NULL)')
+                                elif input1 == '()':
+                                    where_clauses.append(f'("{column}" IS  NULL)')
+                                else:
+                                    where_clauses.append(f'"{column}" IN {input1}')
                 if where_clauses:
+                    
                     final_query = custom_query.strip()
                     
-                    if 'GROUP BY' in final_query.upper():
+                    if 'GROUP BY' in final_query.upper() and is_custome == False:
                         parts = re.split(r'(\sGROUP\sBY\s)', final_query, flags=re.IGNORECASE)
                         main_query = parts[0]
+                        
                         group_by_clause = parts[1] + parts[2]
                 
                     elif 'ORDER BY' in final_query.upper():
@@ -1244,29 +972,47 @@ class FinalDashboardFilterData(CreateAPIView):
                                 main_query += " AND " + " AND ".join(where_clauses)
                             else:
                                 main_query += " WHERE " + " AND ".join(where_clauses)
+                    elif is_custome == True:
+                        temp_table_end = main_query.rfind(') temp_table')
+                        
+                        if temp_table_end != -1:
+                            before_temp_table = main_query[:temp_table_end + len(') temp_table')]
+                            after_temp_table = main_query[temp_table_end + len(') temp_table'):]
+                            
+                            # Check if a WHERE clause is already present after temp_table
+                            if 'WHERE' in after_temp_table.upper():
+                                after_temp_table = re.sub(r'\sWHERE\s', ' WHERE ' + " AND ".join(where_clauses) + ' AND ', after_temp_table, flags=re.IGNORECASE)
+                            else:
+                                after_temp_table = " WHERE " + " AND ".join(where_clauses) + after_temp_table
+                            
+                            # Combine the parts
+                            main_query = before_temp_table + after_temp_table
+                        else:
+                            # If temp_table is not found, keep original behavior
+                            if 'WHERE' in main_query.upper():
+                                main_query += " AND " + " AND ".join(where_clauses)
+                            else:
+                                main_query += " WHERE " + " AND ".join(where_clauses)
                     else:
-                        # Original behavior for when "temp1" is not present
+                        
                         if 'WHERE' in main_query.upper():
                             main_query += " AND " + " AND ".join(where_clauses)
                         else:
                             main_query += " WHERE " + " AND ".join(where_clauses)
-                    
                     # Combine the modified main query and the group by clause
                     final_query = main_query + " " + group_by_clause
-                
-
+                    
                 try:
                     dd = QuerySets.objects.get(queryset_id = detail["query_id"],user_id=user_id).custom_query
                     if DataSource_querysets.objects.filter(queryset_id = detail["query_id"],user_id=user_id).exists():
                         dd = DataSource_querysets.objects.get(queryset_id = detail["query_id"],user_id=user_id).custom_query
                     else:
                         pass
-        
                     cleaned_query = re.sub(r'\(\s*SELECT[\s\S]+?\)\s*temp_table', '() temp_table', final_query, flags=re.IGNORECASE)
                     final_query = re.sub(r'\(\s*\)\s*temp_table', f"(\n{dd}\n) temp_table", cleaned_query)
                     final_query = convert_query(final_query, dtype.lower())
+                    
                     try:
-                        colu = cursor.execute(text(final_query))
                         if dtype.lower() == "microsoftsqlserver":
                             colu = cursor.execute(str(final_query))
                             col_list = [column[0].replace(":OK",'') for column in cursor.description]
@@ -1281,22 +1027,20 @@ class FinalDashboardFilterData(CreateAPIView):
                         
                         for row in colu.fetchall():
                             col_data.append(list(row))
-                    except:
+                    except Exception as e:
                         col_data = []
-
+                        col_list = []
                     a11 = []
                     rows11=[]
+                    pivot_measure = []
                     kk=ast.literal_eval(detail['columns'])
                     
                     for i in kk:
                         result = {'column':[],'result':[]}
-                        
                         a = i.strip(' ')
                         a = a.replace('"',"")
-                        
                         if a in col_list:
                             ind = col_list.index(a)
-
                             result['column'] = col_list[ind]
                             result['result'] = [item[ind] for item in col_data] 
                         else:
@@ -1304,7 +1048,6 @@ class FinalDashboardFilterData(CreateAPIView):
                             result['result'] = []
                         a11.append(result)
 
-                    
                     for i in ast.literal_eval(detail['rows']):
                         result1 = {'column':[],'result':[]}
                         a = i.strip(' ')
@@ -1318,15 +1061,31 @@ class FinalDashboardFilterData(CreateAPIView):
                             result1['result'] = []
                         rows11.append(result1)
                     
-                    sheet_id11 = sheet_data.objects.get(id = sheet1_id,sheet_filt_id = sheetq_id)
+                    for i in (detail['pivot'].strip() if detail['pivot'].strip() == '' else ast.literal_eval(detail['pivot'])):
+                        result2 = {'column':[],'result':[]}
+                        a = i.strip(' ')
+                        a = a.replace('"',"")
+                        if a in col_list:
+                            ind = col_list.index(a)
+                            result2['column'] = col_list[ind]
+                            result2['result'] = [item[ind] for item in col_data]
+                        else:
+                            result2['column'] = a
+                            result2['result'] = []
+                        pivot_measure.append(result2)
+                    
+                    final_count = next((item for item in filter_info if item["sheet_id"] == sheet1_id), None)
                     sql_queries.append({
                         "sheet_id": sheet1_id,
+                        "is_filter_applied":final_count["is_filter_applied"],
+                        "filter_count":final_count["filter_count"],
                         "Sheetqueryset_id": sheetq_id,
                         "final_query": final_query,
                         "columns": a11,
                         "rows": rows11,
+                        "pivot": pivot_measure,
                         "queryset_id": query_id,
-                        "chart_id":sheet_id11.chart_id,
+                        "chart_id": sheet_data.objects.get(id = sheet1_id,sheet_filt_id = sheetq_id).chart_id,
                         "databaseId":QuerySets.objects.get(queryset_id = detail["query_id"],user_id=user_id).hierarchy_id
                     })
                     
@@ -1336,35 +1095,54 @@ class FinalDashboardFilterData(CreateAPIView):
             return Response(sql_queries, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"message": str(e)}, status=status.HTTP_404_NOT_FOUND)
-        
+      
 
+def check_column(query, column):
+
+    def clean_query(query):
+        """Remove comments and unnecessary whitespaces from the query."""
+        query = re.sub(r'--.*?(\n|$)', '', query)  # Remove single-line comments
+        query = re.sub(r'/\*.*?\*/', '', query, flags=re.DOTALL)  # Remove multi-line comments
+        query = re.sub(r'\s+', ' ', query).strip()  # Normalize whitespaces
+        return query
+
+    def extract_columns_from_select(select_part):
+        """Extract columns from a SELECT clause, removing function calls and aliases."""
+        cleaned_select = re.sub(r'\s+AS\s+"[^"]+"', '', select_part, flags=re.IGNORECASE)
+        cleaned_select = re.sub(r'\([^)]*\)', '', cleaned_select)  # Remove function calls like SUM(), COUNT()
+        columns = [col.strip() for col in cleaned_select.split(',')]
+        return columns
+
+    def remove_table_names(columns):
+        """Remove table names from columns with dot notation."""
+        return [
+            col.split('.')[-1] if '.' in col else col  # Keep the part after the last dot
+            for col in columns
+        ]
+
+    # Clean the query to simplify parsing
+    query = clean_query(query)
     
-def check_column(cursor,dtype,final_query,column):
-    colu = cursor.execute(text(final_query))
-    if dtype.lower() == "microsoftsqlserver":
-        colu = cursor.execute(str(final_query))
-        col_list = [column[0].replace(":OK",'') for column in cursor.description]
-    elif dtype.lower() == "snowflake":
-        colu = cursor.execute(text(final_query))
-        col_list = [column.replace(":OK",'') for column in colu.keys()]
-    else:
-        colu = cursor.execute(text(final_query))
-
-        col_list = [column.replace(":OK",'') for column in colu.keys()]
-    col_data = []
-    for i in col_list:
-        if i in column:
-            column = i
-            
-            
-
+    # Extract all SELECT clauses
+    select_clauses = re.findall(r"SELECT\s+(.*?)\s+FROM", query, re.IGNORECASE | re.DOTALL)
     
-    # for row in colu.fetchall():
-    #     col_data.append(list(row))
+    all_columns = []
+    for select_clause in select_clauses:
+        all_columns.extend(extract_columns_from_select(select_clause))
+    
+    # Remove table names from the extracted columns
+    cleaned_columns = remove_table_names(all_columns)
+    
+    # Check if the column exists in the cleaned list
+    normalized_column = column.split('(')[0]  # Remove anything after '('
+    normalized_column = normalized_column.strip('"')  # Remove surrounding quotes, if any
+    for i in cleaned_columns:
+        # Normalize column name in the list
+        normalized_col_list_item = i.strip('"') 
+        if normalized_col_list_item == normalized_column:
+            column = normalized_col_list_item
 
-    return col_list,column
-
-
+    return column 
 class Dashboard_filters_list(CreateAPIView):
     serializer_class = serializers.dashboard_filter_list
 
@@ -1439,7 +1217,6 @@ class DashboardFilterDetail(CreateAPIView):
         q_ids = eval(dash_filter.queryset_id)
         h_id = dash_filter.hierarchy_id
 
-        # print(query_id,"@@@@@")
         
         dash_id = dash_filter.dashboard_id
         dash_q = eval(dash_filter.queryset_id)
@@ -1509,20 +1286,16 @@ class DashboardFilterDetail(CreateAPIView):
     
 def get_query_ids_by_dashboard_and_hierarchy(dashboard_id, hierarchy_id):
     try:
-        # Fetch the dashboard record
         dashboard = dashboard_data.objects.get(id=dashboard_id)
 
-        # Parse the sheet_ids from dashboard_data
         sheet_ids = eval(dashboard.sheet_ids) if isinstance(dashboard.sheet_ids, str) else dashboard.sheet_ids
 
-        # Query sheet_data for matching records
         query_ids = (
             sheet_data.objects.filter(id__in=sheet_ids, hierarchy_id=hierarchy_id)
             .values_list('queryset_id', flat=True)
             .distinct()
         )
 
-        # Return the query IDs as a list
         return list(query_ids)
 
     except dashboard_data.DoesNotExist:
@@ -1569,7 +1342,6 @@ class Nofiltersheet(CreateAPIView):
             sheet_query_id = int(sheet_details.sheet_filt_id)
 
             try:
-                # Fetching server details
                 sheetfilter = SheetFilter_querysets.objects.get(Sheetqueryset_id=sheet_query_id,user_id=user_id)
                 query_id = sheet_details.queryset_id
                 hierarchy_id, custom = get_server_id(query_id)
@@ -1583,21 +1355,17 @@ class Nofiltersheet(CreateAPIView):
                 else:
                     return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
             
-
-
                 final_query = sheetfilter.custom_query
                 final_query = convert_query(final_query, dtype.lower())
 
                 if dtype.lower() == "microsoftsqlserver":
                     data = cursor.execute(str(final_query))
                 else:
-                    # final_query = final_query.replace('"', '') if dtype.lower() == "snowflake" else final_query
                     data = cursor.execute(text(final_query))
 
                 col_list = [column.replace(":OK",'') for column in data.keys()]
                 col_data = [list(row) for row in data.fetchall()]
 
-                # Processing columns and rows
                 columns_data = []
                 rows_data = []
 
@@ -1673,7 +1441,7 @@ class Dashboard_filtersheet_update(CreateAPIView):
         
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
-        
+
         dashboard_id = serializer.validated_data["dashboard_id"]
         update_sheet_ids = serializer.validated_data["sheet_ids"]
         
@@ -1728,16 +1496,10 @@ class Drill_through(CreateAPIView):
 
         id = serializer.validated_data["drill_id"]
         dashboard_id = serializer.validated_data["dashboard_id"]
-        # queryset_id = serializer.validated_data["queryset_id"]
-        # main_sheet_id = serializer.validated_data["main_sheet_id"]
-        # target_ids = serializer.validated_data["target_sheet_ids"]
         column_name = serializer.validated_data["column_name"]
         input_lists= serializer.validated_data["column_data"]
         data_type = serializer.validated_data["datatype"]
        
-
-         
-
         dashboarddata=dashboard_data.objects.get(id=dashboard_id)
         if dashboarddata.is_public==True and token==None:
             user_id=dashboarddata.user_id
@@ -1752,7 +1514,6 @@ class Drill_through(CreateAPIView):
         if Dashboard_drill_through.objects.filter(id=id).exists:
             drill_data = Dashboard_drill_through.objects.get(id=id,user_id=user_id)
             queryset_id = drill_data.queryset_id
-            # queryset_id = [1372,1374]
             main_sheet_id = drill_data.source_sheet_id
             target_ids = eval(drill_data.target_sheet_id)
         else:
@@ -1794,13 +1555,7 @@ class Drill_through(CreateAPIView):
                     sheet1_id = detail["sheet_id"]
                    
                     final_query = custom_query.strip()
-                    
-                   
                     hierarchy_id, custom = get_server_id(q_id)
-                    # if joining_tables == "" or joining_tables == None:
-                    #     joining_tables = []
-                    # else:
-                    #     pass
                     try:
                         
                         con_data =connection_data_retrieve(hierarchy_id,user_id)
@@ -1813,7 +1568,6 @@ class Drill_through(CreateAPIView):
                     except Exception as e:
                         return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
                 
-                    
                     try:
                     
                         dd = QuerySets.objects.get(queryset_id = detail["query_id"],user_id=user_id).custom_query
@@ -1871,6 +1625,7 @@ class Drill_through(CreateAPIView):
                         sheet_id11 = sheet_data.objects.get(id =  detail["sheet_id"],sheet_filt_id = sheetq_id)
                         sql_queries.append({
                             "sheet_id": sheet1_id,
+                            "sheet_name":sheet_id11.sheet_name,
                             "Sheetqueryset_id": sheetq_id,
                             "final_query": final_query,
                             "columns": a11,
@@ -1924,8 +1679,12 @@ class Drill_through(CreateAPIView):
                 q_id = detail["query_id"]
                 sheetq_id = detail["Sheetqueryset_id"]
                 sheet1_id = detail["sheet_id"]
+                is_custome = QuerySets.objects.get(queryset_id = q_id).is_custom_sql
+                where = where_clauses[0]
+                # Replace the column name inside double quotes
+                updated_where_clause = re.sub(r'"[^"]+"', f'"{check_column(custom_query,column_name[0])}"', where, count=1)
+                where_clauses[0] = updated_where_clause
                 
-               
                 for i in sheet_ids:
                     hierarchy_id, custom = get_server_id(q_id)
                     try:
@@ -1974,17 +1733,36 @@ class Drill_through(CreateAPIView):
                                 main_query += " AND " + " AND ".join(where_clauses)
                             else:
                                 main_query += " WHERE " + " AND ".join(where_clauses)
+                    elif is_custome == True:
+                        temp_table_end = main_query.rfind(') temp_table')
+                        
+                        if temp_table_end != -1:
+                            before_temp_table = main_query[:temp_table_end + len(') temp_table')]
+                            after_temp_table = main_query[temp_table_end + len(') temp_table'):]
+                            
+                            # Check if a WHERE clause is already present after temp_table
+                            if 'WHERE' in after_temp_table.upper():
+                                after_temp_table = re.sub(r'\sWHERE\s', ' WHERE ' + " AND ".join(where_clauses) + ' AND ', after_temp_table, flags=re.IGNORECASE)
+                            else:
+                                after_temp_table = " WHERE " + " AND ".join(where_clauses) + after_temp_table
+                            
+                            # Combine the parts
+                            main_query = before_temp_table + after_temp_table
+                        else:
+                            # If temp_table is not found, keep original behavior
+                            if 'WHERE' in main_query.upper():
+                                main_query += " AND " + " AND ".join(where_clauses)
+                            else:
+                                main_query += " WHERE " + " AND ".join(where_clauses)
                     else:
-                        # Original behavior for when "temp1" is not present
+                        
                         if 'WHERE' in main_query.upper():
                             main_query += " AND " + " AND ".join(where_clauses)
                         else:
                             main_query += " WHERE " + " AND ".join(where_clauses)
-                    
                     # Combine the modified main query and the group by clause
                     final_query = main_query + " " + group_by_clause
                 
-
                 try:
                    
                     dd = QuerySets.objects.get(queryset_id = detail["query_id"],user_id=user_id).custom_query
@@ -2009,59 +1787,54 @@ class Drill_through(CreateAPIView):
                 
                             col_list = [column.replace(":OK",'') for column in colu.keys()]
                         col_data = []
-                        
+                    
                         for row in colu.fetchall():
                             col_data.append(list(row))
-                        a11 = []
-                        rows11=[]
-                        kk=ast.literal_eval(detail['columns'])
-                        
-                        for i in kk:
-                            result = {}
-                            
-                            a = i.strip(' ')
-                            a = a.replace('"',"")
-                            
-                            if a in col_list:
-                                ind = col_list.index(a)
+                    except Exception as e:
+                        col_data = []
+                        col_list = []
+                    a11 = []
+                    rows11=[]
+                    kk=ast.literal_eval(detail['columns'])
+                    
+                    for i in kk:
+                        result = {'column':[],'result':[]}
+                        a = i.strip(' ')
+                        a = a.replace('"',"")
+                        if a in col_list:
+                            ind = col_list.index(a)
+                            result['column'] = col_list[ind]
+                            result['result'] = [item[ind] for item in col_data] 
+                        else:
+                            result['column'] = a
+                            result['result'] = []
+                        a11.append(result)
 
-                                result['column'] = col_list[ind]
-                                result['result'] = [item[ind] for item in col_data] 
-                            a11.append(result)
-
-                        
-                        for i in ast.literal_eval(detail['rows']):
-                            result1={}
-                            a = i.strip(' ')
-                            a =a.replace('"',"") 
-                            if a in col_list:
-                                ind = col_list.index(a)
-                                result1['column'] = col_list[ind]
-                                result1['result'] = [item[ind] for item in col_data]
-                            rows11.append(result1)
-                        
-                        sheet_id11 = sheet_data.objects.get(id = sheet1_id,sheet_filt_id = sheetq_id)
-                        sql_queries.append({
-                            "sheet_id": sheet1_id,
-                            "Sheetqueryset_id": sheetq_id,
-                            "final_query": final_query,
-                            "columns": a11,
-                            "rows": rows11,
-                            "queryset_id": queryset_id,
-                            "chart_id":sheet_id11.chart_id
-                        })
-                    except:
-                        s = sheet_data.objects.get(id = sheet1_id)                        
-                        sql_queries.append({
-                            "sheet_id": sheet1_id,
-                            "Sheetqueryset_id": s.sheet_filt_id,
-                            "final_query":sheetq_id,
-                            "columns": [],
-                            "rows": [],
-                            "queryset_id": queryset_id,
-                            "chart_id":s.chart_id
-                            })
-                        
+                    for i in ast.literal_eval(detail['rows']):
+                        result1 = {'column':[],'result':[]}
+                        a = i.strip(' ')
+                        a =a.replace('"',"") 
+                        if a in col_list:
+                            ind = col_list.index(a)
+                            result1['column'] = col_list[ind]
+                            result1['result'] = [item[ind] for item in col_data]
+                        else:
+                            result1['column'] = a
+                            result1['result'] = []
+                        rows11.append(result1)
+                    
+                    sheet_id11 = sheet_data.objects.get(id = sheet1_id,sheet_filt_id = sheetq_id)
+                    sql_queries.append({
+                        "sheet_id": sheet1_id,
+                        "Sheetqueryset_id": sheetq_id,
+                        "final_query": final_query,
+                        "columns": a11,
+                        "rows": rows11,
+                        "queryset_id": queryset_id,
+                        "chart_id":sheet_id11.chart_id
+                    })
+                
+                    
                 except Exception as e:
                     return Response({'message': "Invalid Input Data for Column"}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
@@ -2700,6 +2473,8 @@ class Dashboard_sheet_update(CreateAPIView):
                 table_data = table.get("tableData", [])  
                 table_columns = table.get("tableColumns", [])
                 customizeOptions = sheet_data_json.get('customizeOptions')
+                # items_per_page = table.get("items_per_page")
+                # total_items = table.get("total_items")
                 if table.get("color1") or table.get("color2"):
                     color1 = table.get("color1")
                     sheet_data_dict[sheet_id] = {
@@ -2712,7 +2487,9 @@ class Dashboard_sheet_update(CreateAPIView):
                         'rows': table_data,
                         'banding':banding,
                         'color1': table.get("color1"),
-                        'color2': table.get("color2")
+                        'color2': table.get("color2"),
+                        'tableTotalItems':table.get("total_items"),
+                        'tableItemsPerPage':table.get("items_per_page")
                     }
                     }
                 else:
@@ -2725,7 +2502,9 @@ class Dashboard_sheet_update(CreateAPIView):
                         'tableData': {
                             'headers': table_columns,
                             'rows': table_data,
-                            'banding':banding
+                            'banding':banding,
+                            'tableTotalItems':table.get("total_items"),
+                            'tableItemsPerPage':table.get("items_per_page")
                         }
                     }
             elif chart_id == 25:  # KPI chart
@@ -2736,6 +2515,8 @@ class Dashboard_sheet_update(CreateAPIView):
                 kpi_num = kpi_table.get("kpiNumber")
                 kpi_prefix = kpi_table.get("kpiPrefix")
                 kpi_sufix = kpi_table.get("kpiSuffix")
+                kpiDecimal_Places = kpi_table.get("kpiDecimalPlaces")
+                kpiDecimal_Unit = kpi_table.get("kpiDecimalUnit")
                 sheet_data_dict[sheet_id] = {
                     'chartType': chart_type,
                     'sheetName':sheet_name,
@@ -2746,13 +2527,17 @@ class Dashboard_sheet_update(CreateAPIView):
                         'kpiSuffix':kpi_sufix,
                         'rows': kpi_data,
                         'fontSize': kpi_font,
-                        'color': kpi_col
+                        'color': kpi_col,
+                        'kpiDecimalPlaces':kpiDecimal_Places,
+                        'kpiDecimalUnit':kpiDecimal_Unit
                     },
                     
                 }
             else:  # Other chart types
                 results = sheet_data_json.get("savedChartOptions", {})
                 columns_data = sheet_data_json.get("columns_data",{})
+                drill_down = sheet_data_json.get("drillDownHierarchy")
+                drill_down_boolean = sheet_data_json.get("isDrillDownData")
 
                 rows_data = sheet_data_json.get("rows_data",{})
 
@@ -2762,7 +2547,9 @@ class Dashboard_sheet_update(CreateAPIView):
                     'sheetTagName': sheet_tag_name,
                     'chartOptions': results,
                     'columns_data':columns_data,
-                    'rows_data':rows_data
+                    'rows_data':rows_data,
+                    'drillDownHierarchy':drill_down,
+                    'isDrillDownData':drill_down_boolean
                     # 'numberFormat':number_format
                 }
 
@@ -2785,7 +2572,6 @@ class Dashboard_sheet_update(CreateAPIView):
 
                         # Handle Table chart
                         if sheet_info['chartType'] == 'Table':
-                
                             if 'chartOptions' in a:
                                 a['chartOptions'] = {}
                             a['tableData'] = sheet_info.get('tableData', {})
@@ -2811,6 +2597,7 @@ class Dashboard_sheet_update(CreateAPIView):
                             
                             a["data"]["title"] = sheet_info.get('sheetName')
                             a["data"]["sheetTagName"] = sheet_info.get('sheetTagName')
+                          
 
                         # Handle other chart types
                         else:
@@ -2836,6 +2623,8 @@ class Dashboard_sheet_update(CreateAPIView):
                         a["data"]["sheetTagName"] = sheet_info.get('sheetTagName')
                         a["column_Data"] = sheet_info.get('columns_data')
                         a["row_Data"] = sheet_info.get('rows_data')
+                        a["isDrillDownData"] = sheet_info.get('isDrillDownData')
+                        a["drillDownHierarchy"] = sheet_info.get('drillDownHierarchy')
 
               
                 server_id = None
@@ -3215,10 +3004,9 @@ def get_columns_list(samp, server_type):
     else:
         type_code_to_name = {}
 
+        
 def connection_details_data(hierarchy_id12,user_id):
-    # status1,parameter1,server_id, file_id,quickbooks_id, salesforce_id,hierarchy_id = ids_final_status(hierarchy_id12)
-    status1,parameter1,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=ids_final_status(hierarchy_id12)
-        # status1,parameter,server_details_id,file_id,quickbooks_id,salesforce_id,pr_id
+    status1,parameter1,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,shopify_id,google_sheet_id,pr_id=ids_final_status(hierarchy_id12)
     if status1 != 200:
         return Response({'message':'Invalid Id'},status=status1)
     if (file_id is None or file_id =='') and parameter1 == 'server':         
@@ -3325,6 +3113,46 @@ def connection_details_data(hierarchy_id12,user_id):
                 "status":400,
                 "message":"Data Not Found"
             }
+    elif (shopify_id is not None or shopify_id!='') and parameter1=='shopify':
+        try:
+            server_details=Shopify.objects.get(id=shopify_id)
+            ServerType1='SHOPIFY'
+            file_type =None
+            file_data=None
+            data = {
+                "status":200,
+                "server_details":server_details,
+                "serverType1":ServerType1,
+                # "dbtype" : dbtype,
+                "file_type":file_type,
+                "file_data":file_data,
+                "parameter":parameter1
+                }
+        except:
+            data ={
+                "status":400,
+                "message":"Data Not Found"
+            }
+    elif (google_sheet_id is not None or google_sheet_id!='') and parameter1=='google_sheets':
+        try:
+            server_details=TokenStoring.objects.get(id=google_sheet_id)
+            ServerType1='GOOGLE_SHEETS'
+            file_type =None
+            file_data=None
+            data = {
+                "status":200,
+                "server_details":server_details,
+                "serverType1":ServerType1,
+                # "dbtype" : dbtype,
+                "file_type":file_type,
+                "file_data":file_data,
+                "parameter":parameter1
+                }
+        except:
+            data ={
+                "status":400,
+                "message":"Data Not Found"
+            }
     else:
         try:
             file_data = FileDetails.objects.get(user_id = user_id,id = file_id)
@@ -3348,18 +3176,6 @@ def connection_details_data(hierarchy_id12,user_id):
             }
     return data
 
-# def get_server_id(query_id):
-#     try:
-#         q_id = QuerySets.objects.get(queryset_id=query_id)
-#         # server_id = eval(q_id.server_id)
-#         # file_id = eval(q_id.file_id)
-#         # joining_tables = eval(q_id.table_names)
-#         # print(q_id.server_id,q_id.file_id,q_id.table_names,q_id.is_custom_sql)
-        
-#         return q_id.hierarchy_id,q_id.is_custom_sql
-        
-#     except dashboard_data.DoesNotExist:
-#         return None
 def get_server_id(query_id):
     try:
         if isinstance(query_id, list):
@@ -3387,7 +3203,7 @@ def db_name(h_id):
             db_name = ServerDetails.objects.get(id=ser_id).display_name
         elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'files':
             db_name = FileDetails.objects.get(id = ser_id).display_name
-        elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'quickbooks':
+        elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter in ('quickbooks', 'salesforce', 'google_sheets'):
             db_name = TokenStoring.objects.get(id = ser_id).display_name
         elif parent_ids.objects.filter(table_id = ser_id).exists() and parameter == 'halops':
             db_name = HaloPs.objects.get(id = ser_id).display_name

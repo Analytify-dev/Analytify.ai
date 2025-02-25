@@ -5,6 +5,18 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class WorkbenchService {
+  private skipLoader = false; // Flag to control the loader
+  disableLoaderForNextRequest() {
+    this.skipLoader = true;
+  }
+
+  shouldSkipLoader(): boolean {
+    return this.skipLoader;
+  }
+
+  resetSkipLoader() {
+    this.skipLoader = false; // Reset after request
+  }
   getDrillDowndata(Obj: any) {
     throw new Error('Method not implemented.');
   }
@@ -55,7 +67,11 @@ export class WorkbenchService {
     this.accessToken = JSON.parse( currentUser! )['Token'];
     return this.http.post<any>(`${environment.apiUrl}/halops/`+this.accessToken,obj);
   }
-
+  shopifyConnection(obj:any){
+    const currentUser = localStorage.getItem( 'currentUser' );
+    this.accessToken = JSON.parse( currentUser! )['Token'];
+    return this.http.post<any>(`${environment.apiUrl}/shopify_authentication/`+this.accessToken,obj);
+  }
   connectWiseConnectionUpdate(obj:any){
     const currentUser = localStorage.getItem( 'currentUser' );
     this.accessToken = JSON.parse( currentUser! )['Token'];
@@ -67,7 +83,11 @@ export class WorkbenchService {
     this.accessToken = JSON.parse( currentUser! )['Token'];
     return this.http.put<any>(`${environment.apiUrl}/halops/`+this.accessToken,obj);
   }
-  
+  shopifyConnectionUpdate(obj:any){
+    const currentUser = localStorage.getItem( 'currentUser' );
+    this.accessToken = JSON.parse( currentUser! )['Token'];
+    return this.http.put<any>(`${environment.apiUrl}/shopify_authentication/`+this.accessToken,obj);
+  }
   DbConnectionFiles(obj:any){
     const currentUser = localStorage.getItem( 'currentUser' );
     this.accessToken = JSON.parse( currentUser! )['Token'];
@@ -92,7 +112,21 @@ export class WorkbenchService {
     return this.http.get<any>(`${environment.apiUrl}/salesforce/`+this.accessToken);
   }
 
-
+  connectGoogleSheets(){
+    const currentUser = localStorage.getItem( 'currentUser' );
+    this.accessToken = JSON.parse( currentUser! )['Token'];
+    return this.http.get<any>(`${environment.apiUrl}/auth/google/`+this.accessToken);
+  }
+  getGoogleSheetsDetails(obj:any){
+    const currentUser = localStorage.getItem( 'currentUser' );
+    this.accessToken = JSON.parse( currentUser! )['Token'];
+    return this.http.post<any>(`${environment.apiUrl}/auth/google/callback/`+this.accessToken,obj);
+  }
+  getHierachyIdFromGsheets(parentId:any,id:any){
+    const currentUser = localStorage.getItem( 'currentUser' );
+    this.accessToken = JSON.parse( currentUser! )['Token'];
+    return this.http.get<any>(`${environment.apiUrl}/google_sheets_data/`+this.accessToken+'/'+parentId+'/'+id);
+  }
   // getTableData(obj:any){
   //   const currentUser = localStorage.getItem( 'currentUser' );
   //   console.log(JSON.parse( currentUser!))
@@ -755,5 +789,25 @@ deleteUser(id:any){
       const currentUser = localStorage.getItem( 'currentUser' );
       this.accessToken = JSON.parse( currentUser! )['Token'];
       return this.http.post<any>(`${environment.apiUrl}/drill_noaction_sheet/`+this.accessToken,object);
+    }
+
+    //refresh dashboard
+    refreshDashboardData(object : any){
+      const currentUser = localStorage.getItem( 'currentUser' );
+      this.accessToken = JSON.parse( currentUser! )['Token'];
+      return this.http.put<any>(`${environment.apiUrl}/refresh_dashboard/`+this.accessToken,object);
+    }
+
+    //excel and csv replace & upsert(append)
+    replaceExcelOrCsvFile(object : any){
+      const currentUser = localStorage.getItem( 'currentUser' );
+      this.accessToken = JSON.parse( currentUser! )['Token'];
+      return this.http.post<any>(`${environment.apiUrl}/file_replace/`+this.accessToken,object);
+    }
+
+    upsertExcelOrCsvFile(object : any){
+      const currentUser = localStorage.getItem( 'currentUser' );
+      this.accessToken = JSON.parse( currentUser! )['Token'];
+      return this.http.post<any>(`${environment.apiUrl}/file_append/`+this.accessToken,object);
     }
 }

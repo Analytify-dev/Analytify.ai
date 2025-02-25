@@ -45,17 +45,17 @@ def signup_thread(user_id):
         with open(file_path, 'rb') as f:
             file_content = f.read()
 
-        # Create an InMemoryUploadedFile instance
         file_obj = InMemoryUploadedFile(
-            file=io.BytesIO(file_content),  # File content wrapped in BytesIO
+            file=io.BytesIO(file_content),
             field_name='database_path',
             name='insightapps-sample',
             content_type='application/x-sqlite3',
             size=len(file_content),
             charset=None
         )
-        
-        # Use get_or_create for ServerDetails
+        # Delete previous sample server details for the user
+        models.ServerDetails.objects.filter(user_id=user_id, is_sample=True, display_name='In Ex').delete()
+
         server_details_instance, created = models.ServerDetails.objects.get_or_create(
             server_type=4,
             user_id=user_id,
@@ -82,40 +82,52 @@ def signup_thread(user_id):
         )
         
         hierarchy_id = pr_idtb.id
-        try:
-            click = Clickhouse()
-            click.cursor.execute(text(f'Create Database if Not EXISTS "In Ex"'))
-            # server_conn=server_connection(username, encoded_passw, db_name, hostname,port,service_name,ser_data.server_type.upper(),server_path)
-            server_conn = server_connection(server_details_instance.username,
-                                            server_details_instance.password,
-                                            server_details_instance.database,
-                                            server_details_instance.hostname,
-                                            server_details_instance.port,
-                                            server_details_instance.service_name,
-                                            # server_details_instance.  
-                                            'SQLITE',
-                                            server_details_instance.database_path
-                                            )
-            # data = click.migrate_database_to_clickhouse(server_conn['cursor'],'sqlite',server_details_instance.display_name)
-            data = click.migrate_database_to_clickhouse(server_conn['cursor'],'sqlite',server_details_instance.display_name,server_details_instance.username, server_details_instance.password, server_details_instance.database, server_details_instance.hostname,server_details_instance.port,server_details_instance.service_name,'SQLITE',server_details_instance.database_path)
-        except Exception as e:
-            return Response({'Chickhouse Error Message': str(e)})
+
+        # Initialize Clickhouse
+        click = Clickhouse()
+        click.cursor.execute(text(f'CREATE DATABASE IF NOT EXISTS "In Ex"'))
+
+        # Establish server connection
+        server_conn = server_connection(
+            server_details_instance.username,
+            server_details_instance.password,
+            server_details_instance.database,
+            server_details_instance.hostname,
+            server_details_instance.port,
+            server_details_instance.service_name,
+            'SQLITE',
+            server_details_instance.database_path
+        )
+
+        # Migrate data to ClickHouse
+        data = click.migrate_database_to_clickhouse(
+            server_conn['cursor'],
+            'sqlite',
+            server_details_instance.display_name,
+            server_details_instance.username,
+            server_details_instance.password,
+            server_details_instance.database,
+            server_details_instance.hostname,
+            server_details_instance.port,
+            server_details_instance.service_name,
+            'SQLITE',
+            server_details_instance.database_path
+        )
+
+        # Call management commands safely
+        commands = ['SupplyChain_dashboard', 'Sales_dashboard', 'HrDashboard']
+        for command in commands:
+            try:
+                print(f"Executing {command} with user_id={user_id} and hierarchy_id={hierarchy_id}...")
+                call_command(command, user_id, hierarchy_id)
+                print(f"{command} executed successfully.")
+            except Exception as e:
+                print(f"⚠️ Error executing {command}: {e}")
+
+        return Response({'message': 'Signup process completed successfully.'})
+
     except Exception as e:
-        return Response({'message': str(e)})
-    
-    # # Call the command functions
-    call_command('SupplyChain_dashboard', user_id, hierarchy_id)
-    call_command('Sales_dashboard', user_id, hierarchy_id)
-    call_command('HrDashboard', user_id, hierarchy_id)
-    # Call the command functions
-    # for i in ['SupplyChain_dashboard','Sales_dashboard','HrDashboard']:
-    #     print('\n\n',i, user_id, hierarchy_id)
-    #     call_command(i, user_id, hierarchy_id)
-    #     call_command(i, user_id, hierarchy_id)
-    #     call_command(i, user_id, hierarchy_id)
-    # call_command('quickbooks_dashboard', user_id, hierarchy_id)
-    # call_command('salesforce_dashboard', user_id, hierarchy_id)
-    # data = click.migrate_database_to_clickhouse(server_conn['cursor'],'sqlite',server_details_instance.display_name)
+        return Response({'error': str(e)}, status=500)
     
 
 created_at=datetime.datetime.now(utc)
@@ -329,7 +341,6 @@ class LoginApiView(CreateAPIView):
                     except:
                         return Response({"message":"Incorrect Password"}, status=status.HTTP_401_UNAUTHORIZED) 
                     AccessToken.objects.filter(expires__lte=datetime.datetime.now(utc)).delete()
-                    print(user)
                     if user is not None:
                         access_token=get_access_token(data,password)
                         if access_token['status']==200:
@@ -436,6 +447,10 @@ class Account_reactivate(CreateAPIView):
             else:
                 return Response({"message":"You do not have an account, Please SIGNUP with Analytify"},status=status.HTTP_404_NOT_FOUND)
             name = UserProfile.objects.get(email__iexact=email)
+            up_data=models.UserRole.objects.filter(user_id=name.id).values('created_by')
+            for u1 in up_data:
+                if not name.id==u1['created_by']:
+                    return Response({'message':'Not allowed to re-activate the account'},status=status.HTTP_406_NOT_ACCEPTABLE)
             try:
                 unique_id = get_random_string(length=64)
                 # protocol ='https://'

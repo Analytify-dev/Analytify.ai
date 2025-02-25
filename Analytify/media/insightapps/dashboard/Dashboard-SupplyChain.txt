@@ -1,0 +1,2259 @@
+[
+    {
+        "id": "ba008bbd-e339-4013-ad0c-523873d9d6a8",
+        "x": 0,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Orders",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Orders</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 1,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 100,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "CNTD(order_id)",
+                    "result_data": [
+                        100
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "order_id",
+                "aggregate",
+                "count_distinct",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "a7533916-01df-4e72-aeab-392ee88afba2",
+        "x": 4,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Suppliers",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Suppliers</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 2,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 95,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "CNTD(supplier_id)",
+                    "result_data": [
+                        95
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "supplier_id",
+                "aggregate",
+                "count_distinct",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "84b01657-2da3-409f-a970-5dd2cb71aec1",
+        "x": 8,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Products",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Products</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 3,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 100,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "CNTD(product_id)",
+                    "result_data": [
+                        100
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "product_id",
+                "aggregate",
+                "count_distinct",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "19cdc0c2-7a66-4139-9287-a22c0822fa4c",
+        "x": 12,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Quantity Ordered",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Quantity Ordered</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 4,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 27253,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "sum(quantity_ordered)",
+                    "result_data": [
+                        27253
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "quantity_ordered",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "e302212c-f734-4de2-9ec0-89544fc6b078",
+        "x": 16,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Quantity Received",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Quantity Received</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 5,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 25392,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "sum(quantity_received)",
+                    "result_data": [
+                        25392
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "quantity_received",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "7cabf450-3503-4e66-bad3-23acd8cb0c91",
+        "x": 0,
+        "y": 3,
+        "rows": 8,
+        "cols": 10,
+        "data": {
+            "title": "Total Cost By Order Date",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Cost By Order Date</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 6,
+        "chartType": "bar",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 6,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        608363.1021728516
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "background": "#fff",
+                "events": {}
+            },
+            "xaxis": {
+                "categories": [
+                    "2023"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "colors": [
+                "#673ab7"
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        608363.1021728516
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "background": "#fff",
+                "events": {}
+            },
+            "xaxis": {
+                "categories": [
+                    "2023"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "colors": [
+                "#673ab7"
+            ]
+        },
+        "drillDownHierarchy": [
+            "year",
+            "quarter",
+            "month",
+            "date"
+        ],
+        "column_Data": [
+            [
+                "order_date",
+                "date",
+                "year",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "total_cost",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": true,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#673ab7",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": true,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "f3610814-2324-4ca5-9965-427c5a39dfa3",
+        "x": 10,
+        "y": 3,
+        "rows": 8,
+        "cols": 10,
+        "data": {
+            "title": "Region Wise Quantity Ordered and Received",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Region Wise Quantity Ordered and Received</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 7,
+        "chartType": "HORIZONTAL STACKED BAR",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 2,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "sum(quantity_ordered)",
+                    "data": [
+                        8331,
+                        6795,
+                        6282,
+                        5845
+                    ],
+                    "group": "apexcharts-axis-0"
+                },
+                {
+                    "name": "sum(quantity_received)",
+                    "data": [
+                        8812,
+                        6960,
+                        4763,
+                        4857
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 350,
+                "background": "#fff",
+                "stacked": true,
+                "toolbar": {
+                    "show": true
+                },
+                "zoom": {
+                    "enabled": true
+                },
+                "events": {}
+            },
+            "responsive": [
+                {
+                    "breakpoint": 480,
+                    "options": {
+                        "legend": {
+                            "position": "bottom",
+                            "offsetX": -10,
+                            "offsetY": 0
+                        }
+                    }
+                }
+            ],
+            "plotOptions": {
+                "bar": {
+                    "horizontal": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "xaxis": {
+                "type": "category",
+                "categories": [
+                    "East Warehouse",
+                    "West Warehouse",
+                    "South Warehouse",
+                    "North Warehouse"
+                ],
+                "labels": {
+                    "show": false,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "legend": {
+                "position": "right",
+                "offsetY": 40
+            },
+            "fill": {
+                "opacity": 1
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "sum(quantity_ordered)",
+                    "data": [
+                        8331,
+                        6795,
+                        6282,
+                        5845
+                    ],
+                    "group": "apexcharts-axis-0"
+                },
+                {
+                    "name": "sum(quantity_received)",
+                    "data": [
+                        8812,
+                        6960,
+                        4763,
+                        4857
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 350,
+                "background": "#fff",
+                "stacked": true,
+                "toolbar": {
+                    "show": true
+                },
+                "zoom": {
+                    "enabled": true
+                },
+                "events": {}
+            },
+            "responsive": [
+                {
+                    "breakpoint": 480,
+                    "options": {
+                        "legend": {
+                            "position": "bottom",
+                            "offsetX": -10,
+                            "offsetY": 0
+                        }
+                    }
+                }
+            ],
+            "plotOptions": {
+                "bar": {
+                    "horizontal": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "xaxis": {
+                "type": "category",
+                "categories": [
+                    "East Warehouse",
+                    "West Warehouse",
+                    "South Warehouse",
+                    "North Warehouse"
+                ],
+                "labels": {
+                    "show": false,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "legend": {
+                "position": "right",
+                "offsetY": 40
+            },
+            "fill": {
+                "opacity": 1
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            }
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "warehouse_location",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "quantity_ordered",
+                "aggregate",
+                "sum",
+                ""
+            ],
+            [
+                "quantity_received",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": false,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "97f5a6d9-6eac-4de1-a566-2500eb48afae",
+        "x": 0,
+        "y": 11,
+        "rows": 9,
+        "cols": 10,
+        "data": {
+            "title": "Cost by Category",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Cost by Category</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 8,
+        "chartType": "DONUT",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 10,
+        "chartOptions": {
+            "series": [
+                179847.24084472656,
+                219274.61193847656,
+                209241.24938964844
+            ],
+            "chart": {
+                "type": "donut",
+                "background": "#fff",
+                "events": {}
+            },
+            "labels": [
+                "Raw Materials",
+                "Components",
+                "Finished Goods"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true
+            },
+            "plotOptions": {
+                "pie": {
+                    "donut": {
+                        "labels": {
+                            "show": true,
+                            "name": {
+                                "show": true
+                            },
+                            "value": {
+                                "show": true
+                            },
+                            "total": {
+                                "show": true,
+                                "showAlways": true
+                            }
+                        },
+                        "size": "50%"
+                    }
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                179847.24084472656,
+                219274.61193847656,
+                209241.24938964844
+            ],
+            "chart": {
+                "type": "donut",
+                "background": "#fff",
+                "events": {}
+            },
+            "labels": [
+                "Raw Materials",
+                "Components",
+                "Finished Goods"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true
+            },
+            "plotOptions": {
+                "pie": {
+                    "donut": {
+                        "labels": {
+                            "show": true,
+                            "name": {
+                                "show": true
+                            },
+                            "value": {
+                                "show": true
+                            },
+                            "total": {
+                                "show": true,
+                                "showAlways": true
+                            }
+                        },
+                        "size": "50%"
+                    }
+                }
+            }
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "product_category",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "total_cost",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "a05ce733-3786-45a8-9c34-d0d89eb33321",
+        "x": 10,
+        "y": 11,
+        "rows": 9,
+        "cols": 10,
+        "data": {
+            "title": "Supplier Wise Rating",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Supplier Wise Rating</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 9,
+        "chartType": "bar",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 6,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        2.7777777777777777,
+                        2.793103448275862,
+                        3.066666666666667,
+                        3.2142857142857144
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "background": "#fff",
+                "events": {}
+            },
+            "xaxis": {
+                "categories": [
+                    "Supplier D",
+                    "Supplier A",
+                    "Supplier B",
+                    "Supplier C"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "colors": [
+                "#fff176"
+            ]
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "",
+                    "data": [
+                        2.7777777777777777,
+                        2.793103448275862,
+                        3.066666666666667,
+                        3.2142857142857144
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "type": "bar",
+                "height": 320,
+                "background": "#fff",
+                "events": {}
+            },
+            "xaxis": {
+                "categories": [
+                    "Supplier D",
+                    "Supplier A",
+                    "Supplier B",
+                    "Supplier C"
+                ],
+                "tickPlacement": "on",
+                "position": "bottom",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "colors": [
+                "#fff176"
+            ]
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "supplier_name",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "supplier_rating",
+                "aggregate",
+                "avg",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 2,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#fff176",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": true,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 2,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "d16af6c3-0615-4c1e-bd50-0127fec96f73",
+        "x": 0,
+        "y": 20,
+        "rows": 12,
+        "cols": 20,
+        "data": {
+            "title": "Supply Chain Overview",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Supply Chain Overview</strong></span></p>"
+        },
+        "sheetType": "Table",
+        "sheetId": 10,
+        "chartType": "Table",
+        "databaseId": 1,
+        "qrySetId": 1,
+        "chartId": 1,
+        "tableData": {
+            "headers": [
+                "order_id",
+                "product_id",
+                "product_name",
+                "product_category",
+                "total_cost",
+                "shipping_cost"
+            ],
+            "rows": [
+                {
+                    "order_id": "ORD-1091",
+                    "product_id": "PROD-1158",
+                    "product_name": "Product 86",
+                    "product_category": "Finished Goods",
+                    "total_cost": 1885.99,
+                    "shipping_cost": 254.65
+                },
+                {
+                    "order_id": "ORD-1013",
+                    "product_id": "PROD-8811",
+                    "product_name": "Product 72",
+                    "product_category": "Raw Materials",
+                    "total_cost": 8489.29,
+                    "shipping_cost": 164.29
+                },
+                {
+                    "order_id": "ORD-1072",
+                    "product_id": "PROD-4450",
+                    "product_name": "Product 41",
+                    "product_category": "Finished Goods",
+                    "total_cost": 9722.83,
+                    "shipping_cost": 165.64
+                },
+                {
+                    "order_id": "ORD-1039",
+                    "product_id": "PROD-5915",
+                    "product_name": "Product 59",
+                    "product_category": "Raw Materials",
+                    "total_cost": 5847.23,
+                    "shipping_cost": 358.61
+                },
+                {
+                    "order_id": "ORD-1096",
+                    "product_id": "PROD-1590",
+                    "product_name": "Product 86",
+                    "product_category": "Components",
+                    "total_cost": 9130.82,
+                    "shipping_cost": 473.13
+                },
+                {
+                    "order_id": "ORD-1082",
+                    "product_id": "PROD-5533",
+                    "product_name": "Product 91",
+                    "product_category": "Raw Materials",
+                    "total_cost": 7834.62,
+                    "shipping_cost": 437.06
+                },
+                {
+                    "order_id": "ORD-1076",
+                    "product_id": "PROD-9280",
+                    "product_name": "Product 15",
+                    "product_category": "Raw Materials",
+                    "total_cost": 8665.89,
+                    "shipping_cost": 385.95
+                },
+                {
+                    "order_id": "ORD-1079",
+                    "product_id": "PROD-1832",
+                    "product_name": "Product 25",
+                    "product_category": "Raw Materials",
+                    "total_cost": 4420.08,
+                    "shipping_cost": 483.3
+                },
+                {
+                    "order_id": "ORD-1080",
+                    "product_id": "PROD-2512",
+                    "product_name": "Product 33",
+                    "product_category": "Raw Materials",
+                    "total_cost": 3849.95,
+                    "shipping_cost": 113.34
+                },
+                {
+                    "order_id": "ORD-1033",
+                    "product_id": "PROD-4346",
+                    "product_name": "Product 14",
+                    "product_category": "Components",
+                    "total_cost": 3545.55,
+                    "shipping_cost": 496.71
+                }
+            ],
+            "banding": false
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "order_id",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "product_id",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "product_name",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "product_category",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "total_cost",
+                "float32",
+                "",
+                ""
+            ],
+            [
+                "shipping_cost",
+                "float32",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fcfcfc",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    }
+]

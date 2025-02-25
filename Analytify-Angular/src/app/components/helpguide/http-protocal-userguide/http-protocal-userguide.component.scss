@@ -1,32 +1,17 @@
-p {
-    font-size: 14px;
-    margin-inline-start: 1rem !important;
-}
-h6 {
-    font-weight: 600 !important;
-    // margin-inline-start: 1rem;
-}
-.table thead th {
-    color: #333335; 
-    font-size: 14px;
-}
-.table td {
-    font-size: 14px;
-}
-span{
-    margin-inline-start: 1rem !important;
-}
+p { font-size: 14px; margin-inline-start: 1rem !important;}
+h6 { font-weight: 600 !important;}
+.table thead th { color: #333335;  font-size: 14px;}
+.table td { font-size: 14px;}
+span{ margin-inline-start: 1rem !important;}
+.protocal-table-width{ width: fit-content;}
+.para-box{ width: fit-content; border-right: 2px solid !important;}
 
  // for 90% Resolution //
- @media ( 1420px <= width <= 1560px) {
-    p {
-        font-size: 12px;
-    }
+@media ( 1420px <= width <= 1560px) {
+ p { font-size: 12px;}
  }
 
  // for 100% Resolution //
- @media ( 1280px <= width <= 1420px) {
-    p {
-        font-size: 11px;
-    }
+@media ( 1280px <= width <= 1420px) {
+ p { font-size: 11px; }
  }

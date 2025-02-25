@@ -1,54 +1,3 @@
-# services:
-#   backend:
-#     build: ./InsightApps
-#     volumes:
-#       - ./InsightApps:/app
-#     ports:
-#       - "8000:8000"
-#     # command: python /app/manage.py runserver 0.0.0.0:8000
-
-#   frontend:
-#     build: ./InsightApps-Angular
-#     ports:
-#       - "8080:80"
-#     volumes:
-#       - ./dist/InsightApps-Angular:/frontend:/usr/share/nginx/html
-
-
-##################################
-# version: '3.8'
-
-# services:
-#   backend:
-#     build:
-#       context: ./Analytify
-#       args:
-#         ADMIN_EMAIL: ${ADMIN_EMAIL}
-#         ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-#     volumes:
-#       - ./Analytify:/app
-#     ports:
-#       - "8000:8000"
-#     depends_on:
-#       - clickhouse
-#     environment:
-#       - DJANGO_SETTINGS_MODULE=project.settings
-#       - DATABASE_URL=clickhouse://default@clickhouse:9000
-#       ADMIN_EMAIL: ${ADMIN_EMAIL}
-#       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-#     command: >
-#       sh -c "
-#       python manage.py runserver 0.0.0.0:8000"
-
-
-#   frontend:
-#     build: ./Analytify-Angular
-#     ports:
-#       - "8080:80"
-#     volumes:
-#       - ./dist/Analytify-Angular:/frontend:/usr/share/nginx/html
-
-
 
 version: '3.8'
 
@@ -67,7 +16,7 @@ services:
       - clickhouse
     environment:
       - DJANGO_SETTINGS_MODULE=project.settings
-      # - DATABASE_URL=clickhouse://default@clickhouse:9000
+      - DATABASE_URL=clickhouse://default:@clickhouse:8123/Analytify_db
       - ADMIN_EMAIL=${ADMIN_EMAIL}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
     command: >
@@ -76,16 +25,6 @@ services:
       python manage.py runserver 0.0.0.0:8000"
     networks:
       - analytify-network
-
-  # frontend:
-  #   build:
-  #     context: ./Analytify-Angular
-  #   ports:
-  #     - "8080:80"
-  #   volumes:
-  #     - ./dist/Analytify-Angular:/usr/share/nginx/html
-  #   depends_on:
-  #     - backend
 
   frontend:
     build: ./Analytify-Angular
@@ -102,23 +41,23 @@ services:
     image: clickhouse/clickhouse-server:latest
     container_name: clickhouse
     ports:
-      - "9000:9000"  # ClickHouse client port
-      - "8123:8123"  # HTTP interface port
+      - "9000:9000"
+      - "8123:8123"
     volumes:
-      - clickhouse_data:/var/lib/clickhouseenvironment
+      - clickhouse_data:/var/lib/clickhouse
     environment:
-      - CLICKHOUSE_HOST="clickhouse"
-      - CLICKHOUSE_DB= "Analytify_db"
-      - CLICKHOUSE_USER=default
-      - CLICKHOUSE_PASSWORD=
-    
-    
+      # CLICKHOUSE_HOST : clickhouse
+      # CLICKHOUSE_DB : Analytify_db
+      # CLICKHOUSE_USER : default
+      # CLICKHOUSE_PASSWORD : "" 
+      CLICKHOUSE_USER: ${CLICKHOUSE_USER:-default}
+      CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD:-Analytify123}
+      CLICKHOUSE_DB: ${CLICKHOUSE_DB:-Analytify_db}
     networks:
-    - analytify-network
+      - analytify-network
 
 networks:
-  analytify-network: {}  # Define the network explicitly
-  # driver: bridge
+  analytify-network:
 
 volumes:
   clickhouse_data:

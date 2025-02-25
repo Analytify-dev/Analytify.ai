@@ -3,8 +3,8 @@
 
 <div class="main-container container-fluid">
 
-    <div class="row" class="card" style="padding-top: 15px;">
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;">
+    <div class="row" class="card card-padding-top">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0">
       <div class="d-flex justify-content-between px-5">
         <div class="connect-txt">
           <h4 class="card-title mt-2">Sheets</h4>
@@ -18,7 +18,7 @@
 
 
           <div class="input-group">
-            <select [(ngModel)]="selectedSheetList" style="margin-right: 15px;"  (change)="pageNo = 1;loadSelectedSheetList('fromSelect');getValuesForSheetRoute($event);"  class="form-select form-select select2 fs-14 form-control border-end-0" >
+            <select [(ngModel)]="selectedSheetList" (change)="pageNo = 1;loadSelectedSheetList('fromSelect');getValuesForSheetRoute($event);"  class="form-select form-select select2 fs-14 form-control border-end me-3" >
               <option value="0">All</option>
               @for(sheetlist of sheetsList;track sheetlist.id){
                 <option value="{{sheetlist.id}}" [attr.data-dbid]="sheetlist.hierarchy_id" [attr.data-field]="sheetlist.datasource_queryset_id">{{sheetlist.queryset_name}}</option>
@@ -26,8 +26,8 @@
   
           </select>
             <input type="text" class="form-control border-end-0 " placeholder="Search" [(ngModel)]="sheetName" (keyup.enter)="searchUserList()" aria-describedby="button-addon2" >
-            <button class="btn btn-primary border me-2" (click)="searchUserList()" type="button" id="button-addon2" style="border-radius: 0px 4px 4px 0px;"><i class="fe fe-search "></i></button>
-            <button type="button" class="btn btn-primary" (click)="sheetsRoute()" style="border-radius: 4px 4px 4px 4px;"><i class="fa fa-plus"></i> New Sheet</button>
+            <button class="btn btn-primary border me-2 search-icon-border-radius" (click)="searchUserList()" type="button" id="button-addon2" ><i class="fe fe-search "></i></button>
+            <button type="button" class="btn btn-primary new-sheet-btn-radius" (click)="sheetsRoute()"><i class="fa fa-plus"></i> New Sheet</button>
 
           </div>
         </div>
@@ -40,9 +40,9 @@
     </div>
         <div *ngIf="viewSheetList" class="card-body">
           @if(!gridView){
-            <div class="table-responsive border" style="height: 26rem;">
+            <div class="table-responsive border table-responsive-height">
                 <table class="table border text-nowrap text-md-nowrap mb-0">
-                    <thead class="table-primary bg-primary" style="position: sticky;top: -1px;">
+                    <thead class="table-primary bg-primary table-primary-position">
                         <tr>
                             <th>Title</th>
                             <!-- <th>Created On</th> -->
@@ -86,10 +86,12 @@
                                             <img *ngIf="sheets.chart_id === 28" src="./assets/images/charts/gauge-icon-new.png" alt="" class="w-7 h-7 border rounded-3  me-4">
                                             <img *ngIf="sheets.chart_id === 29" src="./assets/images/charts/world-map.png" alt="" class="w-7 h-7 border rounded-3  me-4">
                                             <img *ngIf="sheets.chart_id === 11" src="./assets/images/charts/calendar-chart.png" alt="" class="w-7 h-7 border rounded-3  me-4">
+                                            <img *ngIf="sheets.chart_id === 9" src="./assets/images/charts/pivot-chart.jpg" alt="" class="w-7 h-7 border rounded-3  me-4">
+
                               </div>
                               <div class="content">
                                 <span>Sheet Name: </span>
-                                <a  style="cursor: pointer;" ngbTooltip="{{sheets.sheet_name}}" (click)="viewSheet(sheets.hierarchy_id,sheets.queryset_id,sheets.sheet_id)" > {{sheets.sheet_name | slice:0:15}}</a>
+                                <a class="cursor-pointer" ngbTooltip="{{sheets.sheet_name}}" (click)="viewSheet(sheets.hierarchy_id,sheets.queryset_id,sheets.sheet_id)" > {{sheets.sheet_name | slice:0:15}}</a>
                                 <p class="mb-0">Created by: {{sheets.created_by}}</p>
                               </div>
                           </div>                                  
@@ -212,6 +214,8 @@
                       <img *ngIf="sheets.chart_id === 28" src="./assets/images/Tiled view sheet icons/guage-bg.png" alt="" class="rounded-circle">
                       <img *ngIf="sheets.chart_id === 29" src="./assets/images/Tiled view sheet icons/worldmap-bg.png" alt="" class="rounded-circle">
                       <img *ngIf="sheets.chart_id === 11" src="./assets/images/Tiled view sheet icons/calendar-bg.png" alt="" class="rounded-circle">
+                      <img *ngIf="sheets.chart_id === 9" src="./assets/images/Tiled view sheet icons/pivot-table.jpg" alt="" class="rounded-circle">
+
                     </span>
                 </div>
                   <div class="ms-2 mt-sm-0 mt-2">
@@ -294,8 +298,8 @@
     </div>
         }
             <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="pageChangegetUserSheetsList((page = $event))"></pagination-controls>
-            <div  style="float: right;font-size: 15px; margin-top: -30px;">
-              <select *ngIf="savedSheetsList.length > 9" [(ngModel)]="itemsPerPage" (ngModelChange)="getUserSheetsList()" class="form-control" style="cursor: pointer;">
+            <div class="pagination-count" >
+              <select *ngIf="savedSheetsList.length > 9" [(ngModel)]="itemsPerPage" (ngModelChange)="getUserSheetsList()" class="form-control cursor-pointer">
                     <option  value="10"> 10</option>
                     <option [disabled]="!(totalItems > 10)" value="20"> 20</option>
                     <option [disabled]="!(totalItems > 20)" value="30"> 30</option>

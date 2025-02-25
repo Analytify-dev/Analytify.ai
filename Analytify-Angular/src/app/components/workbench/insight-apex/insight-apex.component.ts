@@ -1733,7 +1733,7 @@ export class InsightApexComponent {
       legend: {
         show: false
       },
-      colors: this.selectedColorScheme
+      colors: this.isDistributed ? this.selectedColorScheme : [this.color]
     };
   }
   guageChart() {
@@ -2704,7 +2704,7 @@ export class InsightApexComponent {
   }
   colorDistribution(){
     if (this.funnelCharts) {
-      this.chartOptions.colors = this.isDistributed ? [] : [this.color];
+      this.chartOptions.colors = this.isDistributed ? this.selectedColorScheme : [this.color];
       this.chartOptions.plotOptions.bar.distributed = this.isDistributed;
       let object = { colors: this.chartOptions.colors, plotOptions: this.chartOptions.plotOptions };
       this.funnelCharts.updateOptions(object);
@@ -2787,13 +2787,13 @@ export class InsightApexComponent {
       }
       object = { series: this.chartOptions.series };
     }
-    // else if(this.funnelCharts){
-    //   if(this.chartOptions?.colors){
-    //     this.chartOptions.colors = this.isDistributed ? [] : [this.color];
-    //   }
-    //   object = { colors: this.chartOptions.colors }
-    // }
-    else if(['sidebyside','stocked','hstocked','hgrouped','multiline','heatmap','funnel','pie','donut'].includes(this.chartType))  {
+    else if(this.chartType === 'funnel'){
+      if(this.chartOptions?.colors){
+        this.chartOptions.colors = this.isDistributed ? this.selectedColorScheme : [this.color];
+      }
+      object = { colors: this.chartOptions.colors }
+    }
+    else if(['sidebyside','stocked','hstocked','hgrouped','multiline','heatmap','pie','donut'].includes(this.chartType))  {
       this.chartOptions.colors = this.selectedColorScheme
       object = { colors: this.chartOptions.colors };
     }

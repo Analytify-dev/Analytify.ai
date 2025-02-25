@@ -178,7 +178,7 @@ getSavedQueries(){
   this.workbechService.getSavedQueryList(Obj).subscribe({
     next:(data)=>{
       console.log(data);
-      this.savedQueryList = data.sheets
+      this.savedQueryList = data?.sheets
      },
     error:(error)=>{
       console.log(error);

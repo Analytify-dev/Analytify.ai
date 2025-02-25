@@ -462,10 +462,8 @@ active=1;
     if (customTheme.background_colour && customTheme.background_colour.length > 0) {
       // this.dynamicTranparentBgPrimary({ color: customTheme.background_colour });
       this.background(customTheme.background_colour,customTheme.background_colour,customTheme.background_colour,'rgba(255,255,255,0.1)','rgb(25, 38, 101)', 'dark','dark')
-    } else if(reset &&  customTheme.background_colour.length > 0){
-      customTheme.background_colour = "243,246,249"
-      this.background(customTheme.background_colour,customTheme.background_colour,customTheme.background_colour,'rgba(255,255,255,0.1)','rgb(25, 38, 101)', 'dark','dark')
-
+    } else if(reset && !(customTheme.background_colour.length > 0)){
+      customTheme.background_colour = "255,255,255"
     }
     this.primary(customTheme.primary_colour_theme);
     this.menuTheme(customTheme.menutype);

@@ -467,7 +467,7 @@ def halops_dashbaord(request,hierarchy_id,token):
         tok1 = views.test_token(token)
         if tok1['status']==200:
             try:
-                dis_name=Connections.display_name(hierarchy_id)
+                dis_name,para=Connections.display_name(hierarchy_id)
                 database_name=dis_name.display_name
             except:
                 return Response({'message':'Invalid Id'},status=status.HTTP_404_NOT_FOUND)

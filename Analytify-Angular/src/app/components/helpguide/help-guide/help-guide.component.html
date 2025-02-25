@@ -1,7 +1,7 @@
 <p>Help guide</p>
 
 <div class="main-container container-fluid mt-5">
-    <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3" style="padding: 0px;">
+    <div class="col-sm-12 col-lg-12 col-xl-12 card mb-3 p-0">
         <div class="card-body">
             <div class="form-group mb-0 mt-sm-0 mt-2">
                 <div class="input-group">
@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <div class="col-sm-12 col-lg-12 col-xl-12" style="padding: 0px;" *ngIf="isModules && !isSearch">
+    <div class="col-sm-12 col-lg-12 col-xl-12 p-0"  *ngIf="isModules && !isSearch">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -35,9 +35,9 @@
     </div>
     
     @if(!isModules && !isSearch && !isQuestionary){
-        <div *ngFor="let data of userGuideData" class="col-sm-12 col-lg-12 col-xl-12 card" style="padding: 0px;" >
+        <div *ngFor="let data of userGuideData" class="col-sm-12 col-lg-12 col-xl-12 card p-0" >
             <div class="card-body">
-                <div class="subCardBg" style="margin-bottom:15px;">
+                <div class="subCardBg mb-2" >
                     <div class="card mb-0 suggestions-txt">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 allignItemsLeft">
                             <div class="header-title-btn d-flex justify-content-between">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 allignItemsLeft">
                             <p class="mb-0">{{data.description}}
-                            <button class="btn btn-primary primaryBtnCu" type="button" (click)="goToQuestionary(data.alias)">
+                            <button class="btn btn-primary primaryBtnCu ms-1" type="button" (click)="goToQuestionary(data.alias)">
                             <i aria-hidden="true" class="fa fa-eye eyeCu"></i>&nbsp;View</button></p>
                         </div>
                     </div>
@@ -56,8 +56,8 @@
         </div>
     }
     @if(isSearch && !isQuestionary && !isModules){
-        <div class="main-container container-fluid mt-5">
-              <div class="col-sm-12 col-lg-12 col-xl-12 card" style="padding: 0px;">
+        <div class="main-container container-fluid mt-2">
+              <div class="col-sm-12 col-lg-12 col-xl-12 card p-0" >
                   <div class="card-body">
                       <div class="row">
                           <div class="col-lg-3 col-md-3 col-sm-12">
@@ -94,7 +94,7 @@
                                             aria-labelledby="headingOne"
                                             data-bs-parent="#accordionExample"
                                             >
-                                            <div class="accordion-body" ngbAccordionBody style="padding: 10px;">
+                                            <div class="accordion-body p-2">
                                               <ng-template>
                                                   <ul>
                                                       <a *ngFor="let question of userGuideData" (click)="goToQuestionary(question.alias)"><li class="index-tab-btn">{{question.title}}</li></a>
@@ -107,11 +107,11 @@
                                     </div>
                                 </div>
                           </div>
-                          <div class="col-lg-9 col-md-9 col-sm-12" style="border-left: 1px solid #ebebeb;">
+                          <div class="col-lg-9 col-md-9 col-sm-12">
                             @if(searchData.length > 0 && !searchErrorMessage){
-                                <div *ngFor="let data of searchData" class="col-sm-12 col-lg-12 col-xl-12 card" style="padding: 0px;" >
+                                <div *ngFor="let data of searchData" class="col-sm-12 col-lg-12 col-xl-12 card p-0">
                                     <div class="card-body">
-                                        <div class="subCardBg" style="margin-bottom:15px;">
+                                        <div class="subCardBg mb-2">
                                             <div class="card mb-0 suggestions-txt">
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 allignItemsLeft">
                                                     <div class="header-title-btn d-flex justify-content-between">
@@ -120,7 +120,7 @@
                                                 </div>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 allignItemsLeft">
                                                     <p class="mb-0">{{data.description}}
-                                                    <button class="btn btn-primary primaryBtnCu" type="button" (click)="goToQuestionary(data.alias)">
+                                                    <button class="btn btn-primary primaryBtnCu ms-1" type="button" (click)="goToQuestionary(data.alias)">
                                                     <i aria-hidden="true" class="fa fa-eye eyeCu"></i>&nbsp;View</button></p>
                                                 </div>
                                             </div>

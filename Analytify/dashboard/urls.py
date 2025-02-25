@@ -1,5 +1,5 @@
 from django.urls import path
-from dashboard import authentication,Calculation,Connections,columns_extract,views,files,roles,views
+from dashboard import authentication,Calculation,Connections,columns_extract,views,files,roles,views,cross_databases
 from oauth2_provider.views import AuthorizationView, TokenView
 from .views import (DBConnectionAPI,GetTableRelationShipAPI,ListofActiveServerConnections,
                     CustomSQLQuery,SignupWithoutOTP)
@@ -10,6 +10,7 @@ from .Filters import (rdbmsjoins,joining_query_data,Chart_filter,Multicolumndata
                       sheet_delete_stmt,Duplicate_sheet_filters,query_delete_stmt,get_datasource,dashboard_drill_down,data_table_chart,dashboard_table_chart,Clear_Filters)
 
 from .dashboard_filter_apis import *
+from .refreshdashboard import RefrshedDashboardData
 
 from .datasource import rdbmsjoins_new
 
@@ -18,7 +19,7 @@ urlpatterns = [
     path('oauth2/token/', TokenView.as_view(), name='token'),
 
     #### AUTHENTICATION
-    path('signup/',SignupWithoutOTP.as_view(),name='signup'),
+    path('signup/',views.SignupWithoutOTP.as_view(),name='signup'),
     path('activation/<token>',authentication.AccountActivateView.as_view(),name='account activation'),
     path('login/',authentication.LoginApiView.as_view(),name='login'),
 
@@ -57,6 +58,10 @@ urlpatterns = [
     path('sheetidupdate/<token>',Connections.sheets_update_dashboard.as_view(),name='dashboard properties'), #['PUT']
     path('querysetname/<token>',views.query_Name_save.as_view(),name='saving queryset name for query'), #### to save the name for custom/joining queries.
 
+    #### CROSS_DATABASES
+    path('databases_tables_list/<token>',cross_databases.user_db_tables.as_view(),name='set dashoard to public'), #['POST']
+    path('test_query',cross_databases.query_test,name='test_query'), #['GET']
+
     path('is_public/<int:ds_id>',Connections.is_public,name='set dashoard to public'), #['GET']
 
     path('columnextracting/<token>',columns_extract.new_column_extraction.as_view(),name='Fetching columns, datatypes from tables'),
@@ -76,6 +81,8 @@ urlpatterns = [
     path('upload_file/<token>',files.UploadFileAPI.as_view(),name='Upload Files'),   
     path('get_file/<int:file_id>/<token>',files.files_data_fetch,name='fetch Files'),
     path('delete_file/<int:file_id>/<token>',files.files_delete,name='delete Files'),
+    path('file_replace/<token>',files.file_replace.as_view(),name='File Replace'),
+    path('file_append/<token>',files.file_append.as_view(),name='File Append'),
 
     #### Roles & Previlages
     path('previlages_list/<token>',roles.previlages_get.as_view(),name='list of previlages'), #['GET]
@@ -139,7 +146,7 @@ urlpatterns = [
 
     path('datasource_preview/<token>',Datasource_column_preview.as_view(),name='ds column preview'),
     
-    path('server_tables/<token>/<database_id>',views.GetServerTablesList.as_view(),name='Test'),
+    path('server_tables/<token>/<int:database_id>',views.GetServerTablesList.as_view(),name='Test'),
 
     path('data_source_data/<token>',DataSource_Data_with_Filter.as_view(),name = 'datasource_querydata'),
 
@@ -241,7 +248,9 @@ urlpatterns = [
 
     path('clear_filters/<int:query_set_id>/<token>',Clear_Filters.as_view(),name='clear filters'),
 
-    path('duplicate_sheet_filters/<int:sheet_id>/<token>',Duplicate_sheet_filters.as_view(),name= 'duplicate filters')
+    path('duplicate_sheet_filters/<int:sheet_id>/<token>',Duplicate_sheet_filters.as_view(),name= 'duplicate filters'),
+
+    path('refresh_dashboard/<token>',RefrshedDashboardData.as_view(),name='Refrshed Dashboard Data')
 
 
 ]

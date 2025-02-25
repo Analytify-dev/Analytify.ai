@@ -159,16 +159,6 @@ def data_reload(data):
         s_data=models.ServerDetails.objects.get(id=s_id)
         s_type=models.ServerType.objects.get(id=s_data.server_type)
         server_path=''
-        # server=columns_extract.server_connection(s_data.username, s_data.password, s_data.database, s_data.hostname,s_data.port,s_data.service_name,s_type.server_type.upper(),server_path)
-        # if server['status']==200:
-        #     engine=server['engine']
-        #     cursor=server['cursor']
-        # else:
-        #     f_res={
-        #         "status":server['status'],
-        #         "message":server['message']
-        #     }
-        #     return f_res
         try:
             clickhouse_class = clickhouse.Clickhouse(s_data.display_name)
             engine=clickhouse_class.engine
@@ -223,64 +213,6 @@ def data_reload(data):
     cursor.close()
     # engine.dispose()
     return f_res
-
-        
-    
-    
-
-##### Create a calculated field
-class calculated_field(CreateAPIView):
-    serializer_class=serializers.calculated_field
-
-    def post(self,request,token):
-        tok1 = views.test_token(token)
-        if tok1['status']==200:
-            serializer=self.get_serializer(data=request.data)
-            if serializer.is_valid(raise_exception=True):  
-                db_id=serializer.validated_data['db_id']
-                field_name=serializer.validated_data['field_name']
-                function=serializer.validated_data['function']
-                try:
-                    ser_db_data=models.ServerDetails.objects.get(id=db_id,is_connected=True)
-                except:
-                    return Response({'message':'server_details_id/server_type not exists'},status=status.HTTP_404_NOT_FOUND)
-                if models.functions_tb.objects.filter(db_id=db_id,field_name=field_name).exists():
-                    return Response({'message':'Field_name already exists'},status=status.HTTP_406_NOT_ACCEPTABLE)
-                else:
-                    pass
-                models.functions_tb.objects.create(db_id=db_id,field_name=field_name,function_ip=function)
-                return Response({'message':'Created successfully'},status=status.HTTP_200_OK)
-            else:
-                return Response({'message':'serializer value error'},status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(tok1,status=tok1['status'])
-        
-
-####### Fetching functions from a table 
-@api_view(['GET'])
-@transaction.atomic
-def function_get(request,db_id,token):
-    if request.method=='GET':
-        tok1 = views.test_token(token)
-        if tok1['status']==200:
-            try:
-                ser_db_data=models.ServerDetails.objects.get(id=db_id,is_connected=True)
-            except:
-                return Response({'message':'server_details_id/server_type not exists'},status=status.HTTP_404_NOT_FOUND)
-            fun_tb=models.functions_tb.objects.filter(db_id=db_id).values()
-            funlist=[]
-            funip=[]
-            for f1 in fun_tb:
-                funlist.append(f1['field_name'])
-                funip.append(f1['function_ip'])
-            data=[{'field_name':field,'function':funct} for field,funct in zip(funlist,funip)]
-            return Response(data,status=status.HTTP_200_OK)
-        else:
-            return Response(tok1,status=tok1['status'])
-    else:
-        return Response({'message':'Method not allowed'},status=status.HTTP_405_METHOD_NOT_ALLOWED)
-
-
 
 ##### Show_me from table,column
 class show_me(CreateAPIView):
@@ -370,7 +302,7 @@ def file_save_1(data,server_id,queryset_id,ip,dl_key):
             s3.upload_fileobj(file_buffer, Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=file_key)
             file_url = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{file_key}"
         else:
-            # s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(dl_key))
+            s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(dl_key))
             s3.upload_fileobj(file_buffer, Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=file_key)
             file_url = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{file_key}"
         data_fn={
@@ -451,7 +383,7 @@ def image_save_1(image,ip,dl_key):
                 s3.upload_fileobj(image, Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=file_key)
                 file_url = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{file_key}"
             else:
-                # s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(dl_key))
+                s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(dl_key))
                 s3.upload_fileobj(image, Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=file_key)
                 file_url = f"https://{settings.AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/{file_key}"
             data_fn={
@@ -513,8 +445,8 @@ def sheet_filter_queryset(serializer,user_id,parameter):
     sheetfilter_querysets_id = serializer.validated_data['sheetfilter_querysets_id']
     filter_id = serializer.validated_data["filter_id"]
     server_id1 = serializer.validated_data['server_id']
-    # file_id = serializer.validated_data['file_id']
     custom_query = serializer.validated_data['custom_query']
+    pivot_measure=serializer.validated_data['pivot_measure']
 
     pr_id=server_id1
     if parameter=='SAVE' and sheetfilter_querysets_id is None or sheetfilter_querysets_id == '':
@@ -522,13 +454,12 @@ def sheet_filter_queryset(serializer,user_id,parameter):
             datasource_querysetid = datasource_querysetid,
             queryset_id  = query_set_id,
             user_id = user_id,
-            # server_id = server_id,
-            # file_id = file_id,
             hierarchy_id=pr_id,
             filter_id_list = filter_id,
             custom_query = custom_query,
             columns  = col,
             rows = row,
+            pivot_measure = pivot_measure,
             updated_at = updated_at,
             created_at = created_at
         )
@@ -538,10 +469,10 @@ def sheet_filter_queryset(serializer,user_id,parameter):
             queryset_id  = query_set_id,
             datasource_querysetid = datasource_querysetid,
             user_id = user_id,
-            # server_id = server_id,
             filter_id_list = filter_id,
             custom_query = custom_query,
             columns  = col,
+            pivot_measure = pivot_measure,
             rows = row,
             updated_at = updated_at
         )
@@ -557,11 +488,11 @@ def sheet_s_u(serializer,u_id,sh_id,parameter):
     sheet_name=serializer.validated_data['sheet_name']
     filterId=serializer.validated_data['filter_id']
     sheet_tag_name=serializer.validated_data['sheet_tag_name']
-    # file_id=serializer.validated_data['file_id']
     sheetfilter_querysets_id=serializer.validated_data['sheetfilter_querysets_id']
     
-    # status1,parameter12,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(server_id1)
-    status1,parameter12,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(server_id1)
+    status1,tb_id,parameter1=columns_extract.parent_id(server_id1)
+    pr_id=server_id1
+    server_id=tb_id
     if status1 != 200:
         return Response({'message':'Invalid Id'},status=status1)
     if sheet_name=='' or sheet_name==None or sheet_name=="" or sheet_name==' ':
@@ -666,10 +597,8 @@ class sheet_retrieve(CreateAPIView):
             if serializer.is_valid(raise_exception=True):  
                 queryset_id=serializer.validated_data['queryset_id']
                 server_id1=serializer.validated_data['server_id']
-                # sheet_name=serializer.validated_data['sheet_name'] 
-                # file_id=serializer.validated_data['file_id']  
-                # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(server_id1)
-                status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(server_id1)
+                status1,tb_id,parameter=columns_extract.parent_id(server_id1)
+                pr_id=server_id1
                 if status1 != 200:
                     return Response({'message':'Invalid Id'},status=status1)
                 try:
@@ -684,11 +613,20 @@ class sheet_retrieve(CreateAPIView):
                     ch_filter=models.ChartFilters.objects.filter(filter_id=ch).values()
                     ch_list.append(ch_filter)
                 flat_filters_data = [item for sublist in ch_list for item in sublist]
+                for item in flat_filters_data:
+                    if isinstance(item.get("top_bottom"), str):  # Ensure it's a string
+                        try:
+                            item["top_bottom"] = ast.literal_eval(item["top_bottom"])
+                        except (ValueError, SyntaxError):
+                            pass
                 if surl==None:
                     sheet_data=None
                 else:
-                    data=requests.get(sheetdata.datasrc)
-                    sheet_data=data.json() 
+                    try:
+                        data=requests.get(sheetdata.datasrc)
+                        sheet_data=data.json() 
+                    except:
+                        sheet_data=None
                 try:
                     shft_query=models.SheetFilter_querysets.objects.get(Sheetqueryset_id=sheetdata.sheet_filt_id)
                 except:
@@ -714,6 +652,7 @@ class sheet_retrieve(CreateAPIView):
                     "custom_query":shft_query.custom_query,
                     "col_data":litera_eval(shft_query.columns),
                     "row_data":litera_eval(shft_query.rows),
+                    "pivot_measure":litera_eval(shft_query.pivot_measure),
                     "created_by":sheetdata.user_id,
                 }
                 return Response(d1,status=status.HTTP_200_OK)
@@ -845,17 +784,6 @@ def sheet_delete(request,server_id,queryset_id,sheet_id,token):
             delete_file(shdt.datapath)
             models.SheetFilter_querysets.objects.filter(Sheetqueryset_id=shdt.sheet_filt_id).delete()
             models.sheet_data.objects.filter(id=sheet_id).delete()
-
-            # s3 = boto3.client('s3', aws_access_key_id=settings.AWS_S3_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_S3_SECRET_ACCESS_KEY)
-            # s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(shdt.datapath))
-            # if shdt.sheet_filt_id=='' or shdt.sheet_filt_id==None:
-            #     models.sheet_data.objects.filter(user_id=tok1['user_id'],queryset_id=queryset_id,server_id=server_id,id=sheet_id).delete()
-            #     models.sheet_data.objects.filter(user_id=tok1['user_id'],queryset_id=queryset_id,file_id=server_id,id=sheet_id).delete()
-            # else:
-            #     models.SheetFilter_querysets.objects.filter(user_id=tok1['user_id'],Sheetqueryset_id=shdt.sheet_filt_id).delete()
-            #     models.sheet_data.objects.filter(user_id=tok1['user_id'],queryset_id=queryset_id,server_id=server_id,id=sheet_id).delete()
-            #     models.sheet_data.objects.filter(user_id=tok1['user_id'],queryset_id=queryset_id,file_id=server_id,id=sheet_id).delete()
-            
             return Response({'message':'Removed Successfully'},status=status.HTTP_200_OK)
         else:
             return Response(tok1,status=tok1['status'])
@@ -1064,19 +992,32 @@ class dashboard_retrieve(CreateAPIView):
                     for shid in ast.literal_eval(dashboarddata.sheet_ids):
                         try:
                             shdt=models.sheet_data.objects.get(id=shid)
+                            sheet_name.append(shdt.sheet_name)
                         except:
-                            return Response({'message':'Sheet {} not exists'.format(shid)},status=status.HTTP_404_NOT_FOUND)
-                        # sheetsdata=data_reload(shdt)
-                        # if sheetsdata['status']==200:
-                        #     sheets_data.append({'sheet_id':shdt.id,'sheet_name':shdt.sheet_name,'sheets_data':sheetsdata['data']})
-                        # else:
-                        #     return Response({'message':sheetsdata['message']},status=sheetsdata['status'])
-                        sheet_name.append(shdt.sheet_name)
+                            sh_ids = litera_eval(dashboarddata.sheet_ids)
+                            selected_sh_ids = litera_eval(dashboarddata.selected_sheet_ids)
+                            updated = False
+                            if shid in sh_ids:
+                                sh_ids.remove(shid)
+                                updated = True
+                            if shid in selected_sh_ids:
+                                selected_sh_ids.remove(shid)
+                                updated = True
+                            if updated:
+                                models.dashboard_data.objects.filter(id=dashboard_id).update(
+                                    sheet_ids=sh_ids,
+                                    selected_sheet_ids=selected_sh_ids
+                                )
+                            else:
+                                return Response({'message': 'Sheet {} does not exist'.format(shid)}, status=status.HTTP_404_NOT_FOUND)
                 if durl==None:
                     dashboard_data=None
                 else:
-                    data=requests.get(dashboarddata.datasrc)
-                    dashboard_data=data.json() 
+                    try:
+                        data=requests.get(dashboarddata.datasrc)
+                        dashboard_data=data.json() 
+                    except:
+                        dashboard_data=None
                 role_ids = litera_eval(dashboarddata.role_ids)
                 user_ids = litera_eval(dashboarddata.user_ids)
                 if role_ids=="" or role_ids=='':
@@ -1134,9 +1075,7 @@ def dashboard_delete(request,dashboard_id,token):
             
             delete_file(dashboarddata.datapath)
             delete_file(dashboarddata.imagepath)
-            # ds_data=models.dashboard_data.objects.get(id=dashboard_id)
-            # s3 = boto3.client('s3', aws_access_key_id=settings.AWS_S3_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_S3_SECRET_ACCESS_KEY)
-            # s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(ds_data.datapath))
+            s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(dashboarddata.datapath))
             models.dashboard_data.objects.filter(id=dashboard_id).delete()
             return Response({'message':'Removed Successfully'},status=status.HTTP_200_OK)
         else:
@@ -1174,10 +1113,13 @@ class dashboard_name_update(CreateAPIView):
         
 
 def display_name(hierarchy_id):
-    # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(hierarchy_id)
-    status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(hierarchy_id)
-    if status1 != 200:
-        return Response({'message':'Invalid Id'},status=status1)
+    try:
+        status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,shopify_id,google_sheet_id,pr_id=columns_extract.ids_final_status(hierarchy_id)
+        if status1 != 200:
+            return Response({'message':'Invalid Id'},status=status1)
+    except Exception as e:
+        models.QuerySets.objects.filter(hierarchy_id=hierarchy_id).delete()
+        models.sheet_data.objects.filter(hierarchy_id=hierarchy_id).delete()
     
     if (file_id is not None or file_id!='') and parameter=='files':
         try:
@@ -1203,28 +1145,47 @@ def display_name(hierarchy_id):
         try:
             ser_db_data=qb_models.HaloPs.objects.get(id=halops_id)
         except:
-            return Response({'message':'salesforce id not exists'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'message':'halops id not exists'},status=status.HTTP_404_NOT_FOUND)
     elif (connectwise_id is not None or connectwise_id!='') and parameter=='connectwise':
         try:
             ser_db_data=qb_models.connectwise.objects.get(id=connectwise_id)
         except:
-            return Response({'message':'salesforce id not exists'},status=status.HTTP_404_NOT_FOUND)
+            return Response({'message':'connectwise id not exists'},status=status.HTTP_404_NOT_FOUND)
+    elif (shopify_id is not None or shopify_id!='') and parameter=='shopify':
+        try:
+            ser_db_data=qb_models.Shopify.objects.get(id=shopify_id)
+        except:
+            return Response({'message':'shopify id not exists'},status=status.HTTP_404_NOT_FOUND)
+    elif (google_sheet_id is not None or google_sheet_id!='') and parameter=='google_sheets':
+        try:
+            ser_db_data=qb_models.TokenStoring.objects.get(id=google_sheet_id)
+        except:
+            return Response({'message':'googhe sheet id not exists'},status=status.HTTP_404_NOT_FOUND)
+    elif parameter=='cross_database':
+        ser_db_data=None
     else:
         pass
-    return ser_db_data
+    if parameter=='server':
+        parameter=models.ServerType.objects.get(id=ser_db_data.server_type).server_type.lower()
+    else:
+        parameter=parameter
+
+    return ser_db_data,parameter
 
 
 def charts_dt(charts,tok1,database_name):
     cl_list=[]
     for ch in charts:
         try:
-            dis_name=display_name(ch['hierarchy_id'])
+            dis_name,para=display_name(ch['hierarchy_id'])
             database_name=dis_name.display_name
         except:
             return Response({'message':'Invalid Id'},status=status.HTTP_404_NOT_FOUND)
         chid=models.charts.objects.get(id=ch['chart_id'])
         if chid.chart_type=="HIGHLIGHT_TABLES" or chid.chart_type=="Table":
             sheet_type="Table"
+        elif chid.chart_type=='PIVOT':
+            sheet_type="PIVOT"
         else:
             sheet_type="Chart"
         created_by = "Example" if ch['is_sample'] else tok1['username']  # Update created_by based on is_sample
@@ -1274,13 +1235,12 @@ def remove_duplicate_dashboards(data):
     return data
 
 
-def dashboard_dt(charts,charts_user,tok1):
+def dashboard_dt(charts,tok1):
     cl_list=[]
     sample_dashboards = [] 
     for ch in charts:
         gr_tb=models.grid_type.objects.get(id=ch['grid_id'])
         created_by = "Example" if ch['is_sample'] else tok1['username']  # Updated created_by based on is_sample
-        # durl=requests.get(ch['datasrc'])
         data = {
             "created_by":created_by,
             "sheet_ids":litera_eval(ch['sheet_ids']),
@@ -1290,19 +1250,15 @@ def dashboard_dt(charts,charts_user,tok1):
             "dashboard_name":ch['dashboard_name'],
             "dashboard_tag_name":ch['dashboard_tag_name'],
             "selected_sheet_ids":litera_eval(ch['selected_sheet_ids']),
-            # "server_id":litera_eval(ch['server_id']),
             "grid_type":gr_tb.grid_type,
             "height":ch['height'],
             "width":ch['width'],
-            # "file_id":litera_eval(ch['file_id']),
             "hierarchy_id":litera_eval(ch['hierarchy_id']),
             "queryset_id":litera_eval(ch['queryset_id']),
             "dashboard_image":ch['imagesrc'],
             "database_name":None,
             "created":ch['created_at'].date(),
             "Modified":ch['updated_at'].date(),
-            # "dashboard_data":durl.json(),
-            # "sheet_reload_data":sheets_data
         }
         if ch['is_sample']:  # Check if it's a sample dashboard
             sample_dashboards.append(data)
@@ -1316,23 +1272,14 @@ def dashboard_dt(charts,charts_user,tok1):
 def query_sets(qrsets,tok1):
     qrsets_l=[]
     for qr in qrsets:
-        # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(qr['hierarchy_id'])
-        status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(qr['hierarchy_id'])
-        if status1 != 200:
-            return Response({'message':'Invalid Id'},status=status1)
-        if (file_id is not None or file_id!="" or file_id!='') and parameter=='files':
-            ser_dt=models.FileDetails.objects.get(id=file_id)
-        elif (server_id is not None or server_id!='' or server_id!="") and parameter=='server':
-            ser_dt=models.ServerDetails.objects.get(id=server_id)
-        elif (quickbooks_id is not None or quickbooks_id!='' or quickbooks_id!="") and parameter=='quickbooks':
-            ser_dt=qb_models.TokenStoring.objects.get(qbuserid=quickbooks_id)
-        elif (salesforce_id is not None or salesforce_id!='' or salesforce_id!="") and parameter=='salesforce':
-            ser_dt=qb_models.TokenStoring.objects.get(salesuserid=salesforce_id)
-        elif (halops_id is not None or halops_id!='' or halops_id!="") and parameter=='halops':
-            ser_dt=qb_models.HaloPs.objects.get(id=halops_id)
-        elif (connectwise_id is not None or connectwise_id!='' or connectwise_id!="") and parameter=='connectwise':
-            ser_dt=qb_models.connectwise.objects.get(id=connectwise_id)
-
+        try:
+            ser_dt,para=display_name(qr['hierarchy_id'])
+        except:
+            dat1 = {
+                'message':'Invalid Hierarchy Id',
+                'status':401
+            }
+            return dat1
         qrsets_filter=[]
         filter_ids=models.DataSource_querysets.objects.filter(queryset_id=qr['queryset_id']).values().order_by('-updated_at')
         qrsets_filter.append(dt for dt in filter_ids)
@@ -1342,9 +1289,7 @@ def query_sets(qrsets,tok1):
             "queryset_id":qr['queryset_id'],
             "created_by":created_by,
             "queryset_name":qr['query_name'],
-            "hierarchy_id":pr_id,
-            # "file_id":f_id,
-            # "server_id":s_id,
+            "hierarchy_id":qr['hierarchy_id'],
             "is_custom_sql":qr['is_custom_sql'],
             "custom_query":qr['custom_query'],
             "created":qr['created_at'].date(),
@@ -1397,7 +1342,7 @@ class charts_fetch(CreateAPIView):
 
                 pr_id=server_id1
                 try:
-                    ser_db_data=display_name(server_id1)
+                    ser_db_data,para=display_name(server_id1)
                     dis_name=ser_db_data.display_name
                 except:
                     return Response({'message':'Invalid Id'},status=status.HTTP_404_NOT_FOUND)
@@ -1415,7 +1360,11 @@ class charts_fetch(CreateAPIView):
                 sheets_list=[]
                 for sh in charts:
                     shdt=models.sheet_data.objects.get(id=sh['id'])
-                    durl=requests.get(shdt.datasrc)
+                    try:
+                        durl=requests.get(shdt.datasrc)
+                        durl_data=durl.json()
+                    except:
+                        durl_data=None
                     # cl_ro_data=data_reload(shdt)
                     # if cl_ro_data['status']==200:
                     #     reload_data=cl_ro_data['data']
@@ -1427,7 +1376,7 @@ class charts_fetch(CreateAPIView):
                         charts_data['status']==200
                     except:
                         return charts_data
-                    charts_data['sheets'][0]['sheet_data']=durl.json()
+                    charts_data['sheets'][0]['sheet_data']=durl_data
                     # charts_data['sheets'][0]['sheet_reload_data']=reload_data
                     sheets_list.append(charts_data['sheets'])
                 return Response([item for sublist in sheets_list for item in sublist],status=status.HTTP_200_OK)
@@ -1473,6 +1422,8 @@ class charts_fetch(CreateAPIView):
                     return charts_data
                 try:
                     resul_data=pagination(request,charts_data['sheets'],page_no,page_count)
+                    if not resul_data['status']==200:
+                        return resul_data
                     resul_data["database_name"]=charts_data['database_name']
                     return Response(resul_data,status=status.HTTP_200_OK)
                 except:
@@ -1496,22 +1447,33 @@ class dashboard_fetch(CreateAPIView):
                 queryset_id = serializer.validated_data['queryset_id']
                 server_id1 = serializer.validated_data['server_id']
                 search = serializer.validated_data['search']
-                # file_id = serializer.validated_data['file_id']
-                # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(server_id1)
-                status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(server_id1)
-                if status1 != 200:
-                    return Response({'message':'Invalid Id'},status=status1)
+                try:
+                    ser_dt,para=display_name(server_id1)
+                    display_name=ser_dt.display_name
+                except:
+                    dat1 = {
+                        'message':'Invalid Hierarchy Id',
+                        'status':401
+                    }
+                    return Response(dat1,status=status.HTTP_401_UNAUTHORIZED)
                 if queryset_id=='' and server_id1==None:
-                    return Response({'message':'queryset_id, server_id or  queryset_id, file_id fields are required'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                    return Response({'message':'queryset_id and hierarchy_id fields are required'},status=status.HTTP_406_NOT_ACCEPTABLE)
                 else:
                     pass
                 if search=='':
-                    charts = models.dashboard_data.objects.filter(user_id=tok1['user_id'],hierarchy_id__contains=server_id,queryset_id__contains=queryset_id).values().order_by('updated_at')
-                    charts_users = models.dashboard_data.objects.filter(user_ids__contains=[tok1['user_id']],hierarchy_id__contains=server_id,queryset_id__contains=queryset_id).values().order_by('-updated_at')
+                    charts = models.dashboard_data.objects.filter(
+                                        Q(user_id=tok1['user_id']) | Q(user_ids__contains=[tok1['user_id']]),
+                                        hierarchy_id__contains=server_id1,
+                                        queryset_id__contains=queryset_id
+                                    ).values().order_by('-updated_at')
                 else:
-                    charts = models.dashboard_data.objects.filter(user_id=tok1['user_id'],hierarchy_id__contains=server_id,queryset_id__contains=queryset_id,dashboard_name__icontains=search).values().order_by('updated_at')
-                    charts_users = models.dashboard_data.objects.filter(user_ids__contains=[tok1['user_id']],hierarchy_id__contains=server_id,queryset_id__contains=queryset_id,dashboard_name__icontains=search).values().order_by('-updated_at')
-                dashboards_data,_=dashboard_dt(charts,charts_users,tok1)
+                    charts = models.dashboard_data.objects.filter(
+                                        Q(user_id=tok1['user_id']) | Q(user_ids__contains=[tok1['user_id']]),
+                                        hierarchy_id__contains=server_id1,
+                                        queryset_id__contains=queryset_id,
+                                        dashboard_name__icontains=search
+                                    ).values().order_by('-updated_at')
+                dashboards_data,_=dashboard_dt(charts,tok1)
                 return Response(dashboards_data,status=status.HTTP_200_OK)
             else:
                 return Response({'message':'Serializer value error'},status=status.HTTP_400_BAD_REQUEST)
@@ -1522,9 +1484,10 @@ class dashboard_fetch(CreateAPIView):
     def get(self,request,token):
         tok1 = views.test_token(token)
         if tok1['status']==200:
-            charts = models.dashboard_data.objects.filter(user_id=tok1['user_id']).values().order_by('-updated_at')
-            charts_users = models.dashboard_data.objects.filter(user_ids__contains=[tok1['user_id']]).values().order_by('-updated_at')
-            dashboards_data,_=dashboard_dt(charts,charts_users,tok1)
+            charts = models.dashboard_data.objects.filter(
+                                        Q(user_id=tok1['user_id']) | Q(user_ids__contains=[tok1['user_id']]),
+                                    ).values().order_by('-updated_at')
+            dashboards_data,_=dashboard_dt(charts,tok1)
             return Response(dashboards_data,status=status.HTTP_200_OK)
         else:
             return Response(tok1,status=tok1['status'])
@@ -1540,14 +1503,19 @@ class dashboard_fetch(CreateAPIView):
                 page_no = serializer.validated_data['page_no']
                 page_count = serializer.validated_data['page_count']
                 if search=='':
-                    charts = models.dashboard_data.objects.filter(user_id=tok1['user_id']).values().order_by('-updated_at')
-                    charts_users = models.dashboard_data.objects.filter(user_ids__contains=[tok1['user_id']]).values().order_by('-updated_at')
+                    charts = models.dashboard_data.objects.filter(
+                                        Q(user_id=tok1['user_id']) | Q(user_ids__contains=[tok1['user_id']]),
+                                    ).values().order_by('-updated_at')
                 else:
-                    charts = models.dashboard_data.objects.filter(user_id=tok1['user_id'],dashboard_name__icontains=search).values().order_by('-updated_at')
-                    charts_users = models.dashboard_data.objects.filter(user_ids__contains=[tok1['user_id']],dashboard_name__icontains=search).values().order_by('-updated_at')
-                charts_data, sample_dashboards = dashboard_dt(charts,charts_users,tok1)
+                    charts = models.dashboard_data.objects.filter(
+                                            Q(user_id=tok1['user_id']) | Q(user_ids__contains=[tok1['user_id']]),
+                                            dashboard_name__icontains=search
+                                        ).values().order_by('-updated_at')
+                charts_data, sample_dashboards = dashboard_dt(charts,tok1)
                 try:
                     resul_data=pagination(request,charts_data,page_no,page_count)
+                    if not resul_data['status']==200:
+                        return resul_data
                     resul_data["sample_dashboards"] = sample_dashboards  # Added sample dashboards to response
                     return Response(resul_data,status=status.HTTP_200_OK)
                 except:
@@ -1610,11 +1578,10 @@ class user_list_names(CreateAPIView):
                 queryset_id = serializer.validated_data['queryset_id']
                 server_id1 = serializer.validated_data['server_id']
                 sheet_list=[]
-                # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(server_id1)
-                status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(server_id1)
+                status1,tb_id,parameter=columns_extract.parent_id(server_id1)
                 if status1 != 200:
                     return Response({'message':'Invalid Id'},status=status1)
-                sheet_dt=models.sheet_data.objects.filter(hierarchy_id=pr_id,queryset_id=queryset_id).values('id','sheet_name').order_by('id')  ##,user_id=tok1['user_id']
+                sheet_dt=models.sheet_data.objects.filter(hierarchy_id=server_id1,queryset_id=queryset_id).values('id','sheet_name').order_by('id')  ##,user_id=tok1['user_id']
                 # sheet_dt2=models.sheet_data.objects.filter(server_id=server_id,queryset_id=queryset_id).values('id','sheet_name') ##,user_ids__contains=tok1['user_id']
                 for sh in sheet_dt:
                     sheet_list.append({'id':sh['id'],'sheet_name':sh['sheet_name']})
@@ -1649,42 +1616,21 @@ def charts_select(charts,u_id):
 def query_sheet_search(qrse,tok1,sheet_ids):
     final_list=[]
     for qr in qrse:
-        # status1,parameter,database_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(qr['hierarchy_id'])
-        status1,parameter,database_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(qr['hierarchy_id'])
-        if status1 != 200:
-            return Response({'message':'Invalid Id'},status=status1)
-        if (file_id is not None or file_id!="" or file_id!='') and parameter=='files':
-            serdt=models.FileDetails.objects.get(id=file_id)
-            created=serdt.uploaded_at.date()
-            updated=serdt.updated_at.date()
-            display_name=serdt.display_name
-        elif (database_id is not None or database_id!='' or database_id!="") and parameter=='server':
-            serdt=models.ServerDetails.objects.get(id=database_id)
-            created=serdt.created_at.date()
-            updated=serdt.updated_at.date()
-            display_name=serdt.display_name
-        elif (quickbooks_id is not None or quickbooks_id!='' or quickbooks_id!="") and parameter=='quickbooks':
-            serdt=qb_models.TokenStoring.objects.get(qbuserid=quickbooks_id)
-            created=serdt.created_at.date()
-            updated=serdt.updated_at.date()
-            display_name=serdt.display_name
-        elif (salesforce_id is not None or salesforce_id!='' or salesforce_id!="") and parameter=='salesforce':
-            serdt=qb_models.TokenStoring.objects.get(salesuserid=salesforce_id)
-            created=serdt.created_at.date()
-            updated=serdt.updated_at.date()
-            display_name=serdt.display_name
-        elif (halops_id is not None or halops_id!='' or halops_id!="") and parameter=='halops':
-            serdt=qb_models.HaloPs.objects.get(id=halops_id)
-            created=serdt.created_at.date()
-            updated=serdt.updated_at.date()
-            display_name=serdt.display_name
-        elif (connectwise_id is not None or connectwise_id!='' or connectwise_id!="") and parameter=='connectwise':
-            serdt=qb_models.connectwise.objects.get(id=connectwise_id)
-            created=serdt.created_at.date()
-            updated=serdt.updated_at.date()
-            display_name=serdt.display_name
+        try:
+            ser_dt,para=display_name(qr['hierarchy_id'])
+            db_name=ser_dt.display_name
+        except:
+            dat1 = {
+                'message':'Invalid Hierarchy Id',
+                'status':401
+            }
+            return dat1
+        if para.lower()=='files':
+            created=ser_dt.uploaded_at.date()
+            updated=ser_dt.updated_at.date()
         else:
-            print("NO")
+            created=ser_dt.created_at.date()
+            updated=ser_dt.updated_at.date()
 
         sheet_data={}
         created_by = "Example" if qr['is_sample'] else tok1['username']  # Update created_by based on is_sample
@@ -1692,10 +1638,8 @@ def query_sheet_search(qrse,tok1,sheet_ids):
         shtdt=models.sheet_data.objects.filter(queryset_id=qr['queryset_id']).values().order_by('-updated_at')
         sheet_data['queryset_id']=qr['queryset_id']
         sheet_data['queryset_name']=qr['query_name']
-        sheet_data['hierarchy_id']=pr_id
-        # sheet_data['database_id']=serber_id
-        # sheet_data['file_id']=file_id
-        sheet_data['database_name']=display_name
+        sheet_data['hierarchy_id']=qr['hierarchy_id'],
+        sheet_data['database_name']=ser_dt.display_name,
         sheet_data['created_by']=created_by
         sheet_data['created_at']=created
         sheet_data['modified_at']=updated
@@ -1764,6 +1708,8 @@ class user_sheets_list_data(CreateAPIView):
                             return Response({'message':sheets_data['message']},status=sheets_data['status'])
                     try:
                         resul_data=pagination(request,[item for sublist in final_list for item in sublist],page_no,page_count)
+                        if not resul_data['status']==200:
+                            return resul_data
                         return Response(resul_data,status=status.HTTP_200_OK)
                     except:
                         return Response({"message":'Empty page/data not exists/selected count of records are not exists'},status=status.HTTP_400_BAD_REQUEST)
@@ -1779,6 +1725,8 @@ class user_sheets_list_data(CreateAPIView):
                     try:
                         sheets_data['data'] = [sheet for sheet in sheets_data['data'] if sheet['sheet_data']]
                         resul_data=pagination(request,sheets_data['data'],page_no,page_count)
+                        if not resul_data['status']==200:
+                            return resul_data
                         return Response(resul_data,status=status.HTTP_200_OK)
                     except:
                         return Response({"message":'Empty page/data not exists/selected count of records are not exists'},status=status.HTTP_400_BAD_REQUEST)
@@ -1810,14 +1758,12 @@ class sheet_lists_data(CreateAPIView):
                         return Response({'message':'sheet {} not exists'.format(sh)},status=status.HTTP_404_NOT_FOUND)
                     charts=models.sheet_data.objects.filter(id=sh).values().order_by('-updated_at')
                     shdt=models.sheet_data.objects.get(id=sh)
-                    durl=requests.get(shdt.datasrc)
-                    # cl_ro_data=data_reload(shdt)
-                    # if cl_ro_data['status']==200:
-                    #     reload_data=cl_ro_data['data']
-                    # else:
-                    #     return Response({'message':cl_ro_data['message']},status=cl_ro_data['status'])
-                    # status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,pr_id=columns_extract.ids_final_status(shdt.hierarchy_id)
-                    status1,parameter,server_id,file_id,quickbooks_id,salesforce_id,halops_id,connectwise_id,pr_id=columns_extract.ids_final_status(shdt.hierarchy_id)
+                    try:
+                        durl=requests.get(shdt.datasrc)
+                        durl_data=durl.json()
+                    except:
+                        durl_data=None
+                    status1,tb_id,parameter=columns_extract.parent_id(shdt.hierarchy_id)
                     if status1 != 200:
                         return Response({'message':'Invalid Id'},status=status1)
                     display_name=''
@@ -1826,7 +1772,7 @@ class sheet_lists_data(CreateAPIView):
                         charts_data['status']==200
                     except:
                         return charts_data
-                    charts_data['sheets'][0]['sheet_data']=durl.json()
+                    charts_data['sheets'][0]['sheet_data']=durl_data
                     charts_data['sheets'][0]['created_by']=shdt.user_id
                     # charts_data['sheets'][0]['sheet_reload_data']=reload_data
                     sheets_list.append(charts_data)
@@ -1948,6 +1894,8 @@ class query_based_sheets(CreateAPIView):
                     return charts_data
                 try:
                     resul_data=pagination(request,charts_data['sheets'],page_no,page_count)
+                    if not resul_data['status']==200:
+                        return resul_data
                     return Response(resul_data,status=status.HTTP_200_OK)
                 except:
                     return Response({'message':'Empty page/data not exists/selected count of records are not exists'},status=status.HTTP_400_BAD_REQUEST)
@@ -1980,48 +1928,6 @@ def queryset_list(request,token):
         return Response({'message':'Method not allowed'},status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
         
-
-
-# ###### fetch multiple sheets based on sheetname
-# class multiple_sheets(CreateAPIView):
-#     serializer_class=serializers.multiple_charts_data
-
-#     @transaction.atomic
-#     def post(self,request,token):
-#         tok1 = views.test_token(token)
-#         if tok1['status']==200:
-#             serializer = self.serializer_class(data = request.data)
-#             if serializer.is_valid(raise_exception=True):
-#                 queryset_id=[]
-#                 server_id=[]
-#                 chart_names=[]
-#                 ch_list=[]
-#                 server_data=serializer.validated_data['server_data']
-#                 files_data=serializer.validated_data['files_data']
-#                 for dt in server_data:
-#                     queryset_id.append(dt[0])
-#                     server_id.append(dt[1])
-#                     chart_names.append(dt[2])
-#                 for q1,s1,c1 in zip(queryset_id,server_id,chart_names):
-#                     if models.ServerDetails.objects.filter(id=s1,user_id=tok1['user_id']).exists():
-#                         pass
-#                     else:
-#                         return Response({'message':'server id not exists'},status=status.HTTP_404_NOT_FOUND)
-#                     if models.sheet_data.objects.filter(user_id=tok1['user_id'],queryset_id=q1,server_id=s1,sheet_name=c1).exists():
-#                         pass
-#                     else:
-#                         return Response({'message':'sheet not exists for this user'},status=status.HTTP_404_NOT_FOUND)
-#                     charts=models.sheet_data.objects.filter(user_id=tok1['user_id'],queryset_id=q1,server_id=s1,sheet_name=c1).values()
-#                     server_id=''
-#                     charts_data=charts_dt(charts,tok1,server_id=server_id)
-#                     ch_list.append(charts_data)
-#                 return Response(ch_list,status=status.HTTP_200_OK)
-#             else:
-#                 return Response({'message':'Serializer value error'},status=status.HTTP_400_BAD_REQUEST)
-#         else:
-#             return Response(tok1,status=tok1['status'])
-        
-
 class saved_queries(CreateAPIView):
     serializer_class=serializers.SearchFilterSerializer
 
@@ -2056,6 +1962,8 @@ class saved_queries(CreateAPIView):
                     return Response({'message':'Invalid hierarchy_Id'},status=status.HTTP_404_NOT_FOUND)
                 try:
                     resul_data=pagination(request,queryset,page_no,page_count)
+                    if not resul_data['status']==200:
+                        return resul_data
                     return Response(resul_data,status=status.HTTP_200_OK)
                 except:
                     return Response({{'message':'Empty page/data not exists/selected count of records are not exists'}},status=status.HTTP_400_BAD_REQUEST)

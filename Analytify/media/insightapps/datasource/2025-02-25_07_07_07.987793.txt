@@ -1,0 +1,46 @@
+{
+    "dragged_array": [
+        {
+            "schema": "xs",
+            "table": "account_activation",
+            "columns": [
+                {
+                    "column": "id",
+                    "datatype": "int64"
+                },
+                {
+                    "column": "user_id",
+                    "datatype": "nullable(int32)"
+                },
+                {
+                    "column": "key",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "otp",
+                    "datatype": "int32"
+                },
+                {
+                    "column": "agent",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "created_at",
+                    "datatype": "datetime64(6)"
+                },
+                {
+                    "column": "expiry_date",
+                    "datatype": "datetime64(6)"
+                },
+                {
+                    "column": "email",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "account_activation"
+        }
+    ],
+    "dragged_array_indexing": {
+        "account_activation": 1
+    }
+}

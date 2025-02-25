@@ -10,6 +10,7 @@ class display_name(serializers.Serializer):
     # display_name = serializers.CharField()
     redirect_url = serializers.CharField()
     # token = serializers.CharField()
+    hierarchy_id = serializers.IntegerField(default=None)
 
 class filter_date(serializers.Serializer):
     from_date = serializers.DateField(allow_null=True,default='')
@@ -34,4 +35,10 @@ class halops_serializer(serializers.Serializer):
     client_id=serializers.CharField(default='',allow_null=True,allow_blank=True)
     client_secret=serializers.CharField(default='',allow_null=True,allow_blank=True)
     display_name=serializers.CharField(default='',allow_null=True,allow_blank=True)
+    hierarchy_id=serializers.IntegerField(default=None)
+
+class shopify_serializer(serializers.Serializer):
+    api_token = serializers.CharField(default='',allow_null=True,allow_blank=True)
+    shop_name = serializers.CharField(default='',allow_null=True,allow_blank=True)
+    display_name = serializers.CharField(default='',allow_null=True,allow_blank=True)
     hierarchy_id=serializers.IntegerField(default=None)

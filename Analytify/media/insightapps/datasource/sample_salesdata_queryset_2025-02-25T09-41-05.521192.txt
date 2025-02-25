@@ -1,0 +1,111 @@
+{
+    "dragged_array": [
+        {
+            "schema": "In Ex",
+            "table": "sales",
+            "columns": [
+                {
+                    "column": "order_number",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "quantity_ordered",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "price_each",
+                    "datatype": "nullable(float32)"
+                },
+                {
+                    "column": "order_line_number",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "sales",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "order_Date",
+                    "datatype": "nullable(datetime)"
+                },
+                {
+                    "column": "status",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "month_id",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "Year_id",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "product_line",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "MSRP",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "product_code",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "customer_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "phone_number",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "address_1",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "address_2",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "City",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "state",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "postal_code",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "country",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "Territory",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "lastname",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "firstname",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "deal_size",
+                    "datatype": "nullable(string)"
+                }
+            ],
+            "alias": "sales"
+        }
+    ],
+    "dragged_array_indexing": {
+        "sales": 1,
+        "supply_chain": 1
+    }
+}

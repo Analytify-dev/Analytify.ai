@@ -1,23 +1,19 @@
-from dashboard.columns_extract import server_connection
+# from dashboard.columns_extract import server_connection
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
-from sqlalchemy import text
-from dashboard.models import QuerySets, ServerDetails, ServerType,SheetFilter_querysets
 from .serializers import ChartCopilot,APIKEYServerialzer
-from dashboard.Connections import table_name_from_query
-import ast
-import base64
+# from dashboard.Connections import table_name_from_query
 import json
 import requests
 import re
-from dashboard.models import UserProfile,UserRole,Role, FileDetails, FileType, parent_ids 
+from dashboard.models import *
 from dashboard.views import test_token
 from .models import GPTAPIKey
 # from dashboard.files import read_csv_file,read_excel_file,read_pdf_file,read_text_file
 # from dashboard.columns_extract import file_details
 from dashboard import clickhouse
-from quickbooks.models import HaloPs, connectwise, TokenStoring
+from quickbooks.models import *
 
 
 # Create your views here.
@@ -43,6 +39,8 @@ def validate_api_key(KEY):
     elif response.status_code == 401:
         # res = {'error': {'message': 'Incorrect API key provided: "{KEY}". You can find your API key at https://platform.openai.com/account/api-keys.'.format(KEY), 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
         return Response({'message': f"Incorrect API key provided: '{KEY}'. \n\n You can find your API key at https://platform.openai.com/account/api-keys."}, status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        return Response({'message': response.json()['error']['message']}, status=response.status_code)
     
 class ValidateApiKeyView(CreateAPIView):
     serializer_class = APIKEYServerialzer
@@ -729,7 +727,7 @@ class CopilotChartSuggestionAPI(CreateAPIView):
                 gpt = GPTAPIKey.objects.get(added_by = role.created_by) 
                 API_KEY  =gpt.api_key
             else:
-                API_KEY=''
+                return Response({'message':"API Key not found"},status=status.HTTP_404_NOT_FOUND)
 
             serializer = self.serializer_class(data=request.data)
             if serializer.is_valid():   
@@ -849,8 +847,17 @@ class CopilotChartSuggestionAPI(CreateAPIView):
                         cursor=clickhouse_class.cursor
                     except:
                         return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
-                elif TokenStoring.objects.filter(id=parent.table_id) and (parent.parameter.lower() == 'quickbooks' or parent.parameter.lower() == 'salesforce') :
+                elif TokenStoring.objects.filter(id=parent.table_id) and (parent.parameter.lower() in ('quickbooks', 'salesforce','google_sheets')):
                     conn_data =TokenStoring.objects.get(id=parent.table_id)
+
+                    try:
+                        clickhouse_class = clickhouse.Clickhouse(conn_data.display_name)
+                        engine=clickhouse_class.engine
+                        cursor=clickhouse_class.cursor
+                    except Exception as e:
+                        return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
+                elif Shopify.objects.filter(id=parent.table_id) and parent.parameter.lower() == 'shopify' :
+                    conn_data =Shopify.objects.get(id=parent.table_id)
 
                     try:
                         clickhouse_class = clickhouse.Clickhouse(conn_data.display_name)
@@ -963,7 +970,7 @@ class CopilotChartSuggestionAPI(CreateAPIView):
                             "queryset_id": qs.queryset_id,
                             "col": [
                                 [
-                                    format_column_name(chart["col"]),  # Format column name,
+                                    chart["col"],  # Format column name,
                                     chart["col_datatype"].lower(),
                                     "",
                                     ""
@@ -971,7 +978,7 @@ class CopilotChartSuggestionAPI(CreateAPIView):
                             ],
                             "row": [
                                 [
-                                    format_column_name(chart["row"]),  # Format column name
+                                    chart["row"],  # Format column name
                                     "aggregate",
                                     chart["row_aggregate"].lower(),
                                     chart["row_alias"] if "row_alias" in chart else ""
@@ -980,17 +987,17 @@ class CopilotChartSuggestionAPI(CreateAPIView):
                             "filter_id": [],
                             "columns": [
                                 {
-                                    "column": format_column_name(chart["col"]),  # Format column name
+                                    "column": chart["col"],  # Format column name
                                     "data_type": chart["col_datatype"].lower()
                                 }
                             ],
                             "rows": [
                                 {
-                                    "column": format_column_name(chart["row"]),  # Format column name
+                                    "column": chart["row"],  # Format column name
                                     "type": chart["row_aggregate"].lower()
                                 }
                             ],
-                            "datasource_quertsetid": "",
+                            "datasource_quertsetid": (lambda ds: ds.datasource_querysetid if ds else None)(DataSource_querysets.objects.filter(queryset_id=qs.queryset_id, hierarchy_id=parent.id).first()),
                             "sheetfilter_querysets_id": "",
                             "chart_id": chart_id_mapping.get(chart["chart_type"], 0),  # Assign chart_id based on the type
                             "description":chart["description"] if "description" in chart else ""

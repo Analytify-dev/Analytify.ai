@@ -59,7 +59,7 @@ export class HelpGuideQuestionariesComponent {
       this.ModulesData = responce.data;
       this.ModulesData.forEach((data)=>{
         if(data.id == this.userGuideData[0].module_id){
-          this.getQuestionaries(data.id);
+          this.getQuestionaries(data.id,false);
         }
       })
     },
@@ -69,7 +69,10 @@ export class HelpGuideQuestionariesComponent {
   })
   }
 
-  getQuestionaries(moduleId : number){
+  getQuestionaries(moduleId : number,loader:any){
+    if(loader === true){
+    this.workbenchService.disableLoaderForNextRequest();
+    }
     let object ={
       "module_id":moduleId
     }

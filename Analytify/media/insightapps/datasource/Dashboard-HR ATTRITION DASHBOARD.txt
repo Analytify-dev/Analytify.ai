@@ -1,0 +1,2613 @@
+[
+    {
+        "id": "a6c76236-47bd-4d84-b99f-9e4c1b70ad1c",
+        "x": 0,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Total Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Total Employees</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 23,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 1470,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(id)",
+                    "result_data": [
+                        1470
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "34e6dff5-b5bd-4937-ab15-f488de335762",
+        "x": 4,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Attrition Count",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Attrition Count</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 24,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 237,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(attrition)",
+                    "result_data": [
+                        237
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "attrition",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "57da2d5a-3eb4-4e44-a7de-3eaf1d42ab1a",
+        "x": 8,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Active Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Active Employees</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 25,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 1233,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(attrition)",
+                    "result_data": [
+                        1233
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "attrition",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "6b741a34-722e-40e4-8385-cf377c89eb46",
+        "x": 12,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Maximum Hourly Rate",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Maximum Hourly Rate</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 26,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 100,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "max(hourly_rate)",
+                    "result_data": [
+                        100
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "hourly_rate",
+                "aggregate",
+                "max",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "3ccc67da-6190-41ba-9505-4193b3b8d240",
+        "x": 16,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Male Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Male Employees</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 27,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 882,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(gender)",
+                    "result_data": [
+                        882
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "gender",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "a114839b-b119-4e13-bd66-77a5416d6354",
+        "x": 20,
+        "y": 0,
+        "rows": 3,
+        "cols": 4,
+        "data": {
+            "title": "Female Employees",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Female Employees</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 28,
+        "chartType": "KPI",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 25,
+        "chartOptions": {},
+        "selectedSheet": true,
+        "chartData": [],
+        "kpiData": {
+            "kpiNumber": 588,
+            "kpiPrefix": "",
+            "kpiSuffix": "",
+            "kpiDecimalUnit": "none",
+            "kpiDecimalPlaces": 0,
+            "rows": [
+                {
+                    "col": "count(gender)",
+                    "result_data": [
+                        588
+                    ]
+                }
+            ],
+            "fontSize": 1.3,
+            "color": "#175669"
+        },
+        "isEChart": true,
+        "echartOptions": {},
+        "drillDownHierarchy": [],
+        "column_Data": [],
+        "row_Data": [
+            [
+                "gender",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 2,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": true,
+            "funnelColorSwitch": false,
+            "kpiColor": "#175669",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": 1.3,
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "e1d8525f-ac6f-4451-a33f-c550758ba4de",
+        "x": 0,
+        "y": 3,
+        "rows": 11,
+        "cols": 12,
+        "data": {
+            "title": "Attrition By Education Field",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Attrition By Education Field</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 29,
+        "chartType": "DONUT",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 10,
+        "chartOptions": {
+            "series": [
+                63,
+                11,
+                7,
+                89,
+                32,
+                35
+            ],
+            "chart": {
+                "type": "donut",
+                "background": "#fff",
+                "events": {}
+            },
+            "labels": [
+                "Medical",
+                "Other",
+                "Human Resources",
+                "Life Sciences",
+                "Technical Degree",
+                "Marketing"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true
+            },
+            "plotOptions": {
+                "pie": {
+                    "donut": {
+                        "labels": {
+                            "show": true,
+                            "name": {
+                                "show": true
+                            },
+                            "value": {
+                                "show": true
+                            },
+                            "total": {
+                                "show": true,
+                                "showAlways": true
+                            }
+                        },
+                        "size": "50%"
+                    }
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                63,
+                11,
+                7,
+                89,
+                32,
+                35
+            ],
+            "chart": {
+                "type": "donut",
+                "background": "#fff",
+                "events": {}
+            },
+            "labels": [
+                "Medical",
+                "Other",
+                "Human Resources",
+                "Life Sciences",
+                "Technical Degree",
+                "Marketing"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true
+            },
+            "plotOptions": {
+                "pie": {
+                    "donut": {
+                        "labels": {
+                            "show": true,
+                            "name": {
+                                "show": true
+                            },
+                            "value": {
+                                "show": true
+                            },
+                            "total": {
+                                "show": true,
+                                "showAlways": true
+                            }
+                        },
+                        "size": "50%"
+                    }
+                }
+            }
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "education_field",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "24bc4eb7-31ec-4b6a-bf32-90fb5ca7f2c2",
+        "x": 12,
+        "y": 3,
+        "rows": 11,
+        "cols": 12,
+        "data": {
+            "title": "Job Role : Employee Count and Average Age",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Job Role : Employee Count and Average Age</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 30,
+        "chartType": "DUAL COMBINATION",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 4,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "type": "column",
+                    "data": [
+                        102,
+                        52,
+                        326,
+                        80,
+                        83,
+                        292,
+                        145,
+                        259,
+                        131
+                    ],
+                    "color": "#4382f7",
+                    "group": "apexcharts-axis-0"
+                },
+                {
+                    "name": "avg(age)",
+                    "type": "line",
+                    "data": [
+                        46.76470588235294,
+                        35.5,
+                        36.88957055214724,
+                        44,
+                        30.36144578313253,
+                        34.236301369863014,
+                        38.296551724137935,
+                        34.0965250965251,
+                        39.80916030534351
+                    ],
+                    "color": "#38ff98",
+                    "group": "apexcharts-axis-1"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "height": 350,
+                "type": "line",
+                "background": "#fff",
+                "events": {}
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "stroke": {
+                "width": [
+                    0,
+                    4
+                ]
+            },
+            "title": {
+                "text": "",
+                "style": {
+                    "fontSize": "13px",
+                    "fontWeight": "bold",
+                    "color": "#8c9097"
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                },
+                "background": {
+                    "enabled": false
+                }
+            },
+            "xaxis": {
+                "categories": [
+                    "Manager",
+                    "Human Resources",
+                    "Sales Executive",
+                    "Research Director",
+                    "Sales Representative",
+                    "Research Scientist",
+                    "Manufacturing Director",
+                    "Laboratory Technician",
+                    "Healthcare Representative"
+                ],
+                "type": "",
+                "tickPlacement": "on",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                },
+                "convertedCatToNumeric": true
+            },
+            "yaxis": [
+                {
+                    "show": true,
+                    "title": {
+                        "text": "",
+                        "style": {
+                            "fontSize": "13px",
+                            "fontWeight": "bold",
+                            "color": "#8c9097"
+                        }
+                    },
+                    "labels": {
+                        "show": true,
+                        "offsetY": 0,
+                        "style": {
+                            "colors": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                            "fontSize": 12,
+                            "fontFamily": "sans-serif",
+                            "fontWeight": 400
+                        }
+                    }
+                },
+                {
+                    "show": true,
+                    "opposite": true,
+                    "title": {
+                        "text": "",
+                        "style": {
+                            "fontSize": "13px",
+                            "fontWeight": "bold",
+                            "color": "#8c9097"
+                        }
+                    },
+                    "labels": {
+                        "show": true,
+                        "offsetY": 0,
+                        "style": {
+                            "colors": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                            "fontSize": 12,
+                            "fontFamily": "sans-serif",
+                            "fontWeight": 400
+                        }
+                    }
+                }
+            ],
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "type": "column",
+                    "data": [
+                        102,
+                        52,
+                        326,
+                        80,
+                        83,
+                        292,
+                        145,
+                        259,
+                        131
+                    ],
+                    "color": "#4382f7",
+                    "group": "apexcharts-axis-0"
+                },
+                {
+                    "name": "avg(age)",
+                    "type": "line",
+                    "data": [
+                        46.76470588235294,
+                        35.5,
+                        36.88957055214724,
+                        44,
+                        30.36144578313253,
+                        34.236301369863014,
+                        38.296551724137935,
+                        34.0965250965251,
+                        39.80916030534351
+                    ],
+                    "color": "#38ff98",
+                    "group": "apexcharts-axis-1"
+                }
+            ],
+            "annotations": {
+                "points": [
+                    {
+                        "x": "zoom",
+                        "seriesIndex": 0,
+                        "label": {
+                            "borderColor": "#775DD0",
+                            "offsetY": 0,
+                            "style": {
+                                "color": "#fff",
+                                "background": "#775DD0"
+                            },
+                            "text": "zoom"
+                        }
+                    }
+                ]
+            },
+            "chart": {
+                "toolbar": {
+                    "show": true,
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "tools": {
+                        "download": true,
+                        "selection": true,
+                        "zoom": true,
+                        "zoomin": true,
+                        "zoomout": true,
+                        "pan": true,
+                        "reset": true
+                    },
+                    "autoSelected": "zoom"
+                },
+                "height": 350,
+                "type": "line",
+                "background": "#fff",
+                "events": {}
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            },
+            "stroke": {
+                "width": [
+                    0,
+                    4
+                ]
+            },
+            "title": {
+                "text": "",
+                "style": {
+                    "fontSize": "13px",
+                    "fontWeight": "bold",
+                    "color": "#8c9097"
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -20,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                },
+                "background": {
+                    "enabled": false
+                }
+            },
+            "xaxis": {
+                "categories": [
+                    "Manager",
+                    "Human Resources",
+                    "Sales Executive",
+                    "Research Director",
+                    "Sales Representative",
+                    "Research Scientist",
+                    "Manufacturing Director",
+                    "Laboratory Technician",
+                    "Healthcare Representative"
+                ],
+                "type": "",
+                "tickPlacement": "on",
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                },
+                "convertedCatToNumeric": true
+            },
+            "yaxis": [
+                {
+                    "show": true,
+                    "title": {
+                        "text": "",
+                        "style": {
+                            "fontSize": "13px",
+                            "fontWeight": "bold",
+                            "color": "#8c9097"
+                        }
+                    },
+                    "labels": {
+                        "show": true,
+                        "offsetY": 0,
+                        "style": {
+                            "colors": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                            "fontSize": 12,
+                            "fontFamily": "sans-serif",
+                            "fontWeight": 400
+                        }
+                    }
+                },
+                {
+                    "show": true,
+                    "opposite": true,
+                    "title": {
+                        "text": "",
+                        "style": {
+                            "fontSize": "13px",
+                            "fontWeight": "bold",
+                            "color": "#8c9097"
+                        }
+                    },
+                    "labels": {
+                        "show": true,
+                        "offsetY": 0,
+                        "style": {
+                            "colors": [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                            "fontSize": 12,
+                            "fontFamily": "sans-serif",
+                            "fontWeight": 400
+                        }
+                    }
+                }
+            ],
+            "plotOptions": {
+                "bar": {
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            }
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "job_role",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "id",
+                "aggregate",
+                "count",
+                ""
+            ],
+            [
+                "age",
+                "aggregate",
+                "avg",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "0ab8ff1c-6109-432d-acff-c615b65836c4",
+        "x": 0,
+        "y": 14,
+        "rows": 9,
+        "cols": 12,
+        "data": {
+            "title": "Employee Count By Department",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Employee Count By Department</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 31,
+        "chartType": "FUNNEL",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 27,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "data": [
+                        961,
+                        446,
+                        63
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 350,
+                "background": "#fff",
+                "events": {}
+            },
+            "plotOptions": {
+                "bar": {
+                    "borderRadius": 0,
+                    "horizontal": true,
+                    "barHeight": "80%",
+                    "isFunnel": true,
+                    "distributed": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "title": {},
+            "xaxis": {
+                "categories": [
+                    "Sales",
+                    "Human Resources",
+                    "Research & Development"
+                ],
+                "convertedCatToNumeric": false
+            },
+            "legend": {
+                "show": false
+            },
+            "colors": []
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "data": [
+                        961,
+                        446,
+                        63
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 350,
+                "background": "#fff",
+                "events": {}
+            },
+            "plotOptions": {
+                "bar": {
+                    "borderRadius": 0,
+                    "horizontal": true,
+                    "barHeight": "80%",
+                    "isFunnel": true,
+                    "distributed": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "title": {},
+            "xaxis": {
+                "categories": [
+                    "Sales",
+                    "Human Resources",
+                    "Research & Development"
+                ],
+                "convertedCatToNumeric": false
+            },
+            "legend": {
+                "show": false
+            },
+            "colors": []
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "department",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": true,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": "descending"
+        }
+    },
+    {
+        "id": "3b2b2273-63d1-4d7f-90f2-657b71de9f1a",
+        "x": 12,
+        "y": 14,
+        "rows": 9,
+        "cols": 12,
+        "data": {
+            "title": "Employee count By Marital Status",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Employee count By Marital Status</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 32,
+        "chartType": "HORIZONTAL SIDE BY SIDE",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 3,
+        "chartOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "data": [
+                        327,
+                        470,
+                        673
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 430,
+                "background": "#fff",
+                "events": {}
+            },
+            "plotOptions": {
+                "bar": {
+                    "horizontal": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -6,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "stroke": {
+                "show": true,
+                "width": 1,
+                "colors": [
+                    "#fff"
+                ]
+            },
+            "xaxis": {
+                "categories": [
+                    "Divorced",
+                    "Single",
+                    "Married"
+                ],
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                {
+                    "name": "count(id)",
+                    "data": [
+                        327,
+                        470,
+                        673
+                    ],
+                    "group": "apexcharts-axis-0"
+                }
+            ],
+            "chart": {
+                "type": "bar",
+                "height": 430,
+                "background": "#fff",
+                "events": {}
+            },
+            "plotOptions": {
+                "bar": {
+                    "horizontal": true,
+                    "dataLabels": {
+                        "position": "top"
+                    }
+                }
+            },
+            "dataLabels": {
+                "enabled": true,
+                "offsetY": -6,
+                "style": {
+                    "fontSize": "12px",
+                    "fontFamily": "sans-serif",
+                    "fontWeight": 400,
+                    "colors": [
+                        "#2392c1"
+                    ]
+                }
+            },
+            "stroke": {
+                "show": true,
+                "width": 1,
+                "colors": [
+                    "#fff"
+                ]
+            },
+            "xaxis": {
+                "categories": [
+                    "Divorced",
+                    "Single",
+                    "Married"
+                ],
+                "labels": {
+                    "show": true,
+                    "offsetX": 0,
+                    "style": {
+                        "colors": [],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "yaxis": {
+                "show": true,
+                "labels": {
+                    "show": true,
+                    "offsetY": 0,
+                    "style": {
+                        "colors": [
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "fontSize": 12,
+                        "fontFamily": "sans-serif",
+                        "fontWeight": 400
+                    }
+                }
+            },
+            "grid": {
+                "show": true,
+                "borderColor": "#089ffc",
+                "xaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                },
+                "yaxis": {
+                    "lines": {
+                        "show": false
+                    }
+                }
+            }
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "marital_status",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "id",
+                "aggregate",
+                "count",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "585daaa6-cb14-458c-ac04-fd07a7272d81",
+        "x": 0,
+        "y": 23,
+        "rows": 7,
+        "cols": 9,
+        "data": {
+            "title": "Attrition Rate by Years at Company",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Attrition Rate by Years at Company</strong></span></p>"
+        },
+        "sheetType": "Chart",
+        "sheetId": 33,
+        "chartType": "pie",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 24,
+        "chartOptions": {
+            "series": [
+                1216,
+                9086
+            ],
+            "chart": {
+                "height": 300,
+                "type": "pie",
+                "background": "#fff",
+                "events": {}
+            },
+            "labels": [
+                "Yes",
+                "No"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true,
+                "dropShadow": {
+                    "enabled": false
+                }
+            }
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": false,
+        "echartOptions": {
+            "series": [
+                1216,
+                9086
+            ],
+            "chart": {
+                "height": 300,
+                "type": "pie",
+                "background": "#fff",
+                "events": {}
+            },
+            "labels": [
+                "Yes",
+                "No"
+            ],
+            "legend": {
+                "show": true,
+                "position": "bottom"
+            },
+            "dataLabels": {
+                "enabled": true,
+                "dropShadow": {
+                    "enabled": false
+                }
+            }
+        },
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "attrition",
+                "string",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [
+            [
+                "years_at_company",
+                "aggregate",
+                "sum",
+                ""
+            ]
+        ],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fff",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    },
+    {
+        "id": "53d54584-f951-45f5-943f-788ac9c4ef5e",
+        "x": 9,
+        "y": 23,
+        "rows": 7,
+        "cols": 15,
+        "data": {
+            "title": "Attrition Details",
+            "content": "Content of card New",
+            "sheetTagName": "<p style=\"text-align:center;\"><span style=\"font-size:14px;\"><strong>Attrition Details</strong></span></p>"
+        },
+        "sheetType": "Table",
+        "sheetId": 34,
+        "chartType": "Table",
+        "databaseId": 1,
+        "qrySetId": 3,
+        "chartId": 1,
+        "tableData": {
+            "headers": [
+                "id",
+                "attrition",
+                "business_travel",
+                "department",
+                "education_field",
+                "gender",
+                "job_role",
+                "marital_status",
+                "hourly_rate"
+            ],
+            "rows": [
+                {
+                    "id": 927,
+                    "attrition": "No",
+                    "business_travel": "Non-Travel",
+                    "department": "Research & Development",
+                    "education_field": "Medical",
+                    "gender": "Male",
+                    "job_role": "Laboratory Technician",
+                    "marital_status": "Single",
+                    "hourly_rate": 49
+                },
+                {
+                    "id": 879,
+                    "attrition": "Yes",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Sales",
+                    "education_field": "Marketing",
+                    "gender": "Female",
+                    "job_role": "Sales Executive",
+                    "marital_status": "Single",
+                    "hourly_rate": 69
+                },
+                {
+                    "id": 623,
+                    "attrition": "No",
+                    "business_travel": "Travel_Frequently",
+                    "department": "Research & Development",
+                    "education_field": "Medical",
+                    "gender": "Male",
+                    "job_role": "Healthcare Representative",
+                    "marital_status": "Single",
+                    "hourly_rate": 97
+                },
+                {
+                    "id": 90,
+                    "attrition": "No",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Sales",
+                    "education_field": "Medical",
+                    "gender": "Male",
+                    "job_role": "Sales Executive",
+                    "marital_status": "Married",
+                    "hourly_rate": 71
+                },
+                {
+                    "id": 518,
+                    "attrition": "Yes",
+                    "business_travel": "Travel_Frequently",
+                    "department": "Sales",
+                    "education_field": "Life Sciences",
+                    "gender": "Female",
+                    "job_role": "Sales Representative",
+                    "marital_status": "Single",
+                    "hourly_rate": 54
+                },
+                {
+                    "id": 303,
+                    "attrition": "Yes",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Sales",
+                    "education_field": "Medical",
+                    "gender": "Male",
+                    "job_role": "Sales Executive",
+                    "marital_status": "Divorced",
+                    "hourly_rate": 59
+                },
+                {
+                    "id": 1310,
+                    "attrition": "No",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Research & Development",
+                    "education_field": "Medical",
+                    "gender": "Male",
+                    "job_role": "Research Scientist",
+                    "marital_status": "Married",
+                    "hourly_rate": 80
+                },
+                {
+                    "id": 162,
+                    "attrition": "No",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Sales",
+                    "education_field": "Marketing",
+                    "gender": "Female",
+                    "job_role": "Sales Representative",
+                    "marital_status": "Married",
+                    "hourly_rate": 77
+                },
+                {
+                    "id": 139,
+                    "attrition": "No",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Research & Development",
+                    "education_field": "Life Sciences",
+                    "gender": "Male",
+                    "job_role": "Research Director",
+                    "marital_status": "Married",
+                    "hourly_rate": 91
+                },
+                {
+                    "id": 229,
+                    "attrition": "No",
+                    "business_travel": "Travel_Rarely",
+                    "department": "Sales",
+                    "education_field": "Life Sciences",
+                    "gender": "Male",
+                    "job_role": "Sales Executive",
+                    "marital_status": "Married",
+                    "hourly_rate": 80
+                }
+            ],
+            "banding": false
+        },
+        "selectedSheet": true,
+        "chartData": [],
+        "isEChart": true,
+        "drillDownHierarchy": [],
+        "column_Data": [
+            [
+                "id",
+                "int64",
+                "",
+                ""
+            ],
+            [
+                "attrition",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "business_travel",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "department",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "education_field",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "gender",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "job_role",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "marital_status",
+                "string",
+                "",
+                ""
+            ],
+            [
+                "hourly_rate",
+                "int64",
+                "",
+                ""
+            ]
+        ],
+        "row_Data": [],
+        "drillDownObject": [],
+        "drillDownIndex": 0,
+        "isDrillDownData": false,
+        "numberFormat": {
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "displayUnits": "none",
+            "prefix": "",
+            "suffix": ""
+        },
+        "customizeOptions": {
+            "isZoom": false,
+            "xGridColor": "#2392c1",
+            "xGridSwitch": false,
+            "xLabelSwitch": true,
+            "xLabelColor": "#2392c1",
+            "yLabelSwitch": true,
+            "yGridColor": "#2392c1",
+            "yGridSwitch": false,
+            "yLabelColor": "#2392c1",
+            "xLabelFontFamily": "sans-serif",
+            "xLabelFontSize": 12,
+            "xlabelFontWeight": 400,
+            "labelAlignment": "left",
+            "backgroundColor": "#fcfcfc",
+            "color": "#2392c1",
+            "ylabelFontWeight": 400,
+            "isBold": false,
+            "yLabelFontFamily": "sans-serif",
+            "yLabelFontSize": 12,
+            "bandingSwitch": false,
+            "backgroundColorSwitch": false,
+            "chartColorSwitch": false,
+            "barColorSwitch": false,
+            "lineColorSwitch": false,
+            "gridLineColorSwitch": false,
+            "xLabelColorSwitch": false,
+            "xGridLineColorSwitch": false,
+            "yLabelColorSwitch": false,
+            "yGridLineColorSwitch": false,
+            "bandingColorSwitch": false,
+            "kpiColorSwitch": false,
+            "funnelColorSwitch": false,
+            "kpiColor": "#000000",
+            "barColor": "#4382f7",
+            "lineColor": "#38ff98",
+            "GridColor": "#089ffc",
+            "legendSwitch": true,
+            "dataLabels": true,
+            "label": true,
+            "donutSize": 50,
+            "isDistributed": false,
+            "kpiFontSize": "3",
+            "minValueGuage": 0,
+            "maxValueGuage": 100,
+            "donutDecimalPlaces": 0,
+            "decimalPlaces": 0,
+            "legendsAllignment": "bottom",
+            "displayUnits": "none",
+            "suffix": "",
+            "prefix": "",
+            "dataLabelsFontFamily": "sans-serif",
+            "dataLabelsFontSize": "12px",
+            "dataLabelsFontPosition": "top",
+            "measureAlignment": "center",
+            "dimensionAlignment": "center",
+            "tableDataFontFamily": "sans-serif",
+            "tableDataFontSize": "12px",
+            "tableDataFontWeight": 400,
+            "tableDataFontStyle": "normal",
+            "tableDataFontDecoration": "none",
+            "tableDataFontColor": "#000000",
+            "tableDataFontAlignment": "left",
+            "headerFontFamily": "'Arial', sans-serif",
+            "headerFontSize": "16px",
+            "headerFontWeight": 700,
+            "headerFontStyle": "normal",
+            "headerFontDecoration": "none",
+            "headerFontColor": "#000000",
+            "headerFontAlignment": "left",
+            "dimeansionColor": "#2392c1",
+            "measureColor": "#2392c1",
+            "dataLabelsColor": "#2392c1",
+            "sortType": 0
+        }
+    }
+]

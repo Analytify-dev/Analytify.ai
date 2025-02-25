@@ -5,7 +5,7 @@ from rest_framework import status
 from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
 import psycopg2,cx_Oracle
-from dashboard import models,serializers,roles,previlages,views,columns_extract
+from dashboard import models,serializers,roles,previlages,views,columns_extract,Connections,clickhouse
 import pandas as pd
 from sqlalchemy import text,inspect
 import numpy as np
@@ -104,17 +104,13 @@ def calc_main_code(serializer,user_id,parameter):
     cal_field_id=serializer.validated_data['cal_field_id']
     query_set_id=serializer.validated_data['query_set_id']
     database_id1=serializer.validated_data['database_id']
-    # file_id=serializer.validated_data['file_id']
     field_name=serializer.validated_data['field_name']
     nestedFunctionName=serializer.validated_data['nestedFunctionName']
     functionName=serializer.validated_data['functionName']
-    # field_logic=serializer.validated_data['field_logic']
     actual_fields_logic=serializer.validated_data['actual_fields_logic']
     dragged_cal_field=serializer.validated_data['dragged_cal_field']
     error_msg=calc_error_messages(query_set_id,field_name,user_id)
-    if error_msg==200:
-        pass
-    else:
+    if not error_msg==200:
         return error_msg
     if QuerySets.objects.filter(user_id=user_id,queryset_id=query_set_id).exists():
         pass
@@ -122,13 +118,16 @@ def calc_main_code(serializer,user_id,parameter):
         return Response({'message':'Invalid Queryset_id'},status=status.HTTP_406_NOT_ACCEPTABLE)
     pr_id=database_id1
     qrdt=models.QuerySets.objects.get(queryset_id=query_set_id)
-    con_data =connection_data_retrieve(pr_id,user_id)
-    if con_data['status'] ==200:                
-        engine=con_data['engine']
-        cur=con_data['cursor']
-        conn_type = con_data['conn']
-    else:
-        return Response({'message':con_data['message']},status = status.HTTP_404_NOT_FOUND)
+    try:
+        ser_dt,para=Connections.display_name(pr_id)
+    except:
+        return Response({'message':'Invalid Hierarchy Id'},status=status.HTTP_401_UNAUTHORIZED)
+    try:
+        clickhouse_class = clickhouse.Clickhouse(ser_dt.display_name)
+        engine=clickhouse_class.engine
+        cursor=clickhouse_class.cursor
+    except:
+        return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
     
     if dragged_cal_field==[] or dragged_cal_field==None or dragged_cal_field=='':
         actual_fields_logic_op=re.sub(r'"[\w_]+"(?=\.)', '', str(actual_fields_logic)).replace('.','')
@@ -185,8 +184,9 @@ def calc_main_code(serializer,user_id,parameter):
             modified_query = re.sub(pattern, rf'\1{field_logic}\3', query, count=1)
         except:
             modified_query = re.sub(pattern,lambda match: f"{match.group(1)}{field_logic}{match.group(3)}", query, count=1)
+    
     try:
-        query_check_result = cur.execute(text(modified_query))
+        result=views.query_execute(modified_query,cursor,para)
     except Exception as e:
         return Response({'error':str(e).splitlines()[0]},status=status.HTTP_400_BAD_REQUEST)
     if parameter=='SAVE':
@@ -224,14 +224,6 @@ class calculated_field_api(CreateAPIView):
                     pass
                 fn_output=calc_main_code(serializer,tok1['user_id'],parameter='SAVE')
                 return fn_output
-                #Updating the query in queryset table
-                # pattern1 = r'(?i)\bfrom\b'
-                # # Replace it with ",adada FROM"
-                # new_query = re.sub(pattern1, rf',{actual_fields_logic} as "{field_name}" from', query)      
-                # # extract_select = re.search(pattern,query)
-                # # modified_select = extract_select + ',' + str(field_logic)
-                # # final_db_query = query.replace(extract_select)
-                # query_update = models.QuerySets.objects.filter(queryset_id=query_set_id).update(custom_query=new_query)
             else:
                 return Response({'message':'serializer value error'},status=status.HTTP_400_BAD_REQUEST)
         else:

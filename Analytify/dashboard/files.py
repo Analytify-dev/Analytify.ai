@@ -1,7 +1,7 @@
 import os,requests,pdfplumber,boto3
 from project import settings
 import pandas as pd
-from dashboard import views,serializers,models,roles,previlages,Connections,columns_extract
+from dashboard import views,serializers,models,roles,previlages,Connections,columns_extract,clickhouse
 import datetime,re
 from io import BytesIO
 from pytz import utc
@@ -15,6 +15,10 @@ from pathlib import Path
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from .clickhouse import Clickhouse
+from sqlalchemy import text,inspect
+import io
+import numpy as np
+from dateutil import parser
 
 
 created_at=datetime.datetime.now(utc)
@@ -199,7 +203,8 @@ def file_indexing(user_id,file_path):
         d_name=f1['display_name']
         file_list.append(d_name)
     ## to remove the () values from file names
-    cleaned_list = [re.sub(r'\s*\(.*?\)\s*', '', filename) for filename in file_list]
+    # cleaned_list = [re.sub(r'\s*\(.*?\)\s*', '', filename) for filename in file_list]
+    cleaned_list = [re.sub(r'\(.*?\)', '', filename, 1) if filename.count('(') > 1 else filename for filename in file_list]
     if file_path in cleaned_list:
         file_name11, file_extension11 = fetch_filename_extension(file_path)
         count_s1 = cleaned_list.count(file_path)
@@ -315,16 +320,12 @@ def files_delete(request,file_id,token):
         if tok1['status']==200:
             if models.FileDetails.objects.filter(id=file_id,user_id=tok1['user_id']).exists():
                 file=models.FileDetails.objects.get(id=file_id,user_id=tok1['user_id'])
-                # pattern = r'/insightapps/(.*)'
-                # match = re.search(pattern, file.source)
-                # result = match.group(1)
-                # s3 = boto3.client('s3', aws_access_key_id=settings.AWS_S3_ACCESS_KEY_ID, aws_secret_access_key=settings.AWS_S3_SECRET_ACCESS_KEY)
-                # s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(result))
                 qr_list=models.QuerySets.objects.filter(file_id=file.id).values()
                 for qr_id in qr_list:
                     Connections.delete_data(qr_id['queryset_id'],qr_id['server_id'],tok1['user_id'])
                 models.FileDetails.objects.filter(id=file_id,user_id=tok1['user_id']).delete()
                 Connections.delete_file(file.datapath)
+                Connections.s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(file.datapath))
                 return Response({'message':'File deleted successfully'},status=status.HTTP_200_OK)
             else:
                 return Response({'message':'File not found'},status=status.HTTP_404_NOT_FOUND)
@@ -372,10 +373,296 @@ def file_data_delete(file_id,user_id,pr_id):
                 Connections.delete_data(qr_id['queryset_id'],qr_id['hierarchy_id'],tok1['user_id'])
             except:
                 pass
-        models.FileDetails.objects.filter(id=file_id,user_id=tok1['user_id']).delete()
         Connections.delete_file(file.datapath)
         clickhouse_class = Clickhouse(file.display_name)
         clickhouse_class.delete_database(file.display_name)
+        models.FileDetails.objects.filter(id=file_id,user_id=tok1['user_id']).delete()
+        Connections.s3.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=str(file.datapath))
         return Response({'message':'File deleted successfully'},status=status.HTTP_200_OK)
     else:
         return Response({'message':'File not found'},status=status.HTTP_404_NOT_FOUND)
+    
+
+def separate_filename_index(file_string):
+    match = re.match(r"(.*)\((\d+)\)(\.[^.]+)$", file_string)
+    if match:
+        file_name = match.group(1)  # Name before the last index
+        index = match.group(2)      # Extracted last index
+        extension = match.group(3)  # File extension
+    else:
+        file_name, extension = os.path.splitext(file_string)
+        index = None
+    return file_name, index, extension
+
+
+class file_replace(CreateAPIView):
+    serializer_class=serializers.file_replace_serializer
+
+    def post(self,request,token):
+        tok1 = views.test_token(token)
+        if tok1['status']==200:
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                file_type = serializer.validated_data['file_type']
+                file_path112 = serializer.validated_data['file_path']
+                hierarchy_id = serializer.validated_data['hierarchy_id']
+                try:
+                    ser_dt,parameter=Connections.display_name(hierarchy_id)
+                except:
+                    return Response({'message':'Invalid Hierarchy Id'},status=status.HTTP_401_UNAUTHORIZED)
+                
+                try:
+                    clickhouse_class = clickhouse.Clickhouse(ser_dt.display_name)
+                    engine=clickhouse_class.engine
+                    connection=clickhouse_class.cursor
+                except:
+                    return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
+                
+                new_file_name = file_path112.name.replace('_','').replace(' ','').replace('&','').replace('-','_') ## to clean the unnecessary spaces in file name
+                o_filename,o_index,o_extension=separate_filename_index(ser_dt.display_name)
+                if (o_index==None) or (o_index=='') or (o_index==""):
+                    old_file_name = "{}{}".format(o_filename,o_extension)
+                else:
+                    old_file_name = "{}({}){}".format(o_filename,o_index,o_extension)
+                n_filename,n_index,n_extension=separate_filename_index(new_file_name)
+                if not old_file_name==new_file_name:
+                    return Response({'message':'File names are not same'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                if not o_extension==n_extension:
+                    return Response({'message':'File formats are not same'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                if file_type.lower()=='excel':
+                    tb_query = f"SHOW TABLES"
+                    result1 = connection.execute(text(tb_query))
+                    tables = [table[0] for table in result1]
+                    sheet_names=pd.ExcelFile(file_path112).sheet_names
+
+                    if not all(sn in tables for sn in sheet_names):
+                        return Response({'message':'Sheet names are not same as previous'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                    # Iterate through the sheet names and tables and get the sheetname, tablename
+                    # Replace the new sheet name with the old table name along with data if exists
+                    for sn in sheet_names:
+                        found = False
+                        for tn in tables:
+                            if sn == tn:
+                                found = True
+                                try:
+                                    df = pd.read_excel(file_path112, sheet_name=sn, nrows=0)
+                                    new_column_names = list(df.columns)
+                                except Exception as e:
+                                    return Response({'message': f"Error reading Excel sheet: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+                                try:
+                                    query = f"DESCRIBE TABLE {tn}"
+                                    result = connection.execute(text(query))
+                                except Exception as e:
+                                    try:
+                                        query = f'DESCRIBE TABLE "{tn}"'
+                                        result = connection.execute(text(query))
+                                    except Exception as e:
+                                        return Response({'message': f"Error executing query on table {tn}: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+                                old_column_names = [row[0] for row in result]
+                                missing_columns = [col for col in old_column_names if col not in new_column_names]
+                                if missing_columns:
+                                    return Response({'message': "{} columns/headers are missing in {}".format(missing_columns, sn)}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                                try:
+                                    xls = pd.ExcelFile(file_path112)
+                                    df = xls.parse(sn)
+                                    table_name = sn.replace(" ", "_")
+                                    table_name = f'\"{ser_dt.display_name}\".\"{table_name}\"'
+                                    
+                                    data = clickhouse.insert_df_into_clickhouse(table_name, df)
+                                    if data['status'] != 200:
+                                        return data
+                                    else:
+                                        return Response({'message':'File replaced successfully'},status=status.HTTP_200_OK)
+                                except Exception as e:
+                                    return Response({'message': f"Error inserting data into ClickHouse: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+                        if not found:
+                            return Response({'message': 'Sheet names are not same as previous'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                elif file_type.lower()=='csv':
+                    df = pd.read_csv(file_path112)
+                    new_column_names = list(df.columns)
+                    tb_query = f"SHOW TABLES"
+                    result1 = connection.execute(text(tb_query))
+                    tables = [table[0] for table in result1]
+                    table_name = os.path.splitext(os.path.basename(str(file_path112)))[0].replace(" ", "_").replace("_",'')
+                    if not table_name in tables:
+                        return Response({'message':'Sheet name is not same as previous'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                    for tn in tables:
+                        found=False
+                        if table_name == tn:
+                            found = True
+                            try:
+                                query = f"DESCRIBE TABLE {tn}"
+                                result = connection.execute(text(query))
+                            except:
+                                query = f'DESCRIBE TABLE "{tn}"'
+                                result = connection.execute(text(query))
+                            old_column_names = [row[0] for row in result]
+                            missing_columns = [col for col in old_column_names if col not in new_column_names]
+                            if missing_columns:
+                                return Response({'message': f"{missing_columns} columns/headers are missing in {tn}"}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                            
+                            table_name = f'\"{ser_dt.display_name}\".\"{table_name}\"'
+                            data = clickhouse.insert_df_into_clickhouse(table_name, df)
+                            if data['status'] != 200:
+                                return data
+                            else:
+                                return Response({'message': 'File replaced successfully'}, status=status.HTTP_200_OK)
+                        if not found:
+                            return Response({'message': 'Sheet names are not same as previous'}, status=status.HTTP_406_NOT_ACCEPTABLE)
+                else:
+                    return Response({'message':'Unsupported file type/format'},status=status.HTTP_406_NOT_ACCEPTABLE)
+
+                # if (o_index==None) or (o_index=='') or (o_index==""):
+                #     index_file_name = "{}{}".format(n_filename,n_extension)
+                # else:
+                #     index_file_name = "{}({}){}".format(n_filename,o_index,n_extension)
+                # # TRUNCATE ALL TABLES FROM  db
+                # click = clickhouse.Clickhouse()
+                # click.cursor.execute(text(f'TRUNCATE ALL TABLES FROM \"{ser_dt.display_name}\"'))
+                # print(f'{ser_dt.display_name}'" Deleted successfully")
+                # # DUMPING NEW DATA
+                # clickhouse_class = Clickhouse()
+                # insert_data = clickhouse_class.insert_into_clickhouse(index_file_name,file_type,file_path112)
+                # file_save=Connections.file_files_save(index_file_name,file_path112)
+                # file_url=file_save['file_url']
+                # file_path1=file_save['file_key']
+                # if insert_data['status']==200:
+                #     file_cr=models.FileDetails.objects.filter(id=ser_dt.id).update(
+                #         source = file_url,
+                #         datapath=file_path1,
+                #         display_name = str(index_file_name),
+                #         updated_at=updated_at
+                #     )
+                #     return Response({'message':'File replaced successfully'},status=status.HTTP_200_OK)
+                # else:
+                #     return Response({'message':'Unsupported file type/format'},status=status.HTTP_406_NOT_ACCEPTABLE)
+            else:  
+                return Response({'message':"Serializer Error"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(tok1,status=tok1['status'])
+
+
+class file_append(CreateAPIView):
+    serializer_class=serializers.file_replace_serializer
+
+    def post(self,request,token):
+        tok1 = views.test_token(token)
+        if tok1['status']==200:
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                file_type = serializer.validated_data['file_type']
+                file_path112 = serializer.validated_data['file_path']
+                hierarchy_id = serializer.validated_data['hierarchy_id']
+                try:
+                    ser_dt,parameter=Connections.display_name(hierarchy_id)
+                except:
+                    return Response({'message':'Invalid Hierarchy Id'},status=status.HTTP_401_UNAUTHORIZED)
+                if parameter=='files':
+                    fl_type=models.FileType.objects.get(id=ser_dt.file_type)
+                if not fl_type.file_type.lower()==file_type.lower():
+                    return Response({'message':'File type is not acceptable'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                # client.query(f'CREATE DATABASE IF NOT EXISTS "{ser_dt.display_name}"')
+                if file_type.lower()=='excel':
+                    xls = pd.ExcelFile(file_path112)
+                    for sheet in xls.sheet_names:
+                        df = xls.parse(sheet)
+                        table_name = sheet.replace(" ", "_")
+                        table_name = f'\"{ser_dt.display_name}\".\"{table_name}\"'
+                        data=clickhouse.insert_df_into_clickhouse(table_name,df)
+                        if not data['status']==200:
+                            return data
+                elif file_type.lower()=='csv':
+                    df = pd.read_csv(file_path112)
+                    table_name = os.path.splitext(os.path.basename(str(file_path112)))[0]  # Use file name as table name
+                    table_name = f'\"{ser_dt.display_name}\".\"{table_name}\"'
+                    data=clickhouse.insert_df_into_clickhouse(table_name,df)
+                    if not data['status']==200:
+                        return data
+                else:
+                    return Response({'message':'Unsupported file type/format'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                return Response({'message':'File added successfully'},status=status.HTTP_200_OK)
+            else:  
+                return Response({'message':"Serializer Error"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(tok1,status=tok1['status'])
+        
+
+
+class file_upsert(CreateAPIView):
+    serializer_class=serializers.file_replace_serializer
+
+    def post(self,request,token):
+        tok1 = views.test_token(token)
+        if tok1['status']==200:
+            serializer = self.serializer_class(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                file_type = serializer.validated_data['file_type']
+                file_path112 = serializer.validated_data['file_path']
+                hierarchy_id = serializer.validated_data['hierarchy_id']
+                try:
+                    ser_dt,parameter=Connections.display_name(hierarchy_id)
+                except:
+                    return Response({'message':'Invalid Hierarchy Id'},status=status.HTTP_401_UNAUTHORIZED)
+                
+                try:
+                    clickhouse_class = clickhouse.Clickhouse(ser_dt.display_name)
+                    engine=clickhouse_class.engine
+                    connection=clickhouse_class.cursor
+                except:
+                    return Response({'message':"Connection closed, try again"},status=status.HTTP_406_NOT_ACCEPTABLE)
+                
+                new_file_name = file_path112.name.replace('_','').replace(' ','').replace('&','').replace('-','_') ## to clean the unnecessary spaces in file name
+                o_filename,o_index,o_extension=separate_filename_index(ser_dt.display_name)
+                if (o_index==None) or (o_index=='') or (o_index==""):
+                    old_file_name = "{}{}".format(o_filename,o_extension)
+                else:
+                    old_file_name = "{}({}){}".format(o_filename,o_index,o_extension)
+                n_filename,n_index,n_extension=separate_filename_index(new_file_name)
+                if not old_file_name==new_file_name:
+                    return Response({'message':'File names are not same'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                if not o_extension==n_extension:
+                    return Response({'message':'File formats are not same'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                if file_type.lower()=='excel':
+                    tb_query = f"SHOW TABLES"
+                    result1 = connection.execute(text(tb_query))
+                    tables = [table[0] for table in result1]
+                    sheet_names=pd.ExcelFile(file_path112).sheet_names
+                    for sn,tn in zip(sheet_names,tables):
+                        if not sn==tn:
+                            return Response({'message':'Sheet names are not same as previous'},status=status.HTTP_406_NOT_ACCEPTABLE)
+                        df = pd.read_excel(file_path112, sheet_name=sn, nrows=0)
+                        new_column_names=list(df.columns)
+                        try:
+                            query = f"DESCRIBE TABLE {tn}"
+                            result = connection.execute(text(query))
+                        except:
+                            query = f'DESCRIBE TABLE "{tn}"'
+                            result = connection.execute(text(query))
+                        old_column_names = [row[0] for row in result]
+                        missing_columns = [col for col in old_column_names if col not in new_column_names]
+                        if not missing_columns:
+                            pass
+                        else:
+                            return Response({'message':"{} columns/headers are missing in {}".format(missing_columns,sn)},status=status.HTTP_406_NOT_ACCEPTABLE)
+                elif file_type.lower()=='csv':
+                    df = pd.read_csv(file_path112, nrows=0)
+                    new_column_names=list(df.columns)
+                    tb_query = f"SHOW TABLES"
+                    result1 = connection.execute(text(tb_query))
+                    tables = [table[0] for table in result1]
+                    for tn in tables:
+                        try:
+                            query = f"DESCRIBE TABLE {tn}"
+                            result = connection.execute(text(query))
+                        except:
+                            query = f'DESCRIBE TABLE "{tn}"'
+                            result = connection.execute(text(query))
+                        old_column_names = [row[0] for row in result]
+                        missing_columns = [col for col in old_column_names if col not in new_column_names]
+                        if not missing_columns:
+                            pass
+                        else:
+                            return Response({'message':"{} columns/headers are missing in {}".format(missing_columns,sn)},status=status.HTTP_406_NOT_ACCEPTABLE)
+                else:
+                    pass
