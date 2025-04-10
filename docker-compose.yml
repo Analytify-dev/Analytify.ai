@@ -32,6 +32,7 @@ services:
       - "8080:80"
     volumes:
       - ./dist/Analytify-Angular:/frontend:/usr/share/nginx/html
+
     depends_on:
       - backend
     networks:

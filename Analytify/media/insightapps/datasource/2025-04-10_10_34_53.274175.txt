@@ -1,0 +1,34 @@
+{
+    "dragged_array": [
+        {
+            "schema": "xshop_data",
+            "table": "account_emailaddress",
+            "columns": [
+                {
+                    "column": "id",
+                    "datatype": "int32"
+                },
+                {
+                    "column": "email",
+                    "datatype": "string"
+                },
+                {
+                    "column": "verified",
+                    "datatype": "uint8"
+                },
+                {
+                    "column": "primary",
+                    "datatype": "uint8"
+                },
+                {
+                    "column": "user_id",
+                    "datatype": "int32"
+                }
+            ],
+            "alias": "account_emailaddress"
+        }
+    ],
+    "dragged_array_indexing": {
+        "account_emailaddress": 1
+    }
+}

@@ -28,5 +28,17 @@ COPY --from=build /app/dist/Analytify-Angular/browser /usr/share/nginx/html
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# # Start Nginx
-# CMD ["nginx", "-g", "daemon off;"]
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+
+# FROM caddy:alpine
+
+# # Copy build output
+# COPY dist/Analytify-Angular /usr/share/caddy
+
+# # Copy Caddyfile
+# COPY Caddyfile /etc/caddy/Caddyfile
+

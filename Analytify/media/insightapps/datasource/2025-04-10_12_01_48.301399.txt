@@ -1,0 +1,70 @@
+{
+    "dragged_array": [
+        {
+            "schema": "xshop_data",
+            "table": "user_profile",
+            "columns": [
+                {
+                    "column": "is_superuser",
+                    "datatype": "uint8"
+                },
+                {
+                    "column": "is_staff",
+                    "datatype": "uint8"
+                },
+                {
+                    "column": "user_id",
+                    "datatype": "int32"
+                },
+                {
+                    "column": "first_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "last_name",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "username",
+                    "datatype": "string"
+                },
+                {
+                    "column": "mobile_number",
+                    "datatype": "nullable(int64)"
+                },
+                {
+                    "column": "email",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "password",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "date_joined",
+                    "datatype": "datetime64(6)"
+                },
+                {
+                    "column": "last_login",
+                    "datatype": "datetime64(6)"
+                },
+                {
+                    "column": "alias",
+                    "datatype": "nullable(string)"
+                },
+                {
+                    "column": "is_active",
+                    "datatype": "uint8"
+                },
+                {
+                    "column": "is_vendor_com_user",
+                    "datatype": "uint8"
+                }
+            ],
+            "alias": "user_profile"
+        }
+    ],
+    "dragged_array_indexing": {
+        "user_profile": 1
+    }
+}
